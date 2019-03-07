@@ -1,5 +1,5 @@
 ﻿# 1.54inch e-Paper  
-![1.54inch-e-Paper-intro.JPG](1.54inch-e-Paper-intro.JPG)
+![1.54inch-e-Paper-intro.JPG](1.54inch-e-paper-intro.JPG)
 
 /**************************************************************/  
 中文：
