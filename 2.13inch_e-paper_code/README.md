@@ -1,7 +1,7 @@
 ﻿# 2.13inch e-Paper
 
 ## 2.13inch e-Paper
-![2.13inch-e-Paper-intro.JPG](2.13inch-e-paper-intro.JPG)
+![2.13inch-e-Paper-intro.JPG](2.13inch-e-paper-intro.jpg)
 /**************************************************************/  
 中文：
 上传的仅为树莓派驱动程序：  
