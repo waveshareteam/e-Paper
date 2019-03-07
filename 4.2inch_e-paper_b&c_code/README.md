@@ -1,7 +1,7 @@
 ﻿# 4.2inch B&C e-Paper
 
 ## 4.2inch B e-Paper
-![4.2inch-e-Paper-B-intro.JPG](4.2inch-e-Paper-B-intro.JPG)
+![4.2inch-e-Paper-B-intro.JPG](4.2inch-e-paper-B-intro.JPG)
 /**************************************************************/  
 中文：
 上传的仅为树莓派驱动程序：  
