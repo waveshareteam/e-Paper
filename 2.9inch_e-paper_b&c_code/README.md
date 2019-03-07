@@ -23,7 +23,7 @@ More please refer to:
 https://www.waveshare.com/2.9inch-e-paper-b.htm
 
 ## 2.9inch C e-Paper
-![2.9inch-e-Paper-C-intro.JPG](2.9inch-e-Paper-C-intro.JPG)
+![2.9inch-e-Paper-C-intro.JPG](2.9inch-e-paper-C-intro.JPG)
 /**************************************************************/  
 中文：
 上传的仅为树莓派驱动程序：  
