@@ -23,7 +23,7 @@ More please refer to:
 https://www.waveshare.com/7.5inch-e-paper-b.htm
 
 ## 7.5inch C e-Paper
-![7.5inch-e-Paper-C-intro.JPG](7.5inch-e-Paper-C-intro.JPG)
+![7.5inch-e-Paper-C-intro.JPG](7.5inch-e-paper-C-intro.JPG)
 /**************************************************************/  
 中文：  
 上传的仅为树莓派驱动程序：  
