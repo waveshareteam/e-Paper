@@ -23,7 +23,7 @@ More please refer to:
 https://www.waveshare.com/5.83inch-e-paper-b.htm
 
 ## 5.83inch C e-Paper
-![5.83inch-e-Paper-C-intro.JPG](5.83inch-e-Paper-C-intro.JPG)
+![5.83inch-e-Paper-C-intro.JPG](5.83inch-e-Paper-C-intro.jpg)
 /**************************************************************/  
 中文：
 上传的仅为树莓派驱动程序：  
