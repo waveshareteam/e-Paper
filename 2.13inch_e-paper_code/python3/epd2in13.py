@@ -4,27 +4,10 @@
 # * | Function    :   Electronic paper driver
 # * | Info        :
 # *----------------
-# * |	This version:   V3.0
-# * | Date        :   2018-11-01
-# * | Info        :   python2 demo
-# * 1.Remove:
-#   digital_write(self, pin, value)
-#   digital_read(self, pin)
-#   delay_ms(self, delaytime)
-#   set_lut(self, lut)
-#   self.lut = self.lut_full_update
-# * 2.Change:
-#   display_frame -> TurnOnDisplay
-#   set_memory_area -> SetWindow
-#   set_memory_pointer -> SetCursor
-# * 3.How to use
-#   epd = epd2in13.EPD()
-#   epd.init(epd.lut_full_update)
-#   image = Image.new('1', (epd2in13.EPD_WIDTH, epd2in13.EPD_HEIGHT), 255)
-#   ...
-#   drawing ......
-#   ...
-#   epd.display(getbuffer(image))
+# * |	This version:   V3.1
+# * | Date        :   2019-03-20
+# * | Info        :   python3 demo
+# * fix: TurnOnDisplay()
 # ******************************************************************************//
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documnetation files (the "Software"), to deal
@@ -94,12 +77,14 @@ class EPD:
         epdconfig.spi_writebyte([data])
         
     def wait_until_idle(self):
+        print("busy")
         while(epdconfig.digital_read(self.busy_pin) == 1):      # 0: idle, 1: busy
-            epdconfig.delay_ms(100)    
+            epdconfig.delay_ms(100)
+        print("free busy")
 
     def TurnOnDisplay(self):
-        self.send_command(0xC4) # DISPLAY_UPDATE_CONTROL_2
-        self.send_data(0xC7)
+        self.send_command(0x22) # DISPLAY_UPDATE_CONTROL_2
+        self.send_data(0xC4)
         self.send_command(0x20) # MASTER_ACTIVATION
         self.send_command(0xFF) # TERMINATE_FRAME_READ_WRITE
         self.wait_until_idle()
@@ -226,7 +211,7 @@ class EPD:
 
     def sleep(self):
         self.send_command(0x10) #enter deep sleep
-        self.send_data(0x01)
+        # self.send_data(0x01)
         epdconfig.delay_ms(100)    
 
 ### END OF FILE ###
