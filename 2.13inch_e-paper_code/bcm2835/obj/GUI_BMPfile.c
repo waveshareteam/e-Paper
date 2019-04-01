@@ -6,33 +6,34 @@
 *                Used to shield the underlying layers of each master
 *                and enhance portability
 *----------------
-* |	This version:   V2.0
-* | Date        :   2018-11-12
+* |	This version:   V2.1
+* | Date        :   2019-03-29
 * | Info        :   
 * 1.Change file name: GUI_BMP.c -> GUI_BMPfile.c
 * 2.fix: GUI_ReadBmp()
 *   Now Xstart and Xstart can control the position of the picture normally, 
 *   and support the display of images of any size. If it is larger than 
 *   the actual display range, it will not be displayed.
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documnetation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to  whom the Software is
-# furished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in
-# all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS OR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-# THE SOFTWARE.
-#
+* 3.fix:line87  &bmprgbquad[i * 4] =》 &bmprgbquad[i]
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documnetation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to  whom the Software is
+* furished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in
+* all copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS OR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+* THE SOFTWARE.
+*
 ******************************************************************************/
 
 #include "GUI_BMPfile.h"
@@ -52,6 +53,7 @@ UBYTE GUI_ReadBmp(const char *path, UWORD Xstart, UWORD Ystart)
     BMPFILEHEADER bmpFileHeader;  //Define a bmp file header structure
     BMPINFOHEADER bmpInfoHeader;  //Define a bmp info header structure
     
+    
     // Binary file open
     if((fp = fopen(path, "rb")) == NULL) {
         Debug("Cann't open the file!\n");
@@ -65,8 +67,7 @@ UBYTE GUI_ReadBmp(const char *path, UWORD Xstart, UWORD Ystart)
     printf("pixel = %d * %d\r\n", bmpInfoHeader.biWidth, bmpInfoHeader.biHeight);
     
     UWORD Image_Width_Byte = (bmpInfoHeader.biWidth % 8 == 0)? (bmpInfoHeader.biWidth / 8): (bmpInfoHeader.biWidth / 8 + 1);
-    UWORD Bmp_Width_Byte = (Image_Width_Byte % 4 == 0) ? Image_Width_Byte: ((Image_Width_Byte / 4 + 1) * 4);  
-  
+    UWORD Bmp_Width_Byte = (Image_Width_Byte % 4 == 0) ? Image_Width_Byte: ((Image_Width_Byte / 4 + 1) * 4);    
     UBYTE Image[Image_Width_Byte * bmpInfoHeader.biHeight];
     memset(Image, 0xFF, Image_Width_Byte * bmpInfoHeader.biHeight);
     
@@ -82,8 +83,10 @@ UBYTE GUI_ReadBmp(const char *path, UWORD Xstart, UWORD Ystart)
     UWORD Bcolor, Wcolor;
     UWORD bmprgbquadsize = pow(2, bmpInfoHeader.biBitCount);// 2^1 = 2
     BMPRGBQUAD bmprgbquad[bmprgbquadsize];        //palette
+    
     for(i = 0; i < bmprgbquadsize; i++){
-        fread(&bmprgbquad[i * 4], sizeof(BMPRGBQUAD), 1, fp);
+        // fread(&bmprgbquad[i * 4], sizeof(BMPRGBQUAD), 1, fp);
+        fread(&bmprgbquad[i], sizeof(BMPRGBQUAD), 1, fp);
     }
     if(bmprgbquad[0].rgbBlue == 0xff && bmprgbquad[0].rgbGreen == 0xff && bmprgbquad[0].rgbRed == 0xff){
         Bcolor = BLACK;
@@ -105,6 +108,7 @@ UBYTE GUI_ReadBmp(const char *path, UWORD Xstart, UWORD Ystart)
             }
             if(x < Image_Width_Byte) { //bmp
                 Image[x + (bmpInfoHeader.biHeight - y - 1) * Image_Width_Byte] =  Rdata;
+                // printf("rdata = %d\r\n", Rdata);
             }
         }
     }    

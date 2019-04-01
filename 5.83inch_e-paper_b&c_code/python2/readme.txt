@@ -69,6 +69,11 @@
 
   == How to use ==
   1, install the Python libraries.
+  sudo apt-get install python-pip 
+  sudo pip install RPi.GPIO
+  sudo pip install spidev
+  sudo apt-get install ttf-wqy-zenhei ttf-wqy-microhei
+  
   2, change the current directory to where the demo files located.
   3, run the demo with: 
      python main.py
