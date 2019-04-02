@@ -43,6 +43,7 @@ class EPD:
         self.reset_pin = epdconfig.RST_PIN
         self.dc_pin = epdconfig.DC_PIN
         self.busy_pin = epdconfig.BUSY_PIN
+        self.cs_pin = epdconfig.CS_PIN
         self.width = EPD_WIDTH
         self.height = EPD_HEIGHT
     lut_full_update = [
@@ -61,20 +62,26 @@ class EPD:
         
     # Hardware reset
     def reset(self):
+        epdconfig.digital_write(self.cs_pin, GPIO.LOW)
         epdconfig.digital_write(self.reset_pin, GPIO.HIGH)
         epdconfig.delay_ms(200) 
         epdconfig.digital_write(self.reset_pin, GPIO.LOW)         # module reset
         epdconfig.delay_ms(200)
         epdconfig.digital_write(self.reset_pin, GPIO.HIGH)
         epdconfig.delay_ms(200)   
+        epdconfig.digital_write(self.cs_pin, GPIO.HIGH)
 
     def send_command(self, command):
+        epdconfig.digital_write(self.cs_pin, GPIO.LOW)
         epdconfig.digital_write(self.dc_pin, GPIO.LOW)
         epdconfig.spi_writebyte([command])
+        epdconfig.digital_write(self.cs_pin, GPIO.HIGH)
 
     def send_data(self, data):
+        epdconfig.digital_write(self.cs_pin, GPIO.LOW)
         epdconfig.digital_write(self.dc_pin, GPIO.HIGH)
         epdconfig.spi_writebyte([data])
+        epdconfig.digital_write(self.cs_pin, GPIO.HIGH)
         
     def wait_until_idle(self):
         while(epdconfig.digital_read(self.busy_pin) == 1):      # 0: idle, 1: busy
