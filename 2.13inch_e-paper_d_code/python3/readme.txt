@@ -1,7 +1,7 @@
 /******************************************************************************
  * File Name          : readme.txt
  * Description        : Readme file
- * Date               : July-28-2017
+ * Date               : 2019-04-08
  ******************************************************************************
  *
  * Copyright (c) 2017 Waveshare
@@ -66,12 +66,27 @@
   * D/C    ->    22 (Physical, BCM: 25)
   * RES    ->    11 (Physical, BCM: 17)
   * BUSY   ->    18 (Physical, BCM: 24)
+  
+    == How to use ==
+    1, open spidev.
+        spi is enabled in config.txt:
+        dtparam=spi=on
+    or in shell:
+        sudo raspi-config
+            - 5 Interfacing Options  Configure connections to peripherals
+                - 5 Interfacing Options  Configure connections to peripherals
+        
+    2, install the Python libraries.
+        sudo apt-get install python-pip 
+        sudo pip install RPi.GPIO
+        sudo pip install spidev
+        sudo apt-get install ttf-wqy-zenhei ttf-wqy-microhei
 
-  == How to use ==
-  1, install the Python libraries.
-  2, change the current directory to where the demo files located.
-  3, run the demo with: 
-     python main.py
+    3, change the current directory to where the demo files located.
 
-  */
+    4, run the demo with: 
+        sudo python main.py
+    # if use python3:
+        sudo python3 main.py
+*/
 
