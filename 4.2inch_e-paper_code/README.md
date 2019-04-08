@@ -1,5 +1,5 @@
 ﻿# 4.2inch e-Paper
-![4.2inch-e-Paper-intro.JPG](4.2inch-e-Paper-intro.JPG)
+![4.2inch-e-paper-intro.JPG](4.2inch-e-paper-intro.JPG)
 
 ## 中文:  
 上传的为RaspberryPi和Arduino程序:  
