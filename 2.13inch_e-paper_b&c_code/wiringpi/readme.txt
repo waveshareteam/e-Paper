@@ -1,7 +1,7 @@
 /******************************************************************************
  * File Name          : readme.txt
  * Description        : Readme file
- * Date               : July-28-2017
+ * Date               : 2019-04-08
  ******************************************************************************
  *
  * Copyright (c) 2017 Waveshare
@@ -66,13 +66,28 @@
   * BUSY   ->    18 (Physical, BCM: 24)
 
   == How to use ==
-  1, install the C libraries of bcm2835, see: http://www.airspayce.com/mikem/bcm2835/
-  2, change the current directory to where the Makefile and demo files located.
-  3, compile the file with: 
+    1, open spidev.
+        spi is enabled in config.txt:
+        dtparam=spi=on
+    or in shell:
+        sudo raspi-config
+            - 5 Interfacing Options  Configure connections to peripherals
+                - 5 Interfacing Options  Configure connections to peripherals
+    
+    2, install the C libraries：
+        sudo apt-get install git
+        sudo git clone git://git.drogon.net/wiringPi
+        cd wiringPi
+        sudo ./build
+    
+    3, change the current directory to where the Makefile and demo files located.
+    
+    4, compile the file with: 
        make
-     If you need to see the debug information, clear the execution:
-     make DEBUG=-DDEBUG
-  4, run the demo with: 
+    # If you need to see the debug information, clear the execution:
+        make DEBUG=-DDEBUG    
+    
+    5, run the demo with: 
        sudo ./epd
   */
 
