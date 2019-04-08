@@ -10,7 +10,7 @@
     > Python2  
     > python3  
 * Arduino:  
-    > Arduino UNO  
+    > Arduino UNO 
 更多资料请在官网上搜索:   
 http://www.waveshare.net/shop/1.54inch-e-Paper-B.htm
 
@@ -23,7 +23,7 @@ Uploaded as RaspberryPi and Arduino programs:
     > Python2  
     > python3  
 * Arduino:  
-    > Arduino UNO   
+    > Arduino UNO  
 For more information, please search on the official website:  
 https://www.waveshare.com/1.54inch-e-paper-b.htm
 
