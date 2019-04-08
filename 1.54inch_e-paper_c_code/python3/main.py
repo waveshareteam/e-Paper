@@ -1,13 +1,13 @@
 #!/usr/bin/python
 # -*- coding:utf-8 -*-
 
-import epd1in54
+import epd1in54c
 import time
 from PIL import Image,ImageDraw,ImageFont
 import traceback
 
 try:
-    epd = epd1in54.EPD()
+    epd = epd1in54c.EPD()
     epd.init(epd.lut_full_update)
     epd.Clear(0xFF)
     

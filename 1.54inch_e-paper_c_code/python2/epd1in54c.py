@@ -6,7 +6,7 @@
 # *----------------
 # * |	This version:   V3.0
 # * | Date        :   2018-11-01
-# * | Info        :   python3 demo
+# * | Info        :   python2 demo
 # * 1.Remove:
 #   digital_write(self, pin, value)
 #   digital_read(self, pin)
@@ -82,6 +82,7 @@ class EPD:
         self.reset_pin = epdconfig.RST_PIN
         self.dc_pin = epdconfig.DC_PIN
         self.busy_pin = epdconfig.BUSY_PIN
+        self.cs_pin = epdconfig.CS_PIN
         self.width = EPD_WIDTH
         self.height = EPD_HEIGHT
 
@@ -109,12 +110,16 @@ class EPD:
         epdconfig.delay_ms(200)   
 
     def send_command(self, command):
-        epdconfig.digital_write(self.dc_pin, GPIO.LOW)
+        epdconfig.digital_write(self.cs_pin, GPIO.LOW)
+        epdconfig.digital_write(self.dc_pin, GPIO.HIGH)
         epdconfig.spi_writebyte([command])
+        epdconfig.digital_write(self.cs_pin, GPIO.HIGH)
 
     def send_data(self, data):
+        epdconfig.digital_write(self.cs_pin, GPIO.LOW)
         epdconfig.digital_write(self.dc_pin, GPIO.HIGH)
         epdconfig.spi_writebyte([data])
+        epdconfig.digital_write(self.cs_pin, GPIO.HIGH)
         
     def wait_until_idle(self):
         while(epdconfig.digital_read(self.busy_pin) == 1):      # 0: idle, 1: busy
@@ -178,21 +183,25 @@ class EPD:
         return 0
 
     def getbuffer(self, image):
-        buf = [0xFF] * (self.width * self.height // 8)
-        # Set buffer to value of Python Imaging Library image.
-        # Image must be in mode 1.
+        buf = [0xFF] * ((self.width/8) * self.height)
         image_monocolor = image.convert('1')
         imwidth, imheight = image_monocolor.size
-        if imwidth != self.width or imheight != self.height:
-            raise ValueError('Image must be same dimensions as display \
-                ({0}x{1}).' .format(self.width, self.height))
-
         pixels = image_monocolor.load()
-        for y in range(self.height):
-            for x in range(self.width):
-                # Set the bits for the column of pixels at the current position.
-                if pixels[x, y] == 0:
-                    buf[(x + y * self.width) // 8] &= ~(0x80 >> (x % 8))
+        if(imwidth == self.width and imheight == self.height):
+            print "Horizontal"
+            for y in range(imheight):
+                for x in range(imwidth):
+                    # Set the bits for the column of pixels at the current position.
+                    if pixels[x, y] == 0:
+                        buf[(x + y * self.width) / 8] &= ~(0x80 >> (x % 8))
+        elif(imwidth == self.height and imheight == self.width):
+            print "Vertical"
+            for y in range(imheight):
+                for x in range(imwidth):
+                    newx = y
+                    newy = self.height - x - 1
+                    if pixels[x, y] == 0:
+                        buf[(newx + newy*self.width) / 8] &= ~(0x80 >> (y % 8))
         return buf
 
     def display(self, image):
@@ -203,16 +212,18 @@ class EPD:
         for j in range(0, self.height):
             self.SetCursor(0, j)
             self.send_command(WRITE_RAM)
-            for i in range(0, self.width // 8):
-                self.send_data(image[i + j * (self.width // 8)])   
+            for i in range(0, self.width / 8):
+                self.send_data(image[i + j * (self.width / 8)])   
         self.TurnOnDisplay()
         
     def Clear(self, color):
+        # self.SetWindow(0, 0, self.width - 1, self.height - 1)
+        # send the color data
         self.SetWindow(0, 0, self.width, self.height)
         for j in range(0, self.height):
             self.SetCursor(0, j)
             self.send_command(WRITE_RAM)
-            for i in range(0, self.width // 8):
+            for i in range(0, self.width / 8):
                 self.send_data(color)   
         self.TurnOnDisplay()
 
@@ -220,4 +231,5 @@ class EPD:
         self.send_command(DEEP_SLEEP_MODE)
         self.send_data(0x01)
 
+### END OF FILE ###
 
