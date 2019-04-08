@@ -1,7 +1,6 @@
 ﻿# 1.54inch B e-Paper  
 ![1.54inch-e-Paper-B-intro.JPG](1.54inch-e-Paper-B-intro.JPG)
 
-___
 ## 中文:  
 上传的为RaspberryPi和Arduino程序:  
 * RaspberryPi:  
@@ -15,7 +14,6 @@ ___
 更多资料请在官网上搜索:   
 http://www.waveshare.net/shop/1.54inch-e-Paper-B.htm
 
-___
 ## English:  
 Uploaded as RaspberryPi and Arduino programs:  
 * RaspberryPi:  
