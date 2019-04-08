@@ -2,7 +2,7 @@
 ![1.54inch-e-Paper-B-intro.JPG](1.54inch-e-Paper-B-intro.JPG)
 
 ___
-##中文： 
+##中文:  
 上传的为RaspberryPi和Arduino程序:  
 * RaspberryPi:  
     > BCM2835  
