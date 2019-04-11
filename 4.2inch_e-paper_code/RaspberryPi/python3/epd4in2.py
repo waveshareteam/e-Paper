@@ -161,7 +161,7 @@ class EPD:
 
     def send_command(self, command):
         epdconfig.digital_write(self.cs_pin, GPIO.LOW)
-        epdconfig.digital_write(self.dc_pin, GPIO.HIGH)
+        epdconfig.digital_write(self.dc_pin, GPIO.LOW)
         epdconfig.spi_writebyte([command])
         epdconfig.digital_write(self.cs_pin, GPIO.HIGH)
 

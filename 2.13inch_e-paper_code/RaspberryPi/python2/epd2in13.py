@@ -63,14 +63,12 @@ class EPD:
         
     # Hardware reset
     def reset(self):
-        epdconfig.digital_write(self.cs_pin, GPIO.LOW)
         epdconfig.digital_write(self.reset_pin, GPIO.HIGH)
         epdconfig.delay_ms(200) 
         epdconfig.digital_write(self.reset_pin, GPIO.LOW)         # module reset
         epdconfig.delay_ms(200)
         epdconfig.digital_write(self.reset_pin, GPIO.HIGH)
-        epdconfig.delay_ms(200)   
-        epdconfig.digital_write(self.cs_pin, GPIO.HIGH)
+        epdconfig.delay_ms(200)
 
     def send_command(self, command):
         epdconfig.digital_write(self.cs_pin, GPIO.LOW)
