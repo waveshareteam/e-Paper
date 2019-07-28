@@ -1,0 +1,5 @@
+bin/
+epd
+libepd.so
+.*.swp
+.*.swo
