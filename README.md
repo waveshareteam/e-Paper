@@ -6,9 +6,7 @@ waveshare electronics
 Jetson Nano、Raspberry Pi、Arduino、STM32例程
 * Raspberry Pi & Jetson Nano:  
     > C
-    > Python
-* Arduino:  
-    > Arduino UNO  
+    > Python 
 * Arduino:  
     > Arduino UNO  
 * STM32:  
