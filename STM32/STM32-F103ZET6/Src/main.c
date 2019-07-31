@@ -71,7 +71,7 @@ int main(void)
     /* USER CODE BEGIN 2 */
 		
 //		EPD_1in54_test();
-//		EPD_1in54_V2_test();		
+		EPD_1in54_V2_test();		
 //		EPD_1in54b_test();		
 //		EPD_1in54c_test();
 
@@ -79,7 +79,7 @@ int main(void)
 //		EPD_2in7b_test();
 
 //		EPD_2in9_test();
-		EPD_2in9bc_test();
+//		EPD_2in9bc_test();
 //		EPD_2in9d_test();
 
 //		EPD_2in13_test();

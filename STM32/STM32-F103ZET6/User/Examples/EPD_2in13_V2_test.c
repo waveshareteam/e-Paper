@@ -65,7 +65,7 @@ int EPD_2in13_V2_test(void)
     DEV_Delay_ms(2000);
 #endif
 
-#if 1   // Drawing on the image
+#if 0   // Drawing on the image
     printf("Drawing\r\n");
     //1.Select Image
     Paint_SelectImage(BlackImage);
@@ -97,7 +97,7 @@ int EPD_2in13_V2_test(void)
     DEV_Delay_ms(2000);
 #endif
 
-#if 1   //Partial refresh, example shows time    		
+#if 0   //Partial refresh, example shows time    		
     printf("Partial refresh\r\n");
     EPD_2IN13_V2_Init(EPD_2IN13_V2_FULL);
     EPD_2IN13_V2_DisplayPartBaseImage(BlackImage);
