@@ -15,8 +15,9 @@ int main(void)
 {
     // Exception handling:ctrl + c
     signal(SIGINT, Handler);
+    printf("Uncomment the test you want to run in examples/main.c\n");
 
-    // EPD_1in54_test();
+    EPD_1in54_test();
     // EPD_1in54_V2_test();
     // EPD_1in54b_test();
     // EPD_1in54c_test();
