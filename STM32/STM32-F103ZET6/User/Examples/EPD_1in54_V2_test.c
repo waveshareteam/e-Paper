@@ -35,6 +35,10 @@ int EPD_1in54_V2_test(void)
     printf("EPD_1in54_V2_test Demo\r\n");
     DEV_Module_Init();
 
+for(;;){
+// EPD_1IN54_V2_Init();
+//    EPD_1IN54_V2_Clear();
+
     printf("e-Paper Init and Clear...\r\n");
     EPD_1IN54_V2_Init();
     EPD_1IN54_V2_Clear();
@@ -61,7 +65,7 @@ int EPD_1in54_V2_test(void)
     DEV_Delay_ms(2000);
 #endif
 
-#if 1   // Drawing on the image
+#if 0   // Drawing on the image
     printf("Drawing\r\n");
     //1.Select Image
     Paint_SelectImage(BlackImage);
@@ -93,7 +97,7 @@ int EPD_1in54_V2_test(void)
     DEV_Delay_ms(2000);
 #endif
 
-#if 1   //Partial refresh, example shows time    
+#if 0   //Partial refresh, example shows time    
 
     // The image of the previous frame must be uploaded, otherwise the
     // first few seconds will display an exception.
@@ -142,7 +146,7 @@ int EPD_1in54_V2_test(void)
     EPD_1IN54_V2_Sleep();
     free(BlackImage);
     BlackImage = NULL;
-
+}
     // close 5V
     printf("close 5V, Module enters 0 power consumption ...\r\n");
     DEV_Module_Exit();

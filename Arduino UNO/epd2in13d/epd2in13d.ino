@@ -45,7 +45,7 @@ void setup()
         return;
     }
     //Serial.print("ClearFrameMemory\n");
-   // epd.ClearFrameMemory();   // bit set = white, bit reset = black
+    // epd.ClearFrameMemory();   // bit set = white, bit reset = black
 
     /**
      *  there are 2 memory areas embedded in the e-paper display

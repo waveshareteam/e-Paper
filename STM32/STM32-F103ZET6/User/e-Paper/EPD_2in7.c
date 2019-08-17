@@ -82,53 +82,6 @@
 #include "EPD_2in7.h"
 #include "Debug.h"
 
-static const unsigned char EPD_2in7_lut_vcom_dc[] = {
-    0x00	,0x00,
-    0x00	,0x08	,0x00	,0x00	,0x00	,0x02,
-    0x60	,0x28	,0x28	,0x00	,0x00	,0x01,
-    0x00	,0x14	,0x00	,0x00	,0x00	,0x01,
-    0x00	,0x12	,0x12	,0x00	,0x00	,0x01,
-    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
-    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
-    0x00	,0x00	,0x00	,0x00	,0x00	,0x00
-};
-static const unsigned char EPD_2in7_lut_ww[] = {
-    0x40	,0x08	,0x00	,0x00	,0x00	,0x02,
-    0x90	,0x28	,0x28	,0x00	,0x00	,0x01,
-    0x40	,0x14	,0x00	,0x00	,0x00	,0x01,
-    0xA0	,0x12	,0x12	,0x00	,0x00	,0x01,
-    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
-    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
-    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
-};
-static const unsigned char EPD_2in7_lut_bw[] = {
-    0x40	,0x08	,0x00	,0x00	,0x00	,0x02,
-    0x90	,0x28	,0x28	,0x00	,0x00	,0x01,
-    0x40	,0x14	,0x00	,0x00	,0x00	,0x01,
-    0xA0	,0x12	,0x12	,0x00	,0x00	,0x01,
-    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
-    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
-    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
-};
-static const unsigned char EPD_2in7_lut_bb[] = {
-    0x80	,0x08	,0x00	,0x00	,0x00	,0x02,
-    0x90	,0x28	,0x28	,0x00	,0x00	,0x01,
-    0x80	,0x14	,0x00	,0x00	,0x00	,0x01,
-    0x50	,0x12	,0x12	,0x00	,0x00	,0x01,
-    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
-    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
-    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
-};
-static const unsigned char EPD_2in7_lut_wb[] = {
-    0x80	,0x08	,0x00	,0x00	,0x00	,0x02,
-    0x90	,0x28	,0x28	,0x00	,0x00	,0x01,
-    0x80	,0x14	,0x00	,0x00	,0x00	,0x01,
-    0x50	,0x12	,0x12	,0x00	,0x00	,0x01,
-    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
-    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
-    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
-};
-
 /******************************************************************************
 function :	Software reset
 parameter:
@@ -187,39 +140,6 @@ static void EPD_2in7_ReadBusy(void)
 }
 
 /******************************************************************************
-function :	set the look-up tables
-parameter:
-******************************************************************************/
-static void EPD_2in7_SetLut(void)
-{
-    unsigned int count;
-    EPD_2in7_SendCommand(0x20); //vcom
-    for(count = 0; count < 44; count++) {
-        EPD_2in7_SendData(EPD_2in7_lut_vcom_dc[count]);
-    }
-
-    EPD_2in7_SendCommand(0x21); //ww --
-    for(count = 0; count < 42; count++) {
-        EPD_2in7_SendData(EPD_2in7_lut_ww[count]);
-    }
-
-    EPD_2in7_SendCommand(0x22); //bw r
-    for(count = 0; count < 42; count++) {
-        EPD_2in7_SendData(EPD_2in7_lut_bw[count]);
-    }
-
-    EPD_2in7_SendCommand(0x23); //wb w
-    for(count = 0; count < 42; count++) {
-        EPD_2in7_SendData(EPD_2in7_lut_bb[count]);
-    }
-
-    EPD_2in7_SendCommand(0x24); //bb b
-    for(count = 0; count < 42; count++) {
-        EPD_2in7_SendData(EPD_2in7_lut_wb[count]);
-    }
-}
-
-/******************************************************************************
 function :	Initialize the e-Paper register
 parameter:
 ******************************************************************************/
@@ -227,67 +147,35 @@ void EPD_2IN7_Init(void)
 {
     EPD_2in7_Reset();
 
-    EPD_2in7_SendCommand(0x01); // POWER_SETTING
-    EPD_2in7_SendData(0x03); // VDS_EN, VDG_EN
-    EPD_2in7_SendData(0x00); // VCOM_HV, VGHL_LV[1], VGHL_LV[0]
-    EPD_2in7_SendData(0x2b); // VDH
-    EPD_2in7_SendData(0x2b); // VDL
-    EPD_2in7_SendData(0x09); // VDHR
-	
-    EPD_2in7_SendCommand(0x06);  // BOOSTER_SOFT_START
-    EPD_2in7_SendData(0x07);
-    EPD_2in7_SendData(0x07);
-    EPD_2in7_SendData(0x17);
-	
-    // Power optimization
-    EPD_2in7_SendCommand(0xF8);
-    EPD_2in7_SendData(0x60);
-    EPD_2in7_SendData(0xA5);
-	
-    // Power optimization
-    EPD_2in7_SendCommand(0xF8);
-    EPD_2in7_SendData(0x89);
-    EPD_2in7_SendData(0xA5);
-		
-    // Power optimization
-    EPD_2in7_SendCommand(0xF8);
-    EPD_2in7_SendData(0x90);
-    EPD_2in7_SendData(0x00);
-		
-    // Power optimization
-    EPD_2in7_SendCommand(0xF8);
-    EPD_2in7_SendData(0x93);
-    EPD_2in7_SendData(0x2A);
-		
-    // Power optimization
-    EPD_2in7_SendCommand(0xF8);
-    EPD_2in7_SendData(0xA0);
-    EPD_2in7_SendData(0xA5);
-		
-    // Power optimization
-    EPD_2in7_SendCommand(0xF8);
-    EPD_2in7_SendData(0xA1);
-    EPD_2in7_SendData(0x00);
-		
-    // Power optimization
-    EPD_2in7_SendCommand(0xF8);
-    EPD_2in7_SendData(0x73);
-    EPD_2in7_SendData(0x41);
-		
-    EPD_2in7_SendCommand(0x16); // PARTIAL_DISPLAY_REFRESH
-    EPD_2in7_SendData(0x00);
-		
-    EPD_2in7_SendCommand(0x04); // POWER_ON
-    EPD_2in7_ReadBusy();
+		EPD_2in7_SendCommand(0x06); //boost soft start
+		EPD_2in7_SendData(0x07); //A
+		EPD_2in7_SendData(0x07); //B
+		EPD_2in7_SendData(0x17); //C       
 
-    EPD_2in7_SendCommand(0x00); // PANEL_SETTING
-    EPD_2in7_SendData(0xAF); // KW-BF   KWR-AF    BWROTP 0f
-    EPD_2in7_SendCommand(0x30); // PLL_CONTROL
-    EPD_2in7_SendData(0x3A); // 3A 100HZ   29 150Hz 39 200HZ    31 171HZ
-    EPD_2in7_SendCommand(0x82);  // VCM_DC_SETTING_REGISTER
-    EPD_2in7_SendData(0x12);
+		EPD_2in7_SendCommand(0x04);  
+		EPD_2in7_ReadBusy();
 
-    EPD_2in7_SetLut();
+		EPD_2in7_SendCommand(0x00); //panel setting
+		EPD_2in7_SendData(0x1f); //LUT from OTP¡ê?128x296
+	
+		EPD_2in7_SendCommand(0x16);
+		EPD_2in7_SendData(0x00); //KW-BF   KWR-AF	BWROTP 0f	
+	
+		EPD_2in7_SendCommand(0xF8); 
+		EPD_2in7_SendData(0x60);
+		EPD_2in7_SendData(0xa5);
+
+		EPD_2in7_SendCommand(0xF8);
+		EPD_2in7_SendData(0x73);
+		EPD_2in7_SendData(0x23);
+
+		EPD_2in7_SendCommand(0xF8); 
+		EPD_2in7_SendData(0x7C);
+		EPD_2in7_SendData(0x00);
+		
+		EPD_2in7_SendCommand(0X50);
+		EPD_2in7_SendData(0x97); //WBmode:VBDF 17|D7 VBDW 97 VBDB 57		WBRmode:VBDF F7 VBDW 77 VBDB 37  VBDR B7
+
 }
 
 /******************************************************************************
@@ -328,13 +216,6 @@ void EPD_2IN7_Display(UBYTE *Image)
     Width = (EPD_2IN7_WIDTH % 8 == 0)? (EPD_2IN7_WIDTH / 8 ): (EPD_2IN7_WIDTH / 8 + 1);
     Height = EPD_2IN7_HEIGHT;
 
-    EPD_2in7_SendCommand(0x10);
-    for (UWORD j = 0; j < Height; j++) {
-        for (UWORD i = 0; i < Width; i++) {
-            EPD_2in7_SendData(0XFF);
-        }
-    }
-
     EPD_2in7_SendCommand(0x13);
     for (UWORD j = 0; j < Height; j++) {
         for (UWORD i = 0; i < Width; i++) {
@@ -351,8 +232,6 @@ parameter:
 ******************************************************************************/
 void EPD_2IN7_Sleep(void)
 {
-    EPD_2in7_SendCommand(0X50);
-    EPD_2in7_SendData(0xf7);
     EPD_2in7_SendCommand(0X02);  	//power off
     EPD_2in7_SendCommand(0X07);  	//deep sleep
     EPD_2in7_SendData(0xA5);

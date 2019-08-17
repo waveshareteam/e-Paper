@@ -4,11 +4,9 @@ waveshare electronics
 
 ## 中文:  
 Jetson Nano、Raspberry Pi、Arduino、STM32例程
-* Python (Jetson Nano、Raspberry Pi、Python 2/3)
-* Jetson Nano:  
-    > C  
-* Raspberry Pi:  
-    > C(BCM2835\WiringPi)  
+* Raspberry Pi & Jetson Nano:  
+    > C
+    > Python 
 * Arduino:  
     > Arduino UNO  
 * STM32:  
@@ -20,11 +18,9 @@ http://www.waveshare.net
 
 ## English:  
 Jetson Nano、Raspberry Pi、Arduino、STM32 Demo:  
-* Python (Jetson Nano、Raspberry Pi、Python 2/3)
-* Jetson Nano:  
-    > C  
-* Raspberry Pi:  
-    > C(BCM2835\WiringPi)  
+* Raspberry Pi & Jetson Nano:  
+    > C
+    > Python
 * Arduino:  
     > Arduino UNO  
 * STM32:  

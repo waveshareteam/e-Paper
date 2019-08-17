@@ -1,11 +1,11 @@
 /*****************************************************************************
-* | File      	:   EPD_2IN13_V2_test.c
+* | File      	:   EPD_2IN13_test.c
 * | Author      :   Waveshare team
-* | Function    :   2.13inch e-paper(V2) test demo
+* | Function    :   2.9inch e-paper test demo
 * | Info        :
 *----------------
 * |	This version:   V1.0
-* | Date        :   2019-06-13
+* | Date        :   2019-06-11
 * | Info        :
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -28,44 +28,57 @@
 #
 ******************************************************************************/
 #include "EPD_Test.h"
-#include "EPD_2IN13_V2.h"
+#include "EPD_2in13.h"
 
-int EPD_2in13_V2_test(void)
+int EPD_2in13_test(void)
 {
-    printf("EPD_2IN13_V2_test Demo\r\n");
-    DEV_Module_Init();
+    printf("EPD_2IN13_test Demo\r\n");
+    if(DEV_Module_Init()!=0){
+        return -1;
+    }
 
     printf("e-Paper Init and Clear...\r\n");
-    EPD_2IN13_V2_Init(EPD_2IN13_V2_FULL);
-    EPD_2IN13_V2_Clear();
+    EPD_2IN13_Init(EPD_2IN13_FULL);
+    EPD_2IN13_Clear();
     DEV_Delay_ms(500);
 
     //Create a new image cache
     UBYTE *BlackImage;
     /* you have to edit the startup_stm32fxxx.s file and set a big enough heap size */
-    UWORD Imagesize = ((EPD_2IN13_V2_WIDTH % 8 == 0)? (EPD_2IN13_V2_WIDTH / 8 ): (EPD_2IN13_V2_WIDTH / 8 + 1)) * EPD_2IN13_V2_HEIGHT;
+    UWORD Imagesize = ((EPD_2IN13_WIDTH % 8 == 0)? (EPD_2IN13_WIDTH / 8 ): (EPD_2IN13_WIDTH / 8 + 1)) * EPD_2IN13_HEIGHT;
     if((BlackImage = (UBYTE *)malloc(Imagesize)) == NULL) {
         printf("Failed to apply for black memory...\r\n");
         return -1;
     }
     printf("Paint_NewImage\r\n");
-    Paint_NewImage(BlackImage, EPD_2IN13_V2_WIDTH, EPD_2IN13_V2_HEIGHT, 270, WHITE);
+    Paint_NewImage(BlackImage, EPD_2IN13_WIDTH, EPD_2IN13_HEIGHT, 270, WHITE);
+
+#if 1   // show bmp
+    printf("show window BMP-----------------\r\n");
     Paint_SelectImage(BlackImage);
-    Paint_SetMirroring(MIRROR_HORIZONTAL); //
     Paint_Clear(WHITE);
+    GUI_ReadBmp("./pic/100x100.bmp", 10, 10);
+    EPD_2IN13_Display(BlackImage);
+    DEV_Delay_ms(2000);
 
-
+    printf("show bmp------------------------\r\n");
+    Paint_SelectImage(BlackImage);
+    GUI_ReadBmp("./pic/2in13.bmp", 0, 0);
+    EPD_2IN13_Display(BlackImage);
+    DEV_Delay_ms(2000);
+#endif    
+    
 #if 1   //show image for array    
     printf("show image for array\r\n");
     Paint_SelectImage(BlackImage);
     Paint_Clear(WHITE);
     Paint_DrawBitMap(gImage_2in13);
 
-    EPD_2IN13_V2_Display(BlackImage);
+    EPD_2IN13_Display(BlackImage);
     DEV_Delay_ms(2000);
 #endif
 
-#if 0   // Drawing on the image
+#if 1   // Drawing on the image
     printf("Drawing\r\n");
     //1.Select Image
     Paint_SelectImage(BlackImage);
@@ -93,16 +106,13 @@ int EPD_2in13_V2_test(void)
     Paint_DrawString_CN(140, 60, "ÄãºÃabc", &Font12CN, BLACK, WHITE);
     Paint_DrawString_CN(5, 65, "Î¢Ñ©µç×Ó", &Font24CN, WHITE, BLACK);
 
-    EPD_2IN13_V2_Display(BlackImage);
+    EPD_2IN13_Display(BlackImage);
     DEV_Delay_ms(2000);
 #endif
 
-#if 0   //Partial refresh, example shows time    		
+#if 1   //Partial refresh, example shows time    		
     printf("Partial refresh\r\n");
-    EPD_2IN13_V2_Init(EPD_2IN13_V2_FULL);
-    EPD_2IN13_V2_DisplayPartBaseImage(BlackImage);
-
-    EPD_2IN13_V2_Init(EPD_2IN13_V2_PART);
+    EPD_2IN13_Init(EPD_2IN13_PART);
     Paint_SelectImage(BlackImage);
     PAINT_TIME sPaint_time;
     sPaint_time.Hour = 12;
@@ -131,22 +141,19 @@ int EPD_2in13_V2_test(void)
         if(num == 0) {
             break;
         }
-        EPD_2IN13_V2_DisplayPart(BlackImage);
+        EPD_2IN13_Display(BlackImage);
         DEV_Delay_ms(500);//Analog clock 1s
     }
 
 #endif
     printf("Clear...\r\n");
-
-    EPD_2IN13_V2_Init(EPD_2IN13_V2_FULL);
-    EPD_2IN13_V2_Clear();
-    DEV_Delay_ms(2000);//Analog clock 1s
+    EPD_2IN13_Init(EPD_2IN13_FULL);
+    EPD_2IN13_Clear();
 
     printf("Goto Sleep...\r\n");
-    EPD_2IN13_V2_Sleep();
+    EPD_2IN13_Sleep();
     free(BlackImage);
     BlackImage = NULL;
-    DEV_Delay_ms(1000);//Analog clock 1s
 
     // close 5V
     printf("close 5V, Module enters 0 power consumption ...\r\n");

@@ -28,12 +28,14 @@
 #
 ******************************************************************************/
 #include "EPD_Test.h"
-#include "EPD_2IN13_V2.h"
+#include "EPD_2in13_V2.h"
 
 int EPD_2in13_V2_test(void)
 {
     printf("EPD_2IN13_V2_test Demo\r\n");
-    DEV_Module_Init();
+    if(DEV_Module_Init()!=0){
+        return -1;
+    }
 
     printf("e-Paper Init and Clear...\r\n");
     EPD_2IN13_V2_Init(EPD_2IN13_V2_FULL);
@@ -54,6 +56,21 @@ int EPD_2in13_V2_test(void)
     Paint_SetMirroring(MIRROR_HORIZONTAL); //
     Paint_Clear(WHITE);
 
+#if 1   // show bmp
+    printf("show window BMP-----------------\r\n");
+    Paint_SelectImage(BlackImage);
+    Paint_Clear(WHITE);
+    GUI_ReadBmp("./pic/100x100.bmp", 10, 10);
+    EPD_2IN13_V2_Display(BlackImage);
+    DEV_Delay_ms(2000);
+
+    printf("show bmp------------------------\r\n");
+    Paint_SelectImage(BlackImage);
+    GUI_ReadBmp("./pic/2in13-v2.bmp", 0, 0);
+    EPD_2IN13_V2_Display(BlackImage);
+    DEV_Delay_ms(2000);
+#endif    
+    
 
 #if 1   //show image for array    
     printf("show image for array\r\n");
@@ -65,7 +82,7 @@ int EPD_2in13_V2_test(void)
     DEV_Delay_ms(2000);
 #endif
 
-#if 0   // Drawing on the image
+#if 1   // Drawing on the image
     printf("Drawing\r\n");
     //1.Select Image
     Paint_SelectImage(BlackImage);
@@ -97,7 +114,7 @@ int EPD_2in13_V2_test(void)
     DEV_Delay_ms(2000);
 #endif
 
-#if 0   //Partial refresh, example shows time    		
+#if 1   //Partial refresh, example shows time    		
     printf("Partial refresh\r\n");
     EPD_2IN13_V2_Init(EPD_2IN13_V2_FULL);
     EPD_2IN13_V2_DisplayPartBaseImage(BlackImage);

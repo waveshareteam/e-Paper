@@ -3,11 +3,11 @@
 <title>Static Call Graph - [epd-demo\epd-demo.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image epd-demo\epd-demo.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Fri Jun 21 13:53:08 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Fri Jul 12 11:58:23 2019
 <BR><P>
-<H3>Maximum Stack Usage =        744 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        160 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-main &rArr; EPD_2in9bc_test &rArr; Paint_DrawNum &rArr; Paint_DrawString_EN &rArr; Paint_DrawChar &rArr; Paint_SetPixel &rArr; __2printf
+main &rArr; EPD_1in54_V2_test &rArr; EPD_1IN54_V2_Display &rArr; EPD_1IN54_V2_TurnOnDisplay &rArr; EPD_1IN54_V2_SendData &rArr; DEV_SPI_WriteByte &rArr; HAL_SPI_Transmit &rArr; SPI_CheckFlag_BSY &rArr; SPI_WaitFlagStateUntilTimeout
 <P>
 <H3>
 Mutually Recursive functions
@@ -134,25 +134,25 @@ Global Symbols
 <P><STRONG><a name="[48]"></a>__main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry.o(.ARM.Collect$$$$00000000))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f103xe.o(.text)
 </UL>
-<P><STRONG><a name="[f9]"></a>_main_stk</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry2.o(.ARM.Collect$$$$00000001))
+<P><STRONG><a name="[fe]"></a>_main_stk</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry2.o(.ARM.Collect$$$$00000001))
 
 <P><STRONG><a name="[68]"></a>_main_scatterload</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry5.o(.ARM.Collect$$$$00000004))
 <BR><BR>[Calls]<UL><LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
 </UL>
 
-<P><STRONG><a name="[f5]"></a>__main_after_scatterload</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry5.o(.ARM.Collect$$$$00000004))
+<P><STRONG><a name="[fa]"></a>__main_after_scatterload</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry5.o(.ARM.Collect$$$$00000004))
 <BR><BR>[Called By]<UL><LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
 </UL>
 
-<P><STRONG><a name="[fa]"></a>_main_clock</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry7b.o(.ARM.Collect$$$$00000008))
+<P><STRONG><a name="[ff]"></a>_main_clock</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry7b.o(.ARM.Collect$$$$00000008))
 
-<P><STRONG><a name="[fb]"></a>_main_cpp_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry8b.o(.ARM.Collect$$$$0000000A))
+<P><STRONG><a name="[100]"></a>_main_cpp_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry8b.o(.ARM.Collect$$$$0000000A))
 
-<P><STRONG><a name="[fc]"></a>_main_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry9a.o(.ARM.Collect$$$$0000000B))
+<P><STRONG><a name="[101]"></a>_main_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry9a.o(.ARM.Collect$$$$0000000B))
 
-<P><STRONG><a name="[fd]"></a>__rt_final_cpp</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry10a.o(.ARM.Collect$$$$0000000D))
+<P><STRONG><a name="[102]"></a>__rt_final_cpp</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry10a.o(.ARM.Collect$$$$0000000D))
 
-<P><STRONG><a name="[fe]"></a>__rt_final_exit</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry11a.o(.ARM.Collect$$$$0000000F))
+<P><STRONG><a name="[103]"></a>__rt_final_exit</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry11a.o(.ARM.Collect$$$$0000000F))
 
 <P><STRONG><a name="[0]"></a>Reset_Handler</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, startup_stm32f103xe.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f103xe.o(RESET)
@@ -363,13 +363,13 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[46]"></a>main</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, main.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 744<LI>Call Chain = main &rArr; EPD_2in9bc_test &rArr; Paint_DrawNum &rArr; Paint_DrawString_EN &rArr; Paint_DrawChar &rArr; Paint_SetPixel &rArr; __2printf
+<BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = main &rArr; EPD_1in54_V2_test &rArr; EPD_1IN54_V2_Display &rArr; EPD_1IN54_V2_TurnOnDisplay &rArr; EPD_1IN54_V2_SendData &rArr; DEV_SPI_WriteByte &rArr; HAL_SPI_Transmit &rArr; SPI_CheckFlag_BSY &rArr; SPI_WaitFlagStateUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_USART1_UART_Init
 <LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_SPI1_Init
 <LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_GPIO_Init
 <LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Init
-<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in9bc_test
+<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1in54_V2_test
 <LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> entry9a.o(.ARM.Collect$$$$0000000B)
@@ -507,7 +507,7 @@ Global Symbols
 <LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_CheckFlag_BSY
 <LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_WaitFlagStateUntilTimeout
 </UL>
-<BR>[Called By]<UL><LI><a href="#[ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DEV_SPI_WriteByte
+<BR>[Called By]<UL><LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DEV_SPI_WriteByte
 </UL>
 
 <P><STRONG><a name="[8a]"></a>HAL_SPI_TransmitReceive</STRONG> (Thumb, 472 bytes, Stack size 40 bytes, stm32f1xx_hal_spi.o(.text), UNUSED)
@@ -540,7 +540,7 @@ Global Symbols
 <LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_CloseTx_ISR
 </UL>
 
-<P><STRONG><a name="[ff]"></a>HAL_SPI_Transmit_IT</STRONG> (Thumb, 142 bytes, Stack size 12 bytes, stm32f1xx_hal_spi.o(.text), UNUSED)
+<P><STRONG><a name="[104]"></a>HAL_SPI_Transmit_IT</STRONG> (Thumb, 142 bytes, Stack size 12 bytes, stm32f1xx_hal_spi.o(.text), UNUSED)
 
 <P><STRONG><a name="[90]"></a>HAL_SPI_RxCpltCallback</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f1xx_hal_spi.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_DMAReceiveCplt
@@ -603,9 +603,9 @@ Global Symbols
 <LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Abort_IT
 </UL>
 
-<P><STRONG><a name="[100]"></a>HAL_SPI_DMAPause</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, stm32f1xx_hal_spi.o(.text), UNUSED)
+<P><STRONG><a name="[105]"></a>HAL_SPI_DMAPause</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, stm32f1xx_hal_spi.o(.text), UNUSED)
 
-<P><STRONG><a name="[101]"></a>HAL_SPI_DMAResume</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, stm32f1xx_hal_spi.o(.text), UNUSED)
+<P><STRONG><a name="[106]"></a>HAL_SPI_DMAResume</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, stm32f1xx_hal_spi.o(.text), UNUSED)
 
 <P><STRONG><a name="[a1]"></a>HAL_SPI_DMAStop</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, stm32f1xx_hal_spi.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Abort
@@ -616,11 +616,11 @@ Global Symbols
 <LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Abort_IT
 </UL>
 
-<P><STRONG><a name="[102]"></a>HAL_SPI_GetState</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f1xx_hal_spi.o(.text), UNUSED)
+<P><STRONG><a name="[107]"></a>HAL_SPI_GetState</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f1xx_hal_spi.o(.text), UNUSED)
 
-<P><STRONG><a name="[103]"></a>HAL_SPI_GetError</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f1xx_hal_spi.o(.text), UNUSED)
+<P><STRONG><a name="[108]"></a>HAL_SPI_GetError</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f1xx_hal_spi.o(.text), UNUSED)
 
-<P><STRONG><a name="[104]"></a>SPI_ISCRCErrorValid</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f1xx_hal_spi.o(.text), UNUSED)
+<P><STRONG><a name="[109]"></a>SPI_ISCRCErrorValid</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f1xx_hal_spi.o(.text), UNUSED)
 
 <P><STRONG><a name="[79]"></a>HAL_SPI_Init</STRONG> (Thumb, 130 bytes, Stack size 16 bytes, stm32f1xx_hal_spi_ex.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = HAL_SPI_Init &rArr; HAL_SPI_MspInit &rArr; HAL_GPIO_Init
@@ -672,9 +672,9 @@ Global Symbols
 <LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
 </UL>
 
-<P><STRONG><a name="[105]"></a>HAL_UART_Transmit_IT</STRONG> (Thumb, 62 bytes, Stack size 0 bytes, stm32f1xx_hal_uart.o(.text), UNUSED)
+<P><STRONG><a name="[10a]"></a>HAL_UART_Transmit_IT</STRONG> (Thumb, 62 bytes, Stack size 0 bytes, stm32f1xx_hal_uart.o(.text), UNUSED)
 
-<P><STRONG><a name="[106]"></a>HAL_UART_Receive_IT</STRONG> (Thumb, 82 bytes, Stack size 0 bytes, stm32f1xx_hal_uart.o(.text), UNUSED)
+<P><STRONG><a name="[10b]"></a>HAL_UART_Receive_IT</STRONG> (Thumb, 82 bytes, Stack size 0 bytes, stm32f1xx_hal_uart.o(.text), UNUSED)
 
 <P><STRONG><a name="[ae]"></a>HAL_UART_ErrorCallback</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f1xx_hal_uart.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_IRQHandler
@@ -708,9 +708,9 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Start_IT
 </UL>
 
-<P><STRONG><a name="[107]"></a>HAL_UART_DMAPause</STRONG> (Thumb, 102 bytes, Stack size 0 bytes, stm32f1xx_hal_uart.o(.text), UNUSED)
+<P><STRONG><a name="[10c]"></a>HAL_UART_DMAPause</STRONG> (Thumb, 102 bytes, Stack size 0 bytes, stm32f1xx_hal_uart.o(.text), UNUSED)
 
-<P><STRONG><a name="[108]"></a>HAL_UART_DMAResume</STRONG> (Thumb, 94 bytes, Stack size 8 bytes, stm32f1xx_hal_uart.o(.text), UNUSED)
+<P><STRONG><a name="[10d]"></a>HAL_UART_DMAResume</STRONG> (Thumb, 94 bytes, Stack size 8 bytes, stm32f1xx_hal_uart.o(.text), UNUSED)
 
 <P><STRONG><a name="[b5]"></a>HAL_UART_DMAStop</STRONG> (Thumb, 88 bytes, Stack size 8 bytes, stm32f1xx_hal_uart.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_EndTxTransfer
@@ -770,19 +770,19 @@ Global Symbols
 <LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Abort_IT
 </UL>
 
-<P><STRONG><a name="[109]"></a>HAL_LIN_SendBreak</STRONG> (Thumb, 46 bytes, Stack size 0 bytes, stm32f1xx_hal_uart.o(.text), UNUSED)
+<P><STRONG><a name="[10e]"></a>HAL_LIN_SendBreak</STRONG> (Thumb, 46 bytes, Stack size 0 bytes, stm32f1xx_hal_uart.o(.text), UNUSED)
 
-<P><STRONG><a name="[10a]"></a>HAL_MultiProcessor_EnterMuteMode</STRONG> (Thumb, 46 bytes, Stack size 0 bytes, stm32f1xx_hal_uart.o(.text), UNUSED)
+<P><STRONG><a name="[10f]"></a>HAL_MultiProcessor_EnterMuteMode</STRONG> (Thumb, 46 bytes, Stack size 0 bytes, stm32f1xx_hal_uart.o(.text), UNUSED)
 
-<P><STRONG><a name="[10b]"></a>HAL_MultiProcessor_ExitMuteMode</STRONG> (Thumb, 46 bytes, Stack size 0 bytes, stm32f1xx_hal_uart.o(.text), UNUSED)
+<P><STRONG><a name="[110]"></a>HAL_MultiProcessor_ExitMuteMode</STRONG> (Thumb, 46 bytes, Stack size 0 bytes, stm32f1xx_hal_uart.o(.text), UNUSED)
 
-<P><STRONG><a name="[10c]"></a>HAL_HalfDuplex_EnableTransmitter</STRONG> (Thumb, 50 bytes, Stack size 0 bytes, stm32f1xx_hal_uart.o(.text), UNUSED)
+<P><STRONG><a name="[111]"></a>HAL_HalfDuplex_EnableTransmitter</STRONG> (Thumb, 50 bytes, Stack size 0 bytes, stm32f1xx_hal_uart.o(.text), UNUSED)
 
-<P><STRONG><a name="[10d]"></a>HAL_HalfDuplex_EnableReceiver</STRONG> (Thumb, 50 bytes, Stack size 0 bytes, stm32f1xx_hal_uart.o(.text), UNUSED)
+<P><STRONG><a name="[112]"></a>HAL_HalfDuplex_EnableReceiver</STRONG> (Thumb, 50 bytes, Stack size 0 bytes, stm32f1xx_hal_uart.o(.text), UNUSED)
 
-<P><STRONG><a name="[10e]"></a>HAL_UART_GetState</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, stm32f1xx_hal_uart.o(.text), UNUSED)
+<P><STRONG><a name="[113]"></a>HAL_UART_GetState</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, stm32f1xx_hal_uart.o(.text), UNUSED)
 
-<P><STRONG><a name="[10f]"></a>HAL_UART_GetError</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f1xx_hal_uart.o(.text), UNUSED)
+<P><STRONG><a name="[114]"></a>HAL_UART_GetError</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f1xx_hal_uart.o(.text), UNUSED)
 
 <P><STRONG><a name="[c2]"></a>HAL_InitTick</STRONG> (Thumb, 54 bytes, Stack size 16 bytes, stm32f1xx_hal.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = HAL_InitTick &rArr; HAL_NVIC_SetPriority
@@ -837,47 +837,48 @@ Global Symbols
 <LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_ClockConfig
 </UL>
 
-<P><STRONG><a name="[110]"></a>HAL_GetTickPrio</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f1xx_hal.o(.text), UNUSED)
+<P><STRONG><a name="[115]"></a>HAL_GetTickPrio</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f1xx_hal.o(.text), UNUSED)
 
 <P><STRONG><a name="[c5]"></a>HAL_SetTickFreq</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, stm32f1xx_hal.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
 </UL>
 
-<P><STRONG><a name="[111]"></a>HAL_GetTickFreq</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f1xx_hal.o(.text), UNUSED)
+<P><STRONG><a name="[116]"></a>HAL_GetTickFreq</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f1xx_hal.o(.text), UNUSED)
 
 <P><STRONG><a name="[c6]"></a>HAL_Delay</STRONG> (Thumb, 32 bytes, Stack size 16 bytes, stm32f1xx_hal.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = HAL_Delay
 </UL>
 <BR>[Calls]<UL><LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
 </UL>
-<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in9bc_test
-<LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN9BC_Init
-<LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN9BC_ReadBusy
+<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1in54_V2_test
+<LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_Sleep
+<LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_Init
+<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_ReadBusy
 </UL>
 
-<P><STRONG><a name="[112]"></a>HAL_SuspendTick</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, stm32f1xx_hal.o(.text), UNUSED)
+<P><STRONG><a name="[117]"></a>HAL_SuspendTick</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, stm32f1xx_hal.o(.text), UNUSED)
 
-<P><STRONG><a name="[113]"></a>HAL_ResumeTick</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, stm32f1xx_hal.o(.text), UNUSED)
+<P><STRONG><a name="[118]"></a>HAL_ResumeTick</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, stm32f1xx_hal.o(.text), UNUSED)
 
-<P><STRONG><a name="[114]"></a>HAL_GetHalVersion</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f1xx_hal.o(.text), UNUSED)
+<P><STRONG><a name="[119]"></a>HAL_GetHalVersion</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f1xx_hal.o(.text), UNUSED)
 
-<P><STRONG><a name="[115]"></a>HAL_GetREVID</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, stm32f1xx_hal.o(.text), UNUSED)
+<P><STRONG><a name="[11a]"></a>HAL_GetREVID</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, stm32f1xx_hal.o(.text), UNUSED)
 
-<P><STRONG><a name="[116]"></a>HAL_GetDEVID</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, stm32f1xx_hal.o(.text), UNUSED)
+<P><STRONG><a name="[11b]"></a>HAL_GetDEVID</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, stm32f1xx_hal.o(.text), UNUSED)
 
-<P><STRONG><a name="[117]"></a>HAL_DBGMCU_EnableDBGSleepMode</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, stm32f1xx_hal.o(.text), UNUSED)
+<P><STRONG><a name="[11c]"></a>HAL_DBGMCU_EnableDBGSleepMode</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, stm32f1xx_hal.o(.text), UNUSED)
 
-<P><STRONG><a name="[118]"></a>HAL_DBGMCU_DisableDBGSleepMode</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, stm32f1xx_hal.o(.text), UNUSED)
+<P><STRONG><a name="[11d]"></a>HAL_DBGMCU_DisableDBGSleepMode</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, stm32f1xx_hal.o(.text), UNUSED)
 
-<P><STRONG><a name="[119]"></a>HAL_DBGMCU_EnableDBGStopMode</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, stm32f1xx_hal.o(.text), UNUSED)
+<P><STRONG><a name="[11e]"></a>HAL_DBGMCU_EnableDBGStopMode</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, stm32f1xx_hal.o(.text), UNUSED)
 
-<P><STRONG><a name="[11a]"></a>HAL_DBGMCU_DisableDBGStopMode</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, stm32f1xx_hal.o(.text), UNUSED)
+<P><STRONG><a name="[11f]"></a>HAL_DBGMCU_DisableDBGStopMode</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, stm32f1xx_hal.o(.text), UNUSED)
 
-<P><STRONG><a name="[11b]"></a>HAL_DBGMCU_EnableDBGStandbyMode</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, stm32f1xx_hal.o(.text), UNUSED)
+<P><STRONG><a name="[120]"></a>HAL_DBGMCU_EnableDBGStandbyMode</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, stm32f1xx_hal.o(.text), UNUSED)
 
-<P><STRONG><a name="[11c]"></a>HAL_DBGMCU_DisableDBGStandbyMode</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, stm32f1xx_hal.o(.text), UNUSED)
+<P><STRONG><a name="[121]"></a>HAL_DBGMCU_DisableDBGStandbyMode</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, stm32f1xx_hal.o(.text), UNUSED)
 
-<P><STRONG><a name="[11d]"></a>HAL_GetUID</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, stm32f1xx_hal.o(.text), UNUSED)
+<P><STRONG><a name="[122]"></a>HAL_GetUID</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, stm32f1xx_hal.o(.text), UNUSED)
 
 <P><STRONG><a name="[c7]"></a>HAL_RCC_DeInit</STRONG> (Thumb, 202 bytes, Stack size 24 bytes, stm32f1xx_hal_rcc.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
@@ -912,9 +913,9 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_Init
 </UL>
 
-<P><STRONG><a name="[11e]"></a>HAL_RCC_EnableCSS</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, stm32f1xx_hal_rcc.o(.text), UNUSED)
+<P><STRONG><a name="[123]"></a>HAL_RCC_EnableCSS</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, stm32f1xx_hal_rcc.o(.text), UNUSED)
 
-<P><STRONG><a name="[11f]"></a>HAL_RCC_DisableCSS</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, stm32f1xx_hal_rcc.o(.text), UNUSED)
+<P><STRONG><a name="[124]"></a>HAL_RCC_DisableCSS</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, stm32f1xx_hal_rcc.o(.text), UNUSED)
 
 <P><STRONG><a name="[6e]"></a>HAL_RCC_GetHCLKFreq</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f1xx_hal_rcc.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
@@ -928,9 +929,9 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SetConfig
 </UL>
 
-<P><STRONG><a name="[120]"></a>HAL_RCC_GetOscConfig</STRONG> (Thumb, 140 bytes, Stack size 8 bytes, stm32f1xx_hal_rcc.o(.text), UNUSED)
+<P><STRONG><a name="[125]"></a>HAL_RCC_GetOscConfig</STRONG> (Thumb, 140 bytes, Stack size 8 bytes, stm32f1xx_hal_rcc.o(.text), UNUSED)
 
-<P><STRONG><a name="[121]"></a>HAL_RCC_GetClockConfig</STRONG> (Thumb, 54 bytes, Stack size 0 bytes, stm32f1xx_hal_rcc.o(.text), UNUSED)
+<P><STRONG><a name="[126]"></a>HAL_RCC_GetClockConfig</STRONG> (Thumb, 54 bytes, Stack size 0 bytes, stm32f1xx_hal_rcc.o(.text), UNUSED)
 
 <P><STRONG><a name="[cb]"></a>HAL_RCC_CSSCallback</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f1xx_hal_rcc.o(.text), UNUSED)
 <BR><BR>[Called By]<UL><LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_NMI_IRQHandler
@@ -954,22 +955,22 @@ Global Symbols
 <LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SPI_MspDeInit
 </UL>
 
-<P><STRONG><a name="[e7]"></a>HAL_GPIO_ReadPin</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, stm32f1xx_hal_gpio.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN9BC_ReadBusy
+<P><STRONG><a name="[e0]"></a>HAL_GPIO_ReadPin</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, stm32f1xx_hal_gpio.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_ReadBusy
 </UL>
 
 <P><STRONG><a name="[77]"></a>HAL_GPIO_WritePin</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, stm32f1xx_hal_gpio.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_GPIO_Init
-<LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN9BC_Init
+<LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_Init
 <LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DEV_Module_Init
-<LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DEV_Module_Exit
-<LI><a href="#[e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN9BC_SendData
-<LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN9BC_SendCommand
+<LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DEV_Module_Exit
+<LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_SendData
+<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_SendCommand
 </UL>
 
-<P><STRONG><a name="[122]"></a>HAL_GPIO_TogglePin</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, stm32f1xx_hal_gpio.o(.text), UNUSED)
+<P><STRONG><a name="[127]"></a>HAL_GPIO_TogglePin</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, stm32f1xx_hal_gpio.o(.text), UNUSED)
 
-<P><STRONG><a name="[123]"></a>HAL_GPIO_LockPin</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, stm32f1xx_hal_gpio.o(.text), UNUSED)
+<P><STRONG><a name="[128]"></a>HAL_GPIO_LockPin</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, stm32f1xx_hal_gpio.o(.text), UNUSED)
 
 <P><STRONG><a name="[cd]"></a>HAL_GPIO_EXTI_Callback</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f1xx_hal_gpio.o(.text), UNUSED)
 <BR><BR>[Called By]<UL><LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_EXTI_IRQHandler
@@ -979,9 +980,9 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_EXTI_Callback
 </UL>
 
-<P><STRONG><a name="[124]"></a>HAL_DMA_Init</STRONG> (Thumb, 120 bytes, Stack size 12 bytes, stm32f1xx_hal_dma.o(.text), UNUSED)
+<P><STRONG><a name="[129]"></a>HAL_DMA_Init</STRONG> (Thumb, 120 bytes, Stack size 12 bytes, stm32f1xx_hal_dma.o(.text), UNUSED)
 
-<P><STRONG><a name="[125]"></a>HAL_DMA_DeInit</STRONG> (Thumb, 108 bytes, Stack size 8 bytes, stm32f1xx_hal_dma.o(.text), UNUSED)
+<P><STRONG><a name="[12a]"></a>HAL_DMA_DeInit</STRONG> (Thumb, 108 bytes, Stack size 8 bytes, stm32f1xx_hal_dma.o(.text), UNUSED)
 
 <P><STRONG><a name="[ce]"></a>HAL_DMA_Start</STRONG> (Thumb, 80 bytes, Stack size 16 bytes, stm32f1xx_hal_dma.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_SetConfig
@@ -1019,15 +1020,15 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
 </UL>
 
-<P><STRONG><a name="[126]"></a>HAL_DMA_IRQHandler</STRONG> (Thumb, 574 bytes, Stack size 40 bytes, stm32f1xx_hal_dma.o(.text), UNUSED)
+<P><STRONG><a name="[12b]"></a>HAL_DMA_IRQHandler</STRONG> (Thumb, 574 bytes, Stack size 40 bytes, stm32f1xx_hal_dma.o(.text), UNUSED)
 
-<P><STRONG><a name="[127]"></a>HAL_DMA_RegisterCallback</STRONG> (Thumb, 74 bytes, Stack size 8 bytes, stm32f1xx_hal_dma.o(.text), UNUSED)
+<P><STRONG><a name="[12c]"></a>HAL_DMA_RegisterCallback</STRONG> (Thumb, 74 bytes, Stack size 8 bytes, stm32f1xx_hal_dma.o(.text), UNUSED)
 
-<P><STRONG><a name="[128]"></a>HAL_DMA_UnRegisterCallback</STRONG> (Thumb, 82 bytes, Stack size 8 bytes, stm32f1xx_hal_dma.o(.text), UNUSED)
+<P><STRONG><a name="[12d]"></a>HAL_DMA_UnRegisterCallback</STRONG> (Thumb, 82 bytes, Stack size 8 bytes, stm32f1xx_hal_dma.o(.text), UNUSED)
 
-<P><STRONG><a name="[129]"></a>HAL_DMA_GetState</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f1xx_hal_dma.o(.text), UNUSED)
+<P><STRONG><a name="[12e]"></a>HAL_DMA_GetState</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f1xx_hal_dma.o(.text), UNUSED)
 
-<P><STRONG><a name="[12a]"></a>HAL_DMA_GetError</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f1xx_hal_dma.o(.text), UNUSED)
+<P><STRONG><a name="[12f]"></a>HAL_DMA_GetError</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f1xx_hal_dma.o(.text), UNUSED)
 
 <P><STRONG><a name="[84]"></a>HAL_NVIC_SetPriorityGrouping</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32f1xx_hal_cortex.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_MspInit
@@ -1044,11 +1045,11 @@ Global Symbols
 <LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
 </UL>
 
-<P><STRONG><a name="[12b]"></a>HAL_NVIC_EnableIRQ</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, stm32f1xx_hal_cortex.o(.text), UNUSED)
+<P><STRONG><a name="[130]"></a>HAL_NVIC_EnableIRQ</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, stm32f1xx_hal_cortex.o(.text), UNUSED)
 
-<P><STRONG><a name="[12c]"></a>HAL_NVIC_DisableIRQ</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, stm32f1xx_hal_cortex.o(.text), UNUSED)
+<P><STRONG><a name="[131]"></a>HAL_NVIC_DisableIRQ</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, stm32f1xx_hal_cortex.o(.text), UNUSED)
 
-<P><STRONG><a name="[12d]"></a>HAL_NVIC_SystemReset</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, stm32f1xx_hal_cortex.o(.text), UNUSED)
+<P><STRONG><a name="[132]"></a>HAL_NVIC_SystemReset</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, stm32f1xx_hal_cortex.o(.text), UNUSED)
 
 <P><STRONG><a name="[6f]"></a>HAL_SYSTICK_Config</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, stm32f1xx_hal_cortex.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = HAL_SYSTICK_Config
@@ -1059,17 +1060,17 @@ Global Symbols
 <LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
 </UL>
 
-<P><STRONG><a name="[12e]"></a>HAL_NVIC_GetPriorityGrouping</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, stm32f1xx_hal_cortex.o(.text), UNUSED)
+<P><STRONG><a name="[133]"></a>HAL_NVIC_GetPriorityGrouping</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, stm32f1xx_hal_cortex.o(.text), UNUSED)
 
-<P><STRONG><a name="[12f]"></a>HAL_NVIC_GetPriority</STRONG> (Thumb, 82 bytes, Stack size 16 bytes, stm32f1xx_hal_cortex.o(.text), UNUSED)
+<P><STRONG><a name="[134]"></a>HAL_NVIC_GetPriority</STRONG> (Thumb, 82 bytes, Stack size 16 bytes, stm32f1xx_hal_cortex.o(.text), UNUSED)
 
-<P><STRONG><a name="[130]"></a>HAL_NVIC_SetPendingIRQ</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, stm32f1xx_hal_cortex.o(.text), UNUSED)
+<P><STRONG><a name="[135]"></a>HAL_NVIC_SetPendingIRQ</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, stm32f1xx_hal_cortex.o(.text), UNUSED)
 
-<P><STRONG><a name="[131]"></a>HAL_NVIC_GetPendingIRQ</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, stm32f1xx_hal_cortex.o(.text), UNUSED)
+<P><STRONG><a name="[136]"></a>HAL_NVIC_GetPendingIRQ</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, stm32f1xx_hal_cortex.o(.text), UNUSED)
 
-<P><STRONG><a name="[132]"></a>HAL_NVIC_ClearPendingIRQ</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, stm32f1xx_hal_cortex.o(.text), UNUSED)
+<P><STRONG><a name="[137]"></a>HAL_NVIC_ClearPendingIRQ</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, stm32f1xx_hal_cortex.o(.text), UNUSED)
 
-<P><STRONG><a name="[133]"></a>HAL_NVIC_GetActive</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, stm32f1xx_hal_cortex.o(.text), UNUSED)
+<P><STRONG><a name="[138]"></a>HAL_NVIC_GetActive</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, stm32f1xx_hal_cortex.o(.text), UNUSED)
 
 <P><STRONG><a name="[70]"></a>HAL_SYSTICK_CLKSourceConfig</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, stm32f1xx_hal_cortex.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
@@ -1090,97 +1091,89 @@ Global Symbols
 <P><STRONG><a name="[47]"></a>SystemInit</STRONG> (Thumb, 56 bytes, Stack size 0 bytes, system_stm32f1xx.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f103xe.o(.text)
 </UL>
-<P><STRONG><a name="[134]"></a>SystemCoreClockUpdate</STRONG> (Thumb, 82 bytes, Stack size 8 bytes, system_stm32f1xx.o(.text), UNUSED)
+<P><STRONG><a name="[139]"></a>SystemCoreClockUpdate</STRONG> (Thumb, 82 bytes, Stack size 8 bytes, system_stm32f1xx.o(.text), UNUSED)
 
-<P><STRONG><a name="[76]"></a>EPD_2in9bc_test</STRONG> (Thumb, 566 bytes, Stack size 40 bytes, epd_2in9bc_test.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 744<LI>Call Chain = EPD_2in9bc_test &rArr; Paint_DrawNum &rArr; Paint_DrawString_EN &rArr; Paint_DrawChar &rArr; Paint_SetPixel &rArr; __2printf
+<P><STRONG><a name="[76]"></a>EPD_1in54_V2_test</STRONG> (Thumb, 156 bytes, Stack size 24 bytes, epd_1in54_v2_test.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = EPD_1in54_V2_test &rArr; EPD_1IN54_V2_Display &rArr; EPD_1IN54_V2_TurnOnDisplay &rArr; EPD_1IN54_V2_SendData &rArr; DEV_SPI_WriteByte &rArr; HAL_SPI_Transmit &rArr; SPI_CheckFlag_BSY &rArr; SPI_WaitFlagStateUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
-<LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN9BC_Sleep
-<LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN9BC_Init
-<LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN9BC_Display
-<LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN9BC_Clear
+<LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_Sleep
+<LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_Init
+<LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_Display
+<LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_Clear
 <LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_SelectImage
 <LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_NewImage
-<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawString_EN
-<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawString_CN
-<LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawRectangle
-<LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawPoint
-<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawNum
-<LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawLine
-<LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawCircle
+<LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawBitMap
 <LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_Clear
 <LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DEV_Module_Init
-<LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DEV_Module_Exit
 <LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
-<LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free
+<LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free
 <LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[e6]"></a>EPD_2IN9BC_ReadBusy</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, epd_2in9bc.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = EPD_2IN9BC_ReadBusy &rArr; __2printf
-</UL>
-<BR>[Calls]<UL><LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_ReadPin
-<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
-<LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
-</UL>
-<BR>[Called By]<UL><LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN9BC_Sleep
-<LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN9BC_Init
-<LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN9BC_Display
-<LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN9BC_Clear
-</UL>
-
-<P><STRONG><a name="[d5]"></a>EPD_2IN9BC_Init</STRONG> (Thumb, 150 bytes, Stack size 8 bytes, epd_2in9bc.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = EPD_2IN9BC_Init &rArr; EPD_2IN9BC_SendData &rArr; DEV_SPI_WriteByte &rArr; HAL_SPI_Transmit &rArr; SPI_CheckFlag_BSY &rArr; SPI_WaitFlagStateUntilTimeout
+<P><STRONG><a name="[d5]"></a>EPD_1IN54_V2_Init</STRONG> (Thumb, 228 bytes, Stack size 8 bytes, epd_1in54_v2.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = EPD_1IN54_V2_Init &rArr; EPD_1IN54_V2_SendData &rArr; DEV_SPI_WriteByte &rArr; HAL_SPI_Transmit &rArr; SPI_CheckFlag_BSY &rArr; SPI_WaitFlagStateUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
 <LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
-<LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN9BC_ReadBusy
-<LI><a href="#[e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN9BC_SendData
-<LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN9BC_SendCommand
+<LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_SendData
+<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_SendCommand
+<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_ReadBusy
 </UL>
-<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in9bc_test
-</UL>
-
-<P><STRONG><a name="[d6]"></a>EPD_2IN9BC_Clear</STRONG> (Thumb, 86 bytes, Stack size 24 bytes, epd_2in9bc.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = EPD_2IN9BC_Clear &rArr; EPD_2IN9BC_SendData &rArr; DEV_SPI_WriteByte &rArr; HAL_SPI_Transmit &rArr; SPI_CheckFlag_BSY &rArr; SPI_WaitFlagStateUntilTimeout
-</UL>
-<BR>[Calls]<UL><LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN9BC_ReadBusy
-<LI><a href="#[e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN9BC_SendData
-<LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN9BC_SendCommand
-</UL>
-<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in9bc_test
+<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1in54_V2_test
 </UL>
 
-<P><STRONG><a name="[db]"></a>EPD_2IN9BC_Display</STRONG> (Thumb, 120 bytes, Stack size 32 bytes, epd_2in9bc.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = EPD_2IN9BC_Display &rArr; EPD_2IN9BC_SendData &rArr; DEV_SPI_WriteByte &rArr; HAL_SPI_Transmit &rArr; SPI_CheckFlag_BSY &rArr; SPI_WaitFlagStateUntilTimeout
+<P><STRONG><a name="[d6]"></a>EPD_1IN54_V2_Clear</STRONG> (Thumb, 48 bytes, Stack size 24 bytes, epd_1in54_v2.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = EPD_1IN54_V2_Clear &rArr; EPD_1IN54_V2_TurnOnDisplay &rArr; EPD_1IN54_V2_SendData &rArr; DEV_SPI_WriteByte &rArr; HAL_SPI_Transmit &rArr; SPI_CheckFlag_BSY &rArr; SPI_WaitFlagStateUntilTimeout
 </UL>
-<BR>[Calls]<UL><LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN9BC_ReadBusy
-<LI><a href="#[e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN9BC_SendData
-<LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN9BC_SendCommand
+<BR>[Calls]<UL><LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_TurnOnDisplay
+<LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_SendData
+<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_SendCommand
 </UL>
-<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in9bc_test
-</UL>
-
-<P><STRONG><a name="[e3]"></a>EPD_2IN9BC_Sleep</STRONG> (Thumb, 28 bytes, Stack size 8 bytes, epd_2in9bc.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = EPD_2IN9BC_Sleep &rArr; EPD_2IN9BC_SendData &rArr; DEV_SPI_WriteByte &rArr; HAL_SPI_Transmit &rArr; SPI_CheckFlag_BSY &rArr; SPI_WaitFlagStateUntilTimeout
-</UL>
-<BR>[Calls]<UL><LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN9BC_ReadBusy
-<LI><a href="#[e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN9BC_SendData
-<LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN9BC_SendCommand
-</UL>
-<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in9bc_test
+<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1in54_V2_test
 </UL>
 
-<P><STRONG><a name="[ea]"></a>DEV_SPI_WriteByte</STRONG> (Thumb, 18 bytes, Stack size 8 bytes, dev_config.o(.text))
+<P><STRONG><a name="[dc]"></a>EPD_1IN54_V2_Display</STRONG> (Thumb, 56 bytes, Stack size 24 bytes, epd_1in54_v2.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = EPD_1IN54_V2_Display &rArr; EPD_1IN54_V2_TurnOnDisplay &rArr; EPD_1IN54_V2_SendData &rArr; DEV_SPI_WriteByte &rArr; HAL_SPI_Transmit &rArr; SPI_CheckFlag_BSY &rArr; SPI_WaitFlagStateUntilTimeout
+</UL>
+<BR>[Calls]<UL><LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_TurnOnDisplay
+<LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_SendData
+<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_SendCommand
+</UL>
+<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1in54_V2_test
+</UL>
+
+<P><STRONG><a name="[e4]"></a>EPD_1IN54_V2_DisplayPartBaseImage</STRONG> (Thumb, 94 bytes, Stack size 24 bytes, epd_1in54_v2.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_TurnOnDisplayPart
+<LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_SendData
+<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_SendCommand
+</UL>
+
+<P><STRONG><a name="[e6]"></a>EPD_1IN54_V2_DisplayPart</STRONG> (Thumb, 58 bytes, Stack size 24 bytes, epd_1in54_v2.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_TurnOnDisplayPart
+<LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_SendData
+<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_SendCommand
+</UL>
+
+<P><STRONG><a name="[dd]"></a>EPD_1IN54_V2_Sleep</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, epd_1in54_v2.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = EPD_1IN54_V2_Sleep &rArr; EPD_1IN54_V2_SendData &rArr; DEV_SPI_WriteByte &rArr; HAL_SPI_Transmit &rArr; SPI_CheckFlag_BSY &rArr; SPI_WaitFlagStateUntilTimeout
+</UL>
+<BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
+<LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_SendData
+<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_SendCommand
+</UL>
+<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1in54_V2_test
+</UL>
+
+<P><STRONG><a name="[e7]"></a>DEV_SPI_WriteByte</STRONG> (Thumb, 18 bytes, Stack size 8 bytes, dev_config.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = DEV_SPI_WriteByte &rArr; HAL_SPI_Transmit &rArr; SPI_CheckFlag_BSY &rArr; SPI_WaitFlagStateUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SPI_Transmit
 </UL>
-<BR>[Called By]<UL><LI><a href="#[e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN9BC_SendData
-<LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN9BC_SendCommand
+<BR>[Called By]<UL><LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_SendData
+<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_SendCommand
 </UL>
 
 <P><STRONG><a name="[d4]"></a>DEV_Module_Init</STRONG> (Thumb, 38 bytes, Stack size 8 bytes, dev_config.o(.text))
@@ -1188,215 +1181,186 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 </UL>
-<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in9bc_test
+<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1in54_V2_test
 </UL>
 
-<P><STRONG><a name="[e5]"></a>DEV_Module_Exit</STRONG> (Thumb, 38 bytes, Stack size 8 bytes, dev_config.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = DEV_Module_Exit
-</UL>
-<BR>[Calls]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
-</UL>
-<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in9bc_test
+<P><STRONG><a name="[e8]"></a>DEV_Module_Exit</STRONG> (Thumb, 38 bytes, Stack size 8 bytes, dev_config.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 </UL>
 
 <P><STRONG><a name="[d8]"></a>Paint_NewImage</STRONG> (Thumb, 52 bytes, Stack size 16 bytes, gui_paint.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = Paint_NewImage
 </UL>
-<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in9bc_test
+<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1in54_V2_test
 </UL>
 
 <P><STRONG><a name="[d9]"></a>Paint_SelectImage</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, gui_paint.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in9bc_test
+<BR><BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1in54_V2_test
 </UL>
 
-<P><STRONG><a name="[eb]"></a>Paint_SetRotate</STRONG> (Thumb, 44 bytes, Stack size 8 bytes, gui_paint.o(.text), UNUSED)
+<P><STRONG><a name="[e9]"></a>Paint_SetRotate</STRONG> (Thumb, 44 bytes, Stack size 8 bytes, gui_paint.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 
-<P><STRONG><a name="[ec]"></a>Paint_SetMirroring</STRONG> (Thumb, 62 bytes, Stack size 8 bytes, gui_paint.o(.text), UNUSED)
+<P><STRONG><a name="[ea]"></a>Paint_SetMirroring</STRONG> (Thumb, 62 bytes, Stack size 8 bytes, gui_paint.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 
-<P><STRONG><a name="[ed]"></a>Paint_SetPixel</STRONG> (Thumb, 164 bytes, Stack size 16 bytes, gui_paint.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = Paint_SetPixel &rArr; __2printf
+<P><STRONG><a name="[eb]"></a>Paint_SetPixel</STRONG> (Thumb, 164 bytes, Stack size 16 bytes, gui_paint.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
-</UL>
-<BR>[Called By]<UL><LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawString_CN
-<LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawPoint
-<LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_ClearWindows
-<LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawChar
+<BR>[Called By]<UL><LI><a href="#[f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawString_CN
+<LI><a href="#[ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawPoint
+<LI><a href="#[ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_ClearWindows
+<LI><a href="#[f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawChar
 </UL>
 
 <P><STRONG><a name="[da]"></a>Paint_Clear</STRONG> (Thumb, 46 bytes, Stack size 12 bytes, gui_paint.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = Paint_Clear
 </UL>
-<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in9bc_test
+<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1in54_V2_test
 </UL>
 
-<P><STRONG><a name="[ee]"></a>Paint_ClearWindows</STRONG> (Thumb, 52 bytes, Stack size 32 bytes, gui_paint.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_SetPixel
+<P><STRONG><a name="[ec]"></a>Paint_ClearWindows</STRONG> (Thumb, 52 bytes, Stack size 32 bytes, gui_paint.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_SetPixel
 </UL>
 
-<P><STRONG><a name="[dc]"></a>Paint_DrawPoint</STRONG> (Thumb, 160 bytes, Stack size 40 bytes, gui_paint.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = Paint_DrawPoint &rArr; Paint_SetPixel &rArr; __2printf
-</UL>
-<BR>[Calls]<UL><LI><a href="#[ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_SetPixel
+<P><STRONG><a name="[ed]"></a>Paint_DrawPoint</STRONG> (Thumb, 160 bytes, Stack size 40 bytes, gui_paint.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_SetPixel
 <LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in9bc_test
-<LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawLine
-<LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawCircle
+<BR>[Called By]<UL><LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawLine
+<LI><a href="#[f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawCircle
 </UL>
 
-<P><STRONG><a name="[dd]"></a>Paint_DrawLine</STRONG> (Thumb, 198 bytes, Stack size 48 bytes, gui_paint.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = Paint_DrawLine &rArr; Paint_DrawPoint &rArr; Paint_SetPixel &rArr; __2printf
-</UL>
-<BR>[Calls]<UL><LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawPoint
+<P><STRONG><a name="[ee]"></a>Paint_DrawLine</STRONG> (Thumb, 198 bytes, Stack size 48 bytes, gui_paint.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawPoint
 <LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in9bc_test
-<LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawRectangle
+<BR>[Called By]<UL><LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawRectangle
 </UL>
 
-<P><STRONG><a name="[de]"></a>Paint_DrawRectangle</STRONG> (Thumb, 170 bytes, Stack size 48 bytes, gui_paint.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 176<LI>Call Chain = Paint_DrawRectangle &rArr; Paint_DrawLine &rArr; Paint_DrawPoint &rArr; Paint_SetPixel &rArr; __2printf
-</UL>
-<BR>[Calls]<UL><LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawLine
+<P><STRONG><a name="[ef]"></a>Paint_DrawRectangle</STRONG> (Thumb, 170 bytes, Stack size 48 bytes, gui_paint.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawLine
 <LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in9bc_test
-</UL>
 
-<P><STRONG><a name="[e2]"></a>Paint_DrawCircle</STRONG> (Thumb, 880 bytes, Stack size 72 bytes, gui_paint.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = Paint_DrawCircle &rArr; Paint_DrawPoint &rArr; Paint_SetPixel &rArr; __2printf
-</UL>
-<BR>[Calls]<UL><LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawPoint
+<P><STRONG><a name="[f0]"></a>Paint_DrawCircle</STRONG> (Thumb, 880 bytes, Stack size 72 bytes, gui_paint.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawPoint
 <LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in9bc_test
-</UL>
 
-<P><STRONG><a name="[ef]"></a>Paint_DrawChar</STRONG> (Thumb, 172 bytes, Stack size 40 bytes, gui_paint.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = Paint_DrawChar &rArr; Paint_SetPixel &rArr; __2printf
-</UL>
-<BR>[Calls]<UL><LI><a href="#[ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_SetPixel
+<P><STRONG><a name="[f1]"></a>Paint_DrawChar</STRONG> (Thumb, 172 bytes, Stack size 40 bytes, gui_paint.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_SetPixel
 <LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawTime
-<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawString_EN
+<BR>[Called By]<UL><LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawTime
+<LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawString_EN
 </UL>
 
-<P><STRONG><a name="[df]"></a>Paint_DrawString_EN</STRONG> (Thumb, 116 bytes, Stack size 48 bytes, gui_paint.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = Paint_DrawString_EN &rArr; Paint_DrawChar &rArr; Paint_SetPixel &rArr; __2printf
-</UL>
-<BR>[Calls]<UL><LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawChar
+<P><STRONG><a name="[f2]"></a>Paint_DrawString_EN</STRONG> (Thumb, 116 bytes, Stack size 48 bytes, gui_paint.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawChar
 <LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in9bc_test
-<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawNum
+<BR>[Called By]<UL><LI><a href="#[f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawNum
 </UL>
 
-<P><STRONG><a name="[e0]"></a>Paint_DrawString_CN</STRONG> (Thumb, 394 bytes, Stack size 40 bytes, gui_paint.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = Paint_DrawString_CN &rArr; Paint_SetPixel &rArr; __2printf
-</UL>
-<BR>[Calls]<UL><LI><a href="#[ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_SetPixel
-</UL>
-<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in9bc_test
+<P><STRONG><a name="[f3]"></a>Paint_DrawString_CN</STRONG> (Thumb, 394 bytes, Stack size 40 bytes, gui_paint.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_SetPixel
 </UL>
 
-<P><STRONG><a name="[e1]"></a>Paint_DrawNum</STRONG> (Thumb, 140 bytes, Stack size 576 bytes, gui_paint.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 704<LI>Call Chain = Paint_DrawNum &rArr; Paint_DrawString_EN &rArr; Paint_DrawChar &rArr; Paint_SetPixel &rArr; __2printf
-</UL>
-<BR>[Calls]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawString_EN
+<P><STRONG><a name="[f4]"></a>Paint_DrawNum</STRONG> (Thumb, 140 bytes, Stack size 576 bytes, gui_paint.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawString_EN
 <LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
-<LI><a href="#[f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
-</UL>
-<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in9bc_test
+<LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
 
-<P><STRONG><a name="[f1]"></a>Paint_DrawTime</STRONG> (Thumb, 436 bytes, Stack size 72 bytes, gui_paint.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawChar
+<P><STRONG><a name="[f6]"></a>Paint_DrawTime</STRONG> (Thumb, 436 bytes, Stack size 72 bytes, gui_paint.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawChar
 </UL>
 
-<P><STRONG><a name="[135]"></a>Paint_DrawBitMap</STRONG> (Thumb, 44 bytes, Stack size 16 bytes, gui_paint.o(.text), UNUSED)
-
-<P><STRONG><a name="[f3]"></a>__aeabi_memset</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
-<BR><BR>[Called By]<UL><LI><a href="#[f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_memset$wrapper
-<LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
+<P><STRONG><a name="[db]"></a>Paint_DrawBitMap</STRONG> (Thumb, 44 bytes, Stack size 16 bytes, gui_paint.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = Paint_DrawBitMap
+</UL>
+<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1in54_V2_test
 </UL>
 
-<P><STRONG><a name="[136]"></a>__aeabi_memset4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
-
-<P><STRONG><a name="[137]"></a>__aeabi_memset8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
-
-<P><STRONG><a name="[f2]"></a>__aeabi_memclr</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memset
+<P><STRONG><a name="[f8]"></a>__aeabi_memset</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_memset$wrapper
+<LI><a href="#[f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
 </UL>
 
-<P><STRONG><a name="[f0]"></a>__aeabi_memclr4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawNum
+<P><STRONG><a name="[13a]"></a>__aeabi_memset4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
+
+<P><STRONG><a name="[13b]"></a>__aeabi_memset8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
+
+<P><STRONG><a name="[f7]"></a>__aeabi_memclr</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memset
 </UL>
 
-<P><STRONG><a name="[138]"></a>__aeabi_memclr8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
-
-<P><STRONG><a name="[f4]"></a>_memset$wrapper</STRONG> (Thumb, 18 bytes, Stack size 8 bytes, memseta.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memset
+<P><STRONG><a name="[f5]"></a>__aeabi_memclr4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawNum
 </UL>
 
-<P><STRONG><a name="[139]"></a>__aeabi_uidiv</STRONG> (Thumb, 0 bytes, Stack size 12 bytes, uidiv.o(.text), UNUSED)
+<P><STRONG><a name="[13c]"></a>__aeabi_memclr8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
 
-<P><STRONG><a name="[f8]"></a>__aeabi_uidivmod</STRONG> (Thumb, 44 bytes, Stack size 12 bytes, uidiv.o(.text), UNUSED)
-<BR><BR>[Called By]<UL><LI><a href="#[f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_core
+<P><STRONG><a name="[f9]"></a>_memset$wrapper</STRONG> (Thumb, 18 bytes, Stack size 8 bytes, memseta.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memset
+</UL>
+
+<P><STRONG><a name="[13d]"></a>__aeabi_uidiv</STRONG> (Thumb, 0 bytes, Stack size 12 bytes, uidiv.o(.text), UNUSED)
+
+<P><STRONG><a name="[fd]"></a>__aeabi_uidivmod</STRONG> (Thumb, 44 bytes, Stack size 12 bytes, uidiv.o(.text), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_core
 </UL>
 
 <P><STRONG><a name="[69]"></a>__scatterload</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, init.o(.text))
-<BR><BR>[Calls]<UL><LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__main_after_scatterload
+<BR><BR>[Calls]<UL><LI><a href="#[fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__main_after_scatterload
 </UL>
 <BR>[Called By]<UL><LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_main_scatterload
 </UL>
 
-<P><STRONG><a name="[13a]"></a>__scatterload_rt2</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, init.o(.text), UNUSED)
+<P><STRONG><a name="[13e]"></a>__scatterload_rt2</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, init.o(.text), UNUSED)
 
-<P><STRONG><a name="[f6]"></a>__0printf$3</STRONG> (Thumb, 22 bytes, Stack size 24 bytes, printf3.o(i.__0printf$3), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_core
+<P><STRONG><a name="[fb]"></a>__0printf$3</STRONG> (Thumb, 22 bytes, Stack size 24 bytes, printf3.o(i.__0printf$3), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_core
 </UL>
 
-<P><STRONG><a name="[13b]"></a>__1printf$3</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printf3.o(i.__0printf$3), UNUSED)
+<P><STRONG><a name="[13f]"></a>__1printf$3</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printf3.o(i.__0printf$3), UNUSED)
 
 <P><STRONG><a name="[d3]"></a>__2printf</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printf3.o(i.__0printf$3))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = __2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in9bc_test
-<LI><a href="#[ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_SetMirroring
-<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawString_EN
-<LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawRectangle
-<LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawPoint
-<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawNum
-<LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawLine
-<LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawCircle
-<LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawChar
-<LI><a href="#[ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_SetPixel
-<LI><a href="#[eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_SetRotate
-<LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN9BC_ReadBusy
+<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1in54_V2_test
+<LI><a href="#[ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_SetMirroring
+<LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawString_EN
+<LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawRectangle
+<LI><a href="#[ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawPoint
+<LI><a href="#[f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawNum
+<LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawLine
+<LI><a href="#[f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawCircle
+<LI><a href="#[f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawChar
+<LI><a href="#[eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_SetPixel
+<LI><a href="#[e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_SetRotate
+<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_ReadBusy
 </UL>
 
-<P><STRONG><a name="[13c]"></a>__scatterload_copy</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_copy), UNUSED)
+<P><STRONG><a name="[140]"></a>__scatterload_copy</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_copy), UNUSED)
 
-<P><STRONG><a name="[13d]"></a>__scatterload_null</STRONG> (Thumb, 2 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_null), UNUSED)
+<P><STRONG><a name="[141]"></a>__scatterload_null</STRONG> (Thumb, 2 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_null), UNUSED)
 
-<P><STRONG><a name="[13e]"></a>__scatterload_zeroinit</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_zeroinit), UNUSED)
+<P><STRONG><a name="[142]"></a>__scatterload_zeroinit</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_zeroinit), UNUSED)
 
-<P><STRONG><a name="[e4]"></a>free</STRONG> (Thumb, 76 bytes, Stack size 8 bytes, malloc.o(i.free))
+<P><STRONG><a name="[de]"></a>free</STRONG> (Thumb, 76 bytes, Stack size 8 bytes, malloc.o(i.free))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = free
 </UL>
-<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in9bc_test
+<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1in54_V2_test
 </UL>
 
 <P><STRONG><a name="[d7]"></a>malloc</STRONG> (Thumb, 92 bytes, Stack size 20 bytes, malloc.o(i.malloc))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = malloc
 </UL>
-<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in9bc_test
+<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1in54_V2_test
 </UL>
 <P>
 <H3>
@@ -1727,34 +1691,74 @@ Local Symbols
 <LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriority
 </UL>
 
-<P><STRONG><a name="[e8]"></a>EPD_2IN9BC_SendCommand</STRONG> (Thumb, 46 bytes, Stack size 16 bytes, epd_2in9bc.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = EPD_2IN9BC_SendCommand &rArr; DEV_SPI_WriteByte &rArr; HAL_SPI_Transmit &rArr; SPI_CheckFlag_BSY &rArr; SPI_WaitFlagStateUntilTimeout
+<P><STRONG><a name="[df]"></a>EPD_1IN54_V2_ReadBusy</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, epd_1in54_v2.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = EPD_1IN54_V2_ReadBusy &rArr; __2printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
-<LI><a href="#[ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DEV_SPI_WriteByte
+<BR>[Calls]<UL><LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_ReadPin
+<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
+<LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN9BC_Sleep
-<LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN9BC_Init
-<LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN9BC_Display
-<LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN9BC_Clear
-</UL>
-
-<P><STRONG><a name="[e9]"></a>EPD_2IN9BC_SendData</STRONG> (Thumb, 46 bytes, Stack size 16 bytes, epd_2in9bc.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = EPD_2IN9BC_SendData &rArr; DEV_SPI_WriteByte &rArr; HAL_SPI_Transmit &rArr; SPI_CheckFlag_BSY &rArr; SPI_WaitFlagStateUntilTimeout
-</UL>
-<BR>[Calls]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
-<LI><a href="#[ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DEV_SPI_WriteByte
-</UL>
-<BR>[Called By]<UL><LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN9BC_Sleep
-<LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN9BC_Init
-<LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN9BC_Display
-<LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN9BC_Clear
+<BR>[Called By]<UL><LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_Init
+<LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_TurnOnDisplayPart
+<LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_TurnOnDisplay
 </UL>
 
-<P><STRONG><a name="[f7]"></a>_printf_core</STRONG> (Thumb, 436 bytes, Stack size 96 bytes, printf3.o(i._printf_core), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
+<P><STRONG><a name="[e1]"></a>EPD_1IN54_V2_SendCommand</STRONG> (Thumb, 46 bytes, Stack size 16 bytes, epd_1in54_v2.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = EPD_1IN54_V2_SendCommand &rArr; DEV_SPI_WriteByte &rArr; HAL_SPI_Transmit &rArr; SPI_CheckFlag_BSY &rArr; SPI_WaitFlagStateUntilTimeout
 </UL>
-<BR>[Called By]<UL><LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__0printf$3
+<BR>[Calls]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
+<LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DEV_SPI_WriteByte
+</UL>
+<BR>[Called By]<UL><LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_Sleep
+<LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_Init
+<LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_Display
+<LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_Clear
+<LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_DisplayPart
+<LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_DisplayPartBaseImage
+<LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_TurnOnDisplayPart
+<LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_TurnOnDisplay
+</UL>
+
+<P><STRONG><a name="[e2]"></a>EPD_1IN54_V2_SendData</STRONG> (Thumb, 46 bytes, Stack size 16 bytes, epd_1in54_v2.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = EPD_1IN54_V2_SendData &rArr; DEV_SPI_WriteByte &rArr; HAL_SPI_Transmit &rArr; SPI_CheckFlag_BSY &rArr; SPI_WaitFlagStateUntilTimeout
+</UL>
+<BR>[Calls]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
+<LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DEV_SPI_WriteByte
+</UL>
+<BR>[Called By]<UL><LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_Sleep
+<LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_Init
+<LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_Display
+<LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_Clear
+<LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_DisplayPart
+<LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_DisplayPartBaseImage
+<LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_TurnOnDisplayPart
+<LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_TurnOnDisplay
+</UL>
+
+<P><STRONG><a name="[e3]"></a>EPD_1IN54_V2_TurnOnDisplay</STRONG> (Thumb, 26 bytes, Stack size 8 bytes, epd_1in54_v2.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = EPD_1IN54_V2_TurnOnDisplay &rArr; EPD_1IN54_V2_SendData &rArr; DEV_SPI_WriteByte &rArr; HAL_SPI_Transmit &rArr; SPI_CheckFlag_BSY &rArr; SPI_WaitFlagStateUntilTimeout
+</UL>
+<BR>[Calls]<UL><LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_SendData
+<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_SendCommand
+<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_ReadBusy
+</UL>
+<BR>[Called By]<UL><LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_Display
+<LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_Clear
+</UL>
+
+<P><STRONG><a name="[e5]"></a>EPD_1IN54_V2_TurnOnDisplayPart</STRONG> (Thumb, 26 bytes, Stack size 8 bytes, epd_1in54_v2.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_SendData
+<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_SendCommand
+<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_ReadBusy
+</UL>
+<BR>[Called By]<UL><LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_DisplayPart
+<LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_1IN54_V2_DisplayPartBaseImage
+</UL>
+
+<P><STRONG><a name="[fc]"></a>_printf_core</STRONG> (Thumb, 436 bytes, Stack size 96 bytes, printf3.o(i._printf_core), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
+</UL>
+<BR>[Called By]<UL><LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__0printf$3
 </UL>
 <P>
 <H3>
