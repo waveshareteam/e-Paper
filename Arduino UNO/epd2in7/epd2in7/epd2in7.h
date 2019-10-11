@@ -97,6 +97,10 @@ public:
     void DisplayFrame(void);
     void ClearFrame(void);
     void Sleep(void);
+    
+    void Init_4Gray(void);
+    void gray_SetLut(void);
+    void Display4Gray(const unsigned char *Image);
 
 private:
     unsigned int reset_pin;

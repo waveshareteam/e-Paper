@@ -1,0 +1,4 @@
+2019-7-31:  完成全部整合。
+2019-9-29:  添加新程序1.02inch e-Paper Module程序。
+2019-10-8:  添加新程序7.5inch V2 e-Paper 和 7.5inch B V2 e-Paper程序。
+2019-10-11: 添加新功能2.7inch e-Paper 4灰度。

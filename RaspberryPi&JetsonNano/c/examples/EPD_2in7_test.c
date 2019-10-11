@@ -79,7 +79,7 @@ int EPD_2in7_test(void)
     DEV_Delay_ms(500);
 #endif
 
-#if 1   // Drawing on the image
+#if 1  // Drawing on the image
     //1.Select Image
     printf("SelectImage:BlackImage\r\n");
     Paint_SelectImage(BlackImage);
@@ -109,16 +109,69 @@ int EPD_2in7_test(void)
     EPD_2IN7_Display(BlackImage);
     DEV_Delay_ms(2000);
 #endif
-
     printf("Clear...\r\n");
+    // EPD_2IN7_Clear();
+    free(BlackImage);
+    
+#if 1 // show image for array
+    printf("show Gray------------------------\r\n");
+    Imagesize = ((EPD_2IN7_WIDTH % 4 == 0)? (EPD_2IN7_WIDTH / 4 ): (EPD_2IN7_WIDTH / 4 + 1)) * EPD_2IN7_HEIGHT;
+    if((BlackImage = (UBYTE *)malloc(Imagesize)) == NULL) {
+        printf("Failed to apply for black memory...\r\n");
+        return -1;
+    }
+    printf("4 grayscale display\r\n");
+    EPD_2IN7_Init_4Gray();
+    Paint_NewImage(BlackImage, EPD_2IN7_WIDTH, EPD_2IN7_HEIGHT, 270, WHITE);
+    Paint_SetScale(4);
+    Paint_Clear(WHITE);
+    
+    Paint_DrawPoint(10, 80, GRAY4, DOT_PIXEL_1X1, DOT_STYLE_DFT);
+    Paint_DrawPoint(10, 90, GRAY4, DOT_PIXEL_2X2, DOT_STYLE_DFT);
+    Paint_DrawPoint(10, 100, GRAY4, DOT_PIXEL_3X3, DOT_STYLE_DFT);
+    Paint_DrawLine(20, 70, 70, 120, GRAY4, DOT_PIXEL_1X1, LINE_STYLE_SOLID);
+    Paint_DrawLine(70, 70, 20, 120, GRAY4, DOT_PIXEL_1X1, LINE_STYLE_SOLID);
+    Paint_DrawRectangle(20, 70, 70, 120, GRAY4, DOT_PIXEL_1X1, DRAW_FILL_EMPTY);
+    Paint_DrawRectangle(80, 70, 130, 120, GRAY4, DOT_PIXEL_1X1, DRAW_FILL_FULL);
+    Paint_DrawCircle(45, 95, 20, GRAY4, DOT_PIXEL_1X1, DRAW_FILL_EMPTY);
+    Paint_DrawCircle(105, 95, 20, GRAY2, DOT_PIXEL_1X1, DRAW_FILL_FULL);
+    Paint_DrawLine(85, 95, 125, 95, GRAY4, DOT_PIXEL_1X1, LINE_STYLE_DOTTED);
+    Paint_DrawLine(105, 75, 105, 115, GRAY4, DOT_PIXEL_1X1, LINE_STYLE_DOTTED);
+    Paint_DrawString_EN(10, 0, "waveshare", &Font16, GRAY4, GRAY1);
+    Paint_DrawString_EN(10, 20, "hello world", &Font12, GRAY3, GRAY1);
+    Paint_DrawNum(10, 33, 123456789, &Font12, GRAY4, GRAY2);
+    Paint_DrawNum(10, 50, 987654321, &Font16, GRAY1, GRAY4);
+    Paint_DrawString_CN(150, 0,"你好abc", &Font12CN, GRAY4, GRAY1);
+    Paint_DrawString_CN(150, 20,"你好abc", &Font12CN, GRAY3, GRAY2);
+    Paint_DrawString_CN(150, 40,"你好abc", &Font12CN, GRAY2, GRAY3);
+    Paint_DrawString_CN(150, 60,"你好abc", &Font12CN, GRAY1, GRAY4);
+    Paint_DrawString_CN(10, 130, "微雪电子", &Font24CN, GRAY1, GRAY4);
+    EPD_2IN7_4GrayDisplay(BlackImage);
+    DEV_Delay_ms(3000);
+    
+    EPD_2IN7_4GrayDisplay(gImage_2in7_4Gray1);
+    DEV_Delay_ms(3000);
+    
+    Paint_NewImage(BlackImage, EPD_2IN7_WIDTH, EPD_2IN7_HEIGHT, 0, WHITE);
+    Paint_SetScale(4);
+    Paint_Clear(WHITE);
+    GUI_ReadBmp_4Gray("./pic/2in7_Scale.bmp", 0, 0);
+    EPD_2IN7_4GrayDisplay(BlackImage);
+    DEV_Delay_ms(3000);
+    
+    Paint_Clear(WHITE);
+    GUI_ReadBmp("./pic/100x100.bmp", 20, 20);
+    EPD_2IN7_4GrayDisplay(BlackImage);
+    DEV_Delay_ms(3000);
+    
     EPD_2IN7_Clear();
-
+#endif
+    // close 5V
     printf("Goto Sleep...\r\n");
     EPD_2IN7_Sleep();
     free(BlackImage);
     BlackImage = NULL;
-
-    // close 5V
+    
     printf("close 5V, Module enters 0 power consumption ...\r\n");
     DEV_Module_Exit();
 

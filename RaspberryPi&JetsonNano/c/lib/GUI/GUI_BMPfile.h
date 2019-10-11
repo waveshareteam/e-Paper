@@ -6,9 +6,13 @@
 *                Used to shield the underlying layers of each master
 *                and enhance portability
 *----------------
-* |	This version:   V2.0
-* | Date        :   2018-11-12
+* |	This version:   V2.1
+* | Date        :   2019-10-10
 * | Info        :   
+* -----------------------------------------------------------------------------
+* V2.1(2019-10-10):
+* 1.Add GUI_ReadBmp_4Gray()
+* V2.0(2018-11-12):
 * 1.Change file name: GUI_BMP.h -> GUI_BMPfile.h
 * 2.fix: GUI_ReadBmp()
 *   Now Xstart and Xstart can control the position of the picture normally, 
@@ -78,4 +82,5 @@ typedef struct RGB_QUAD {
 /**************************************** end ***********************************************/
 
 UBYTE GUI_ReadBmp(const char *path, UWORD Xstart, UWORD Ystart);
+UBYTE GUI_ReadBmp_4Gray(const char *path, UWORD Xstart, UWORD Ystart);
 #endif

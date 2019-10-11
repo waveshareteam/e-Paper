@@ -53,7 +53,7 @@ class RaspberryPi:
         self.GPIO.output(pin, value)
 
     def digital_read(self, pin):
-        return self.GPIO.input(self.BUSY_PIN)
+        return self.GPIO.input(pin)
 
     def delay_ms(self, delaytime):
         time.sleep(delaytime / 1000.0)

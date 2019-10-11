@@ -70,8 +70,10 @@ int main(void)
     MX_SPI1_Init();
     /* USER CODE BEGIN 2 */
 		
+//		EPD_1in02d_test();
+		
 //		EPD_1in54_test();
-		EPD_1in54_V2_test();		
+//		EPD_1in54_V2_test();		
 //		EPD_1in54b_test();		
 //		EPD_1in54c_test();
 
@@ -94,7 +96,11 @@ int main(void)
 //		EPD_5in83bc_test();
 
 //		EPD_7in5_test();
+//		EPD_7in5_V2_test();
 //		EPD_7in5bc_test();
+//		EPD_7in5b_V2_test();
+
+
 
     /* USER CODE END 2 */
 
@@ -174,6 +180,7 @@ void _Error_Handler(char *file, int line)
     /* USER CODE BEGIN Error_Handler_Debug */
     /* User can add his own implementation to report the HAL error return state */
     while(1) {
+			printf("_Error_Handler\r\n");
     }
     /* USER CODE END Error_Handler_Debug */
 }

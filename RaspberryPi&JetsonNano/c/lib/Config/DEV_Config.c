@@ -206,7 +206,7 @@ static int DEV_Equipment_Testing(void)
 	int fd;
 	char value_str[20];
 	fd = open("/etc/issue", O_RDONLY);
-    printf("Currently in the Raspberry Pi environment: ");
+    printf("Current environment: ");
 	while(1) {
 		if (fd < 0) {
 			Debug( "Read failed Pin\n");
@@ -319,12 +319,13 @@ UBYTE DEV_Module_Init(void)
 	// GPIO Config
 	DEV_GPIO_Init();
 
-	wiringPiSPISetup(0,32000000);
+	wiringPiSPISetup(0,10000000);
 	// wiringPiSPISetupMode(0, 32000000, 0);
 #elif USE_DEV_LIB
 	printf("Write and read /dev/spidev0.0 \r\n");
 	DEV_GPIO_Init();
 	DEV_HARDWARE_SPI_begin("/dev/spidev0.0");
+    DEV_HARDWARE_SPI_setSpeed(10000000);
 #endif
 
 #elif JETSON

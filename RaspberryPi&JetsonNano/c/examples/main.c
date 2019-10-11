@@ -11,17 +11,21 @@ void  Handler(int signo)
     exit(0);
 }
 
+
+
 int main(void)
 {
     // Exception handling:ctrl + c
     signal(SIGINT, Handler);
-
+    
+    // EPD_1in02d_test();
+    
     // EPD_1in54_test();
     // EPD_1in54_V2_test();
     // EPD_1in54b_test();
     // EPD_1in54c_test();
 
-    // EPD_2in7_test();
+    EPD_2in7_test();
     // EPD_2in7b_test();
 
     // EPD_2in9_test();
@@ -40,7 +44,9 @@ int main(void)
     // EPD_5in83bc_test();
 
     // EPD_7in5_test();
+    // EPD_7in5_V2_test();
     // EPD_7in5bc_test();
+    // EPD_7in5bc_V2_test();
 
     return 0;
 }

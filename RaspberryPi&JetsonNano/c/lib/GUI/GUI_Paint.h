@@ -8,10 +8,15 @@
 *   Achieve display characters: Display a single character, string, number
 *   Achieve time display: adaptive size display time minutes and seconds
 *----------------
-* |	This version:   V3.0
-* | Date        :   2019-04-18
+* |	This version:   V3.1
+* | Date        :   2019-10-10
 * | Info        :
 * -----------------------------------------------------------------------------
+* V3.1(2019-10-10):
+* 1. Add gray level
+*   PAINT Add Scale
+* 2. Add void Paint_SetScale(UBYTE scale);
+* 
 * V3.0(2019-04-18):
 * 1.Change: 
 *    Paint_DrawPoint(..., DOT_STYLE DOT_STYLE)
@@ -82,6 +87,7 @@ typedef struct {
     UWORD Mirror;
     UWORD WidthByte;
     UWORD HeightByte;
+    UWORD Scale;
 } PAINT;
 extern PAINT Paint;
 
@@ -174,6 +180,7 @@ void Paint_SelectImage(UBYTE *image);
 void Paint_SetRotate(UWORD Rotate);
 void Paint_SetMirroring(UBYTE mirror);
 void Paint_SetPixel(UWORD Xpoint, UWORD Ypoint, UWORD Color);
+void Paint_SetScale(UBYTE scale);
 
 void Paint_Clear(UWORD Color);
 void Paint_ClearWindows(UWORD Xstart, UWORD Ystart, UWORD Xend, UWORD Yend, UWORD Color);

@@ -616,6 +616,21 @@
               <FileType>1</FileType>
               <FilePath>..\User\Examples\EPD_7in5bc_test.c</FilePath>
             </File>
+            <File>
+              <FileName>EPD_1in02_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Examples\EPD_1in02_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>EPD_7in5_V2_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Examples\EPD_7in5_V2_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>EPD_7in5b_V2_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Examples\EPD_7in5b_V2_test.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -715,6 +730,21 @@
               <FileName>EPD_7in5bc.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\e-Paper\EPD_7in5bc.c</FilePath>
+            </File>
+            <File>
+              <FileName>EPD_7in5_V2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\e-Paper\EPD_7in5_V2.c</FilePath>
+            </File>
+            <File>
+              <FileName>EPD_7in5b_V2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\e-Paper\EPD_7in5b_V2.c</FilePath>
+            </File>
+            <File>
+              <FileName>EPD_1in02d.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\e-Paper\EPD_1in02d.c</FilePath>
             </File>
           </Files>
         </Group>

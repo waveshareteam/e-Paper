@@ -4,10 +4,21 @@
 * | Function    :   2.7inch e-paper
 * | Info        :
 *----------------
-* |	This version:   V3.0
-* | Date        :   2019-06-12
+* |	This version:   V3.1
+* | Date        :   2019-10-10
 * | Info        :
 * -----------------------------------------------------------------------------
+* V3.1(2019-10-10):
+* 1. Add 4 grayscale display
+*    Add   EPD_2in7_gray_lut_vcom[]
+*    Add   EPD_2in7_gray_lut_ww[]
+*    Add   EPD_2in7_gray_lut_bw[]
+*    Add   EPD_2in7_gray_lut_wb[]
+*    Add   EPD_2in7_gray_lut_bb[]
+*    Add   EPD_2in7_gray_SetLut()
+*    Add   EPD_2IN7_Init_4Gray()
+*    Add   EPD_2IN7_4GrayDisplay()
+*
 * V3.0(2019-06-12):
 * 1.Change:
 *    lut_vcom_dc[] => EPD_2in7_lut_vcom_dc[]
@@ -86,11 +97,19 @@
 
 // Display resolution
 #define EPD_2IN7_WIDTH       176
-#define EPD_2IN7_HEIGHT      264
+#define EPD_2IN7_HEIGHT      264 //46464
+
+//Gray level
+#define  GRAY1 0x03 //Blackest
+#define  GRAY2 0x02
+#define  GRAY3 0x01 //gray
+#define  GRAY4 0x00 //white
 
 void EPD_2IN7_Init(void);
 void EPD_2IN7_Clear(void);
-void EPD_2IN7_Display(UBYTE *Image);
+void EPD_2IN7_Display(const UBYTE *Image);
 void EPD_2IN7_Sleep(void);
 
+void EPD_2IN7_Init_4Gray(void);
+void EPD_2IN7_4GrayDisplay(const UBYTE *Image);
 #endif

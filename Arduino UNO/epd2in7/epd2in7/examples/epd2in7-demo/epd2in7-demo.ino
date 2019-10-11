@@ -25,9 +25,9 @@
  */
 
 #include <SPI.h>
-#include <epd2in7.h>
+#include "epd2in7.h"
 #include "imagedata.h"
-#include <epdpaint.h>
+#include "epdpaint.h"
 
 #define COLORED     0
 #define UNCOLORED   1
@@ -37,8 +37,9 @@ void setup() {
   Serial.begin(9600);
   Epd epd;
 
+  Serial.print("e-Paper init\r\n");
   if (epd.Init() != 0) {
-    Serial.print("e-Paper init failed");
+    Serial.print("e-Paper init failed\r\n");
     return;
   }
 
@@ -51,6 +52,7 @@ void setup() {
     * update a partial display several times.
     * 1 byte = 8 pixels, therefore you have to set 8*N pixels at a time.
     */
+
   unsigned char image[1024];
   Paint paint(image, 176, 24);    //width should be the multiple of 8 
 
@@ -85,9 +87,18 @@ void setup() {
 
   /* This displays the data from the SRAM in e-Paper module */
   epd.DisplayFrame();
-
+  
+#if 0
   /* This displays an image */
   epd.DisplayFrame(IMAGE_DATA);
+  delay(1000);
+#endif
+  
+  epd.Init_4Gray();
+  epd.Display4Gray(IMAGE_DATA_4Gray);
+  
+  
+
 
   /* Deep sleep */
   epd.Sleep();

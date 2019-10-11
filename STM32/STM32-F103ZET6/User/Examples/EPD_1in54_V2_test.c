@@ -35,10 +35,6 @@ int EPD_1in54_V2_test(void)
     printf("EPD_1in54_V2_test Demo\r\n");
     DEV_Module_Init();
 
-for(;;){
-// EPD_1IN54_V2_Init();
-//    EPD_1IN54_V2_Clear();
-
     printf("e-Paper Init and Clear...\r\n");
     EPD_1IN54_V2_Init();
     EPD_1IN54_V2_Clear();
@@ -146,7 +142,7 @@ for(;;){
     EPD_1IN54_V2_Sleep();
     free(BlackImage);
     BlackImage = NULL;
-}
+
     // close 5V
     printf("close 5V, Module enters 0 power consumption ...\r\n");
     DEV_Module_Exit();

@@ -25,7 +25,64 @@
  */
 
 #include <stdlib.h>
-#include <epd2in7.h>
+#include "epd2in7.h"
+
+//////////////////////////////////////full screen update LUT////////////////////////////////////////////
+//0~3 gray
+static const unsigned char EPD_2in7_gray_lut_vcom[] =
+{
+0x00  ,0x00,
+0x00  ,0x0A ,0x00 ,0x00 ,0x00 ,0x01,
+0x60  ,0x14 ,0x14 ,0x00 ,0x00 ,0x01,
+0x00  ,0x14 ,0x00 ,0x00 ,0x00 ,0x01,
+0x00  ,0x13 ,0x0A ,0x01 ,0x00 ,0x01,
+0x00  ,0x00 ,0x00 ,0x00 ,0x00 ,0x00,
+0x00  ,0x00 ,0x00 ,0x00 ,0x00 ,0x00,
+0x00  ,0x00 ,0x00 ,0x00 ,0x00 ,0x00,        
+};
+//R21
+static const unsigned char EPD_2in7_gray_lut_ww[] ={
+0x40  ,0x0A ,0x00 ,0x00 ,0x00 ,0x01,
+0x90  ,0x14 ,0x14 ,0x00 ,0x00 ,0x01,
+0x10  ,0x14 ,0x0A ,0x00 ,0x00 ,0x01,
+0xA0  ,0x13 ,0x01 ,0x00 ,0x00 ,0x01,
+0x00  ,0x00 ,0x00 ,0x00 ,0x00 ,0x00,
+0x00  ,0x00 ,0x00 ,0x00 ,0x00 ,0x00,
+0x00  ,0x00 ,0x00 ,0x00 ,0x00 ,0x00,
+};
+//R22H  r
+static const unsigned char EPD_2in7_gray_lut_bw[] ={
+0x40  ,0x0A ,0x00 ,0x00 ,0x00 ,0x01,
+0x90  ,0x14 ,0x14 ,0x00 ,0x00 ,0x01,
+0x00  ,0x14 ,0x0A ,0x00 ,0x00 ,0x01,
+0x99  ,0x0C ,0x01 ,0x03 ,0x04 ,0x01,
+0x00  ,0x00 ,0x00 ,0x00 ,0x00 ,0x00,
+0x00  ,0x00 ,0x00 ,0x00 ,0x00 ,0x00,
+0x00  ,0x00 ,0x00 ,0x00 ,0x00 ,0x00,
+};
+//R23H  w
+static const unsigned char EPD_2in7_gray_lut_wb[] ={
+0x40  ,0x0A ,0x00 ,0x00 ,0x00 ,0x01,
+0x90  ,0x14 ,0x14 ,0x00 ,0x00 ,0x01,
+0x00  ,0x14 ,0x0A ,0x00 ,0x00 ,0x01,
+0x99  ,0x0B ,0x04 ,0x04 ,0x01 ,0x01,
+0x00  ,0x00 ,0x00 ,0x00 ,0x00 ,0x00,
+0x00  ,0x00 ,0x00 ,0x00 ,0x00 ,0x00,
+0x00  ,0x00 ,0x00 ,0x00 ,0x00 ,0x00,
+};
+//R24H  b
+static const unsigned char EPD_2in7_gray_lut_bb[] ={
+0x80  ,0x0A ,0x00 ,0x00 ,0x00 ,0x01,
+0x90  ,0x14 ,0x14 ,0x00 ,0x00 ,0x01,
+0x20  ,0x14 ,0x0A ,0x00 ,0x00 ,0x01,
+0x50  ,0x13 ,0x01 ,0x00 ,0x00 ,0x01,
+0x00  ,0x00 ,0x00 ,0x00 ,0x00 ,0x00,
+0x00  ,0x00 ,0x00 ,0x00 ,0x00 ,0x00,
+0x00  ,0x00 ,0x00 ,0x00 ,0x00 ,0x00,
+};
+
+/* END OF FILE */
+
 
 Epd::~Epd() {
 };
@@ -102,6 +159,75 @@ int Epd::Init(void) {
 
 }
 
+void Epd::Init_4Gray(void)
+{
+    Reset();
+    SendCommand(0x01);			//POWER SETTING
+    SendData (0x03);
+    SendData (0x00);    
+    SendData (0x2b);															 
+    SendData (0x2b);		
+
+
+    SendCommand(0x06);         //booster soft start
+    SendData (0x07);		//A
+    SendData (0x07);		//B
+    SendData (0x17);		//C 
+
+    SendCommand(0xF8);         //boost??
+    SendData (0x60);
+    SendData (0xA5);
+
+    SendCommand(0xF8);         //boost??
+    SendData (0x89);
+    SendData (0xA5);
+
+    SendCommand(0xF8);         //boost??
+    SendData (0x90);
+    SendData (0x00);
+
+    SendCommand(0xF8);         //boost??
+    SendData (0x93);
+    SendData (0x2A);
+
+    SendCommand(0xF8);         //boost??
+    SendData (0xa0);
+    SendData (0xa5);
+
+    SendCommand(0xF8);         //boost??
+    SendData (0xa1);
+    SendData (0x00);
+
+    SendCommand(0xF8);         //boost??
+    SendData (0x73);
+    SendData (0x41);
+
+    SendCommand(0x16);
+    SendData(0x00);	
+
+    SendCommand(0x04);
+    WaitUntilIdle();
+
+    SendCommand(0x00);			//panel setting
+    SendData(0xbf);		//KW-BF   KWR-AF	BWROTP 0f
+
+    SendCommand(0x30);			//PLL setting
+    SendData (0x90);      	//100hz 
+
+    SendCommand(0x61);			//resolution setting
+    SendData (0x00);		//176
+    SendData (0xb0);     	 
+    SendData (0x01);		//264
+    SendData (0x08);
+
+    SendCommand(0x82);			//vcom_DC setting
+    SendData (0x12);
+
+    SendCommand(0X50);			//VCOM AND DATA INTERVAL SETTING			
+    SendData(0x97);
+}
+
+
 /**
  *  @brief: basic function for sending commands
  */
@@ -134,7 +260,7 @@ void Epd::WaitUntilIdle(void) {
  */
 void Epd::Reset(void) {
     DigitalWrite(reset_pin, LOW);
-    DelayMs(200);
+    DelayMs(20);
     DigitalWrite(reset_pin, HIGH);
     DelayMs(200);   
 }
@@ -170,6 +296,34 @@ void Epd::SetLut(void) {
     } 
 }
 
+void Epd::gray_SetLut(void)
+{
+  unsigned int count;  
+    SendCommand(0x20);             //vcom
+    for(count=0;count<44;count++)
+      {SendData(EPD_2in7_gray_lut_vcom[count]);}
+    
+  SendCommand(0x21);             //red not use
+  for(count=0;count<42;count++)
+    {SendData(EPD_2in7_gray_lut_ww[count]);}
+
+    SendCommand(0x22);             //bw r
+    for(count=0;count<42;count++)
+      {SendData(EPD_2in7_gray_lut_bw[count]);}
+
+    SendCommand(0x23);             //wb w
+    for(count=0;count<42;count++)
+      {SendData(EPD_2in7_gray_lut_wb[count]);}
+
+    SendCommand(0x24);             //bb b
+    for(count=0;count<42;count++)
+      {SendData(EPD_2in7_gray_lut_bb[count]);}
+
+    SendCommand(0x25);             //vcom
+    for(count=0;count<42;count++)
+      {SendData(EPD_2in7_gray_lut_ww[count]);}
+         
+}
 /**
  *  @brief: transmit partial data to the SRAM
  */
@@ -229,6 +383,97 @@ void Epd::DisplayFrame(const unsigned char* frame_buffer) {
         SendCommand(DISPLAY_REFRESH); 
         WaitUntilIdle();
     }
+}
+
+void Epd::Display4Gray(const unsigned char *Image)
+{
+    int i,j,k;
+    unsigned char temp1,temp2,temp3;
+
+    SendCommand(0x10);	       
+    for(i=0;i<5808;i++)	               //5808*4  46464
+    {
+        temp3=0;
+        for(j=0;j<2;j++)	
+        {
+            temp1 = pgm_read_byte(&Image[i*2+j]);
+            for(k=0;k<2;k++)	
+            {
+                temp2 = temp1&0xC0 ;
+                if(temp2 == 0xC0)
+                    temp3 |= 0x01;//white
+                else if(temp2 == 0x00)
+                    temp3 |= 0x00;  //black
+                else if(temp2 == 0x80) 
+                    temp3 |= 0x01;  //gray1
+                else //0x40
+                    temp3 |= 0x00; //gray2
+                temp3 <<= 1;	
+                
+                temp1 <<= 2;
+                temp2 = temp1&0xC0 ;
+                if(temp2 == 0xC0)  //white
+                    temp3 |= 0x01;
+                else if(temp2 == 0x00) //black
+                    temp3 |= 0x00;
+                else if(temp2 == 0x80)
+                    temp3 |= 0x01; //gray1
+                else    //0x40
+                        temp3 |= 0x00;	//gray2	
+                if(j!=1 || k!=1)				
+                    temp3 <<= 1;
+                
+                temp1 <<= 2;
+            }
+            
+         }
+        SendData(temp3);			
+    }
+    // new  data
+    SendCommand(0x13);	       
+    for(i=0;i<5808;i++)	               //5808*4  46464
+    {
+        temp3=0;
+        for(j=0;j<2;j++)	
+        {
+            temp1 = pgm_read_byte(&Image[i*2+j]);
+            for(k=0;k<2;k++)	
+            {
+                temp2 = temp1&0xC0 ;
+                if(temp2 == 0xC0)
+                    temp3 |= 0x01;//white
+                else if(temp2 == 0x00)
+                    temp3 |= 0x00;  //black
+                else if(temp2 == 0x80) 
+                    temp3 |= 0x00;  //gray1
+                else //0x40
+                    temp3 |= 0x01; //gray2
+                temp3 <<= 1;	
+                
+                temp1 <<= 2;
+                temp2 = temp1&0xC0 ;
+                if(temp2 == 0xC0)  //white
+                    temp3 |= 0x01;
+                else if(temp2 == 0x00) //black
+                    temp3 |= 0x00;
+                else if(temp2 == 0x80)
+                    temp3 |= 0x00; //gray1
+                else    //0x40
+                        temp3 |= 0x01;	//gray2
+                if(j!=1 || k!=1)					
+                    temp3 <<= 1;
+                
+                temp1 <<= 2;
+            }
+            
+         }
+        SendData(temp3);	
+    }
+    
+    gray_SetLut();
+    SendCommand(0x12);
+    DelayMs(200);
+    WaitUntilIdle();
 }
 
 /**
@@ -327,7 +572,5 @@ const unsigned char lut_wb[] =
 };
 
 
-
-/* END OF FILE */
 
 

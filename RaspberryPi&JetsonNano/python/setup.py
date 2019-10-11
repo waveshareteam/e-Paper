@@ -1,7 +1,5 @@
 import sys
 from setuptools import setup
-
-
 setup(
     name='waveshare-epd',
     description='Waveshare e-Paper Display',

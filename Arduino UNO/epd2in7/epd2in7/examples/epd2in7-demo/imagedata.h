@@ -24,6 +24,7 @@
  */
 
 extern const unsigned char IMAGE_DATA[];
+extern const unsigned char IMAGE_DATA_4Gray[];
 
 /* END OF FILE*/
 

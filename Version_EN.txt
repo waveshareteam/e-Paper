@@ -1,0 +1,4 @@
+2019-7-31:  Completed the integration.
+2019-9-29:  Add a new program 1.02inch e-Paper Module program.
+2019-10-8:  Add new programs for the 7.5inch V2 e-Paper and 7.5inch B V2 e-Paper programs.
+2019-10-11: Add new feature 2.7inch e-Paper 4 grayscale.

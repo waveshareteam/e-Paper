@@ -88,6 +88,8 @@ void Paint_NewImage(UBYTE *image, UWORD Width, UWORD Height, UWORD Rotate, UWORD
     Paint.WidthMemory = Width;
     Paint.HeightMemory = Height;
     Paint.Color = Color;    
+		Paint.Scale = 2;
+		
     Paint.WidthByte = (Width % 8 == 0)? (Width / 8 ): (Width / 8 + 1);
     Paint.HeightByte = Height;    
 //    printf("WidthByte = %d, HeightByte = %d\r\n", Paint.WidthByte, Paint.HeightByte);
@@ -130,6 +132,19 @@ void Paint_SetRotate(UWORD Rotate)
     }
 }
 
+void Paint_SetScale(UBYTE scale)
+{
+    if(scale == 2){
+        Paint.Scale = scale;
+        Paint.WidthByte = (Paint.WidthMemory % 8 == 0)? (Paint.WidthMemory / 8 ): (Paint.WidthMemory / 8 + 1);
+    }else if(scale == 4){
+        Paint.Scale = scale;
+        Paint.WidthByte = (Paint.WidthMemory % 4 == 0)? (Paint.WidthMemory / 4 ): (Paint.WidthMemory / 4 + 1);
+    }else{
+        Debug("Set Scale Input parameter error\r\n");
+        Debug("Scale Only support: 2 4 \r\n");
+    }
+}
 /******************************************************************************
 function:	Select Image mirror
 parameter:
@@ -205,12 +220,21 @@ void Paint_SetPixel(UWORD Xpoint, UWORD Ypoint, UWORD Color)
         return;
     }
     
-    UDOUBLE Addr = X / 8 + Y * Paint.WidthByte;
-    UBYTE Rdata = Paint.Image[Addr];
-    if(Color == BLACK)
-        Paint.Image[Addr] = Rdata & ~(0x80 >> (X % 8));
-    else
-        Paint.Image[Addr] = Rdata | (0x80 >> (X % 8));
+    if(Paint.Scale == 2){
+        UDOUBLE Addr = X / 8 + Y * Paint.WidthByte;
+        UBYTE Rdata = Paint.Image[Addr];
+        if(Color == BLACK)
+            Paint.Image[Addr] = Rdata & ~(0x80 >> (X % 8));
+        else
+            Paint.Image[Addr] = Rdata | (0x80 >> (X % 8));
+    }else if(Paint.Scale == 4){
+        UDOUBLE Addr = X / 4 + Y * Paint.WidthByte;
+        Color = Color % 4;//Guaranteed color scale is 4  --- 0~3
+        UBYTE Rdata = Paint.Image[Addr];
+        
+        Rdata = Rdata & (~(0xC0 >> ((X % 4)*2)));
+        Paint.Image[Addr] = Rdata | ((Color << 6) >> ((X % 4)*2));
+    }
 }
 
 /******************************************************************************
@@ -261,6 +285,8 @@ void Paint_DrawPoint(UWORD Xpoint, UWORD Ypoint, UWORD Color,
 {
     if (Xpoint > Paint.Width || Ypoint > Paint.Height) {
         Debug("Paint_DrawPoint Input exceeds the normal display range\r\n");
+				printf("Xpoint = %d , Paint.Width = %d  \r\n ",Xpoint,Paint.Width);
+				printf("Ypoint = %d , Paint.Height = %d  \r\n ",Ypoint,Paint.Height);
         return;
     }
 
@@ -722,4 +748,93 @@ void Paint_DrawBitMap(const unsigned char* image_buffer)
             Paint.Image[Addr] = (unsigned char)image_buffer[Addr];
         }
     }
+}
+
+///******************************************************************************
+//function:	SDisplay half of monochrome bitmap
+//parameter:
+//	Region : 1 Upper half
+//					 2 Lower half
+//info:
+//******************************************************************************/
+//void Paint_DrawBitMap_Half(const unsigned char* image_buffer, UBYTE Region)
+//{
+//    UWORD x, y;
+//    UDOUBLE Addr = 0;
+//		
+//		if(Region == 1){
+//			for (y = 0; y < Paint.HeightByte; y++) {
+//					for (x = 0; x < Paint.WidthByte; x++) {//8 pixel =  1 byte
+//							Addr = x + y * Paint.WidthByte;
+//							Paint.Image[Addr] = (unsigned char)image_buffer[Addr];
+//					}
+//			}
+//		}else{
+//			for (y = 0; y < Paint.HeightByte; y++) {
+//					for (x = 0; x < Paint.WidthByte; x++) {//8 pixel =  1 byte
+//							Addr = x + y * Paint.WidthByte ;
+//							Paint.Image[Addr] = \
+//							(unsigned char)image_buffer[Addr+ (Paint.HeightByte)*Paint.WidthByte];
+//					}
+//			}
+//		}
+//}
+
+///******************************************************************************
+//function:	SDisplay half of monochrome bitmap
+//parameter:
+//	Region : 1 Upper half
+//					 2 Lower half
+//info:
+//******************************************************************************/
+//void Paint_DrawBitMap_OneQuarter(const unsigned char* image_buffer, UBYTE Region)
+//{
+//    UWORD x, y;
+//    UDOUBLE Addr = 0;
+//		
+//		if(Region == 1){
+//			for (y = 0; y < Paint.HeightByte; y++) {
+//					for (x = 0; x < Paint.WidthByte; x++) {//8 pixel =  1 byte
+//							Addr = x + y * Paint.WidthByte;
+//							Paint.Image[Addr] = (unsigned char)image_buffer[Addr];
+//					}
+//			}
+//		}else if(Region == 2){
+//			for (y = 0; y < Paint.HeightByte; y++) {
+//					for (x = 0; x < Paint.WidthByte; x++) {//8 pixel =  1 byte
+//							Addr = x + y * Paint.WidthByte ;
+//							Paint.Image[Addr] = \
+//							(unsigned char)image_buffer[Addr+ (Paint.HeightByte)*Paint.WidthByte];
+//					}
+//			}
+//		}else if(Region == 3){
+//			for (y = 0; y < Paint.HeightByte; y++) {
+//					for (x = 0; x < Paint.WidthByte; x++) {//8 pixel =  1 byte
+//							Addr = x + y * Paint.WidthByte ;
+//							Paint.Image[Addr] = \
+//							(unsigned char)image_buffer[Addr+ (Paint.HeightByte)*Paint.WidthByte*2];
+//					}
+//			}
+//		}else if(Region == 4){
+//			for (y = 0; y < Paint.HeightByte; y++) {
+//					for (x = 0; x < Paint.WidthByte; x++) {//8 pixel =  1 byte
+//							Addr = x + y * Paint.WidthByte ;
+//							Paint.Image[Addr] = \
+//							(unsigned char)image_buffer[Addr+ (Paint.HeightByte)*Paint.WidthByte*3];
+//					}
+//			}
+//		}
+//}
+
+void Paint_DrawBitMap_Block(const unsigned char* image_buffer, UBYTE Region)
+{
+    UWORD x, y;
+    UDOUBLE Addr = 0;
+		for (y = 0; y < Paint.HeightByte; y++) {
+				for (x = 0; x < Paint.WidthByte; x++) {//8 pixel =  1 byte
+						Addr = x + y * Paint.WidthByte ;
+						Paint.Image[Addr] = \
+						(unsigned char)image_buffer[Addr+ (Paint.HeightByte)*Paint.WidthByte*(Region - 1)];
+				}
+		}
 }

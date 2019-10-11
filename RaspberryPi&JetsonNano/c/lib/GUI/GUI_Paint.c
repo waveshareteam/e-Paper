@@ -8,10 +8,14 @@
 *   Achieve display characters: Display a single character, string, number
 *   Achieve time display: adaptive size display time minutes and seconds
 *----------------
-* |	This version:   V3.0
-* | Date        :   2019-04-18
+* |	This version:   V3.1
+* | Date        :   2019-10-10
 * | Info        :
 * -----------------------------------------------------------------------------
+* V3.1(2019-10-10):
+* 1. Add gray level
+*   PAINT Add Scale
+* 2. Add void Paint_SetScale(UBYTE scale);
 * V3.0(2019-04-18):
 * 1.Change: 
 *    Paint_DrawPoint(..., DOT_STYLE DOT_STYLE)
@@ -88,6 +92,7 @@ void Paint_NewImage(UBYTE *image, UWORD Width, UWORD Height, UWORD Rotate, UWORD
     Paint.WidthMemory = Width;
     Paint.HeightMemory = Height;
     Paint.Color = Color;    
+    Paint.Scale = 2;
     Paint.WidthByte = (Width % 8 == 0)? (Width / 8 ): (Width / 8 + 1);
     Paint.HeightByte = Height;    
 //    printf("WidthByte = %d, HeightByte = %d\r\n", Paint.WidthByte, Paint.HeightByte);
@@ -147,6 +152,19 @@ void Paint_SetMirroring(UBYTE mirror)
     }    
 }
 
+void Paint_SetScale(UBYTE scale)
+{
+    if(scale == 2){
+        Paint.Scale = scale;
+        Paint.WidthByte = (Paint.WidthMemory % 8 == 0)? (Paint.WidthMemory / 8 ): (Paint.WidthMemory / 8 + 1);
+    }else if(scale == 4){
+        Paint.Scale = scale;
+        Paint.WidthByte = (Paint.WidthMemory % 4 == 0)? (Paint.WidthMemory / 4 ): (Paint.WidthMemory / 4 + 1);
+    }else{
+        Debug("Set Scale Input parameter error\r\n");
+        Debug("Scale Only support: 2 4 \r\n");
+    }
+}
 /******************************************************************************
 function: Draw Pixels
 parameter:
@@ -161,7 +179,6 @@ void Paint_SetPixel(UWORD Xpoint, UWORD Ypoint, UWORD Color)
         return;
     }      
     UWORD X, Y;
-
     switch(Paint.Rotate) {
     case 0:
         X = Xpoint;
@@ -205,12 +222,21 @@ void Paint_SetPixel(UWORD Xpoint, UWORD Ypoint, UWORD Color)
         return;
     }
     
-    UDOUBLE Addr = X / 8 + Y * Paint.WidthByte;
-    UBYTE Rdata = Paint.Image[Addr];
-    if(Color == BLACK)
-        Paint.Image[Addr] = Rdata & ~(0x80 >> (X % 8));
-    else
-        Paint.Image[Addr] = Rdata | (0x80 >> (X % 8));
+    if(Paint.Scale == 2){
+        UDOUBLE Addr = X / 8 + Y * Paint.WidthByte;
+        UBYTE Rdata = Paint.Image[Addr];
+        if(Color == BLACK)
+            Paint.Image[Addr] = Rdata & ~(0x80 >> (X % 8));
+        else
+            Paint.Image[Addr] = Rdata | (0x80 >> (X % 8));
+    }else if(Paint.Scale == 4){
+        UDOUBLE Addr = X / 4 + Y * Paint.WidthByte;
+        Color = Color % 4;//Guaranteed color scale is 4  --- 0~3
+        UBYTE Rdata = Paint.Image[Addr];
+        
+        Rdata = Rdata & (~(0xC0 >> ((X % 4)*2)));
+        Paint.Image[Addr] = Rdata | ((Color << 6) >> ((X % 4)*2));
+    }
 }
 
 /******************************************************************************

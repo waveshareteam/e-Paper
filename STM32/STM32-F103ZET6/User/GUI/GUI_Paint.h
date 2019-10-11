@@ -82,6 +82,7 @@ typedef struct {
     UWORD Mirror;
     UWORD WidthByte;
     UWORD HeightByte;
+    UWORD Scale;
 } PAINT;
 extern PAINT Paint;
 
@@ -174,6 +175,7 @@ void Paint_SelectImage(UBYTE *image);
 void Paint_SetRotate(UWORD Rotate);
 void Paint_SetMirroring(UBYTE mirror);
 void Paint_SetPixel(UWORD Xpoint, UWORD Ypoint, UWORD Color);
+void Paint_SetScale(UBYTE scale);
 
 void Paint_Clear(UWORD Color);
 void Paint_ClearWindows(UWORD Xstart, UWORD Ystart, UWORD Xend, UWORD Yend, UWORD Color);
@@ -193,8 +195,10 @@ void Paint_DrawTime(UWORD Xstart, UWORD Ystart, PAINT_TIME *pTime, sFONT* Font, 
 
 //pic
 void Paint_DrawBitMap(const unsigned char* image_buffer);
-
-
+//void Paint_DrawBitMap_Half(const unsigned char* image_buffer, UBYTE Region);
+//void Paint_DrawBitMap_OneQuarter(const unsigned char* image_buffer, UBYTE Region);
+//void Paint_DrawBitMap_OneEighth(const unsigned char* image_buffer, UBYTE Region);
+void Paint_DrawBitMap_Block(const unsigned char* image_buffer, UBYTE Region);
 #endif
 
 

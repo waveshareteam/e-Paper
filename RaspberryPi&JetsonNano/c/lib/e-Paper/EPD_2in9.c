@@ -143,6 +143,7 @@ parameter:
 void EPD_2IN9_ReadBusy(void)
 {
     Debug("e-Paper busy\r\n");
+    DEV_Delay_ms(100);
     while(DEV_Digital_Read(EPD_BUSY_PIN) == 1) {      //LOW: idle, HIGH: busy
         DEV_Delay_ms(100);
     }
