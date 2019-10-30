@@ -32,7 +32,6 @@ import logging
 import sys
 import time
 
-
 class RaspberryPi:
     # Pin definition
     RST_PIN         = 17
@@ -62,6 +61,10 @@ class RaspberryPi:
         self.SPI.writebytes(data)
 
     def module_init(self):
+        # issue #36 - cannot wake from sleep
+        # once self.module_exit is called, the SPI.close() call prevents reiniting the device
+        # this explicitly calls the __init__ method to ensure that self.SPI is available
+        self.__init__() 
         self.GPIO.setmode(self.GPIO.BCM)
         self.GPIO.setwarnings(False)
         self.GPIO.setup(self.RST_PIN, self.GPIO.OUT)
