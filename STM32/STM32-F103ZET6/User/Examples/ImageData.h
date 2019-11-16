@@ -57,6 +57,7 @@ extern const unsigned char gImage_2in13c_y[];
 extern const unsigned char gImage_2in13d[];
 
 extern const unsigned char gImage_4in2[];
+extern const unsigned char gImage_4in2_4Gray[];
 extern const unsigned char gImage_4in2bc_b[];
 extern const unsigned char gImage_4in2bc_ry[];
 

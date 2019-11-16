@@ -24,6 +24,7 @@
  */
 
 extern const unsigned char IMAGE_BUTTERFLY[];
+extern const unsigned char gImage_4in2_4Gray1[];
 
 /* FILE END */
 

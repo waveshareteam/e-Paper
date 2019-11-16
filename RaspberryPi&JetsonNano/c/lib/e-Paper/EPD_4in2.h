@@ -4,10 +4,31 @@
 * | Function    :   4.2inch e-paper
 * | Info        :
 *----------------
-* |	This version:   V3.0
-* | Date        :   2019-06-13
+* |	This version:   V3.1
+* | Date        :   2019-11-14
 * | Info        :
 * -----------------------------------------------------------------------------
+* V3.1(2019-11-14):
+* 1.Add 4 grayscale drive and display program
+*	 Add EPD_4IN2_4Gray_lut_vcom[]
+*	 Add EPD_4IN2_4Gray_lut_ww[]
+*	 Add EPD_4IN2_4Gray_lut_bw[]
+*	 Add EPD_4IN2_4Gray_lut_wb
+*	 Add EPD_4IN2_4Gray_lut_bb
+*	 Add EPD_4IN2_Partial_SetLut()
+*	 Add EPD_4IN2_4Gray_lut()
+*	 Add EPD_4IN2_Init_4Gray()
+*	 Add EPD_4IN2_4GrayDisplay(....)
+* 2.Add partial refresh display
+* 	 Add EPD_4IN2_Partial_lut_vcom1[]
+* 	 Add EPD_4IN2_Partial_lut_ww1[]
+* 	 Add EPD_4IN2_Partial_lut_bw1[]
+* 	 Add EPD_4IN2_Partial_lut_wb1[]
+* 	 Add EPD_4IN2_Partial_lut_bb1[]
+* 	 Add EPD_4IN2_Partial_SetLut()
+* 	 Add EPD_4IN2_PartialDisplay(...)
+* 	 Poor display, no display function by default
+*
 * V3.0(2019-06-13):
 * 1.Change:
 *    lut_vcomDC[]  => EPD_4IN2_lut_vcomDC[]
@@ -101,5 +122,8 @@ void EPD_4IN2_Init(void);
 void EPD_4IN2_Clear(void);
 void EPD_4IN2_Display(UBYTE *Image);
 void EPD_4IN2_Sleep(void);
+void EPD_4IN2_PartialDisplay(UWORD X_start,UWORD Y_start,UWORD X_end,UWORD Y_end, UBYTE *Image);
 
+void EPD_4IN2_Init_4Gray(void);
+void EPD_4IN2_4GrayDisplay(const UBYTE *Image);
 #endif

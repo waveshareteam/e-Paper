@@ -41,7 +41,7 @@ void setup() {
     Serial.print("e-Paper init failed");
     return;
   }
-
+	//Serial.print(UNCOLORED);
   /* This clears the SRAM of the e-paper display */
   epd.ClearFrame();
 
@@ -87,7 +87,13 @@ void setup() {
   epd.DisplayFrame();
 
   /* This displays an image */
-  epd.DisplayFrame(IMAGE_BUTTERFLY);
+  //epd.DisplayFrame(IMAGE_BUTTERFLY);
+
+  
+  
+  epd.Init_4Gray();
+  epd.ClearFrame();
+  epd.Set_4GrayDisplay(gImage_4in2_4Gray1, 100, 100,  200,150);
 
   /* Deep sleep */
   epd.Sleep();
@@ -97,4 +103,3 @@ void loop() {
   // put your main code here, to run repeatedly:
 
 }
-
