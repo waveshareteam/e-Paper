@@ -35,7 +35,7 @@ import platform
 
 
 class Rock64:
-    RST_PIN = 17
+    RST_PIN = 17  # RPi-BCM17 = RPi-P11 = 
     DC_PIN = 25
     CS_PIN = 8
     BUSY_PIN = 24
@@ -65,7 +65,7 @@ class Rock64:
         self.GPIO.setup(self.DC_PIN, self.GPIO.OUT)
         self.GPIO.setup(self.CS_PIN, self.GPIO.OUT)
         self.GPIO.setup(self.BUSY_PIN, self.GPIO.IN)
-        self.SPI.max_speed_hz = 4000000
+        self.SPI.max_speed_hz = 10000000
         self.SPI.mode = 0b00
         return 0
 
