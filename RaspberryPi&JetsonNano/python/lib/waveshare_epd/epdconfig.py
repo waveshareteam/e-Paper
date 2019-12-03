@@ -31,6 +31,7 @@ import os
 import logging
 import sys
 import time
+import platform
 
 
 class Rock64:
@@ -190,6 +191,8 @@ class JetsonNano:
 
 if os.path.exists('/sys/bus/platform/drivers/gpiomem-bcm2835'):
     implementation = RaspberryPi()
+elif platform.machine() == 'aarch64':  # Rock64
+	implementation = Rock64()
 else:
     implementation = JetsonNano()
 
