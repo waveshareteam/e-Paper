@@ -33,6 +33,23 @@ import sys
 import time
 
 
+class Rock64:
+	RST_PIN = 17
+	DC_PIN = 25
+	CS_PIN = 8
+	BUSY_PIN = 24
+
+	def __init__(self):
+		import spidev
+		import R64.GPIO as GPIO
+
+		self.GPIO = GPIO
+		self.SPI = spidev.SpiDev(32766, 1)
+
+	def digital_write(self, pin, value):
+		self.GPIO.output(pin, value)
+
+
 class RaspberryPi:
     # Pin definition
     RST_PIN         = 17
