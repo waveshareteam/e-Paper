@@ -14,7 +14,7 @@ __maintainer__ = 'Brian Yiu'
 __status__ = 'Development'
 
 # Pin definitions
-CS_PIN 		= 23
+CS_PIN 		= 24
 DC_PIN 		= 22
 RST_PIN 	= 12
 BUSY_PIN 	= 18
