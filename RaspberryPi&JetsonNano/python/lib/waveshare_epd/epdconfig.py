@@ -15,8 +15,8 @@ __status__ = 'Development'
 
 # Pin definitions
 CS_PIN 		= 26
-DC_PIN 		= 22
-RST_PIN 	= 12
+DC_PIN 		= 15
+RST_PIN 	= 16
 BUSY_PIN 	= 18
 
 # SPI device, bus = 32766, device = 1 on ROCK64
