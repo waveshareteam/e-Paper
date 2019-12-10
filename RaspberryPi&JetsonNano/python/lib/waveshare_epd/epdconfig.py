@@ -14,10 +14,10 @@ __maintainer__ = 'Brian Yiu'
 __status__ = 'Development'
 
 # Pin definitions
-CS_PIN 		= 26
-DC_PIN 		= 15
-RST_PIN 	= 16
-BUSY_PIN 	= 18
+CS_PIN 		= 26  # Orange
+DC_PIN 		= 15  # Green
+RST_PIN 	= 16  # White
+BUSY_PIN 	= 18  # Purple
 
 # SPI device, bus = 32766, device = 1 on ROCK64
 SPI = spidev.SpiDev(32766, 1)
