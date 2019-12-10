@@ -8,14 +8,15 @@ import R64.GPIO as GPIO
 import time
 
 __author__ = 'Brian Yiu'
+__credits__ = ['Martin Cerveny']
 __version__ = '0.1.0'
 __maintainer__ = 'Brian Yiu'
 __status__ = 'Development'
 
-# Pin definition
-RST_PIN 	= 16
-DC_PIN 		= 15
-CS_PIN 		= 26
+# Pin definitions
+CS_PIN 		= 23
+DC_PIN 		= 22
+RST_PIN 	= 12
 BUSY_PIN 	= 18
 
 # SPI device, bus = 32766, device = 1 on ROCK64
