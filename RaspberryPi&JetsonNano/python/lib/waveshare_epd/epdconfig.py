@@ -15,7 +15,7 @@ __status__ = 'Development'
 
 # Pin definitions
 CS_PIN 		= 26  # Orange
-DC_PIN 		= 15  # Green
+DC_PIN 		= 22  # Green
 RST_PIN 	= 16  # White
 BUSY_PIN 	= 18  # Purple
 
