@@ -3,4 +3,4 @@
 2019-10-8:  Add new programs for the 7.5inch V2 e-Paper and 7.5inch B V2 e-Paper programs.
 2019-10-11: Add new feature 2.7inch e-Paper 4 grayscale.
 2019-11-12: Adding a new feature 4.2inch e-Paper partial refresh display, partial refresh display is not good, not added in some routines.
-2019-11-13: Add a new feature 4.2inch e-Paper 4 grayscale.¡£
+2019-11-13: Add a new feature 4.2inch e-Paper 4 grayscale.
