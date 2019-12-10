@@ -14,9 +14,10 @@ __maintainer__ = 'Brian Yiu'
 __status__ = 'Development'
 
 # Pin definitions
+# Vcc to 3V3
 CS_PIN 		= 26  # Orange
-DC_PIN 		= 15  # Green
-RST_PIN 	= 16  # White
+DC_PIN 		= 22  # Green
+RST_PIN 	= 12  # White
 BUSY_PIN 	= 18  # Purple
 
 # SPI device, bus = 32766, device = 1 on ROCK64
