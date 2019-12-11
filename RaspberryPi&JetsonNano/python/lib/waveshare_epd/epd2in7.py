@@ -548,12 +548,12 @@ class EPD:
         self.ReadBusy()
 
     def sleep(self):
-        self.send_command(0X50)
+        self.send_command(0x50)
         self.send_data(0xf7)
-        self.send_command(0X02)  # power off
+        self.send_command(0x02)  # power off
         self.ReadBusy()
-        self.send_command(0X07)  # deep sleep
-        self.send_data(0xA5)
+        self.send_command(0x07)  # deep sleep
+        self.send_data(0xa5)
         
         epdconfig.module_exit()
 ### END OF FILE ###
