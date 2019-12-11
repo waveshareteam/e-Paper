@@ -158,15 +158,11 @@ class EPD:
 
     def send_command(self, command):
         epdconfig.digital_write(self.dc_pin, 0)
-        # epdconfig.digital_write(self.cs_pin, 0)
         epdconfig.spi_writebyte([command])
-        # epdconfig.digital_write(self.cs_pin, 1)
 
     def send_data(self, data):
         epdconfig.digital_write(self.dc_pin, 1)
-        # epdconfig.digital_write(self.cs_pin, 0)
         epdconfig.spi_writebyte([data])
-        # epdconfig.digital_write(self.cs_pin, 1)
         
     def ReadBusy(self):        
         logging.debug("e-Paper busy")
@@ -509,8 +505,9 @@ class EPD:
     def sleep(self):
         self.send_command(0X50)
         self.send_data(0xf7)
-        self.send_command(0X02)
-        self.send_command(0X07)
+        self.send_command(0X02)  # power off
+        self.ReadBusy()
+        self.send_command(0X07)  # deep sleep
         self.send_data(0xA5)
         
         epdconfig.module_exit()
