@@ -106,7 +106,7 @@ try:
     
     logging.info("Goto Sleep...")
     epd.sleep()
-    time.sleep(2)
+    tiem.sleep(2)
     
 except IOError as e:
     logging.info(e)
