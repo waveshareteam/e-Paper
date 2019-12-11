@@ -214,11 +214,13 @@ class EPD:
     def set_lut(self):
         self.send_command(LUT_FOR_VCOM) # vcom
         for command in self.lut_vcom_dc:
-            self.send_command(command)
+            self.send_data(command)
         self.send_command(LUT_WHITE_TO_WHITE) # ww --
         for command in self.lut_ww:
-            self.send_command(command)
+            self.send_data(command)
         self.send_command(LUT_BLACK_TO_WHITE) # bw r
+        for command in self.lut_bw:
+            self.send_data(command)
         for count in range(0, 42):
             self.send_data(self.lut_bw[count])
         self.send_command(LUT_WHITE_TO_BLACK) # wb w
