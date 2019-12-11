@@ -151,24 +151,22 @@ class EPD:
     
     # Hardware reset
     def reset(self):
+        epdconfig.digital_write(self.reset_pin, 0)
+        epdconfig.delay_ms(200)
         epdconfig.digital_write(self.reset_pin, 1)
         epdconfig.delay_ms(200) 
-        epdconfig.digital_write(self.reset_pin, 0)
-        epdconfig.delay_ms(10)
-        epdconfig.digital_write(self.reset_pin, 1)
-        epdconfig.delay_ms(200)   
 
     def send_command(self, command):
         epdconfig.digital_write(self.dc_pin, 0)
-        epdconfig.digital_write(self.cs_pin, 0)
+        # epdconfig.digital_write(self.cs_pin, 0)
         epdconfig.spi_writebyte([command])
-        epdconfig.digital_write(self.cs_pin, 1)
+        # epdconfig.digital_write(self.cs_pin, 1)
 
     def send_data(self, data):
         epdconfig.digital_write(self.dc_pin, 1)
-        epdconfig.digital_write(self.cs_pin, 0)
+        # epdconfig.digital_write(self.cs_pin, 0)
         epdconfig.spi_writebyte([data])
-        epdconfig.digital_write(self.cs_pin, 1)
+        # epdconfig.digital_write(self.cs_pin, 1)
         
     def ReadBusy(self):        
         logging.debug("e-Paper busy")
