@@ -44,7 +44,7 @@ try:
     draw.rectangle((80, 50, 130, 100), fill = 0)
     draw.chord((200, 50, 250, 100), 0, 360, fill = 0)
     epd.display(epd.getbuffer(Himage))
-    time.sleep(2)
+    time.sleep(1)
     
     # Drawing on the Vertical image
     logging.info("2.Drawing on the Vertical image...")
@@ -61,19 +61,19 @@ try:
     draw.rectangle((10, 150, 60, 200), fill = 0)
     draw.chord((70, 150, 120, 200), 0, 360, fill = 0)
     epd.display(epd.getbuffer(Limage))
-    time.sleep(2)
+    time.sleep(1)
     
     logging.info("3.read bmp file")
     Himage = Image.open(os.path.join(picdir, '2in7.bmp'))
     epd.display(epd.getbuffer(Himage))
-    time.sleep(2)
+    time.sleep(1)
     
     logging.info("4.read bmp file on window")
     Himage2 = Image.new('1', (epd.height, epd.width), 255)  # 255: clear the frame
     bmp = Image.open(os.path.join(picdir, '100x100.bmp'))
     Himage2.paste(bmp, (50,10))
     epd.display(epd.getbuffer(Himage2))
-    time.sleep(2)
+    time.sleep(1)
     
     '''4Gray display'''
     logging.info("4Gray display--------------------------------")
@@ -94,12 +94,12 @@ try:
     draw.rectangle((10, 200, 60, 250), fill = epd.GRAY1)
     draw.chord((70, 200, 120, 250), 0, 360, fill = epd.GRAY1)
     epd.display_4Gray(epd.getbuffer_4Gray(Limage))
-    time.sleep(2)
+    time.sleep(1)
     
     #display 4Gra bmp
     Himage = Image.open(os.path.join(picdir, '2in7_Scale.bmp'))
     epd.display_4Gray(epd.getbuffer_4Gray(Himage))
-    time.sleep(2)
+    time.sleep(1)
 
     logging.info("Clear...")
     epd.Clear(0xFF)
