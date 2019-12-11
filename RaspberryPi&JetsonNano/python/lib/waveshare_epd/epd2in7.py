@@ -207,19 +207,17 @@ class EPD:
         
     def ReadBusy(self):        
         logging.debug("e-Paper busy")
-        while(epdconfig.digital_read(self.busy_pin) == 0):      #  0: idle, 1: busy
+        while(epdconfig.digital_read(self.busy_pin) == 0):  # 0: idle, 1: busy
             epdconfig.delay_ms(1)                
         logging.debug("e-Paper busy release")
 
     def set_lut(self):
         self.send_command(LUT_FOR_VCOM) # vcom
-        # for count in range(0, 44):
-        #     self.send_data(self.lut_vcom_dc[count])
         for command in self.lut_vcom_dc:
             self.send_command(command)
         self.send_command(LUT_WHITE_TO_WHITE) # ww --
-        for count in range(0, 42):
-            self.send_data(self.lut_ww[count])
+        for command in self.lut_ww:
+            self.send_command(command)
         self.send_command(LUT_BLACK_TO_WHITE) # bw r
         for count in range(0, 42):
             self.send_data(self.lut_bw[count])
