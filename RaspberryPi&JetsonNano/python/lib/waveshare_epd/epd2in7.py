@@ -212,24 +212,24 @@ class EPD:
         logging.debug("e-Paper busy release")
 
     def set_lut(self):
-        self.send_command(0x20) # vcom
+        self.send_command(LUT_FOR_VCOM) # vcom
         for count in range(0, 44):
             self.send_data(self.lut_vcom_dc[count])
-        self.send_command(0x21) # ww --
+        self.send_command(LUT_WHITE_TO_WHITE) # ww --
         for count in range(0, 42):
             self.send_data(self.lut_ww[count])
-        self.send_command(0x22) # bw r
+        self.send_command(LUT_BLACK_TO_WHITE) # bw r
         for count in range(0, 42):
             self.send_data(self.lut_bw[count])
-        self.send_command(0x23) # wb w
+        self.send_command(LUT_WHITE_TO_BLACK) # wb w
         for count in range(0, 42):
             self.send_data(self.lut_bb[count])
-        self.send_command(0x24) # bb b
+        self.send_command(LUT_BLACK_TO_BLACK) # bb b
         for count in range(0, 42):
             self.send_data(self.lut_wb[count])
             
     def gray_SetLut(self):
-        self.send_command(0x20)
+        self.send_command(LUT_FOR_VCOM)
         for count in range(0, 44):        #vcom
             self.send_data(self.gray_lut_vcom[count])
             
