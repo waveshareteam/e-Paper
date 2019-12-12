@@ -249,7 +249,8 @@ class EPD:
         for data in self.gray_lut_bb:
             self.send_data(data)
 
-        self.send_command(0x25)  #vcom
+        # self.send_command(0x25)  #vcom
+        self.send_command(LUT_WHITE_TO_WHITE)
         for data in self.gray_lut_ww:
             self.send_data(data)
     
