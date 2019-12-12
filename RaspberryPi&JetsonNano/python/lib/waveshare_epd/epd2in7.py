@@ -213,45 +213,45 @@ class EPD:
 
     def set_lut(self):
         self.send_command(LUT_FOR_VCOM) # vcom
-        for command in self.lut_vcom_dc:
-            self.send_data(command)
+        for data in self.lut_vcom_dc:
+            self.send_data(data)
         self.send_command(LUT_WHITE_TO_WHITE) # ww --
-        for command in self.lut_ww:
-            self.send_data(command)
+        for data in self.lut_ww:
+            self.send_data(data)
         self.send_command(LUT_BLACK_TO_WHITE) # bw r
-        for command in self.lut_bw:
-            self.send_data(command)
+        for data in self.lut_bw:
+            self.send_data(data)
         self.send_command(LUT_WHITE_TO_BLACK) # wb w
-        for command in self.lut_bb:
-            self.send_data(command)
+        for data in self.lut_bb:
+            self.send_data(data)
         self.send_command(LUT_BLACK_TO_BLACK) # bb b
-        for command in self.lut_wb:
-            self.send_data(command)
+        for data in self.lut_wb:
+            self.send_data(data)
             
     def gray_SetLut(self):
         self.send_command(LUT_FOR_VCOM)
-        for count in range(0, 44):        #vcom
-            self.send_data(self.gray_lut_vcom[count])
+        for data in gray_lut_vcom:
+            self.send_data(data)
             
-        self.send_command(0x21)							#red not use
-        for count in range(0, 42): 
-            self.send_data(self.gray_lut_ww[count])
+        self.send_command(LUT_WHITE_TO_WHITE)  #red not use
+        for data in gray_lut_ww:
+            self.send_data(data)
 
-        self.send_command(0x22)							#bw r
-        for count in range(0, 42): 
-            self.send_data(self.gray_lut_bw[count])
+        self.send_command(LUT_BLACK_TO_WHITE)  #bw r
+        for data in gray_lut_bw:
+            self.send_data(data)
 
-        self.send_command(0x23)							#wb w
-        for count in range(0, 42): 
-            self.send_data(self.gray_lut_wb[count])
+        self.send_command(LUT_WHITE_TO_BLACK)  #wb w
+        for data in gray_lut_wb:
+            self.send_data(data)
 
-        self.send_command(0x24)							#bb b
-        for count in range(0, 42): 
-            self.send_data(self.gray_lut_bb[count])
+        self.send_command(LUT_BLACK_TO_BLACK)  #bb b
+        for data in gray_lut_bb:
+            self.send_data(data)
 
-        self.send_command(0x25)							#vcom
-        for count in range(0, 42): 
-            self.send_data(self.gray_lut_ww[count])
+        self.send_command(0x25)  #vcom
+        for data in gray_lut_ww:
+            self.send_data(data)
     
     def init(self):
         if (epdconfig.module_init() != 0):
