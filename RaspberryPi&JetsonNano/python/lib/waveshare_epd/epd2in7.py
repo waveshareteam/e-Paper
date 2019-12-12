@@ -230,27 +230,27 @@ class EPD:
             
     def gray_SetLut(self):
         self.send_command(LUT_FOR_VCOM)
-        for data in gray_lut_vcom:
+        for data in self.gray_lut_vcom:
             self.send_data(data)
             
         self.send_command(LUT_WHITE_TO_WHITE)  #red not use
-        for data in gray_lut_ww:
+        for data in self.gray_lut_ww:
             self.send_data(data)
 
         self.send_command(LUT_BLACK_TO_WHITE)  #bw r
-        for data in gray_lut_bw:
+        for data in self.gray_lut_bw:
             self.send_data(data)
 
         self.send_command(LUT_WHITE_TO_BLACK)  #wb w
-        for data in gray_lut_wb:
+        for data in self.gray_lut_wb:
             self.send_data(data)
 
         self.send_command(LUT_BLACK_TO_BLACK)  #bb b
-        for data in gray_lut_bb:
+        for data in self.gray_lut_bb:
             self.send_data(data)
 
         self.send_command(0x25)  #vcom
-        for data in gray_lut_ww:
+        for data in self.gray_lut_ww:
             self.send_data(data)
     
     def init(self):
