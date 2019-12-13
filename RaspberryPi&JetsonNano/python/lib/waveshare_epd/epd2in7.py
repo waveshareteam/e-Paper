@@ -535,13 +535,14 @@ class EPD:
         # pass
         
     def Clear(self, color):
-        self.send_command(0x10)
+        self.send_command(DATA_START_TRANSMISSION_1)
         for i in range(0, int(self.width * self.height / 8)):
             self.send_data(0xFF)
-        self.send_command(0x13)
+        self.send_command(DATA_START_TRANSMISSION_2)
         for i in range(0, int(self.width * self.height / 8)):
             self.send_data(0xFF)
-        self.send_command(0x12) 
+        self.set_lut()
+        self.send_command(DISPLAY_REFRESH)
         self.ReadBusy()
 
     def sleep(self):
