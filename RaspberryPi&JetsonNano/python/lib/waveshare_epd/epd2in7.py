@@ -558,6 +558,7 @@ class EPD:
         # self.ReadBusy()
         # epdconfig.module_exit()
         self.send_command(DEEP_SLEEP)
+        self.send_data(0xA5)
         self.ReadBusy()
         epdconfig.module_exit()
 ### END OF FILE ###
