@@ -536,16 +536,12 @@ class EPD:
         
     def Clear(self, color):
         self.send_command(0x10)
-        epdconfig.delay_ms(2)
         for i in range(0, int(self.width * self.height / 8)):
-            self.send_data(color)
-        epdconfig.delay_ms(2)
+            self.send_data(0xFF)
         self.send_command(0x13)
-        epdconfig.delay_ms(2)
         for i in range(0, int(self.width * self.height / 8)):
-            self.send_data(color)
-        epdconfig.delay_ms(2)
-        self.send_command(0x12)
+            self.send_data(0xFF)
+        self.send_command(0x12) 
         self.ReadBusy()
 
     def sleep(self):
