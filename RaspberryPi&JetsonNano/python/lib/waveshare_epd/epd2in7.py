@@ -243,7 +243,7 @@ class EPD:
     
     # Hardware reset
     def reset(self):
-        epdconfig.digital_write(self.reset_pin, 0)
+        epdconfig.digital_write(self.reset_pin, epdconfig.GPIO.LOW)
         epdconfig.delay_ms(200)
         epdconfig.digital_write(self.reset_pin, 1)
         epdconfig.delay_ms(200) 
