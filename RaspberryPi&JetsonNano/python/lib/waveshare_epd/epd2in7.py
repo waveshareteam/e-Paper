@@ -315,8 +315,10 @@ class EPD:
         self.send_command(0x01) # POWER_SETTING
         self.send_data(0x03) # VDS_EN, VDG_EN
         self.send_data(0x00) # VCOM_HV, VGHL_LV[1], VGHL_LV[0]
-        self.send_data(0x2b) # VDH
-        self.send_data(0x2b) # VDL
+        # self.send_data(0x2b) # VDH
+        # self.send_data(0x2b) # VDL
+        self.send_data(0x26)
+        self.send_data(0x26)
         self.send_data(0x09) # VDHR
         
         self.send_command(0x06) # BOOSTER_SOFT_START
