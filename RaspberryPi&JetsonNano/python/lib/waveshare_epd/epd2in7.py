@@ -246,7 +246,7 @@ class EPD:
         epdconfig.digital_write(self.reset_pin, epdconfig.GPIO.LOW)
         epdconfig.delay_ms(200)
         epdconfig.digital_write(self.reset_pin, 1)
-        epdconfig.delay_ms(200) 
+        # epdconfig.delay_ms(200) 
 
     def send_command(self, command):
         epdconfig.digital_write(self.dc_pin, 0)
