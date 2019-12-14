@@ -51,7 +51,7 @@ try:
     Limage = Image.new('1', (epd.width, epd.height), 255)  # 255: clear the frame
     draw = ImageDraw.Draw(Limage)
     draw.text((2, 0), 'hello world', font = font18, fill = 0)
-    draw.text((20, 50), u'微雪电子', font = font18, fill = 0)
+    draw.text((20, 50), u'よろしく', font = font18, fill = 0)
     draw.line((10, 90, 60, 140), fill = 0)
     draw.line((60, 90, 10, 140), fill = 0)
     draw.rectangle((10, 90, 60, 140), outline = 0)
@@ -81,9 +81,9 @@ try:
     
     Limage = Image.new('L', (epd.width, epd.height), 0)  # 255: clear the frame
     draw = ImageDraw.Draw(Limage)
-    draw.text((20, 0), u'微雪电子', font = font35, fill = epd.GRAY1)
-    draw.text((20, 35), u'微雪电子', font = font35, fill = epd.GRAY2)
-    draw.text((20, 70), u'微雪电子', font = font35, fill = epd.GRAY3)
+    draw.text((20, 0), u'よろしく', font = font35, fill = epd.GRAY1)
+    draw.text((20, 35), u'よろしく', font = font35, fill = epd.GRAY2)
+    draw.text((20, 70), u'よろしく', font = font35, fill = epd.GRAY3)
     draw.text((40, 110), 'hello world', font = font18, fill = epd.GRAY1)
     draw.line((10, 140, 60, 190), fill = epd.GRAY1)
     draw.line((60, 140, 10, 190), fill = epd.GRAY1)
