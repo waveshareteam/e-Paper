@@ -269,10 +269,10 @@ class EPD:
 
     def send_command_and_data(self, command, data=None):
         epdconfig.digital_write(self.dc_pin, epdconfig.GPIO.LOW)  # LOW: write command
-        epdconfig.spi_writebytes([command])
+        epdconfig.spi_writebyte([command])
         if data:
             epdconfig.digital_write(self.dc_pin, epdconfig.GPIO.HIGH)  # HIGH: write data
-            epdconfig.spi_writebytes(data)
+            epdconfig.spi_writebyte(data)
 
     def set_lut(self):
         look_up_tables = {
