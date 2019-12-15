@@ -267,22 +267,37 @@ class EPD:
             epdconfig.delay_ms(1)                
         logging.debug("e-Paper busy release")
 
+    def build_look_up_table(self, command, lut):
+        self.send_command(command)
+        [self.send_data(data) for data in lut]
+
     def set_lut(self):
-        self.send_command(LUT_FOR_VCOM) # vcom
-        for data in self.lut_vcom_dc:
-            self.send_data(data)
-        self.send_command(LUT_WHITE_TO_WHITE) # ww --
-        for data in self.lut_ww:
-            self.send_data(data)
-        self.send_command(LUT_BLACK_TO_WHITE) # bw r
-        for data in self.lut_bw:
-            self.send_data(data)
-        self.send_command(LUT_WHITE_TO_BLACK) # wb w
-        for data in self.lut_bb:
-            self.send_data(data)
-        self.send_command(LUT_BLACK_TO_BLACK) # bb b
-        for data in self.lut_wb:
-            self.send_data(data)
+        look_up_tables = {
+            LUT_FOR_VCOM: self.lut_vcom_dc,
+            LUT_WHITE_TO_WHITE: self.lut_ww,
+            LUT_BLACK_TO_WHITE: self.lut_bw,
+            LUT_WHITE_TO_BLACK: self.lut_wb,
+            LUT_BLACK_TO_BLACK: self.lut_bb
+        }
+
+        for command, lut in look_up_tables.items():
+            self.build_look_up_table(command, lut)
+
+        # self.send_command(LUT_FOR_VCOM) # vcom
+        # for data in self.lut_vcom_dc:
+        #     self.send_data(data)
+        # self.send_command(LUT_WHITE_TO_WHITE) # ww --
+        # for data in self.lut_ww:
+        #     self.send_data(data)
+        # self.send_command(LUT_BLACK_TO_WHITE) # bw r
+        # for data in self.lut_bw:
+        #     self.send_data(data)
+        # self.send_command(LUT_WHITE_TO_BLACK) # wb w
+        # for data in self.lut_bb:
+        #     self.send_data(data)
+        # self.send_command(LUT_BLACK_TO_BLACK) # bb b
+        # for data in self.lut_wb:
+        #     self.send_data(data)
             
     def gray_SetLut(self):
         self.send_command(LUT_FOR_VCOM)
