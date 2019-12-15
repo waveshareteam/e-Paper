@@ -273,7 +273,7 @@ class EPD:
         if data:
             epdconfig.digital_write(self.dc_pin, epdconfig.GPIO.HIGH)  # HIGH: write data
             # [epdconfig.spi_writebyte([byte]) for byte in data]
-            epdconfig.spi_writebytes2(data)
+            epdconfig.spi_writebyte2(data)
 
     def set_lut(self):
         look_up_tables = {
@@ -284,8 +284,8 @@ class EPD:
             LUT_BLACK_TO_BLACK: self.lut_bb
         }
 
-        for command, data in look_up_tables.items():
-            self.send_command_and_data(command, data)
+        for command, lut in look_up_tables.items():
+            self.send_command_and_data(command, data=lut)
 
         # self.send_command(LUT_FOR_VCOM) # vcom
         # for data in self.lut_vcom_dc:
