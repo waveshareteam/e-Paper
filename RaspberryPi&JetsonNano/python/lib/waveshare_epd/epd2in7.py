@@ -277,15 +277,15 @@ class EPD:
             epdconfig.spi_writebyte2(data)
 
     def set_lut(self):
-        look_up_tables = {
-            LUT_FOR_VCOM: self.lut_vcom_dc,
-            LUT_WHITE_TO_WHITE: self.lut_ww,
-            LUT_BLACK_TO_WHITE: self.lut_bw,
-            LUT_WHITE_TO_BLACK: self.lut_wb,
-            LUT_BLACK_TO_BLACK: self.lut_bb
-        }
+        look_up_tables = [
+            (LUT_FOR_VCOM, self.lut_vcom_dc),
+            (LUT_WHITE_TO_WHITE, self.lut_ww),
+            (LUT_BLACK_TO_WHITE, self.lut_bw),
+            (LUT_WHITE_TO_BLACK, self.lut_wb),
+            (LUT_BLACK_TO_BLACK, self.lut_bb)
+            ]
 
-        for command, lut in look_up_tables.items():
+        for (command, lut) in look_up_tables:
             self.send_command_and_data(command, data=lut)
 
         # self.send_command(LUT_FOR_VCOM) # vcom
