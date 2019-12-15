@@ -267,7 +267,7 @@ class EPD:
             epdconfig.delay_ms(1)                
         logging.debug("e-Paper busy release")
 
-    def send_command_and_data(self command, data=None):
+    def send_command_and_data(self, command, data=None):
         self.digital_write(self.dc_pin, epdif.GPIO.LOW)  # LOW: write command
         epdif.spi_writebytes([command])
         if data:
