@@ -267,9 +267,12 @@ class EPD:
             epdconfig.delay_ms(1)                
         logging.debug("e-Paper busy release")
 
-    def build_look_up_table(self, command, lut):
-        self.send_command(command)
-        [self.send_data(data) for data in lut]
+    def send_command_and_data(self command, data=None):
+        self.digital_write(self.dc_pin, epdif.GPIO.LOW)  # LOW: write command
+        epdif.spi_writebytes([command])
+        if data:
+            self.digital_write(self.dc_pin, epdif.GPIO.HIGH)  # HIGH: write data
+            epdif.spi_writebytes(data)
 
     def set_lut(self):
         look_up_tables = {
@@ -280,8 +283,8 @@ class EPD:
             LUT_BLACK_TO_BLACK: self.lut_bb
         }
 
-        for command, lut in look_up_tables.items():
-            self.build_look_up_table(command, lut)
+        for command, data in look_up_tables.items():
+            self.send_command_and_data(command, data)
 
         # self.send_command(LUT_FOR_VCOM) # vcom
         # for data in self.lut_vcom_dc:
