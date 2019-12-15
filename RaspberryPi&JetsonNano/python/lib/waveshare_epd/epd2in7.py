@@ -372,7 +372,8 @@ class EPD:
         self.send_data(0xEF) # KW-BF   KWR-AF    BWROTP 0f
         
         self.send_command(0x30) # PLL_CONTROL
-        self.send_data(0x3A) # 3A 100HZ   29 150Hz 39 200HZ    31 171HZ
+        # self.send_data(0x3A) # 3A 100HZ   29 150Hz 39 200HZ    31 171HZ
+        self.send_data(0x0F)
         
         self.send_command(0x82) # VCM_DC_SETTING_REGISTER
         self.send_data(0x12)
