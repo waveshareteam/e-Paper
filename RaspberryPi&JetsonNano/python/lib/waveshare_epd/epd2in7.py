@@ -264,7 +264,8 @@ class EPD:
     def ReadBusy(self):        
         logging.debug("e-Paper busy")
         while(epdconfig.digital_read(self.busy_pin) == 0):  # 0: idle, 1: busy
-            epdconfig.delay_ms(1)                
+            # epdconfig.delay_ms(1)                
+            pass
         logging.debug("e-Paper busy release")
 
     def send_command_and_data(self, command, data=None):
