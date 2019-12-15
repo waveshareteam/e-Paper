@@ -321,8 +321,10 @@ class EPD:
         self.send_data(0x09) # VDHR
         
         self.send_command(0x06) # BOOSTER_SOFT_START
-        self.send_data(0x07)
-        self.send_data(0x07)
+        # self.send_data(0x07)
+        # self.send_data(0x07)
+        self.send_data(0x00)
+        self.send_data(0x00)
         self.send_data(0x17)
         
         # Power optimization
