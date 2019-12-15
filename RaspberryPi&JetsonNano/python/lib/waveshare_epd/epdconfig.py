@@ -37,6 +37,12 @@ def spi_writebyte(data):
 	SPI.writebytes(data)
 	GPIO.output(CS_PIN, GPIO.HIGH)
 
+def spi_writebytes2(data):
+	# manual CS on ROCK64
+	GPIO.output(CS_PIN, GPIO.LOW)
+	SPI.writebytes2(data)
+	GPIO.output(CS_PIN, GPIO.HIGH)
+
 def module_init():
 	GPIO.setmode(GPIO.BOARD)
 	GPIO.setwarnings(False)

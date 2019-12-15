@@ -272,7 +272,8 @@ class EPD:
         epdconfig.spi_writebyte([command])
         if data:
             epdconfig.digital_write(self.dc_pin, epdconfig.GPIO.HIGH)  # HIGH: write data
-            [epdconfig.spi_writebyte([byte]) for byte in data]
+            # [epdconfig.spi_writebyte([byte]) for byte in data]
+            epdconfig.spi_writebytes2(data)
 
     def set_lut(self):
         look_up_tables = {
