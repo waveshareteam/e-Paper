@@ -268,11 +268,11 @@ class EPD:
         logging.debug("e-Paper busy release")
 
     def send_command_and_data(self, command, data=None):
-        self.digital_write(self.dc_pin, epdif.GPIO.LOW)  # LOW: write command
-        epdif.spi_writebytes([command])
+        epdconfig.digital_write(self.dc_pin, epdconfig.GPIO.LOW)  # LOW: write command
+        epdconfig.spi_writebytes([command])
         if data:
-            self.digital_write(self.dc_pin, epdif.GPIO.HIGH)  # HIGH: write data
-            epdif.spi_writebytes(data)
+            epdconfig.digital_write(self.dc_pin, epdconfig.GPIO.HIGH)  # HIGH: write data
+            epdconfig.spi_writebytes(data)
 
     def set_lut(self):
         look_up_tables = {
