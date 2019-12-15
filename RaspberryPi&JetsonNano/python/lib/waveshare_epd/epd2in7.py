@@ -368,7 +368,8 @@ class EPD:
         self.ReadBusy()
 
         self.send_command(0x00) # PANEL_SETTING
-        self.send_data(0xAF) # KW-BF   KWR-AF    BWROTP 0f
+        # self.send_data(0xAF) # KW-BF   KWR-AF    BWROTP 0f
+        self.send_data(0x2F) # KW-BF   KWR-AF    BWROTP 0f
         
         self.send_command(0x30) # PLL_CONTROL
         self.send_data(0x3A) # 3A 100HZ   29 150Hz 39 200HZ    31 171HZ
