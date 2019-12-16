@@ -616,7 +616,7 @@ class EPD:
         # pass
         
     def Clear(self, color):
-        data = [color] * self.width * self.height / 8
+        data = [color] * int(self.width * self.height / 8)
         self.send_command(DATA_START_TRANSMISSION_1)
         # for i in range(0, int(self.width * self.height / 8)):
         #     self.send_data(0xFF)
