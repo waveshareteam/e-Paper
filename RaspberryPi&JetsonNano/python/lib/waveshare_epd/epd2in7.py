@@ -616,12 +616,15 @@ class EPD:
         # pass
         
     def Clear(self, color):
+        data = [color] * self.width * self.height / 8
         self.send_command(DATA_START_TRANSMISSION_1)
-        for i in range(0, int(self.width * self.height / 8)):
-            self.send_data(0xFF)
+        # for i in range(0, int(self.width * self.height / 8)):
+        #     self.send_data(0xFF)
+        [self.send_data(byte) for byte in data]
         self.send_command(DATA_START_TRANSMISSION_2)
-        for i in range(0, int(self.width * self.height / 8)):
-            self.send_data(0xFF)
+        # for i in range(0, int(self.width * self.height / 8)):
+        #     self.send_data(0xFF)
+        [self.send_data(byte) for byte in data]
         # self.set_lut()
         self.send_command(DISPLAY_REFRESH)
         self.ReadBusy()
