@@ -264,8 +264,7 @@ class EPD:
     def ReadBusy(self):        
         logging.debug("e-Paper busy")
         while(epdconfig.digital_read(self.busy_pin) == 0):  # 0: idle, 1: busy
-            # epdconfig.delay_ms(1)                
-            pass
+            epdconfig.delay_ms(1)
         logging.debug("e-Paper busy release")
 
     def send_command_and_data(self, command, data=None):
@@ -274,7 +273,8 @@ class EPD:
         if data:
             epdconfig.digital_write(self.dc_pin, epdconfig.GPIO.HIGH)  # HIGH: write data
             # [epdconfig.spi_writebyte([byte]) for byte in data]
-            epdconfig.spi_writebyte2(data)
+            # epdconfig.spi_writebyte2(data)
+            epdconfig.spi_writebyte(data)
 
     def set_lut(self):
         look_up_tables = [
@@ -622,7 +622,7 @@ class EPD:
         self.send_command(DATA_START_TRANSMISSION_2)
         for i in range(0, int(self.width * self.height / 8)):
             self.send_data(0xFF)
-        self.set_lut()
+        # self.set_lut()
         self.send_command(DISPLAY_REFRESH)
         self.ReadBusy()
 
