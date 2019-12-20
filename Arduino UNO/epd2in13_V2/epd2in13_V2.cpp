@@ -326,10 +326,6 @@ void Epd::DisplayPart(const unsigned char* frame_buffer)
  */
 void Epd::Sleep()
 {
-    SendCommand(0x22); //POWER OFF
-    SendData(0xC3);
-    SendCommand(0x20);
-
     SendCommand(0x10); //enter deep sleep
     SendData(0x01);
     DelayMs(200);
