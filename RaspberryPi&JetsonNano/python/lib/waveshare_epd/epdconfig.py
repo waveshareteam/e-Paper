@@ -16,7 +16,7 @@ __status__ = 'Development'
 # Pin definitions
 CS_PIN 		= 26  # Orange
 DC_PIN 		= 22  # Green
-RST_PIN 	= 7  # White
+RST_PIN 	= 13  # White
 BUSY_PIN 	= 18  # Purple
 
 # SPI device, bus = 32766, device = 1 on ROCK64
