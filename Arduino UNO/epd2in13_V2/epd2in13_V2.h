@@ -56,6 +56,7 @@ public:
     void Display(const unsigned char* frame_buffer);
     void DisplayPartBaseImage(const unsigned char* frame_buffer);
     void DisplayPart(const unsigned char* frame_buffer);
+    void ClearPart(void);
     
     void Sleep(void);
 private:

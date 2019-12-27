@@ -103,10 +103,11 @@ void Epd::SendData(unsigned char data)
  */
 void Epd::WaitUntilIdle(void)
 {
-    while(DigitalRead(busy_pin) == 1) {      //LOW: idle, HIGH: busy
+    while(1) {      //LOW: idle, HIGH: busy
+        if(DigitalRead(busy_pin) == 0)
+            break;
         DelayMs(100);
     }
-    DelayMs(200);
 }
 
 int Epd::Init(char Mode)
@@ -276,14 +277,14 @@ void Epd::DisplayPartBaseImage(const unsigned char* frame_buffer)
         SendCommand(0x24);
         for (int j = 0; j < h; j++) {
             for (int i = 0; i < w; i++) {
-                SendData(frame_buffer[i + j * w]);
+                SendData(pgm_read_byte(&frame_buffer[i + j * w]));
             }
         }
 
         SendCommand(0x26);
         for (int j = 0; j < h; j++) {
             for (int i = 0; i < w; i++) {
-                SendData(frame_buffer[i + j * w]);
+                SendData(pgm_read_byte(&frame_buffer[i + j * w]));
             }
         }
     }
@@ -304,8 +305,27 @@ void Epd::DisplayPart(const unsigned char* frame_buffer)
         SendCommand(0x24);
         for (int j = 0; j < h; j++) {
             for (int i = 0; i < w; i++) {
-                SendData(frame_buffer[i + j * w]);
+                SendData(pgm_read_byte(&frame_buffer[i + j * w]));
             }
+        }
+    }
+
+    //DISPLAY REFRESH
+    SendCommand(0x22);
+    SendData(0x0C);
+    SendCommand(0x20);
+    WaitUntilIdle();
+}
+
+void Epd::ClearPart(void)
+{
+    int w, h;
+    w = (EPD_WIDTH % 8 == 0)? (EPD_WIDTH / 8 ): (EPD_WIDTH / 8 + 1);
+    h = EPD_HEIGHT;
+    SendCommand(0x24);
+    for (int j = 0; j < h; j++) {
+        for (int i = 0; i < w; i++) {
+            SendData(0xff);
         }
     }
 
