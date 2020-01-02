@@ -384,7 +384,7 @@ class EPD:
     
     def display_4Gray(self, image):
         self.send_command(0x10)
-        for i in range(0, EPD_WIDTH * EPD_HEIGHT / 8):                   # EPD_WIDTH * EPD_HEIGHT / 4
+        for i in range(0, int(EPD_WIDTH * EPD_HEIGHT / 8)):                   # EPD_WIDTH * EPD_HEIGHT / 4
             temp3=0
             for j in range(0, 2):
                 temp1 = image[i*2+j]
@@ -417,7 +417,7 @@ class EPD:
             
         self.send_command(0x13)	    
                
-        for i in range(0, EPD_WIDTH * EPD_HEIGHT / 8):                #5808*4  46464
+        for i in range(0, int(EPD_WIDTH * EPD_HEIGHT / 8)):                #5808*4  46464
             temp3=0
             for j in range(0, 2):
                 temp1 = image[i*2+j]
