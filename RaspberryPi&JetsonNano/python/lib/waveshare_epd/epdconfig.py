@@ -32,6 +32,30 @@ import logging
 import sys
 import time
 
+def board_is_NanoPi():
+
+    """
+    Detects if the current platform is a NanoPi.
+
+    Output example with a test:
+
+    >>> isinstance(board_is_NanoPi(), bool)
+    True
+    """
+
+    info_path = "/sys/firmware/devicetree/base/model"
+    model = ""
+
+    if os.path.exists(info_path):
+        with open(info_path, 'r') as infile:
+            model = infile.read()
+
+    if "NanoPi" in model:
+        result = True
+    else:
+        result = False
+
+    return result
 
 class RaspberryPi:
     # Pin definition
@@ -40,14 +64,36 @@ class RaspberryPi:
     CS_PIN          = 8
     BUSY_PIN        = 24
 
-    def __init__(self):
+    def __init__(self, nanopi = False):
         import spidev
+
+        self.is_nanopi = nanopi
+
+        if self.is_nanopi:
+            self.init_NanoPi()
+        else:
+            self.init_RaspberryPi()
+
+        # SPI device, bus = 0, device = 0
+        self.SPI = spidev.SpiDev(0, 0)
+
+    def init_RaspberryPi(self):
         import RPi.GPIO
 
         self.GPIO = RPi.GPIO
 
-        # SPI device, bus = 0, device = 0
-        self.SPI = spidev.SpiDev(0, 0)
+    def init_NanoPi(self):
+
+        # Using `GPIO.setmode(self.GPIO.BCM)` caused an error in NPi.GPIO.
+        # Hence, defining pin numbers in GPIO.BOARD notation.
+        self.RST_PIN     = 11
+        self.DC_PIN      = 22
+        self.CS_PIN      = 24
+        self.BUSY_PIN    = 18
+
+        import NPi.GPIO
+
+        self.GPIO = NPi.GPIO
 
     def digital_write(self, pin, value):
         self.GPIO.output(pin, value)
@@ -62,7 +108,10 @@ class RaspberryPi:
         self.SPI.writebytes(data)
 
     def module_init(self):
-        self.GPIO.setmode(self.GPIO.BCM)
+        if self.is_nanopi:
+            self.GPIO.setmode(self.GPIO.BOARD)
+        else:
+            self.GPIO.setmode(self.GPIO.BCM)
         self.GPIO.setwarnings(False)
         self.GPIO.setup(self.RST_PIN, self.GPIO.OUT)
         self.GPIO.setup(self.DC_PIN, self.GPIO.OUT)
@@ -144,6 +193,8 @@ class JetsonNano:
 
 if os.path.exists('/sys/bus/platform/drivers/gpiomem-bcm2835'):
     implementation = RaspberryPi()
+elif board_is_NanoPi():
+    implementation = RaspberryPi(nanopi=True)
 else:
     implementation = JetsonNano()
 
