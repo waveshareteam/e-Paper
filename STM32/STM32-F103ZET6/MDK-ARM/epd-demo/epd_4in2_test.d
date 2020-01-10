@@ -9,13 +9,13 @@ epd-demo\epd_4in2_test.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.
 epd-demo\epd_4in2_test.o: ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h
 epd-demo\epd_4in2_test.o: ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h
 epd-demo\epd_4in2_test.o: ../Drivers/CMSIS/Include/core_cm3.h
-epd-demo\epd_4in2_test.o: D:\application\keil_V5\ARM\ARMCC\Bin\..\include\stdint.h
+epd-demo\epd_4in2_test.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 epd-demo\epd_4in2_test.o: ../Drivers/CMSIS/Include/core_cmInstr.h
 epd-demo\epd_4in2_test.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
 epd-demo\epd_4in2_test.o: ../Drivers/CMSIS/Include/core_cmFunc.h
 epd-demo\epd_4in2_test.o: ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h
 epd-demo\epd_4in2_test.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h
-epd-demo\epd_4in2_test.o: D:\application\keil_V5\ARM\ARMCC\Bin\..\include\stdio.h
+epd-demo\epd_4in2_test.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 epd-demo\epd_4in2_test.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h
 epd-demo\epd_4in2_test.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h
 epd-demo\epd_4in2_test.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h
@@ -31,5 +31,6 @@ epd-demo\epd_4in2_test.o: ..\User\GUI\GUI_Paint.h
 epd-demo\epd_4in2_test.o: ..\User\GUI\../Fonts/fonts.h
 epd-demo\epd_4in2_test.o: ..\User\Examples\imagedata.h
 epd-demo\epd_4in2_test.o: ..\User\Config\Debug.h
-epd-demo\epd_4in2_test.o: D:\application\keil_V5\ARM\ARMCC\Bin\..\include\stdlib.h
+epd-demo\epd_4in2_test.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 epd-demo\epd_4in2_test.o: ..\User\e-Paper\EPD_4in2.h
+epd-demo\epd_4in2_test.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

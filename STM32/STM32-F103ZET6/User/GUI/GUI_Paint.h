@@ -116,6 +116,11 @@ typedef enum {
 #define FONT_FOREGROUND     BLACK
 #define FONT_BACKGROUND     WHITE
 
+//4 Gray level
+#define  GRAY1 0x03 //Blackest
+#define  GRAY2 0x02
+#define  GRAY3 0x01 //gray
+#define  GRAY4 0x00 //white
 /**
  * The size of the point
 **/

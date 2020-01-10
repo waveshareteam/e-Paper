@@ -302,10 +302,6 @@ class EPD:
         self.TurnOnDisplay()
 
     def sleep(self):
-        self.send_command(0x22) #POWER OFF
-        self.send_data(0xC3)
-        self.send_command(0x20)
-
         self.send_command(0x10) #enter deep sleep
         self.send_data(0x01)
         epdconfig.delay_ms(100)

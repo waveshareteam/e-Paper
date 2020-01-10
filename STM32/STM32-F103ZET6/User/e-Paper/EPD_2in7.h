@@ -99,12 +99,6 @@
 #define EPD_2IN7_WIDTH       176
 #define EPD_2IN7_HEIGHT      264 //46464
 
-//Gray level
-#define  GRAY1 0x03 //Blackest
-#define  GRAY2 0x02
-#define  GRAY3 0x01 //gray
-#define  GRAY4 0x00 //white
-
 void EPD_2IN7_Init(void);
 void EPD_2IN7_Clear(void);
 void EPD_2IN7_Display(const UBYTE *Image);

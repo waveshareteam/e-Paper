@@ -89,7 +89,7 @@ int main(void)
 //		EPD_2in13bc_test();
 //		EPD_2in13d_test();
 
-//		EPD_4in2_test();
+		EPD_4in2_test();
 //		EPD_4in2bc_test();
 
 //		EPD_5in83_test();
