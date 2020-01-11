@@ -42,12 +42,18 @@ class RaspberryPi:
     def __init__(self):
         import spidev
         import RPi.GPIO
-
         self.GPIO = RPi.GPIO
 
         # SPI device, bus = 0, device = 0
-        self.SPI = spidev.SpiDev(0, 0)
-
+        try:
+            self.SPI = spidev.SpiDev(0, 0)
+        except PermissionError as e:
+            logging.critical(f'Error initing SPI {e}')
+            logging.ciritcal('The current user may not have access to /dev/spidev*')
+            logging.critical('Remedy this by adding the user to the spi access group:')
+            logging.critical('$ sudo groupadd <username> spi')
+            sys.exit(1)
+  
     def digital_write(self, pin, value):
         self.GPIO.output(pin, value)
 
