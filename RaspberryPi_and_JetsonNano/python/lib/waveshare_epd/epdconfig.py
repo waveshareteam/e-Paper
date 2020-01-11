@@ -49,9 +49,9 @@ class RaspberryPi:
             self.SPI = spidev.SpiDev(0, 0)
         except PermissionError as e:
             logging.critical(f'Error initing SPI {e}')
-            logging.ciritcal('The current user may not have access to /dev/spidev*')
+            logging.critical('The current user may not have access to /dev/spidev*')
             logging.critical('Remedy this by adding the user to the spi access group:')
-            logging.critical('$ sudo groupadd <username> spi')
+            logging.critical('$ usermod -a spi <username>')
             sys.exit(1)
   
     def digital_write(self, pin, value):
