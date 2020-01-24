@@ -121,8 +121,8 @@ void Epd::DisplayFrame(const unsigned char* frame_buffer) {
     
     SendCommand(0x13);
     for (unsigned long j = 0; j < height; j++) {
-        for (unsigned long i = 0; i < width; i++) {
-            SendData(~frame_buffer[i + j * width]);
+        for (unsigned long i = 0; i < width/8; i++) {
+            SendData(~frame_buffer[i + j * width/8]);
         }
     }
     SendCommand(0x12);
