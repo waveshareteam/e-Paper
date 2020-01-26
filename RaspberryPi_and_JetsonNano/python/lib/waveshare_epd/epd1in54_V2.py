@@ -131,7 +131,7 @@ class EPD:
         
         self.ReadBusy()
         
-    def Clear(self, color):
+    def Clear(self):
         self.send_command(0x24)
         for j in range(0, self.height):
             for i in range(0, int(self.width / 8)):

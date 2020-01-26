@@ -200,7 +200,7 @@ class EPD:
                 self.send_data(image[i + j * linewidth])   
         self.TurnOnDisplay()
     
-    def Clear(self, color):
+    def Clear(self):
         if self.width%8 == 0:
             linewidth = int(self.width/8)
         else:
