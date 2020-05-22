@@ -199,7 +199,7 @@ void EPD_7IN5B_V2_ClearBlack(void)
 
     }
     EPD_7IN5B_V2_SendCommand(0x13);
-    for(i=0; i<Width*Height; i++)	{
+    for(i=0; i<Width*Height; i++){
         EPD_7IN5B_V2_SendData(0x00);
 
     }

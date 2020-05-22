@@ -45,17 +45,17 @@ int EPD_5in83bc_test(void)
     //Create a new image cache named IMAGE_BW and fill it with white
     UBYTE *BlackImage, *RYImage;
     UWORD Imagesize = ((EPD_5IN83BC_WIDTH % 8 == 0)? (EPD_5IN83BC_WIDTH / 8 ): (EPD_5IN83BC_WIDTH / 8 + 1)) * EPD_5IN83BC_HEIGHT;
-    if((BlackImage = (UBYTE *)malloc(Imagesize)) == NULL) {
+    if((BlackImage = (UBYTE *)malloc(Imagesize / 2)) == NULL) {
         printf("Failed to apply for black memory...\r\n");
         return -1;
     }
-    if((RYImage = (UBYTE *)malloc(Imagesize)) == NULL) {
+    if((RYImage = (UBYTE *)malloc(Imagesize / 2)) == NULL) {
         printf("Failed to apply for red memory...\r\n");
         return -1;
     }
     printf("NewImage:BlackImage and RYImage\r\n");
-    Paint_NewImage(BlackImage, EPD_5IN83BC_WIDTH, EPD_5IN83BC_HEIGHT, 0, WHITE);
-    Paint_NewImage(RYImage, EPD_5IN83BC_WIDTH, EPD_5IN83BC_HEIGHT, 0, WHITE);
+    Paint_NewImage(BlackImage, EPD_5IN83BC_WIDTH, EPD_5IN83BC_HEIGHT / 2, 0, WHITE);
+    Paint_NewImage(RYImage, EPD_5IN83BC_WIDTH, EPD_5IN83BC_HEIGHT / 2, 0, WHITE);
 
     //Select Image
     Paint_SelectImage(BlackImage);

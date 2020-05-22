@@ -15,9 +15,9 @@
 *    lut_bb[] => EPD_2in7B_lut_bb[]
 *    lut_wb[] => EPD_2in7B_lut_wb[]
 *    EPD_Reset() => EPD_2in7B_Reset()
-*    EPD_SendCommand() => EPD_2in7B_SendCommand()
-*    EPD_SendData() => EPD_2in7B_SendData()
-*    EPD_WaitUntilIdle() => EPD_2in7B_ReadBusy()
+*    EPD_2IN7B_SendCommand() => EPD_2in7B_SendCommand()
+*    EPD_2IN7B_SendData() => EPD_2in7B_SendData()
+*    EPD_2IN7B_ReadBusy() => EPD_2in7B_ReadBusy()
 *    EPD_SetLut() => EPD_2in7B_SetLut()
 *    EPD_Init() => EPD_2in7B_Init()
 *    EPD_Clear() => EPD_2in7B_Clear()
@@ -237,62 +237,40 @@ parameter:
 void EPD_2IN7B_Init(void)
 {
     EPD_2IN7B_Reset();
+    
+    EPD_2IN7B_SendCommand(0x06);         //boost soft start
+    EPD_2IN7B_SendData (0x07);		//A
+    EPD_2IN7B_SendData (0x07);		//B
+    EPD_2IN7B_SendData (0x17);		//C       
 
-    EPD_2IN7B_SendCommand(0x04); // POWER_ON
-    EPD_2IN7B_ReadBusy();
+    EPD_2IN7B_SendCommand(0x04);  
+    EPD_2IN7B_ReadBusy();//waiting for the electronic paper IC to release the idle signal
 
-    EPD_2IN7B_SendCommand(0x00); // PANEL_SETTING
-    EPD_2IN7B_SendData(0xaf); // KW-BF   KWR-AF BWROTP 0f
+    EPD_2IN7B_SendCommand(0x00);			//panel setting
+    EPD_2IN7B_SendData(0x0f);		//LUT from OTP￡?128x296
 
-    EPD_2IN7B_SendCommand(0x30); // PLL_CONTROL
-    EPD_2IN7B_SendData(0x3a); //3A 100HZ   29 150Hz 39 200HZ    31 171HZ
+    EPD_2IN7B_SendCommand(0x16);
+    EPD_2IN7B_SendData(0x00);				//KW-BF   KWR-AF	BWROTP 0f	
+
+    EPD_2IN7B_SendCommand(0xF8);         //boostéè?¨
+    EPD_2IN7B_SendData (0x60);
+    EPD_2IN7B_SendData(0xa5);
+
+    EPD_2IN7B_SendCommand(0xF8);         //boostéè?¨
+    EPD_2IN7B_SendData (0x90);
+    EPD_2IN7B_SendData (0x00);
+
+    EPD_2IN7B_SendCommand(0xF8);         //boostéè?¨
+    EPD_2IN7B_SendData (0x93);
+    EPD_2IN7B_SendData(0x2A);
 
     EPD_2IN7B_SendCommand(0x01); // PANEL_SETTING
     EPD_2IN7B_SendData(0x03); // VDS_EN, VDG_EN
     EPD_2IN7B_SendData(0x00); // VCOM_HV, VGHL_LV[1], VGHL_LV[0]
     EPD_2IN7B_SendData(0x2b); // VDH
     EPD_2IN7B_SendData(0x2b); // VDL
-    EPD_2IN7B_SendData(0x09); // VDHR
-
-    EPD_2IN7B_SendCommand(0x06);  // BOOSTER_SOFT_START
-    EPD_2IN7B_SendData(0x07);
-    EPD_2IN7B_SendData(0x07);
-    EPD_2IN7B_SendData(0x17);
-
-    // Power optimization
-    EPD_2IN7B_SendCommand(0xF8);
-    EPD_2IN7B_SendData(0x60);
-    EPD_2IN7B_SendData(0xA5);
-
-    // Power optimization
-    EPD_2IN7B_SendCommand(0xF8);
-    EPD_2IN7B_SendData(0x89);
-    EPD_2IN7B_SendData(0xA5);
-
-    // Power optimization
-    EPD_2IN7B_SendCommand(0xF8);
-    EPD_2IN7B_SendData(0x90);
-    EPD_2IN7B_SendData(0x00);
-
-    // Power optimization
-    EPD_2IN7B_SendCommand(0xF8);
-    EPD_2IN7B_SendData(0x93);
-    EPD_2IN7B_SendData(0x2A);
-
-    // Power optimization
-    EPD_2IN7B_SendCommand(0xF8);
-    EPD_2IN7B_SendData(0x73);
-    EPD_2IN7B_SendData(0x41);
-
-    EPD_2IN7B_SendCommand(0x82); // VCM_DC_SETTING_REGISTER
-    EPD_2IN7B_SendData(0x12);
-    EPD_2IN7B_SendCommand(0x50); // VCOM_AND_DATA_INTERVAL_SETTING
-    EPD_2IN7B_SendData(0x87); // define by OTP
-
-    EPD_2IN7B_SetLut();
-
-    EPD_2IN7B_SendCommand(0x16); // PARTIAL_DISPLAY_REFRESH
-    EPD_2IN7B_SendData(0x00);
+    EPD_2IN7B_SendData(0x2b); // VDHR
+    
 }
 
 /******************************************************************************

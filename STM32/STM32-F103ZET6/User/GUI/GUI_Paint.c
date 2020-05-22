@@ -838,3 +838,4 @@ void Paint_DrawBitMap_Block(const unsigned char* image_buffer, UBYTE Region)
 				}
 		}
 }
+

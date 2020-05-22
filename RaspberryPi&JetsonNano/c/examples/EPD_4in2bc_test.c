@@ -78,6 +78,7 @@ int EPD_4in2bc_test(void)
     Paint_SelectImage(RYImage);
     GUI_ReadBmp("./pic/4in2b-r.bmp", 0, 0);
     EPD_4IN2BC_Display(BlackImage, RYImage);
+    DEV_Delay_ms(2000);
 #endif    
     
 #if 1   // show image for array    

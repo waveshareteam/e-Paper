@@ -100,7 +100,53 @@ class EPD:
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     ]
-    
+    #******************************partial screen update LUT*********************************/
+    EPD_4IN2_Partial_lut_vcom1 =[
+    0x00	,0x19	,0x01	,0x00	,0x00	,0x01,
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
+    0x00	,0x00,	]
+
+    EPD_4IN2_Partial_lut_ww1 =[
+    0x00	,0x19	,0x01	,0x00	,0x00	,0x01,
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,]
+
+    EPD_4IN2_Partial_lut_bw1 =[
+    0x80	,0x19	,0x01	,0x00	,0x00	,0x01,	
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,	
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,	
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,	
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,	
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,	
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,	]
+
+    EPD_4IN2_Partial_lut_wb1 =[
+    0x40	,0x19	,0x01	,0x00	,0x00	,0x01,	
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,	
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,	
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,	
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,	
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,	
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,	]
+
+    EPD_4IN2_Partial_lut_bb1 =[
+    0x00	,0x19	,0x01	,0x00	,0x00	,0x01,	
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,	
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,	
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,	
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,	
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,	
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,	]
+
     #******************************gray*********************************/
     #0~3 gray
     EPD_4IN2_4Gray_lut_vcom =[
@@ -200,7 +246,31 @@ class EPD:
         self.send_command(0x24)         # bb b
         for count in range(0, 42):
             self.send_data(self.lut_wb[count])
+
+
+    def Partial_SetLut(self):
+        self.send_command(0x20);
+        for count in range(0, 44):	     
+            self.send_data(self.EPD_4IN2_Partial_lut_vcom1[count])
+
+        self.send_command(0x21);
+        for count in range(0, 42):	     
+            self.send_data(self.EPD_4IN2_Partial_lut_ww1[count])
         
+        self.send_command(0x22);
+        for count in range(0, 42):     
+            self.send_data(self.EPD_4IN2_Partial_lut_bw1[count])
+
+        self.send_command(0x23);
+        for count in range(0, 42):	     
+            self.send_data(self.EPD_4IN2_Partial_lut_wb1[count])
+
+        self.send_command(0x24);
+        for count in range(0, 42):	     
+            self.send_data(self.EPD_4IN2_Partial_lut_bb1[count])
+
+
+       
     def Gray_SetLut(self):
         self.send_command(0x20)						#vcom
         for count in range(0, 42):
@@ -371,6 +441,8 @@ class EPD:
         return buf
 
     def display(self, image):
+        self.send_command(0x92);	
+        self.set_lut();
         self.send_command(0x10)
         for i in range(0, int(self.width * self.height / 8)):
             self.send_data(0xFF)
@@ -381,10 +453,58 @@ class EPD:
             
         self.send_command(0x12) 
         self.ReadBusy()
-    
+
+    def EPD_4IN2_PartialDisplay(self, X_start, Y_start, X_end, Y_end, Image):
+        # EPD_WIDTH       = 400
+        # EPD_HEIGHT      = 300
+        if(EPD_WIDTH % 8 != 0):
+           Width = int(EPD_WIDTH / 8) + 1;
+        else:
+            Width = int(EPD_WIDTH / 8);
+        Height = EPD_HEIGHT;
+        
+        if(X_start % 8 != 0):
+            X_start = int(X_start/8)*8+8
+        if(X_end % 8 != 0):
+            X_end = int(X_end/8)*8+8
+        
+        self.Partial_SetLut();
+        self.send_command(0x91);		#This command makes the display enter partial mode
+        self.send_command(0x90);		#resolution setting
+        self.send_data (int(X_start/256));
+        self.send_data (int(X_start%256));   #x-start    
+        
+        self.send_data (int(X_end /256));		
+        self.send_data (int(X_end %256)-1);  #x-end
+
+        self.send_data (int(Y_start/256));
+        self.send_data (int(Y_start%256));   #y-start    
+        
+
+        self.send_data (int(Y_end/256));		
+        self.send_data (int(Y_end%256)-1);  #y-end
+        self.send_data (0x28);	
+
+        self.send_command(0x10);	       #writes Old data to SRAM for programming
+        for j in range(0, int(Y_end - Y_start)):
+            for i in range(0, int(X_end/8) - int(X_start/8)):
+                self.send_data(Image[(Y_start + j)*Width + int(X_start/8) + i]);
+            
+        self.send_command(0x13);				 #writes New data to SRAM.
+        for j in range(0, int(Y_end - Y_start)):
+            for i in range(0, int(X_end/8) - int(X_start/8)):
+                self.send_data(~Image[(Y_start + j)*Width + int(X_start/8) + i]);
+            
+        self.send_command(0x12);		 #DISPLAY REFRESH 		             
+        epdconfig.delay_ms(200)    #The delay here is necessary, 200uS at least!!!     
+        self.ReadBusy()
+
+
     def display_4Gray(self, image):
+        self.send_command(0x92);	
+        self.set_lut();
         self.send_command(0x10)
-        for i in range(0, EPD_WIDTH * EPD_HEIGHT / 8):                   # EPD_WIDTH * EPD_HEIGHT / 4
+        for i in range(0, int(EPD_WIDTH * EPD_HEIGHT / 8)):                   # EPD_WIDTH * EPD_HEIGHT / 4
             temp3=0
             for j in range(0, 2):
                 temp1 = image[i*2+j]
@@ -417,7 +537,7 @@ class EPD:
             
         self.send_command(0x13)	    
                
-        for i in range(0, EPD_WIDTH * EPD_HEIGHT / 8):                #5808*4  46464
+        for i in range(0, int(EPD_WIDTH * EPD_HEIGHT / 8)):                #5808*4  46464
             temp3=0
             for j in range(0, 2):
                 temp1 = image[i*2+j]

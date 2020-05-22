@@ -21,7 +21,7 @@
 * V3.0(2019-06-12):
 * 1.Change:
 *    lut_vcom_dc[] => EPD_2in7_lut_vcom_dc[]
-*    lut_ww[] => EPD_2in7_lut_ww[] 
+*    lut_ww[] => EPD_2in7_lut_ww[]
 *    lut_bw[] => EPD_2in7_lut_bw[]
 *    lut_bb[] => EPD_2in7_lut_bb[]
 *    lut_wb[] => EPD_2in7_lut_wb[]
@@ -141,56 +141,55 @@ static const unsigned char EPD_2in7_lut_wb[] = {
 
 //////////////////////////////////////full screen update LUT////////////////////////////////////////////
 //0~3 gray
-static const unsigned char EPD_2in7_gray_lut_vcom[] =
-{
-0x00	,0x00,
-0x00	,0x0A	,0x00	,0x00	,0x00	,0x01,
-0x60	,0x14	,0x14	,0x00	,0x00	,0x01,
-0x00	,0x14	,0x00	,0x00	,0x00	,0x01,
-0x00	,0x13	,0x0A	,0x01	,0x00	,0x01,
-0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
-0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
-0x00	,0x00	,0x00	,0x00	,0x00	,0x00,				
+static const unsigned char EPD_2in7_gray_lut_vcom[] = {
+    0x00	,0x00,
+    0x00	,0x0A	,0x00	,0x00	,0x00	,0x01,
+    0x60	,0x14	,0x14	,0x00	,0x00	,0x01,
+    0x00	,0x14	,0x00	,0x00	,0x00	,0x01,
+    0x00	,0x13	,0x0A	,0x01	,0x00	,0x01,
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
 };
 //R21
-static const unsigned char EPD_2in7_gray_lut_ww[] ={
-0x40	,0x0A	,0x00	,0x00	,0x00	,0x01,
-0x90	,0x14	,0x14	,0x00	,0x00	,0x01,
-0x10	,0x14	,0x0A	,0x00	,0x00	,0x01,
-0xA0	,0x13	,0x01	,0x00	,0x00	,0x01,
-0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
-0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
-0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
+static const unsigned char EPD_2in7_gray_lut_ww[] = {
+    0x40	,0x0A	,0x00	,0x00	,0x00	,0x01,
+    0x90	,0x14	,0x14	,0x00	,0x00	,0x01,
+    0x10	,0x14	,0x0A	,0x00	,0x00	,0x01,
+    0xA0	,0x13	,0x01	,0x00	,0x00	,0x01,
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
 };
 //R22H	r
-static const unsigned char EPD_2in7_gray_lut_bw[] ={
-0x40	,0x0A	,0x00	,0x00	,0x00	,0x01,
-0x90	,0x14	,0x14	,0x00	,0x00	,0x01,
-0x00	,0x14	,0x0A	,0x00	,0x00	,0x01,
-0x99	,0x0C	,0x01	,0x03	,0x04	,0x01,
-0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
-0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
-0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
+static const unsigned char EPD_2in7_gray_lut_bw[] = {
+    0x40	,0x0A	,0x00	,0x00	,0x00	,0x01,
+    0x90	,0x14	,0x14	,0x00	,0x00	,0x01,
+    0x00	,0x14	,0x0A	,0x00	,0x00	,0x01,
+    0x99	,0x0C	,0x01	,0x03	,0x04	,0x01,
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
 };
 //R23H	w
-static const unsigned char EPD_2in7_gray_lut_wb[] ={
-0x40	,0x0A	,0x00	,0x00	,0x00	,0x01,
-0x90	,0x14	,0x14	,0x00	,0x00	,0x01,
-0x00	,0x14	,0x0A	,0x00	,0x00	,0x01,
-0x99	,0x0B	,0x04	,0x04	,0x01	,0x01,
-0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
-0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
-0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
+static const unsigned char EPD_2in7_gray_lut_wb[] = {
+    0x40	,0x0A	,0x00	,0x00	,0x00	,0x01,
+    0x90	,0x14	,0x14	,0x00	,0x00	,0x01,
+    0x00	,0x14	,0x0A	,0x00	,0x00	,0x01,
+    0x99	,0x0B	,0x04	,0x04	,0x01	,0x01,
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
 };
 //R24H	b
-static const unsigned char EPD_2in7_gray_lut_bb[] ={
-0x80	,0x0A	,0x00	,0x00	,0x00	,0x01,
-0x90	,0x14	,0x14	,0x00	,0x00	,0x01,
-0x20	,0x14	,0x0A	,0x00	,0x00	,0x01,
-0x50	,0x13	,0x01	,0x00	,0x00	,0x01,
-0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
-0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
-0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
+static const unsigned char EPD_2in7_gray_lut_bb[] = {
+    0x80	,0x0A	,0x00	,0x00	,0x00	,0x01,
+    0x90	,0x14	,0x14	,0x00	,0x00	,0x01,
+    0x20	,0x14	,0x0A	,0x00	,0x00	,0x01,
+    0x50	,0x13	,0x01	,0x00	,0x00	,0x01,
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
+    0x00	,0x00	,0x00	,0x00	,0x00	,0x00,
 };
 
 /******************************************************************************
@@ -285,31 +284,37 @@ static void EPD_2in7_SetLut(void)
 
 void EPD_2in7_gray_SetLut(void)
 {
-	unsigned int count;	 
+    unsigned int count;
     EPD_2in7_SendCommand(0x20);							//vcom
-		for(count=0;count<44;count++)
-			{EPD_2in7_SendData(EPD_2in7_gray_lut_vcom[count]);}
-		
-	EPD_2in7_SendCommand(0x21);							//red not use
-	for(count=0;count<42;count++)
-		{EPD_2in7_SendData(EPD_2in7_gray_lut_ww[count]);}
+    for(count=0; count<44; count++) {
+        EPD_2in7_SendData(EPD_2in7_gray_lut_vcom[count]);
+    }
 
-		EPD_2in7_SendCommand(0x22);							//bw r
-		for(count=0;count<42;count++)
-			{EPD_2in7_SendData(EPD_2in7_gray_lut_bw[count]);}
+    EPD_2in7_SendCommand(0x21);							//red not use
+    for(count=0; count<42; count++) {
+        EPD_2in7_SendData(EPD_2in7_gray_lut_ww[count]);
+    }
 
-		EPD_2in7_SendCommand(0x23);							//wb w
-		for(count=0;count<42;count++)
-			{EPD_2in7_SendData(EPD_2in7_gray_lut_wb[count]);}
+    EPD_2in7_SendCommand(0x22);							//bw r
+    for(count=0; count<42; count++) {
+        EPD_2in7_SendData(EPD_2in7_gray_lut_bw[count]);
+    }
 
-		EPD_2in7_SendCommand(0x24);							//bb b
-		for(count=0;count<42;count++)
-			{EPD_2in7_SendData(EPD_2in7_gray_lut_bb[count]);}
+    EPD_2in7_SendCommand(0x23);							//wb w
+    for(count=0; count<42; count++) {
+        EPD_2in7_SendData(EPD_2in7_gray_lut_wb[count]);
+    }
 
-		EPD_2in7_SendCommand(0x25);							//vcom
-		for(count=0;count<42;count++)
-			{EPD_2in7_SendData(EPD_2in7_gray_lut_ww[count]);}
-         
+    EPD_2in7_SendCommand(0x24);							//bb b
+    for(count=0; count<42; count++) {
+        EPD_2in7_SendData(EPD_2in7_gray_lut_bb[count]);
+    }
+
+    EPD_2in7_SendCommand(0x25);							//vcom
+    for(count=0; count<42; count++) {
+        EPD_2in7_SendData(EPD_2in7_gray_lut_ww[count]);
+    }
+
 }
 
 /******************************************************************************
@@ -326,50 +331,50 @@ void EPD_2IN7_Init(void)
     EPD_2in7_SendData(0x2b); // VDH
     EPD_2in7_SendData(0x2b); // VDL
     EPD_2in7_SendData(0x09); // VDHR
-	
+
     EPD_2in7_SendCommand(0x06);  // BOOSTER_SOFT_START
     EPD_2in7_SendData(0x07);
     EPD_2in7_SendData(0x07);
     EPD_2in7_SendData(0x17);
-	
+
     // Power optimization
     EPD_2in7_SendCommand(0xF8);
     EPD_2in7_SendData(0x60);
     EPD_2in7_SendData(0xA5);
-	
+
     // Power optimization
     EPD_2in7_SendCommand(0xF8);
     EPD_2in7_SendData(0x89);
     EPD_2in7_SendData(0xA5);
-		
+
     // Power optimization
     EPD_2in7_SendCommand(0xF8);
     EPD_2in7_SendData(0x90);
     EPD_2in7_SendData(0x00);
-		
+
     // Power optimization
     EPD_2in7_SendCommand(0xF8);
     EPD_2in7_SendData(0x93);
     EPD_2in7_SendData(0x2A);
-		
+
     // Power optimization
     EPD_2in7_SendCommand(0xF8);
     EPD_2in7_SendData(0xA0);
     EPD_2in7_SendData(0xA5);
-		
+
     // Power optimization
     EPD_2in7_SendCommand(0xF8);
     EPD_2in7_SendData(0xA1);
     EPD_2in7_SendData(0x00);
-		
+
     // Power optimization
     EPD_2in7_SendCommand(0xF8);
     EPD_2in7_SendData(0x73);
     EPD_2in7_SendData(0x41);
-		
+
     EPD_2in7_SendCommand(0x16); // PARTIAL_DISPLAY_REFRESH
     EPD_2in7_SendData(0x00);
-		
+
     EPD_2in7_SendCommand(0x04); // POWER_ON
     EPD_2in7_ReadBusy();
 
@@ -388,15 +393,15 @@ void EPD_2IN7_Init_4Gray(void)
     EPD_2in7_Reset();
     EPD_2in7_SendCommand(0x01);			//POWER SETTING
     EPD_2in7_SendData (0x03);
-    EPD_2in7_SendData (0x00);    
-    EPD_2in7_SendData (0x2b);															 
-    EPD_2in7_SendData (0x2b);		
+    EPD_2in7_SendData (0x00);
+    EPD_2in7_SendData (0x2b);
+    EPD_2in7_SendData (0x2b);
 
 
     EPD_2in7_SendCommand(0x06);         //booster soft start
     EPD_2in7_SendData (0x07);		//A
     EPD_2in7_SendData (0x07);		//B
-    EPD_2in7_SendData (0x17);		//C 
+    EPD_2in7_SendData (0x17);		//C
 
     EPD_2in7_SendCommand(0xF8);         //boost??
     EPD_2in7_SendData (0x60);
@@ -427,7 +432,7 @@ void EPD_2IN7_Init_4Gray(void)
     EPD_2in7_SendData (0x41);
 
     EPD_2in7_SendCommand(0x16);
-    EPD_2in7_SendData(0x00);	
+    EPD_2in7_SendData(0x00);
 
     EPD_2in7_SendCommand(0x04);
     EPD_2in7_ReadBusy();
@@ -436,22 +441,20 @@ void EPD_2IN7_Init_4Gray(void)
     EPD_2in7_SendData(0xbf);		//KW-BF   KWR-AF	BWROTP 0f
 
     EPD_2in7_SendCommand(0x30);			//PLL setting
-    EPD_2in7_SendData (0x90);      	//100hz 
+    EPD_2in7_SendData (0x90);      	//100hz
 
     EPD_2in7_SendCommand(0x61);			//resolution setting
     EPD_2in7_SendData (0x00);		//176
-    EPD_2in7_SendData (0xb0);     	 
+    EPD_2in7_SendData (0xb0);
     EPD_2in7_SendData (0x01);		//264
     EPD_2in7_SendData (0x08);
 
     EPD_2in7_SendCommand(0x82);			//vcom_DC setting
     EPD_2in7_SendData (0x12);
 
-    EPD_2in7_SendCommand(0X50);			//VCOM AND DATA INTERVAL SETTING			
+    EPD_2in7_SendCommand(0X50);			//VCOM AND DATA INTERVAL SETTING
     EPD_2in7_SendData(0x97);
 }
-
-
 
 /******************************************************************************
 function :	Clear screen
@@ -476,7 +479,7 @@ void EPD_2IN7_Clear(void)
             EPD_2in7_SendData(0XFF);
         }
     }
-		
+
     EPD_2in7_SendCommand(0x12);
     EPD_2in7_ReadBusy();
 }
@@ -514,27 +517,23 @@ void EPD_2IN7_4GrayDisplay(const UBYTE *Image)
     UBYTE temp1,temp2,temp3;
 
     // old  data
-    EPD_2in7_SendCommand(0x10);	       
-
-    for(i=0;i<5808;i++)	               //5808*4  46464
-    {
+    EPD_2in7_SendCommand(0x10);
+    for(i=0; i<5808; i++) {             //5808*4  46464
         temp3=0;
-        for(j=0;j<2;j++)	
-        {
+        for(j=0; j<2; j++) {
             temp1 = Image[i*2+j];
-            for(k=0;k<2;k++)	
-            {
-                temp2 = temp1&0xC0 ;
+            for(k=0; k<2; k++) {
+                temp2 = temp1&0xC0;
                 if(temp2 == 0xC0)
                     temp3 |= 0x01;//white
                 else if(temp2 == 0x00)
                     temp3 |= 0x00;  //black
-                else if(temp2 == 0x80) 
+                else if(temp2 == 0x80)
                     temp3 |= 0x01;  //gray1
                 else //0x40
                     temp3 |= 0x00; //gray2
-                temp3 <<= 1;	
-                
+                temp3 <<= 1;
+
                 temp1 <<= 2;
                 temp2 = temp1&0xC0 ;
                 if(temp2 == 0xC0)  //white
@@ -544,37 +543,34 @@ void EPD_2IN7_4GrayDisplay(const UBYTE *Image)
                 else if(temp2 == 0x80)
                     temp3 |= 0x01; //gray1
                 else    //0x40
-                        temp3 |= 0x00;	//gray2	
-                if(j!=1 || k!=1)				
+                    temp3 |= 0x00;	//gray2
+                if(j!=1 || k!=1)
                     temp3 <<= 1;
-                
+
                 temp1 <<= 2;
             }
-            
-         }
-        EPD_2in7_SendData(temp3);			
+
+        }
+        EPD_2in7_SendData(temp3);
     }
     // new  data
-    EPD_2in7_SendCommand(0x13);	       
-    for(i=0;i<5808;i++)	               //5808*4  46464
-    {
+    EPD_2in7_SendCommand(0x13);
+    for(i=0; i<5808; i++) {             //5808*4  46464
         temp3=0;
-        for(j=0;j<2;j++)	
-        {
+        for(j=0; j<2; j++) {
             temp1 = Image[i*2+j];
-            for(k=0;k<2;k++)	
-            {
+            for(k=0; k<2; k++) {
                 temp2 = temp1&0xC0 ;
                 if(temp2 == 0xC0)
                     temp3 |= 0x01;//white
                 else if(temp2 == 0x00)
                     temp3 |= 0x00;  //black
-                else if(temp2 == 0x80) 
+                else if(temp2 == 0x80)
                     temp3 |= 0x00;  //gray1
                 else //0x40
                     temp3 |= 0x01; //gray2
-                temp3 <<= 1;	
-                
+                temp3 <<= 1;
+
                 temp1 <<= 2;
                 temp2 = temp1&0xC0 ;
                 if(temp2 == 0xC0)  //white
@@ -584,17 +580,16 @@ void EPD_2IN7_4GrayDisplay(const UBYTE *Image)
                 else if(temp2 == 0x80)
                     temp3 |= 0x00; //gray1
                 else    //0x40
-                        temp3 |= 0x01;	//gray2
-                if(j!=1 || k!=1)					
+                    temp3 |= 0x01;	//gray2
+                if(j!=1 || k!=1)
                     temp3 <<= 1;
-                
+
                 temp1 <<= 2;
             }
-            
-         }
-        EPD_2in7_SendData(temp3);	
+        }
+        EPD_2in7_SendData(temp3);
     }
-    
+
     EPD_2in7_gray_SetLut();
     EPD_2in7_SendCommand(0x12);
     DEV_Delay_ms(200);

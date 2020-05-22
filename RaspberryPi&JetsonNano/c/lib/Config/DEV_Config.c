@@ -318,7 +318,6 @@ UBYTE DEV_Module_Init(void)
 
 	// GPIO Config
 	DEV_GPIO_Init();
-
 	wiringPiSPISetup(0,10000000);
 	// wiringPiSPISetupMode(0, 32000000, 0);
 #elif USE_DEV_LIB

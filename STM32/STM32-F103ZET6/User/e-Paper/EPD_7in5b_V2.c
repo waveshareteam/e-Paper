@@ -136,6 +136,12 @@ UBYTE EPD_7IN5B_V2_Init(void)
 
     EPD_7IN5B_V2_SendCommand(0X60);			//TCON SETTING
     EPD_7IN5B_V2_SendData(0x22);
+		
+		EPD_7IN5B_V2_SendCommand(0X82);
+		EPD_7IN5B_V2_SendData(0x08);
+		EPD_7IN5B_V2_SendCommand(0X30);
+		EPD_7IN5B_V2_SendData(0x06);
+				
 
     return 0;
 }

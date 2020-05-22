@@ -354,6 +354,10 @@ parameter:
 ******************************************************************************/
 void EPD_2IN13_V2_Sleep(void)
 {
+    EPD_2IN13_V2_SendCommand(0x22); //POWER OFF
+    EPD_2IN13_V2_SendData(0xC3);
+    EPD_2IN13_V2_SendCommand(0x20);
+
     EPD_2IN13_V2_SendCommand(0x10); //enter deep sleep
     EPD_2IN13_V2_SendData(0x01);
     DEV_Delay_ms(100);

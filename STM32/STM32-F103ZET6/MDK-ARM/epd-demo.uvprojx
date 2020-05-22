@@ -537,6 +537,11 @@
               <FilePath>..\User\Examples\EPD_1in54b_test.c</FilePath>
             </File>
             <File>
+              <FileName>EPD_1in54b_V2_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Examples\EPD_1in54b_V2_test.c</FilePath>
+            </File>
+            <File>
               <FileName>EPD_1in54c_test.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\Examples\EPD_1in54c_test.c</FilePath>
@@ -631,11 +636,36 @@
               <FileType>1</FileType>
               <FilePath>..\User\Examples\EPD_7in5b_V2_test.c</FilePath>
             </File>
+            <File>
+              <FileName>EPD_2in13b_V2_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Examples\EPD_2in13b_V2_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>EPD_2in9b_V2_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Examples\EPD_2in9b_V2_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>EPD_7in5b_HD_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Examples\EPD_7in5b_HD_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>EPD_7in5_HD_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Examples\EPD_7in5_HD_test.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>e-Paper</GroupName>
           <Files>
+            <File>
+              <FileName>EPD_1in02d.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\e-Paper\EPD_1in02d.c</FilePath>
+            </File>
             <File>
               <FileName>EPD_1in54.c</FileName>
               <FileType>1</FileType>
@@ -650,6 +680,11 @@
               <FileName>EPD_1in54b.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\e-Paper\EPD_1in54b.c</FilePath>
+            </File>
+            <File>
+              <FileName>EPD_1in54b_V2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\e-Paper\EPD_1in54b_V2.c</FilePath>
             </File>
             <File>
               <FileName>EPD_1in54c.c</FileName>
@@ -742,9 +777,24 @@
               <FilePath>..\User\e-Paper\EPD_7in5b_V2.c</FilePath>
             </File>
             <File>
-              <FileName>EPD_1in02d.c</FileName>
+              <FileName>EPD_2in9b_V2.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\User\e-Paper\EPD_1in02d.c</FilePath>
+              <FilePath>..\User\e-Paper\EPD_2in9b_V2.c</FilePath>
+            </File>
+            <File>
+              <FileName>EPD_2in13b_V2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\e-Paper\EPD_2in13b_V2.c</FilePath>
+            </File>
+            <File>
+              <FileName>EPD_7in5b_HD.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\e-Paper\EPD_7in5b_HD.c</FilePath>
+            </File>
+            <File>
+              <FileName>EPD_7in5_HD.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\e-Paper\EPD_7in5_HD.c</FilePath>
             </File>
           </Files>
         </Group>

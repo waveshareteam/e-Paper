@@ -312,8 +312,8 @@ void EPD_5IN83BC_DisplayHalfScreen(const UBYTE *blackimage, const UBYTE *ryimage
             }
         }
     }
-		
-		for (j = 0; j < Height / 2; j++) {
+
+    for (j = 0; j < Height / 2; j++) {
         for (i = 0; i < Width; i++) {
             for(UBYTE k = 0; k < 4; k++) {
                 EPD_5IN83BC_SendData(0x33);
