@@ -13,7 +13,7 @@ logging.basicConfig(level=logging.DEBUG)
 picdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'pic')
 libdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'lib')
 
-image_full: Image = Image.open(os.path.join(picdir, 'fucking_retarded.bmp'))
+image_full = Image.open(os.path.join(picdir, 'fucking_retarded.bmp'))
 
 buffer = np.array(image_full.convert('RGB'))
 
@@ -25,7 +25,7 @@ buffer_black[np.logical_and(r == 0, g == 0, b == 0)] = [0, 0, 0]
 
 buffer_red = np.full(buffer.shape, 255, 'uint8')
 
-buffer_red[r == 255] = [0, 0, 0]
+buffer_red[np.logical_and(r == 255, g == 0, b == 0)] = [0, 0, 0]
 
 image_black = Image.fromarray(buffer_black)
 image_red = Image.fromarray(buffer_red)
