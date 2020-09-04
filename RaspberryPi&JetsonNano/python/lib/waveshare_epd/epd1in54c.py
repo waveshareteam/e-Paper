@@ -148,6 +148,7 @@ class EPD:
         self.send_command(0X07)  #  deep sleep
         self.send_data(0xA5)
         
+    def Dev_exit(self):
         epdconfig.module_exit()
 ### END OF FILE ###
 

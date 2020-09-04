@@ -29,6 +29,8 @@
 ******************************************************************************/
 #include "EPD_Test.h"
 #include "EPD_4in2bc.h"
+#include <time.h> 
+
 
 int EPD_4in2bc_test(void)
 {
@@ -39,7 +41,11 @@ int EPD_4in2bc_test(void)
 
     printf("e-Paper Init and Clear...\r\n");
     EPD_4IN2BC_Init();
+    struct timespec start={0,0}, finish={0,0}; 
+    clock_gettime(CLOCK_REALTIME,&start);
     EPD_4IN2BC_Clear();
+    clock_gettime(CLOCK_REALTIME,&finish);
+    printf("%ld S\r\n",finish.tv_sec-start.tv_sec);
     DEV_Delay_ms(500);
 
     //Create a new image cache named IMAGE_BW and fill it with white

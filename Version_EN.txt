@@ -9,3 +9,8 @@
 2020-04-22: Added new program 2.13inch B V2 e-Paper routine.
 2020-04-27: Add new program 7.5inch B HD e-Paper routine.
 2020-04-28: Add new program 7.5inch HD e-Paper routine.
+2020-07-03: Added new program 2.9inch B V2 e-Paper routine.
+2020-07-14: Added new program 5.65inch e-Paper Module (F) routine.
+2020-07-30: Added new program 3.7inch e-Paper HAT routine.
+2020-07-30: Added new program 2.66inch e-Paper Module routine.
+2020-08-03: Added new program 5.83inch B V2 e-Paper routine.

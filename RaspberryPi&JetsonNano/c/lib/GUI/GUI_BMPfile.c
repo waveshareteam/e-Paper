@@ -6,10 +6,12 @@
 *                Used to shield the underlying layers of each master
 *                and enhance portability
 *----------------
-* |	This version:   V2.1
-* | Date        :   2019-10-10
+* |	This version:   V2.2
+* | Date        :   2020-07-08
 * | Info        :   
 * -----------------------------------------------------------------------------
+* V2.2(2020-07-08):
+* 1.Add GUI_ReadBmp_RGB_7Color()
 * V2.1(2019-10-10):
 * 1.Add GUI_ReadBmp_4Gray()
 * V2.0(2018-11-12):
@@ -221,7 +223,6 @@ UBYTE GUI_ReadBmp_RGB_7Color(const char *path, UWORD Xstart, UWORD Ystart)
     printf("pixel = %d * %d\r\n", bmpInfoHeader.biWidth, bmpInfoHeader.biHeight);
 	
     UDOUBLE Image_Byte = bmpInfoHeader.biWidth * bmpInfoHeader.biHeight * 3;
-    UDOUBLE Bmp_Byte = bmpInfoHeader.biWidth * bmpInfoHeader.biHeight * 3;
     UBYTE Image[Image_Byte];
     memset(Image, 0xFF, Image_Byte);
 
@@ -234,7 +235,6 @@ UBYTE GUI_ReadBmp_RGB_7Color(const char *path, UWORD Xstart, UWORD Ystart)
     // Read image data into the cache
     UWORD x, y;
     UBYTE Rdata[3];
-	
     fseek(fp, bmpFileHeader.bOffset, SEEK_SET);
     
     for(y = 0; y < bmpInfoHeader.biHeight; y++) {//Total display column
@@ -272,14 +272,13 @@ UBYTE GUI_ReadBmp_RGB_7Color(const char *path, UWORD Xstart, UWORD Ystart)
     fclose(fp);
    
     // Refresh the image to the display buffer based on the displayed orientation
-    UBYTE color;
     for(y = 0; y < bmpInfoHeader.biHeight; y++) {
         for(x = 0; x < bmpInfoHeader.biWidth; x++) {
             if(x > Paint.Width || y > Paint.Height) {
                 break;
             }
             Paint_SetPixel(Xstart + x, Ystart + y, Image[bmpInfoHeader.biHeight *  bmpInfoHeader.biWidth - 1 -(bmpInfoHeader.biWidth-x-1+(y* bmpInfoHeader.biWidth))]);
-        }
+		}
     }
     return 0;
 }

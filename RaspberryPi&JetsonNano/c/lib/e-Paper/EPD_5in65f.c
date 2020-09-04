@@ -1,16 +1,54 @@
+/*****************************************************************************
+* | File      	:   EPD_5in65f.c
+* | Author      :   Waveshare team
+* | Function    :   5.65inch e-paper
+* | Info        :
+*----------------
+* |	This version:   V1.0
+* | Date        :   2020-07-07
+* | Info        :
+* -----------------------------------------------------------------------------
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documnetation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to  whom the Software is
+# furished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS OR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
+#
+******************************************************************************/
 #include "EPD_5in65f.h"
 
+
+/******************************************************************************
+function:
+		hardware reset
+******************************************************************************/
 static void EPD_5IN65F_Reset(void)
 {
     DEV_Digital_Write(EPD_RST_PIN, 1);
     DEV_Delay_ms(200);
     DEV_Digital_Write(EPD_RST_PIN, 0);
-    DEV_Delay_ms(1);
+    DEV_Delay_ms(10);
     DEV_Digital_Write(EPD_RST_PIN, 1);
     DEV_Delay_ms(200);
 }
 
-
+/******************************************************************************
+function:
+		send Command
+******************************************************************************/
 static void EPD_5IN65F_SendCommand(UBYTE Reg)
 {
     DEV_Digital_Write(EPD_DC_PIN, 0);
@@ -19,6 +57,10 @@ static void EPD_5IN65F_SendCommand(UBYTE Reg)
     DEV_Digital_Write(EPD_CS_PIN, 1);
 }
 
+/******************************************************************************
+function:
+		send data
+******************************************************************************/
 static void EPD_5IN65F_SendData(UBYTE Data)
 {
     DEV_Digital_Write(EPD_DC_PIN, 1);
@@ -27,7 +69,10 @@ static void EPD_5IN65F_SendData(UBYTE Data)
     DEV_Digital_Write(EPD_CS_PIN, 1);
 }
 
-
+/******************************************************************************
+function:
+		io busy
+******************************************************************************/
 static void EPD_5IN65F_BusyHigh(void)// If BUSYN=0 then waiting
 {
     while(!(DEV_Digital_Read(EPD_BUSY_PIN)));
@@ -38,7 +83,10 @@ static void EPD_5IN65F_BusyLow(void)// If BUSYN=1 then waiting
     while(DEV_Digital_Read(EPD_BUSY_PIN));
 }
 
-
+/******************************************************************************
+function:
+		module init
+******************************************************************************/
 void EPD_5IN65F_Init(void)
 {
 	EPD_5IN65F_Reset();
@@ -78,6 +126,10 @@ void EPD_5IN65F_Init(void)
     EPD_5IN65F_SendData(0x37);
 }
 
+/******************************************************************************
+function:
+		clear display
+******************************************************************************/
 void EPD_5IN65F_Clear(UBYTE color)
 {
     EPD_5IN65F_SendCommand(0x61);//Set Resolution setting
@@ -99,18 +151,35 @@ void EPD_5IN65F_Clear(UBYTE color)
     DEV_Delay_ms(500);
 }
 
-void EPD_5IN65F_Display(const UBYTE *image)
+/******************************************************************************
+function:
+		show 7 kind of color block 
+******************************************************************************/
+void EPD_5IN65F_Show7Block(void)
 {
-    unsigned long i,j;
+    unsigned long i,j,k;
+    unsigned char const Color_seven[8] =
+	{EPD_5IN65F_BLACK,EPD_5IN65F_BLUE,EPD_5IN65F_GREEN,EPD_5IN65F_ORANGE,
+	EPD_5IN65F_RED,EPD_5IN65F_YELLOW,EPD_5IN65F_WHITE,EPD_5IN65F_WHITE};
     EPD_5IN65F_SendCommand(0x61);//Set Resolution setting
     EPD_5IN65F_SendData(0x02);
     EPD_5IN65F_SendData(0x58);
     EPD_5IN65F_SendData(0x01);
     EPD_5IN65F_SendData(0xC0);
     EPD_5IN65F_SendCommand(0x10);
-    for(i=0; i<EPD_5IN65F_HEIGHT; i++) {
-        for(j=0; j<EPD_5IN65F_WIDTH/2; j++)
-            EPD_5IN65F_SendData(image[j+((EPD_5IN65F_WIDTH/2)*i)]);
+    for(i=0; i<224; i++) {
+        for(k = 0 ; k < 4; k ++) {
+            for(j = 0 ; j < 75; j ++) {
+                EPD_5IN65F_SendData((Color_seven[k]<<4) |Color_seven[k]);
+            }
+        }
+    }
+    for(i=0; i<224; i++) {
+        for(k = 4 ; k < 8; k ++) {
+            for(j = 0 ; j < 75; j ++) {
+                EPD_5IN65F_SendData((Color_seven[k]<<4) |Color_seven[k]);
+            }
+        }
     }
     EPD_5IN65F_SendCommand(0x04);//0x04
     EPD_5IN65F_BusyHigh();
@@ -121,7 +190,81 @@ void EPD_5IN65F_Display(const UBYTE *image)
 	DEV_Delay_ms(200);
 }
 
+/******************************************************************************
+function:
+		refresh display
+******************************************************************************/
+void EPD_5IN65F_Display(const UBYTE *image)
+{
+    unsigned long i, j;
+	// UBYTE k = 0;
+    EPD_5IN65F_SendCommand(0x61);//Set Resolution setting
+    EPD_5IN65F_SendData(0x02);
+    EPD_5IN65F_SendData(0x58);
+    EPD_5IN65F_SendData(0x01);
+    EPD_5IN65F_SendData(0xC0);
+    EPD_5IN65F_SendCommand(0x10);
+    for(i=0; i<EPD_5IN65F_HEIGHT; i++) {
+        for(j=0; j<EPD_5IN65F_WIDTH/2; j++) {
+            EPD_5IN65F_SendData(image[j+((EPD_5IN65F_WIDTH/2)*i)]);
+			// printf("0x%x, ", image[j+((EPD_5IN65F_WIDTH/2)*i)]);
+			// k++;
+			// if(k == 16) {
+				// printf("\n");
+				// k = 0;
+			// }
+		}
+	}
+    EPD_5IN65F_SendCommand(0x04);//0x04
+    EPD_5IN65F_BusyHigh();
+    EPD_5IN65F_SendCommand(0x12);//0x12
+    EPD_5IN65F_BusyHigh();
+    EPD_5IN65F_SendCommand(0x02);  //0x02
+    EPD_5IN65F_BusyLow();
+	DEV_Delay_ms(200);
+}
 
+void EPD_5IN65F_Display_part(const UBYTE *image, UWORD xstart, UWORD ystart, 
+								UWORD image_width, UWORD image_heigh)
+{
+    unsigned long i, j;
+	// UBYTE k = 0;
+    EPD_5IN65F_SendCommand(0x61);//Set Resolution setting
+    EPD_5IN65F_SendData(0x02);
+    EPD_5IN65F_SendData(0x58);
+    EPD_5IN65F_SendData(0x01);
+    EPD_5IN65F_SendData(0xC0);
+    EPD_5IN65F_SendCommand(0x10);
+    for(i=0; i<EPD_5IN65F_HEIGHT; i++) {
+        for(j=0; j< EPD_5IN65F_WIDTH/2; j++) {
+						if(i<image_heigh+ystart && i>=ystart && j<(image_width+xstart)/2 && j>=xstart/2) {
+							EPD_5IN65F_SendData(image[(j-xstart/2) + (image_width/2*(i-ystart))]);
+							// printf("0x%x, ", image[j+((EPD_5IN65F_WIDTH/2)*i)]);
+							// k++;
+							// if(k == 16) {
+								// printf("\r\n");
+								// k = 0;
+							// }
+						}
+						else {
+							EPD_5IN65F_SendData(0x11);
+						}
+				}
+    }
+    EPD_5IN65F_SendCommand(0x04);//0x04
+    EPD_5IN65F_BusyHigh();
+    EPD_5IN65F_SendCommand(0x12);//0x12
+    EPD_5IN65F_BusyHigh();
+    EPD_5IN65F_SendCommand(0x02);  //0x02
+    EPD_5IN65F_BusyLow();
+	DEV_Delay_ms(200);
+	
+}
+
+/******************************************************************************
+function:
+		Sleep
+******************************************************************************/
 void EPD_5IN65F_Sleep(void)
 {
     DEV_Delay_ms(100);

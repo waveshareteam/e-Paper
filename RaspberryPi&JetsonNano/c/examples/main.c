@@ -1,7 +1,7 @@
 ﻿#include <stdlib.h>     //exit()
 #include <signal.h>     //signal()
 #include "EPD_Test.h"   //Examples
-#include "EPD_3in7.h"
+
 void  Handler(int signo)
 {
     //System Exit
@@ -23,7 +23,10 @@ int main(void)
     // EPD_1in54_test();
     // EPD_1in54_V2_test();
     // EPD_1in54b_test();
+	// EPD_1in54b_V2_test();
     // EPD_1in54c_test();
+
+	// EPD_2in66_test();
 
     // EPD_2in7_test();
     // EPD_2in7b_test();
@@ -36,17 +39,20 @@ int main(void)
     // EPD_2in13_test();
     // EPD_2in13_V2_test();
     // EPD_2in13bc_test();
-    // EPD_2in13b_V2_test();
+    // EPD_2in13b_V3_test();
     // EPD_2in13d_test();
-    
+	
     // EPD_3in7_test();
     
     // EPD_4in2_test();
     // EPD_4in2bc_test();
     // EPD_4in2b_V2_test();
 
+	// EPD_5in65f_test();
+
     // EPD_5in83_test();
     // EPD_5in83bc_test();
+    // EPD_5in83b_V2_test();
 
     // EPD_7in5_test();
     // EPD_7in5_V2_test();

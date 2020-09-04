@@ -5,7 +5,7 @@
 * | Info        :
 *----------------
 * |	This version:   V1.0
-* | Date        :   2019-06-12
+* | Date        :   2020-07-03
 * | Info        :
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -64,7 +64,7 @@ int EPD_2in9b_V2_test(void)
 #if 1   // show image for array    
     printf("show image for array\r\n");
     EPD_2IN9B_V2_Display(gImage_2in9bc_b, gImage_2in9bc_ry);
-    DEV_Delay_ms(2000);
+    DEV_Delay_ms(5000);
 #endif
 
 #if 1   // Drawing on the image
@@ -97,12 +97,12 @@ int EPD_2in9b_V2_test(void)
 
     printf("EPD_Display\r\n");
     EPD_2IN9B_V2_Display(BlackImage, RYImage);
-    DEV_Delay_ms(2000);
+    DEV_Delay_ms(5000);
 #endif
-
+	// clear EPD
     printf("Clear...\r\n");
     EPD_2IN9B_V2_Clear();
-
+	//deep sleep mode, free heap ram
     printf("Goto Sleep...\r\n");
     EPD_2IN9B_V2_Sleep();
     free(BlackImage);

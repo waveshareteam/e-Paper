@@ -8,9 +8,18 @@
 *   Achieve display characters: Display a single character, string, number
 *   Achieve time display: adaptive size display time minutes and seconds
 *----------------
-* |	This version:   V3.0
-* | Date        :   2019-04-18
+* |	This version:   V3.1
+* | Date        :   2020-07-08
 * | Info        :
+* -----------------------------------------------------------------------------
+* V3.1(2020-07-08):
+* 1.Change: Paint_SetScale(UBYTE scale)
+*		 Add scale 7 for 5.65f e-Parper
+* 2.Change: Paint_SetPixel(UWORD Xpoint, UWORD Ypoint, UWORD Color)
+*		 Add the branch for scale 7
+* 3.Change: Paint_Clear(UWORD Color)
+*		 Add the branch for scale 7
+*
 * -----------------------------------------------------------------------------
 * V3.0(2019-04-18):
 * 1.Change: 
@@ -140,9 +149,12 @@ void Paint_SetScale(UBYTE scale)
     }else if(scale == 4){
         Paint.Scale = scale;
         Paint.WidthByte = (Paint.WidthMemory % 4 == 0)? (Paint.WidthMemory / 4 ): (Paint.WidthMemory / 4 + 1);
-    }else{
+    }else if(scale == 7){//Only applicable with 5in65 e-Paper
+				Paint.Scale = scale;
+				Paint.WidthByte = (Paint.WidthMemory % 2 == 0)? (Paint.WidthMemory / 2 ): (Paint.WidthMemory / 2 + 1);;
+		}else{
         Debug("Set Scale Input parameter error\r\n");
-        Debug("Scale Only support: 2 4 \r\n");
+        Debug("Scale Only support: 2 4 7\r\n");
     }
 }
 /******************************************************************************
@@ -234,7 +246,13 @@ void Paint_SetPixel(UWORD Xpoint, UWORD Ypoint, UWORD Color)
         
         Rdata = Rdata & (~(0xC0 >> ((X % 4)*2)));
         Paint.Image[Addr] = Rdata | ((Color << 6) >> ((X % 4)*2));
-    }
+    }else if(Paint.Scale == 7){
+		UDOUBLE Addr = X / 2  + Y * Paint.WidthByte;
+		UBYTE Rdata = Paint.Image[Addr];
+		Rdata = Rdata & (~(0xF0 >> ((X % 2)*4)));//Clear first, then set value
+		Paint.Image[Addr] = Rdata | ((Color << 4) >> ((X % 2)*4));
+		//printf("Add =  %d ,data = %d\r\n",Addr,Rdata);
+		}
 }
 
 /******************************************************************************
@@ -244,12 +262,21 @@ parameter:
 ******************************************************************************/
 void Paint_Clear(UWORD Color)
 {
-    for (UWORD Y = 0; Y < Paint.HeightByte; Y++) {
-        for (UWORD X = 0; X < Paint.WidthByte; X++ ) {//8 pixel =  1 byte
-            UDOUBLE Addr = X + Y*Paint.WidthByte;
-            Paint.Image[Addr] = Color;
-        }
-    }
+	if(Paint.Scale == 2 || Paint.Scale == 4){
+		for (UWORD Y = 0; Y < Paint.HeightByte; Y++) {
+			for (UWORD X = 0; X < Paint.WidthByte; X++ ) {//8 pixel =  1 byte
+				UDOUBLE Addr = X + Y*Paint.WidthByte;
+				Paint.Image[Addr] = Color;
+			}
+		}		
+	}else if(Paint.Scale == 7){
+		for (UWORD Y = 0; Y < Paint.HeightByte; Y++) {
+			for (UWORD X = 0; X < Paint.WidthByte; X++ ) {
+				UDOUBLE Addr = X + Y*Paint.WidthByte;
+				Paint.Image[Addr] = (Color<<4)|Color;
+			}
+		}		
+	}
 }
 
 /******************************************************************************

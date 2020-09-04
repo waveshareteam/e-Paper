@@ -77,22 +77,15 @@ parameter:
 ******************************************************************************/
 void EPD_4IN2B_V2_ReadBusy(void)
 {
-    Debug("4.2 e-Paper busy\r\n");
+    Debug("e-Paper busy\r\n");
     unsigned char busy;
     do{
         EPD_4IN2B_V2_SendCommand(0x71);
 		busy = DEV_Digital_Read(EPD_BUSY_PIN);
 		busy =!(busy & 0x01); 
     }while(busy);
-    
-    
-    // EPD_4IN2B_V2_SendCommand(0x71);
-    // while(DEV_Digital_Read(EPD_BUSY_PIN) == 0) {
-        // EPD_4IN2B_V2_SendCommand(0x71);
-        // DEV_Delay_ms(100);
-    // }
     Debug("e-Paper busy release\r\n");
-    DEV_Delay_ms(2000);
+    DEV_Delay_ms(200);
 }
 
 /******************************************************************************
@@ -113,12 +106,6 @@ parameter:
 void EPD_4IN2B_V2_Init(void)
 {
     EPD_4IN2B_V2_Reset();
-    // EPD_4IN2B_V2_ReadBusy();
-    
-    // EPD_4IN2B_V2_SendCommand(0x06);
-    // EPD_4IN2B_V2_SendData(0x17);
-    // EPD_4IN2B_V2_SendData(0x17);
-    // EPD_4IN2B_V2_SendData(0x17);
     
     EPD_4IN2B_V2_SendCommand(0x04); 
     EPD_4IN2B_V2_ReadBusy();

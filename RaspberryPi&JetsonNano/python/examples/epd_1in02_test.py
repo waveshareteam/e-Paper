@@ -88,6 +88,7 @@ try:
     
     logging.info("Goto Sleep...")
     epd.Sleep()
+    epd.Dev_exit()
         
 except IOError as e:
     logging.info(e)

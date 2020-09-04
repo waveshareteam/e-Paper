@@ -5,7 +5,7 @@
 * | Info        :
 *----------------
 * |	This version:   V1.0
-* | Date        :   2020-04-12
+* | Date        :   2020-07-03
 * | Info        :
 * -----------------------------------------------------------------------------
 #
@@ -40,7 +40,7 @@ static void EPD_2IN9B_V2_Reset(void)
     DEV_Digital_Write(EPD_RST_PIN, 1);
     DEV_Delay_ms(200);
     DEV_Digital_Write(EPD_RST_PIN, 0);
-    DEV_Delay_ms(10);
+    DEV_Delay_ms(5);
     DEV_Digital_Write(EPD_RST_PIN, 1);
     DEV_Delay_ms(200);
 }
@@ -96,7 +96,6 @@ parameter:
 ******************************************************************************/
 void EPD_2IN9B_V2_Init(void)
 {
-    EPD_2IN9B_V2_Reset();
     EPD_2IN9B_V2_Reset();
 
     EPD_2IN9B_V2_SendCommand(0x04);  
@@ -155,6 +154,7 @@ void EPD_2IN9B_V2_Display(const UBYTE *blackimage, const UBYTE *ryimage)
     Width = (EPD_2IN9B_V2_WIDTH % 8 == 0)? (EPD_2IN9B_V2_WIDTH / 8 ): (EPD_2IN9B_V2_WIDTH / 8 + 1);
     Height = EPD_2IN9B_V2_HEIGHT;
 
+	//send black data
     EPD_2IN9B_V2_SendCommand(0x10);
     for (UWORD j = 0; j < Height; j++) {
         for (UWORD i = 0; i < Width; i++) {
@@ -163,6 +163,7 @@ void EPD_2IN9B_V2_Display(const UBYTE *blackimage, const UBYTE *ryimage)
     }
     EPD_2IN9B_V2_SendCommand(0x92);
     
+	//send red data
     EPD_2IN9B_V2_SendCommand(0x13);
     for (UWORD j = 0; j < Height; j++) {
         for (UWORD i = 0; i < Width; i++) {

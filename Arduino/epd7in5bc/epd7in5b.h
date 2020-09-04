@@ -83,6 +83,8 @@ public:
     void WaitUntilIdle(void);
     void Reset(void);
     void DisplayFrame(const unsigned char** image_data);
+	void DisplayOneQuarterFrame(const unsigned char* image_data);
+	void Epd::Clean(void);
     void SendCommand(unsigned char command);
     void SendData(unsigned char data);
     void Sleep(void);

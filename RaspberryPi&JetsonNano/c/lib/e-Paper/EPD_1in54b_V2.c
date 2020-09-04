@@ -167,12 +167,12 @@ void EPD_1IN54B_V2_Display(const UBYTE *blackimage, const UBYTE *redimage)
 
      unsigned int i;	
     EPD_1IN54B_V2_SendCommand(0x24);   //write RAM for black(0)/white (1)
-    for(i=0;i<Width*Height/8;i++)
+    for(i=0;i<Width*Height;i++)
     {               
         EPD_1IN54B_V2_SendData(blackimage[i]);
     }
     EPD_1IN54B_V2_SendCommand(0x26);   //write RAM for black(0)/white (1)
-    for(i=0;i<Width*Height/8;i++)
+    for(i=0;i<Width*Height;i++)
     {               
         EPD_1IN54B_V2_SendData(~redimage[i]);
     }

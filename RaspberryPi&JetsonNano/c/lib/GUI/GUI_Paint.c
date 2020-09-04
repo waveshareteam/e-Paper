@@ -8,14 +8,23 @@
 *   Achieve display characters: Display a single character, string, number
 *   Achieve time display: adaptive size display time minutes and seconds
 *----------------
-* |	This version:   V3.1
-* | Date        :   2019-10-10
+* |	This version:   V3.2
+* | Date        :   2020-07-10
 * | Info        :
+* -----------------------------------------------------------------------------
+* V3.2(2020-07-10):
+* 1.Change: Paint_SetScale(UBYTE scale)
+*		 Add scale 7 for 5.65f e-Parper
+* 2.Change: Paint_SetPixel(UWORD Xpoint, UWORD Ypoint, UWORD Color)
+*		 Add the branch for scale 7
+* 3.Change: Paint_Clear(UWORD Color)
+*		 Add the branch for scale 7
 * -----------------------------------------------------------------------------
 * V3.1(2019-10-10):
 * 1. Add gray level
 *   PAINT Add Scale
 * 2. Add void Paint_SetScale(UBYTE scale);
+* -----------------------------------------------------------------------------
 * V3.0(2019-04-18):
 * 1.Change: 
 *    Paint_DrawPoint(..., DOT_STYLE DOT_STYLE)
@@ -244,7 +253,7 @@ void Paint_SetPixel(UWORD Xpoint, UWORD Ypoint, UWORD Color)
 		UBYTE Rdata = Paint.Image[Addr];
 		Rdata = Rdata & (~(0xF0 >> ((X % 2)*4)));//Clear first, then set value
 		Paint.Image[Addr] = Rdata | ((Color << 4) >> ((X % 2)*4));
-		//printf("Add =  %d ,data = %d\r\n",Addr,Rdata);
+		// printf("Add =  %d ,data = %d\r\n",Addr,Rdata);
 	}
 }
 

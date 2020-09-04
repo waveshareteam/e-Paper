@@ -466,13 +466,13 @@ void EPD_2IN7_Clear(void)
     Width = (EPD_2IN7_WIDTH % 8 == 0)? (EPD_2IN7_WIDTH / 8 ): (EPD_2IN7_WIDTH / 8 + 1);
     Height = EPD_2IN7_HEIGHT;
 
-    EPD_2in7_SendCommand(0x10);
+/*    EPD_2in7_SendCommand(0x10);
     for (UWORD j = 0; j < Height; j++) {
         for (UWORD i = 0; i < Width; i++) {
             EPD_2in7_SendData(0XFF);
         }
     }
-
+*/
     EPD_2in7_SendCommand(0x13);
     for (UWORD j = 0; j < Height; j++) {
         for (UWORD i = 0; i < Width; i++) {
@@ -494,13 +494,13 @@ void EPD_2IN7_Display(const UBYTE *Image)
     Width = (EPD_2IN7_WIDTH % 8 == 0)? (EPD_2IN7_WIDTH / 8 ): (EPD_2IN7_WIDTH / 8 + 1);
     Height = EPD_2IN7_HEIGHT;
 
-    EPD_2in7_SendCommand(0x10);
+  /*  EPD_2in7_SendCommand(0x10);
     for (UWORD j = 0; j < Height; j++) {
-        for (UWORD i = 0; i < Width; i++) {
-            EPD_2in7_SendData(0XFF);
-        }
+       for (UWORD i = 0; i < Width; i++) {
+           EPD_2in7_SendData(0XFF);
+       }
     }
-
+*/
     EPD_2in7_SendCommand(0x13);
     for (UWORD j = 0; j < Height; j++) {
         for (UWORD i = 0; i < Width; i++) {

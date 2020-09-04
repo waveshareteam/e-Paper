@@ -9,3 +9,9 @@
 2020-04-22: 添加新程序2.13inch B V2 e-Paper 例程。
 2020-04-27：添加新程序7.5inch B HD e-Paper 例程。
 2020-04-28：添加新程序7.5inch HD e-Paper 例程。
+2020-05-21：2.13inch B V2 e-Paper更改为2.13inch B V3 e-Paper
+2020-07-03：添加新程序2.9inch B V2 e-Paper 例程。
+2020-07-18：添加新程序5.65inch e-Paper Module (F)例程。
+2020-07-30：添加新程序3.7inch e-Paper HAT例程。
+2020-07-30：添加新程序2.66inch e-Paper Module例程。
+2020-08-03：添加新程序5.83inch B V2 e-Paper例程。

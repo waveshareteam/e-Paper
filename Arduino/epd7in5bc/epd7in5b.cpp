@@ -62,7 +62,7 @@ int Epd::Init(void) {
     WaitUntilIdle();
 
     SendCommand(PLL_CONTROL);
-    SendData(0x3c);        
+    SendData(0x3A);        
 
     SendCommand(TEMPERATURE_CALIBRATION);
     SendData(0x00);
@@ -158,6 +158,64 @@ void Epd::DisplayFrame(const unsigned char** image_data) {
             }
         }
     }
+    SendCommand(DISPLAY_REFRESH);
+    DelayMs(100);
+    WaitUntilIdle();
+}
+
+void Epd::Clean(void) {
+    SendCommand(DATA_START_TRANSMISSION_1);
+    for (long i = 0; i < 122880; i++) {    
+        SendData(0x33); 
+    }
+    SendCommand(DISPLAY_REFRESH);
+    DelayMs(100);
+    WaitUntilIdle();
+}
+
+void Epd::DisplayOneQuarterFrame(const unsigned char* image_data) {
+    unsigned char temp1, temp2;
+    SendCommand(DATA_START_TRANSMISSION_1);
+
+
+	for (long i = 0; i < 192; i++) {   
+			for (long k = 0; k < 80; k++) {
+				temp1 = pgm_read_byte(image_data + i*80 + k);
+				for (unsigned char j = 0; j < 4; j++) {
+					if ((temp1 & 0xC0) == 0xC0) {
+						temp2 = 0x03;                       // white
+					} else if ((temp1 & 0xC0) == 0x00) {
+						temp2 = 0x00;                       // black
+					} else {
+						temp2 = 0x04;                       // red
+					}
+					temp2 <<= 4;
+					temp1 <<= 2;
+					j++;
+					if((temp1 & 0xC0) == 0xC0) {
+						temp2 |= 0x03;                      // white
+					} else if ((temp1 & 0xC0) == 0x00) {
+						temp2 |= 0x00;                      // black
+					} else {
+						temp2 |= 0x04;                      // red
+					}
+					temp1 <<= 2;
+					SendData(temp2); 
+				}
+			}
+			for (long k = 0; k < 160; k++) {                // 1/4 show white
+				SendData(0x33); 
+			}
+		
+	}
+	for (long i = 0; i < 192; i++) {                    
+			for (long k = 0; k < 160; k++) {                 // 1/4 show red 
+				SendData(0x44); 
+			}
+			for (long k = 0; k < 160; k++) {                 // 1/4 show black 
+				SendData(0x00); 
+			}
+	}
     SendCommand(DISPLAY_REFRESH);
     DelayMs(100);
     WaitUntilIdle();

@@ -46,7 +46,8 @@ unsigned long time_now_s;
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(9600);
+  Serial.begin(115200);
+  Serial.print("e-Paper init ");
   if (epd.Init(lut_full_update) != 0) {
       Serial.print("e-Paper init failed");
       return;
@@ -143,4 +144,3 @@ void loop() {
 
   delay(500);*/
 }
-

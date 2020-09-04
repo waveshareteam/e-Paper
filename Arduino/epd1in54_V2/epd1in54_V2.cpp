@@ -146,15 +146,15 @@ int Epd::LDirInit(void)
 	SendCommand(0x11); //data entry mode
 	SendData(0x03);
 
-	SendCommand(0x44); //set Ram-X address start/end position
-	SendData(0x00);
-	SendData(0x18);    //0x0C-->(18+1)*8=200
-
-	SendCommand(0x45); //set Ram-Y address start/end position
-	SendData(0xC7);   //0xC7-->(199+1)=200
-	SendData(0x00);
-	SendData(0x00);
-	SendData(0x00);
+  SendCommand(0x44);
+  /* x point must be the multiple of 8 or the last 3 bits will be ignored */
+  SendData((0 >> 3) & 0xFF);
+  SendData((200 >> 3) & 0xFF);
+  SendCommand(0x45);
+  SendData(0 & 0xFF);
+  SendData((0 >> 8) & 0xFF);
+  SendData(200 & 0xFF);
+  SendData((200 >> 8) & 0xFF);
 
 	SendCommand(0x3C); //BorderWavefrom
 	SendData(0x01);
@@ -188,7 +188,7 @@ void Epd::Reset(void)
 	DigitalWrite(reset_pin, HIGH);
 	DelayMs(200);
 	DigitalWrite(reset_pin, LOW);                //module reset
-	DelayMs(20);
+	DelayMs(10);
 	DigitalWrite(reset_pin, HIGH);
 	DelayMs(200);
 }
@@ -198,13 +198,13 @@ void Epd::Clear(void)
 	int w, h;
 	w = (EPD_WIDTH % 8 == 0)? (EPD_WIDTH / 8 ): (EPD_WIDTH / 8 + 1);
 	h = EPD_HEIGHT;
+ 
 	SendCommand(0x24);
 	for (int j = 0; j < h; j++) {
 		for (int i = 0; i < w; i++) {
 			SendData(0xff);
 		}
 	}
-
 	//DISPLAY REFRESH
 	SendCommand(0x22);
 	SendData(0xF7);
@@ -426,5 +426,3 @@ void Epd::Sleep()
 }
 
 /* END OF FILE */
-
-

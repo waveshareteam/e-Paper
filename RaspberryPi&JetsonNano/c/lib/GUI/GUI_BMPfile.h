@@ -6,10 +6,12 @@
 *                Used to shield the underlying layers of each master
 *                and enhance portability
 *----------------
-* |	This version:   V2.1
-* | Date        :   2019-10-10
+* |	This version:   V2.2
+* | Date        :   2020-07-08
 * | Info        :   
 * -----------------------------------------------------------------------------
+* V2.2(2020-07-08):
+* 1.Add GUI_ReadBmp_RGB_7Color()
 * V2.1(2019-10-10):
 * 1.Add GUI_ReadBmp_4Gray()
 * V2.0(2018-11-12):

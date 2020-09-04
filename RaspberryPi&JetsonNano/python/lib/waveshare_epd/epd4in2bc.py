@@ -143,6 +143,7 @@ class EPD:
         self.send_command(0x07) # DEEP_SLEEP
         self.send_data(0xA5) # check code
         
+    def Dev_exit(self):
         epdconfig.module_exit()
 ### END OF FILE ###
 

@@ -1,5 +1,5 @@
 /*****************************************************************************
-* | File      	:   Readme_CN.txt
+* | File      	:   Readme_EN.txt
 * | Author      :   Waveshare team
 * | Function    :   Help with use
 * | Info        :
@@ -33,12 +33,12 @@ BUSY   ->    24
 Since this project is a comprehensive project, you may need to read the following for use:
 You can see the 19 functions that have been annotated in lines 19 through 43 of main.c.
 Please note which ink screen you purchased.
-Chestnut 1:
+eg 1:
      If you purchased 5.83inch e-paper, then you should remove the comment for the corresponding 39 lines of code, ie:
          // EPD_5in83_test();
      changed to:
          EPD_5in83_test();
-Chestnut 2:
+eg 2:
      If you buy a 2.9inch e-paper (B), since the 2.9-inch Type B and Type C are common driver codes,
      Then you should remove the comment for the corresponding 28 lines of code, ie:
          // EPD_2in9bc_test();

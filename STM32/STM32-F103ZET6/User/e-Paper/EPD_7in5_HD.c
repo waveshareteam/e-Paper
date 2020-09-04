@@ -229,7 +229,6 @@ void EPD_7IN5_HD_WritePicture(const UBYTE *blackimage, UBYTE Block)
     EPD_7IN5_HD_SendData(0x00);
     EPD_7IN5_HD_SendData(0x00);
     EPD_7IN5_HD_SendCommand(0x24);
-		UDOUBLE i;
     for (UDOUBLE j = 0; j < Height/2; j++) {
         for (UDOUBLE i = 0; i < Width; i++) {
             EPD_7IN5_HD_SendData(blackimage[i + j * Width]);

@@ -213,6 +213,7 @@ class EPD:
         
         self.send_command(0x02) # power off
         
+    def Dev_exit(self):
         epdconfig.module_exit()
 
 ### END OF FILE ###

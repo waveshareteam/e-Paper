@@ -130,8 +130,8 @@ void EPD_7IN5_HD_Init(void)
     EPD_7IN5_HD_SendData(0x6F); 
     EPD_7IN5_HD_SendData(0x03); 
     EPD_7IN5_HD_SendCommand(0x45); 
-    EPD_7IN5_HD_SendData(0xAF); 
-    EPD_7IN5_HD_SendData(0x02);
+    EPD_7IN5_HD_SendData(0xFF); 
+    EPD_7IN5_HD_SendData(0x03);
     EPD_7IN5_HD_SendData(0x00); 
     EPD_7IN5_HD_SendData(0x00);
 
@@ -154,7 +154,7 @@ void EPD_7IN5_HD_Init(void)
     EPD_7IN5_HD_SendCommand(0x4F); 
     EPD_7IN5_HD_SendData(0x00);
     EPD_7IN5_HD_SendData(0x00);
-    // return 0;
+    
 }
 
 /******************************************************************************
@@ -170,7 +170,7 @@ void EPD_7IN5_HD_Clear(void)
     EPD_7IN5_HD_SendCommand(0x4F); 
     EPD_7IN5_HD_SendData(0x00);
     EPD_7IN5_HD_SendData(0x00);
-    EPD_7IN5_HD_SendCommand(0x24);
+     EPD_7IN5_HD_SendCommand(0x24);
     UDOUBLE i;
     for(i=0; i<58080; i++) {
         EPD_7IN5_HD_SendData(0xff);
@@ -184,6 +184,8 @@ void EPD_7IN5_HD_Clear(void)
     EPD_7IN5_HD_SendData(0xF7);//Load LUT from MCU(0x32)
     EPD_7IN5_HD_SendCommand(0x20);
     DEV_Delay_ms(10);
+    
+   
     EPD_7IN5_HD_WaitUntilIdle();
 }
 

@@ -1,11 +1,11 @@
 /*****************************************************************************
-* | File      	:   EPD_3in7.h
+* | File      	:   EPD_3IN7.h
 * | Author      :   Waveshare team
 * | Function    :   3.7inch e-paper
 * | Info        :
 *----------------
-* |	This version:   V1.1
-* | Date        :   2020-04-25
+* |	This version:   V1.0
+* | Date        :   2020-07-16
 * | Info        :
 * -----------------------------------------------------------------------------
 #
@@ -35,12 +35,17 @@
 
 // Display resolution
 #define EPD_3IN7_WIDTH       280
-#define EPD_3IN7_HEIGHT      480 //16800
+#define EPD_3IN7_HEIGHT      480 
 
+void EPD_3IN7_4Gray_Clear(void);
+void EPD_3IN7_4Gray_Init(void);
+void EPD_3IN7_4Gray_Display(const UBYTE *Image);
 
-void EPD_3IN7_Init(void);
-void EPD_3IN7_Clear(void);
-void EPD_3IN7_Display(const UBYTE *Image);
+void EPD_3IN7_1Gray_Clear(void);
+void EPD_3IN7_1Gray_Init(void);
+void EPD_3IN7_1Gray_Display(const UBYTE *Image);
+void EPD_3IN7_1Gray_Display_Part(const UBYTE *Image, UWORD Xstart, UWORD Ystart, UWORD Xend, UWORD Yend);
+
 void EPD_3IN7_Sleep(void);
 
 #endif

@@ -1,11 +1,11 @@
 /*****************************************************************************
-* | File      	:   EPD_5in65.h
+* | File      	:   EPD_5in65f.h
 * | Author      :   Waveshare team
 * | Function    :   5.65inch e-paper
 * | Info        :
 *----------------
 * |	This version:   V1.0
-* | Date        :   2019-10-10
+* | Date        :   2020-07-07
 * | Info        :
 * -----------------------------------------------------------------------------
 #
@@ -51,10 +51,11 @@ Color Index
 void EPD_5IN65F_Clear(UBYTE color);
 void EPD_5IN65F_Sleep(void);
 void EPD_Init(void);
-
+void EPD_5IN65F_Show7Block(void);
 void EPD_5IN65F_Display(const UBYTE *image);
 void EPD_5IN65F_Init(void);
-
+void EPD_5IN65F_Display_part(const UBYTE *image, UWORD xstart, UWORD ystart, 
+								UWORD image_width, UWORD image_heigh);
 #endif
 
 
