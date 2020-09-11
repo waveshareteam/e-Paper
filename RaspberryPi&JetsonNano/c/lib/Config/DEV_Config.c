@@ -38,6 +38,14 @@ int EPD_DC_PIN;
 int EPD_CS_PIN;
 int EPD_BUSY_PIN;
 
+#ifdef RPI
+#ifdef USE_BCM2835_LIB
+#elif USE_WIRINGPI_LIB
+#elif USE_PIGPIO_LIB
+int spiHandle = -1;
+#endif
+#endif
+
 /**
  * GPIO read and write
 **/
@@ -48,6 +56,8 @@ void DEV_Digital_Write(UWORD Pin, UBYTE Value)
 	bcm2835_gpio_write(Pin, Value);
 #elif USE_WIRINGPI_LIB
 	digitalWrite(Pin, Value);
+#elif USE_PIGPIO_LIB
+	gpioWrite(Pin, Value);
 #elif USE_DEV_LIB
 	SYSFS_GPIO_Write(Pin, Value);
 #endif
@@ -70,6 +80,8 @@ UBYTE DEV_Digital_Read(UWORD Pin)
 	Read_value = bcm2835_gpio_lev(Pin);
 #elif USE_WIRINGPI_LIB
 	Read_value = digitalRead(Pin);
+#elif USE_PIGPIO_LIB
+	Read_value = gpioRead(Pin);
 #elif USE_DEV_LIB
 	Read_value = SYSFS_GPIO_Read(Pin);
 #endif
@@ -95,6 +107,8 @@ void DEV_SPI_WriteByte(uint8_t Value)
 	bcm2835_spi_transfer(Value);
 #elif USE_WIRINGPI_LIB
 	wiringPiSPIDataRW(0,&Value,1);
+#elif USE_PIGPIO_LIB
+	spiWrite(spiHandle,&Value,1);
 #elif USE_DEV_LIB
 	DEV_HARDWARE_SPI_TransferByte(Value);
 #endif
@@ -117,6 +131,8 @@ void DEV_SPI_Write_nByte(uint8_t *pData, uint32_t Len)
 	bcm2835_spi_transfernb(pData,rData,Len);
 #elif USE_WIRINGPI_LIB
 	wiringPiSPIDataRW(0, pData, Len);
+#elif USE_PIGPIO_LIB
+	spiWrite(spiHandle, pData, Len);
 #elif USE_DEV_LIB
 	DEV_HARDWARE_SPI_Transfer(pData, Len);
 #endif
@@ -152,6 +168,14 @@ void DEV_GPIO_Mode(UWORD Pin, UWORD Mode)
 		pinMode(Pin, OUTPUT);
 		// Debug (" %d OUT \r\n",Pin);
 	}
+#elif USE_PIGPIO_LIB
+	if(Mode == 0 || Mode == INPUT) {
+		gpioSetMode(Pin, PI_INPUT);
+		gpioSetPullUpDown(Pin, PI_PUD_UP);
+	} else {
+		gpioSetMode(Pin, PI_OUTPUT);
+		// Debug (" %d OUT \r\n",Pin);
+	}
 #elif USE_DEV_LIB
 	SYSFS_GPIO_Export(Pin);
 	if(Mode == 0 || Mode == SYSFS_GPIO_IN) {
@@ -184,6 +208,8 @@ void DEV_Delay_ms(UDOUBLE xms)
 	bcm2835_delay(xms);
 #elif USE_WIRINGPI_LIB
 	delay(xms);
+#elif USE_PIGPIO_LIB
+	gpioDelay(xms * 1000);
 #elif USE_DEV_LIB
 	UDOUBLE i;
 	for(i=0; i < xms; i++) {
@@ -229,12 +255,12 @@ static int DEV_Equipment_Testing(void)
 	if(i<5) {
 		printf("Unrecognizable\r\n");
 	} else {
-		char RPI_System[10]   = {"Raspbian"};
-		for(i=0; i<6; i++) {
-			if(RPI_System[i]!= value_str[i]) {
-				printf("Please make JETSON !!!!!!!!!!\r\n");
-				return -1;
-			}
+		// "/etc/issue" returns "Debian" on Raspberry Pi OS (64bit).
+		char RPI_System[][10]   = {"Raspbian", "Debian"};
+		int f = 0;
+		if (memcmp(RPI_System[0], value_str, 6) && memcmp(RPI_System[1], value_str, 6)) {
+			printf("Please make JETSON !!!!!!!!!!\r\n");
+			return -1;
 		}
 	}
 #endif
@@ -320,6 +346,19 @@ UBYTE DEV_Module_Init(void)
 	DEV_GPIO_Init();
 	wiringPiSPISetup(0,10000000);
 	// wiringPiSPISetupMode(0, 32000000, 0);
+
+#elif USE_PIGPIO_LIB
+	if(gpioInitialise() < 0) { //use BCM2835 Pin number table
+		printf("set pigpio lib failed	!!! \r\n");
+		return 1;
+	} else {
+		printf("set pigpio lib success !!! \r\n");
+	}
+
+	// GPIO Config
+	DEV_GPIO_Init();
+	spiHandle = spiOpen(0,10000000,0);
+
 #elif USE_DEV_LIB
 	printf("Write and read /dev/spidev0.0 \r\n");
 	DEV_GPIO_Init();
@@ -365,6 +404,13 @@ void DEV_Module_Exit(void)
 	DEV_Digital_Write(EPD_CS_PIN, 0);
 	DEV_Digital_Write(EPD_DC_PIN, 0);
 	DEV_Digital_Write(EPD_RST_PIN, 0);
+#elif USE_PIGPIO_LIB
+	spiClose(spiHandle);
+	spiHandle = -1;
+	DEV_Digital_Write(EPD_CS_PIN, 0);
+	DEV_Digital_Write(EPD_DC_PIN, 0);
+	DEV_Digital_Write(EPD_RST_PIN, 0);
+	gpioTerminate();
 #elif USE_DEV_LIB
 	DEV_HARDWARE_SPI_end();
 	DEV_Digital_Write(EPD_CS_PIN, 0);

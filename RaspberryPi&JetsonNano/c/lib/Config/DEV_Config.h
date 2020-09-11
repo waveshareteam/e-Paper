@@ -62,6 +62,10 @@
     #elif USE_WIRINGPI_LIB
         #include <wiringPi.h>
         #include <wiringPiSPI.h>
+    #elif USE_PIGPIO_LIB
+        #include <pigpio.h>
+		#define INPUT (PI_INPUT)
+		#define OUTPUT (PI_OUTPUT)
     #elif USE_DEV_LIB
         #include "RPI_sysfs_gpio.h"
         #include "dev_hardware_SPI.h"
