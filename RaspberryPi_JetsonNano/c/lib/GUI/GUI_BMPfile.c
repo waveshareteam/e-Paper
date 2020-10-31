@@ -62,20 +62,18 @@ UBYTE GUI_ReadBmp(const char *path, UWORD Xstart, UWORD Ystart)
 
     // Binary file open
     if((fp = fopen(path, "rb")) == NULL) {
-        Debug("Cann't open the file!\n");
+        Debug("Can't open the file!\n");
         exit(0);
     }
 
     // Set the file pointer from the beginning
     fseek(fp, 0, SEEK_SET);
     fread(&bmpFileHeader, sizeof(BMPFILEHEADER), 1, fp);    //sizeof(BMPFILEHEADER) must be 14
-    fread(&bmpInfoHeader, sizeof(BMPINFOHEADER), 1, fp);    //sizeof(BMPFILEHEADER) must be 50
+    fread(&bmpInfoHeader, sizeof(BMPINFOHEADER), 1, fp);    //sizeof(BMPINFOHEADER) must be 50
     printf("pixel = %d * %d\r\n", bmpInfoHeader.biWidth, bmpInfoHeader.biHeight);
 
-    UWORD Image_Width_Byte = (bmpInfoHeader.biWidth % 8 == 0)? (bmpInfoHeader.biWidth / 8): (bmpInfoHeader.biWidth / 8 + 1);
-    UWORD Bmp_Width_Byte = (Image_Width_Byte % 4 == 0) ? Image_Width_Byte: ((Image_Width_Byte / 4 + 1) * 4);
-    UBYTE Image[Image_Width_Byte * bmpInfoHeader.biHeight];
-    memset(Image, 0xFF, Image_Width_Byte * bmpInfoHeader.biHeight);
+    UWORD Image_Width_Byte = (bmpInfoHeader.biWidth + 7) / 8;
+    UWORD Bmp_Width_Byte = (Image_Width_Byte + 3) & ~3;
 
     // Determine if it is a monochrome bitmap
     int readbyte = bmpInfoHeader.biBitCount;
@@ -85,16 +83,11 @@ UBYTE GUI_ReadBmp(const char *path, UWORD Xstart, UWORD Ystart)
     }
 
     // Determine black and white based on the palette
-    UWORD i;
     UWORD Bcolor, Wcolor;
     UWORD bmprgbquadsize = pow(2, bmpInfoHeader.biBitCount);// 2^1 = 2
     BMPRGBQUAD bmprgbquad[bmprgbquadsize];        //palette
-    // BMPRGBQUAD bmprgbquad[2];        //palette
 
-    for(i = 0; i < bmprgbquadsize; i++){
-    // for(i = 0; i < 2; i++) {
-        fread(&bmprgbquad[i], sizeof(BMPRGBQUAD), 1, fp);
-    }
+	fread(bmprgbquad, sizeof(BMPRGBQUAD), bmprgbquadsize, fp);
     if(bmprgbquad[0].rgbBlue == 0xff && bmprgbquad[0].rgbGreen == 0xff && bmprgbquad[0].rgbRed == 0xff) {
         Bcolor = BLACK;
         Wcolor = WHITE;
@@ -103,36 +96,32 @@ UBYTE GUI_ReadBmp(const char *path, UWORD Xstart, UWORD Ystart)
         Wcolor = BLACK;
     }
 
-    // Read image data into the cache
-    UWORD x, y;
-    UBYTE Rdata;
+    // Read image data and paint the pixels
+    UWORD x, xb, y, yp;
+    UDOUBLE Rdata[1];
+    UBYTE color;
     fseek(fp, bmpFileHeader.bOffset, SEEK_SET);
     for(y = 0; y < bmpInfoHeader.biHeight; y++) {//Total display column
-        for(x = 0; x < Bmp_Width_Byte; x++) {//Show a line in the line
-            if(fread((char *)&Rdata, 1, readbyte, fp) != readbyte) {
+        for(xb = 0; xb < Bmp_Width_Byte; xb+=sizeof Rdata) {//Show a line in the line
+			readbyte = sizeof Rdata;
+			if (Bmp_Width_Byte-xb < readbyte) readbyte=Bmp_Width_Byte-xb;
+            if(fread(Rdata, 1, readbyte, fp) != readbyte) {
                 perror("get bmpdata:\r\n");
                 break;
             }
-            if(x < Image_Width_Byte) { //bmp
-                Image[x + (bmpInfoHeader.biHeight - y - 1) * Image_Width_Byte] =  Rdata;
-                // printf("rdata = %d\r\n", Rdata);
-            }
+			UDOUBLE temp=be32toh(Rdata[0]);
+			yp = (bmpInfoHeader.biHeight - y - 1);
+			if (Ystart + yp >= Paint.Height) continue;
+			for (x=xb*8; x<(xb+sizeof Rdata)*8; x++) {
+				if(Xstart + x >= Paint.Width) break;
+				color = (temp & (1<<(sizeof Rdata*8-1))) ?Bcolor:Wcolor;
+				temp <<= 1;
+				Paint_SetPixel(Xstart + x, Ystart + yp, color);
+			}
         }
     }
     fclose(fp);
 
-    // Refresh the image to the display buffer based on the displayed orientation
-    UBYTE color, temp;
-    for(y = 0; y < bmpInfoHeader.biHeight; y++) {
-        for(x = 0; x < bmpInfoHeader.biWidth; x++) {
-            if(x > Paint.Width || y > Paint.Height) {
-                break;
-            }
-            temp = Image[(x / 8) + (y * Image_Width_Byte)];
-            color = (((temp << (x%8)) & 0x80) == 0x80) ?Bcolor:Wcolor;
-            Paint_SetPixel(Xstart + x, Ystart + y, color);
-        }
-    }
     return 0;
 }
 /*************************************************************************
