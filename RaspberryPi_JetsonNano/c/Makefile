@@ -17,12 +17,13 @@ DEBUG = -D DEBUG
 USELIB_RPI = USE_WIRINGPI_LIB
 # USELIB_RPI = USE_DEV_LIB
 
+LIB_RPI=-Wl,--gc-sections
 ifeq ($(USELIB_RPI), USE_BCM2835_LIB)
-    LIB_RPI = -lbcm2835 -lm 
+    LIB_RPI += -lbcm2835 -lm 
 else ifeq ($(USELIB_RPI), USE_WIRINGPI_LIB)
-    LIB_RPI = -lwiringPi -lm 
+    LIB_RPI += -lwiringPi -lm 
 else ifeq ($(USELIB_RPI), USE_DEV_LIB)
-    LIB_RPI = -lm 
+    LIB_RPI += -lm 
 endif
 DEBUG_RPI = -D $(USELIB_RPI) -D RPI
 
@@ -42,7 +43,7 @@ JETSON: JETSON_DEV JETSON_epd
 
 TARGET = epd
 CC = gcc
-MSG = -g -O0 -Wall
+MSG = -g -O -ffunction-sections -fdata-sections -Wall
 CFLAGS += $(MSG)
 
 RPI_epd:${OBJ_O}
