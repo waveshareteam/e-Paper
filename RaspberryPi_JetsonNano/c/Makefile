@@ -54,6 +54,8 @@ JETSON_epd:${OBJ_O}
 	echo $(@)
 	$(CC) $(CFLAGS) $(OBJ_O) $(JETSON_DEV_C) -o $(TARGET) $(LIB_JETSONI) $(DEBUG)
 
+$(shell mkdir -p $(DIR_BIN))
+
 ${DIR_BIN}/%.o:$(DIR_Examples)/%.c
 	$(CC) $(CFLAGS) -c  $< -o $@ -I $(DIR_Config) -I $(DIR_GUI) -I $(DIR_EPD) $(DEBUG)
     
