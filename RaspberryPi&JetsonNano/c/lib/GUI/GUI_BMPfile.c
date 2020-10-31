@@ -93,7 +93,7 @@ UBYTE GUI_ReadBmp(const char *path, UWORD Xstart, UWORD Ystart)
 
     for(i = 0; i < bmprgbquadsize; i++){
     // for(i = 0; i < 2; i++) {
-        fread(&bmprgbquad[i * 4], sizeof(BMPRGBQUAD), 1, fp);
+        fread(&bmprgbquad[i], sizeof(BMPRGBQUAD), 1, fp);
     }
     if(bmprgbquad[0].rgbBlue == 0xff && bmprgbquad[0].rgbGreen == 0xff && bmprgbquad[0].rgbRed == 0xff) {
         Bcolor = BLACK;
