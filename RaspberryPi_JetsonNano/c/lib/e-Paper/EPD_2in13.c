@@ -110,10 +110,9 @@ parameter:
 ******************************************************************************/
 void EPD_2IN13_ReadBusy(void)
 {
+	if(DEV_Digital_Read(EPD_BUSY_PIN) == 0) return;
     Debug("e-Paper busy\r\n");
-    while(DEV_Digital_Read(EPD_BUSY_PIN) == 1) {      //LOW: idle, HIGH: busy
-        DEV_Delay_ms(100);
-    }
+	DEV_Digital_Wait(EPD_BUSY_PIN, 0);      //1: busy, 0: idle
     Debug("e-Paper busy release\r\n");
 }
 

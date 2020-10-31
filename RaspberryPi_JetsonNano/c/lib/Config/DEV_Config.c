@@ -29,6 +29,7 @@
 ******************************************************************************/
 #include "DEV_Config.h"
 #include <fcntl.h>
+#include <time.h>
 
 /**
  * GPIO
@@ -83,6 +84,31 @@ UBYTE DEV_Digital_Read(UWORD Pin)
 #endif
 #endif
 	return Read_value;
+}
+
+void DEV_Digital_Wait(UWORD Pin, UBYTE Value)
+{
+#ifdef RPI
+#ifdef USE_BCM2835_LIB
+	do {
+		DEV_Delay_ms(10);
+	} while(bcm2835_gpio_lev(Pin) != Value);
+#elif USE_WIRINGPI_LIB
+	do {
+		DEV_Delay_ms(10);
+	} while(digitalRead(Pin) != Value);
+#elif USE_DEV_LIB
+	SYSFS_GPIO_Wait(Pin, Value);
+#endif
+#endif
+
+#ifdef JETSON
+#ifdef USE_DEV_LIB
+	SYSFS_GPIO_Wait(Pin, Value);
+#elif USE_HARDWARE_LIB
+	Debug("not support");
+#endif
+#endif
 }
 
 /**
@@ -185,10 +211,10 @@ void DEV_Delay_ms(UDOUBLE xms)
 #elif USE_WIRINGPI_LIB
 	delay(xms);
 #elif USE_DEV_LIB
-	UDOUBLE i;
-	for(i=0; i < xms; i++) {
-		usleep(1000);
-	}
+	struct timespec tv;
+	tv.tv_nsec=(xms%1000)*1000000;
+	tv.tv_sec=xms/1000;
+	nanosleep(&tv, NULL);
 #endif
 #endif
 
@@ -229,7 +255,7 @@ static int DEV_Equipment_Testing(void)
 	if(i<5) {
 		printf("Unrecognizable\r\n");
 	} else {
-		char RPI_System[10]   = {"Raspbian"};
+		char RPI_System[10]   = {"Debian"};
 		for(i=0; i<6; i++) {
 			if(RPI_System[i]!= value_str[i]) {
 				printf("Please make JETSON !!!!!!!!!!\r\n");
@@ -366,10 +392,10 @@ void DEV_Module_Exit(void)
 	DEV_Digital_Write(EPD_DC_PIN, 0);
 	DEV_Digital_Write(EPD_RST_PIN, 0);
 #elif USE_DEV_LIB
-	DEV_HARDWARE_SPI_end();
 	DEV_Digital_Write(EPD_CS_PIN, 0);
 	DEV_Digital_Write(EPD_DC_PIN, 0);
 	DEV_Digital_Write(EPD_RST_PIN, 0);
+	DEV_HARDWARE_SPI_end();
 #endif
 
 #elif JETSON

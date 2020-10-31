@@ -76,17 +76,9 @@ parameter:
 ******************************************************************************/
 static void EPD_1IN54_V2_ReadBusy(void)
 {
+	if(DEV_Digital_Read(EPD_BUSY_PIN) == 0) return;
     Debug("e-Paper busy\r\n");
-    // UBYTE busy;
-    // do {
-        // EPD_1IN54_V2_SendCommand(0x71);
-        // busy = DEV_Digital_Read(EPD_BUSY_PIN);
-        // busy = !(busy & 0x01);
-    // } while(busy);
-    // DEV_Delay_ms(200);
-    while(DEV_Digital_Read(EPD_BUSY_PIN) == 1) {      //LOW: idle, HIGH: busy
-        DEV_Delay_ms(100);
-    }
+	DEV_Digital_Wait(EPD_BUSY_PIN, 0);      //1: busy, 0: idle
     Debug("e-Paper busy release\r\n");
 }
 

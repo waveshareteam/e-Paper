@@ -39,6 +39,10 @@
 #define SYSFS_GPIO_LOW  0
 #define SYSFS_GPIO_HIGH 1
 
+#define SYSFS_GPIO_RISING 0
+#define SYSFS_GPIO_FALLING 1
+#define SYSFS_GPIO_BOTH 2
+
 #define NUM_MAXBUF  4
 #define DIR_MAXSIZ  60
 
@@ -78,5 +82,6 @@ int SYSFS_GPIO_Unexport(int Pin);
 int SYSFS_GPIO_Direction(int Pin, int Dir);
 int SYSFS_GPIO_Read(int Pin);
 int SYSFS_GPIO_Write(int Pin, int value);
+int SYSFS_GPIO_Wait(int Pin, int value);
 
 #endif
