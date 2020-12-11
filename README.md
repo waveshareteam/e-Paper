@@ -4,7 +4,7 @@ waveshare electronics
 
 ## 中文:  
 Jetson Nano、Raspberry Pi、Arduino、STM32例程
-* Raspberry Pi & Jetson Nano:  
+* RaspberryPi_JetsonNano  
     > C
     > Python 
 * Arduino:  
@@ -18,7 +18,7 @@ http://www.waveshare.net
 
 ## English:  
 Jetson Nano、Raspberry Pi、Arduino、STM32 Demo:  
-* Raspberry Pi & Jetson Nano:  
+* RaspberryPi_JetsonNano:  
     > C
     > Python
 * Arduino:  

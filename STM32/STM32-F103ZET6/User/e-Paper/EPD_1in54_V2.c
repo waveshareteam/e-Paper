@@ -39,7 +39,7 @@ static void EPD_1IN54_V2_Reset(void)
     DEV_Digital_Write(EPD_RST_PIN, 1);
     DEV_Delay_ms(200);
     DEV_Digital_Write(EPD_RST_PIN, 0);
-    DEV_Delay_ms(10);
+    DEV_Delay_ms(2);
     DEV_Digital_Write(EPD_RST_PIN, 1);
     DEV_Delay_ms(200);
 }
@@ -241,6 +241,13 @@ void EPD_1IN54_V2_DisplayPart(UBYTE *Image)
     Width = (EPD_1IN54_V2_WIDTH % 8 == 0)? (EPD_1IN54_V2_WIDTH / 8 ): (EPD_1IN54_V2_WIDTH / 8 + 1);
     Height = EPD_1IN54_V2_HEIGHT;
 
+    DEV_Digital_Write(EPD_RST_PIN, 0);
+    DEV_Delay_ms(10);
+    DEV_Digital_Write(EPD_RST_PIN, 1);
+    DEV_Delay_ms(10);	
+    EPD_1IN54_V2_SendCommand(0x3C); //BorderWavefrom
+    EPD_1IN54_V2_SendData(0x80);
+	
     UDOUBLE Addr = 0;
     EPD_1IN54_V2_SendCommand(0x24);
     for (UWORD j = 0; j < Height; j++) {

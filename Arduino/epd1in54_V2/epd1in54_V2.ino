@@ -62,22 +62,20 @@ void setup()
 
   //Part display
   epd.HDirInit();
-  epd.Clear();
-  epd.DisplayPartBaseWhiteImage();
+  epd.DisplayPartBaseImage(IMAGE_DATA);
 
-  //paint.SetRotate(90);
-  paint.SetWidth(200);
-  paint.SetHeight(20);
+  paint.SetWidth(50);
+  paint.SetHeight(60);
   paint.Clear(UNCOLORED);
 
   char i = 0;
   char str[10][10] = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
   for (i = 0; i < 10; i++) {
     paint.Clear(UNCOLORED);
-    paint.DrawStringAt(0, 0, str[i], &Font24, COLORED);
-    epd.SetFrameMemory(paint.GetImage(), 20, 20, paint.GetWidth(), paint.GetHeight());
+    paint.DrawStringAt(10, 10, str[i], &Font24, COLORED);
+    epd.SetFrameMemory(paint.GetImage(), 80, 70, paint.GetWidth(), paint.GetHeight());
     epd.DisplayPartFrame();
-    delay(200);
+    delay(100);
   }
 
   Serial.println("e-Paper clear and goto sleep");

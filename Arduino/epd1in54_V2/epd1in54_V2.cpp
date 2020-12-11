@@ -206,10 +206,7 @@ void Epd::Clear(void)
 		}
 	}
 	//DISPLAY REFRESH
-	SendCommand(0x22);
-	SendData(0xF7);
-	SendCommand(0x20);
-	WaitUntilIdle();
+	DisplayFrame();
 }
 
 void Epd::Display(const unsigned char* frame_buffer)
@@ -227,10 +224,7 @@ void Epd::Display(const unsigned char* frame_buffer)
 	}
 
 	//DISPLAY REFRESH
-	SendCommand(0x22);
-	SendData(0xF7);
-	SendCommand(0x20);
-	WaitUntilIdle();
+	DisplayFrame();
 }
 
 void Epd::DisplayPartBaseImage(const unsigned char* frame_buffer)
@@ -255,10 +249,7 @@ void Epd::DisplayPartBaseImage(const unsigned char* frame_buffer)
 	}
 
 	//DISPLAY REFRESH
-	SendCommand(0x22);
-	SendData(0xFF);
-	SendCommand(0x20);
-	WaitUntilIdle();
+	DisplayFrame();
 }
 void Epd::DisplayPartBaseWhiteImage(void)
 {
@@ -281,10 +272,7 @@ void Epd::DisplayPartBaseWhiteImage(void)
 
 
 	//DISPLAY REFRESH
-	SendCommand(0x22);
-	SendData(0xFF);
-	SendCommand(0x20);
-	WaitUntilIdle();
+	DisplayFrame();
 }
 
 
@@ -303,10 +291,7 @@ void Epd::DisplayPart(const unsigned char* frame_buffer)
 	}
 
 	//DISPLAY REFRESH
-	SendCommand(0x22);
-	SendData(0xFF);
-	SendCommand(0x20);
-	WaitUntilIdle();
+	DisplayPartFrame();
 }
 
 
@@ -376,6 +361,13 @@ void Epd::SetFrameMemory(
 {
 	int x_end;
 	int y_end;
+	
+	DigitalWrite(reset_pin, LOW);                //module reset
+	DelayMs(10);
+	DigitalWrite(reset_pin, HIGH);
+	DelayMs(10);
+	SendCommand(0x3c);
+	SendData(0x80);
 
 	if (
 	        image_buffer == NULL ||

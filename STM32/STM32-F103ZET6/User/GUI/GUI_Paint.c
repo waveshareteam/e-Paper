@@ -97,7 +97,7 @@ void Paint_NewImage(UBYTE *image, UWORD Width, UWORD Height, UWORD Rotate, UWORD
     Paint.WidthMemory = Width;
     Paint.HeightMemory = Height;
     Paint.Color = Color;    
-		Paint.Scale = 2;
+	Paint.Scale = 2;
 		
     Paint.WidthByte = (Width % 8 == 0)? (Width / 8 ): (Width / 8 + 1);
     Paint.HeightByte = Height;    
