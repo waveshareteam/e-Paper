@@ -1,11 +1,11 @@
 /*****************************************************************************
-* | File      	:   EPD_7in5bc_test.c
+* | File      	:   EPD_7in5b_V2_test.c
 * | Author      :   Waveshare team
-* | Function    :   5.83inch B&C e-paper test demo
+* | Function    :   7.5inch B V2 e-paper test demo
 * | Info        :
 *----------------
-* |	This version:   V1.0
-* | Date        :   2019-06-13
+* |	This version:   V1.1
+* | Date        :   2020-11-30
 * | Info        :
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -32,7 +32,7 @@
 
 int EPD_7in5b_V2_test(void)
 {
-    printf("EPD_7IN5BC_test Demo\r\n");
+    printf("EPD_7IN5B_V2_test Demo\r\n");
     DEV_Module_Init();
 
     printf("e-Paper Init and Clear...\r\n");
@@ -82,8 +82,8 @@ int EPD_7in5b_V2_test(void)
     Paint_DrawString_CN(130, 20, "Î¢Ñ©µç×Ó", &Font24CN, WHITE, BLACK);
     Paint_DrawNum(10, 50, 987654321, &Font16, WHITE, BLACK);
     EPD_7IN5B_V2_WritePicture(Image, 0);
-		Paint_Clear(WHITE);
-		EPD_7IN5B_V2_WritePicture(Image, 1);
+	Paint_Clear(WHITE);
+	EPD_7IN5B_V2_WritePicture(Image, 1);
     //2.Draw red image
     Paint_Clear(WHITE);
     Paint_DrawCircle(160, 95, 20, BLACK, DOT_PIXEL_1X1, DRAW_FILL_EMPTY);
@@ -94,8 +94,8 @@ int EPD_7in5b_V2_test(void)
     Paint_DrawString_EN(10, 20, "hello world", &Font12, WHITE, BLACK);
     Paint_DrawNum(10, 33, 123456789, &Font12, BLACK, WHITE);
     EPD_7IN5B_V2_WritePicture(Image, 2);
-		Paint_Clear(WHITE);
-		EPD_7IN5B_V2_WritePicture(Image, 3);
+	Paint_Clear(WHITE);
+	EPD_7IN5B_V2_WritePicture(Image, 3);
     printf("EPD_Display\r\n");
     DEV_Delay_ms(2000);
 #endif

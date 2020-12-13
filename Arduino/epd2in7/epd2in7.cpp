@@ -248,9 +248,11 @@ void Epd::SendData(unsigned char data) {
  *  @brief: Wait until the busy_pin goes HIGH
  */
 void Epd::WaitUntilIdle(void) {
+    Serial.print("e-Paper busy\r\n");
     while(DigitalRead(busy_pin) == 0) {      //0: busy, 1: idle
         DelayMs(100);
     }      
+    Serial.print("e-Paper busy release\r\n");
 }
 
 /**
@@ -259,8 +261,10 @@ void Epd::WaitUntilIdle(void) {
  *          see Epd::Sleep();
  */
 void Epd::Reset(void) {
+    DigitalWrite(reset_pin, HIGH);
+    DelayMs(200);   
     DigitalWrite(reset_pin, LOW);
-    DelayMs(20);
+    DelayMs(10);
     DigitalWrite(reset_pin, HIGH);
     DelayMs(200);   
 }
@@ -370,17 +374,19 @@ void Epd::DisplayFrame(const unsigned char* frame_buffer) {
     if (frame_buffer != NULL) {
         SendCommand(DATA_START_TRANSMISSION_1);           
         DelayMs(2);
-        for(int i = 0; i < this->width / 8 * this->height; i++) {
-            SendData(0xFF);
+        for(int i = 0; i < 5808; i++) {
+            SendData(0xff);
         }  
         DelayMs(2);                  
         SendCommand(DATA_START_TRANSMISSION_2);
         DelayMs(2);
-        for(int i = 0; i < this->width / 8 * this->height; i++) {
+        for(int i = 0; i < 5808; i++) {
             SendData(pgm_read_byte(&frame_buffer[i]));  
         }  
         DelayMs(2);
-        SendCommand(DISPLAY_REFRESH); 
+        
+        SendCommand(0x12); 
+        DelayMs(200);
         WaitUntilIdle();
     }
 }
@@ -499,6 +505,7 @@ void Epd::ClearFrame(void) {
  */
 void Epd::DisplayFrame(void) {
     SendCommand(DISPLAY_REFRESH); 
+    DelayMs(200);
     WaitUntilIdle();
 }
 
@@ -570,7 +577,3 @@ const unsigned char lut_wb[] =
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 };
-
-
-
-

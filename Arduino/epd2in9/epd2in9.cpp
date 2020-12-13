@@ -275,5 +275,3 @@ const unsigned char lut_partial_update[] = {
 
 
 /* END OF FILE */
-
-

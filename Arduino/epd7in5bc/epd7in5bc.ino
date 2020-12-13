@@ -36,7 +36,8 @@ void setup() {
         Serial.print("e-Paper init failed");
         return;
     }
-    epd.DisplayFrame(IMAGE_DATA);
+    //epd.Clean();
+    epd.DisplayOneQuarterFrame(IMAGE_DATA);
 }
 
 void loop() {

@@ -4,3 +4,20 @@
 2019-10-11: Add new feature 2.7inch e-Paper 4 grayscale.
 2019-11-12: Adding a new feature 4.2inch e-Paper partial refresh display, partial refresh display is not good, not added in some routines.
 2019-11-13: Add a new feature 4.2inch e-Paper 4 grayscale.
+2020-01-04: Modified Arduino routines, no need to move to the root directory, just double click to use;
+2020-04-21: Added new program 1.54inch B V2 e-Paper routine.
+2020-04-22: Added new program 2.13inch B V2 e-Paper routine.
+2020-04-27: Add new program 7.5inch B HD e-Paper routine.
+2020-04-28: Add new program 7.5inch HD e-Paper routine.
+2020-07-03: Added new program 2.9inch B V2 e-Paper routine.
+2020-07-14: Added new program 5.65inch e-Paper (F) routine.
+2020-07-30: Added new program 3.7inch e-Paper routine.
+2020-07-30: Added new program 2.66inch e-Paper routine.
+2020-08-03: Added new program 5.83inch B V2 e-Paper routine.
+2020-11-23: Update 1.54inch V2 e-Paper routine.
+2020-11-25: Added 4.2inch B V2 e-paper routine.
+2020-11-30: Update 7.5inch B V2 e-Paper routine.
+2020-12-02: Added new program 2.66inch e-Paper routine.
+2020-12-03: 2.9inch B V2 e-Paper was renamed 2.9inch B V3 e-Paper.
+2020-12-09: Added new program 2.9inch V2 e-Paper routine.
+2020-12-09: Added new program 5.83inch V2 e-Paper routine.

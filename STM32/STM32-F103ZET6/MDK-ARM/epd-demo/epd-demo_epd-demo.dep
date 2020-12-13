@@ -1,2062 +1,0 @@
-Dependencies for Project 'epd-demo', Target 'epd-demo': (DO NOT MODIFY !)
-F (startup_stm32f103xe.s)(0x5BEF8F9B)(--cpu Cortex-M3 -g --apcs=interwork --pd "__MICROLIB SETA 1"-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include--pd "__UVISION_VERSION SETA 525" --pd "_RTE_ SETA 1" --pd "STM32F10X_HD SETA 1"--list startup_stm32f103xe.lst --xref -o epd-demo\startup_stm32f103xe.o --depend epd-demo\startup_stm32f103xe.d)
-F (../Src/main.c)(0x5DCB759F)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\main.o --omf_browse epd-demo\main.crf --depend epd-demo\main.d)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (../Inc/spi.h)(0x5BEF8F97)
-I (../Inc/usart.h)(0x5BEF8F98)
-I (../Inc/gpio.h)(0x5BEF8F97)
-I (..\User\Examples\EPD_Test.h)(0x5D9FEA48)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (..\User\GUI\GUI_Paint.h)(0x5DCB7612)
-I (..\User\GUI\../Fonts/fonts.h)(0x5BD6A308)
-I (..\User\Examples\imagedata.h)(0x5DCB76A1)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
-F (../Src/gpio.c)(0x5BEF8F97)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\gpio.o --omf_browse epd-demo\gpio.crf --depend epd-demo\gpio.d)
-I (../Inc/gpio.h)(0x5BEF8F97)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-F (../Src/spi.c)(0x5BEF8F97)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\spi.o --omf_browse epd-demo\spi.crf --depend epd-demo\spi.d)
-I (../Inc/spi.h)(0x5BEF8F97)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (../Inc/gpio.h)(0x5BEF8F97)
-F (../Src/usart.c)(0x5BEF9432)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\usart.o --omf_browse epd-demo\usart.crf --depend epd-demo\usart.d)
-I (../Inc/usart.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (../Inc/gpio.h)(0x5BEF8F97)
-F (../Src/stm32f1xx_it.c)(0x5BEF8F98)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\stm32f1xx_it.o --omf_browse epd-demo\stm32f1xx_it.crf --depend epd-demo\stm32f1xx_it.d)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_it.h)(0x5BEF8F98)
-F (../Src/stm32f1xx_hal_msp.c)(0x5BEF8F98)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\stm32f1xx_hal_msp.o --omf_browse epd-demo\stm32f1xx_hal_msp.crf --depend epd-demo\stm32f1xx_hal_msp.d)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-F (../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c)(0x5AF29D1D)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\stm32f1xx_hal_gpio_ex.o --omf_browse epd-demo\stm32f1xx_hal_gpio_ex.crf --depend epd-demo\stm32f1xx_hal_gpio_ex.d)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-F (../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi.c)(0x5AF29D1D)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\stm32f1xx_hal_spi.o --omf_browse epd-demo\stm32f1xx_hal_spi.crf --depend epd-demo\stm32f1xx_hal_spi.d)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-F (../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c)(0x5AF29D1D)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\stm32f1xx_hal_spi_ex.o --omf_browse epd-demo\stm32f1xx_hal_spi_ex.crf --depend epd-demo\stm32f1xx_hal_spi_ex.d)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-F (../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c)(0x5AF29D1D)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\stm32f1xx_hal_tim.o --omf_browse epd-demo\stm32f1xx_hal_tim.crf --depend epd-demo\stm32f1xx_hal_tim.d)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-F (../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c)(0x5AF29D1D)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\stm32f1xx_hal_tim_ex.o --omf_browse epd-demo\stm32f1xx_hal_tim_ex.crf --depend epd-demo\stm32f1xx_hal_tim_ex.d)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-F (../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c)(0x5AF29D1D)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\stm32f1xx_hal_uart.o --omf_browse epd-demo\stm32f1xx_hal_uart.crf --depend epd-demo\stm32f1xx_hal_uart.d)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-F (../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c)(0x5AF29D1D)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\stm32f1xx_hal.o --omf_browse epd-demo\stm32f1xx_hal.crf --depend epd-demo\stm32f1xx_hal.d)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-F (../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.c)(0x5AF29D1D)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\stm32f1xx_hal_rcc.o --omf_browse epd-demo\stm32f1xx_hal_rcc.crf --depend epd-demo\stm32f1xx_hal_rcc.d)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-F (../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.c)(0x5AF29D1D)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\stm32f1xx_hal_rcc_ex.o --omf_browse epd-demo\stm32f1xx_hal_rcc_ex.crf --depend epd-demo\stm32f1xx_hal_rcc_ex.d)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-F (../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c)(0x5AF29D1D)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\stm32f1xx_hal_gpio.o --omf_browse epd-demo\stm32f1xx_hal_gpio.crf --depend epd-demo\stm32f1xx_hal_gpio.d)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-F (../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c)(0x5AF29D1D)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\stm32f1xx_hal_dma.o --omf_browse epd-demo\stm32f1xx_hal_dma.crf --depend epd-demo\stm32f1xx_hal_dma.d)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-F (../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c)(0x5AF29D1D)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\stm32f1xx_hal_cortex.o --omf_browse epd-demo\stm32f1xx_hal_cortex.crf --depend epd-demo\stm32f1xx_hal_cortex.d)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-F (../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c)(0x5AF29D1D)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\stm32f1xx_hal_pwr.o --omf_browse epd-demo\stm32f1xx_hal_pwr.crf --depend epd-demo\stm32f1xx_hal_pwr.d)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-F (../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.c)(0x5AF29D1D)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\stm32f1xx_hal_flash.o --omf_browse epd-demo\stm32f1xx_hal_flash.crf --depend epd-demo\stm32f1xx_hal_flash.d)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-F (../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c)(0x5AF29D1D)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\stm32f1xx_hal_flash_ex.o --omf_browse epd-demo\stm32f1xx_hal_flash_ex.crf --depend epd-demo\stm32f1xx_hal_flash_ex.d)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-F (..//Src/system_stm32f1xx.c)(0x5AF29CE5)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\system_stm32f1xx.o --omf_browse epd-demo\system_stm32f1xx.crf --depend epd-demo\system_stm32f1xx.d)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-F (..\User\Examples\ImageData.c)(0x5DCB7690)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\imagedata.o --omf_browse epd-demo\imagedata.crf --depend epd-demo\imagedata.d)
-I (..\User\Examples\ImageData.h)(0x5DCB76A1)
-F (..\User\Examples\EPD_1in54_test.c)(0x5D0214A0)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_1in54_test.o --omf_browse epd-demo\epd_1in54_test.crf --depend epd-demo\epd_1in54_test.d)
-I (..\User\Examples\EPD_Test.h)(0x5D9FEA48)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\GUI\GUI_Paint.h)(0x5DCB7612)
-I (..\User\GUI\../Fonts/fonts.h)(0x5BD6A308)
-I (..\User\Examples\imagedata.h)(0x5DCB76A1)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
-I (..\User\e-Paper\EPD_1in54.h)(0x5D01E68E)
-F (..\User\Examples\EPD_1in54_V2_test.c)(0x5D9F1434)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_1in54_v2_test.o --omf_browse epd-demo\epd_1in54_v2_test.crf --depend epd-demo\epd_1in54_v2_test.d)
-I (..\User\Examples\EPD_Test.h)(0x5D9FEA48)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\GUI\GUI_Paint.h)(0x5DCB7612)
-I (..\User\GUI\../Fonts/fonts.h)(0x5BD6A308)
-I (..\User\Examples\imagedata.h)(0x5DCB76A1)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
-I (..\User\e-Paper\EPD_1in54_V2.h)(0x5D01E6B7)
-F (..\User\Examples\EPD_1in54b_test.c)(0x5D021497)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_1in54b_test.o --omf_browse epd-demo\epd_1in54b_test.crf --depend epd-demo\epd_1in54b_test.d)
-I (..\User\Examples\EPD_Test.h)(0x5D9FEA48)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\GUI\GUI_Paint.h)(0x5DCB7612)
-I (..\User\GUI\../Fonts/fonts.h)(0x5BD6A308)
-I (..\User\Examples\imagedata.h)(0x5DCB76A1)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
-I (..\User\e-Paper\EPD_1in54b.h)(0x5D01E7B5)
-F (..\User\Examples\EPD_1in54c_test.c)(0x5D0214B0)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_1in54c_test.o --omf_browse epd-demo\epd_1in54c_test.crf --depend epd-demo\epd_1in54c_test.d)
-I (..\User\Examples\EPD_Test.h)(0x5D9FEA48)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\GUI\GUI_Paint.h)(0x5DCB7612)
-I (..\User\GUI\../Fonts/fonts.h)(0x5BD6A308)
-I (..\User\Examples\imagedata.h)(0x5DCB76A1)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
-I (..\User\e-Paper\EPD_1in54c.h)(0x5D01E7B5)
-F (..\User\Examples\EPD_2in7_test.c)(0x5D9F16CA)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_2in7_test.o --omf_browse epd-demo\epd_2in7_test.crf --depend epd-demo\epd_2in7_test.d)
-I (..\User\Examples\EPD_Test.h)(0x5D9FEA48)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\GUI\GUI_Paint.h)(0x5DCB7612)
-I (..\User\GUI\../Fonts/fonts.h)(0x5BD6A308)
-I (..\User\Examples\imagedata.h)(0x5DCB76A1)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
-I (..\User\e-Paper\EPD_2in7.h)(0x5DCB761C)
-F (..\User\Examples\EPD_2in7b_test.c)(0x5D0214AE)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_2in7b_test.o --omf_browse epd-demo\epd_2in7b_test.crf --depend epd-demo\epd_2in7b_test.d)
-I (..\User\Examples\EPD_Test.h)(0x5D9FEA48)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\GUI\GUI_Paint.h)(0x5DCB7612)
-I (..\User\GUI\../Fonts/fonts.h)(0x5BD6A308)
-I (..\User\Examples\imagedata.h)(0x5DCB76A1)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
-I (..\User\e-Paper\EPD_2IN7b.h)(0x5D01E7B5)
-F (..\User\Examples\EPD_2in9_test.c)(0x5D0214AC)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_2in9_test.o --omf_browse epd-demo\epd_2in9_test.crf --depend epd-demo\epd_2in9_test.d)
-I (..\User\Examples\EPD_Test.h)(0x5D9FEA48)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\GUI\GUI_Paint.h)(0x5DCB7612)
-I (..\User\GUI\../Fonts/fonts.h)(0x5BD6A308)
-I (..\User\Examples\imagedata.h)(0x5DCB76A1)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
-I (..\User\e-Paper\EPD_2in9.h)(0x5D01E7B5)
-F (..\User\Examples\EPD_2in9bc_test.c)(0x5D0214AB)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_2in9bc_test.o --omf_browse epd-demo\epd_2in9bc_test.crf --depend epd-demo\epd_2in9bc_test.d)
-I (..\User\Examples\EPD_Test.h)(0x5D9FEA48)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\GUI\GUI_Paint.h)(0x5DCB7612)
-I (..\User\GUI\../Fonts/fonts.h)(0x5BD6A308)
-I (..\User\Examples\imagedata.h)(0x5DCB76A1)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
-I (..\User\e-Paper\EPD_2IN9BC.h)(0x5D076105)
-F (..\User\Examples\EPD_2in9d_test.c)(0x5D023975)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_2in9d_test.o --omf_browse epd-demo\epd_2in9d_test.crf --depend epd-demo\epd_2in9d_test.d)
-I (..\User\Examples\EPD_Test.h)(0x5D9FEA48)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\GUI\GUI_Paint.h)(0x5DCB7612)
-I (..\User\GUI\../Fonts/fonts.h)(0x5BD6A308)
-I (..\User\Examples\imagedata.h)(0x5DCB76A1)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
-I (..\User\e-Paper\EPD_2in9d.h)(0x5D022DA1)
-F (..\User\Examples\EPD_2in13_test.c)(0x5D0214A9)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_2in13_test.o --omf_browse epd-demo\epd_2in13_test.crf --depend epd-demo\epd_2in13_test.d)
-I (..\User\Examples\EPD_Test.h)(0x5D9FEA48)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\GUI\GUI_Paint.h)(0x5DCB7612)
-I (..\User\GUI\../Fonts/fonts.h)(0x5BD6A308)
-I (..\User\Examples\imagedata.h)(0x5DCB76A1)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
-I (..\User\e-Paper\EPD_2in13.h)(0x5D01E802)
-F (..\User\Examples\EPD_2in13_V2_test.c)(0x5D1EABC8)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_2in13_v2_test.o --omf_browse epd-demo\epd_2in13_v2_test.crf --depend epd-demo\epd_2in13_v2_test.d)
-I (..\User\Examples\EPD_Test.h)(0x5D9FEA48)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\GUI\GUI_Paint.h)(0x5DCB7612)
-I (..\User\GUI\../Fonts/fonts.h)(0x5BD6A308)
-I (..\User\Examples\imagedata.h)(0x5DCB76A1)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
-I (..\User\e-Paper\EPD_2IN13_V2.h)(0x5D01E93F)
-F (..\User\Examples\EPD_2in13bc_test.c)(0x5D0214A7)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_2in13bc_test.o --omf_browse epd-demo\epd_2in13bc_test.crf --depend epd-demo\epd_2in13bc_test.d)
-I (..\User\Examples\EPD_Test.h)(0x5D9FEA48)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\GUI\GUI_Paint.h)(0x5DCB7612)
-I (..\User\GUI\../Fonts/fonts.h)(0x5BD6A308)
-I (..\User\Examples\imagedata.h)(0x5DCB76A1)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
-I (..\User\e-Paper\EPD_2IN13BC.h)(0x5D07615D)
-F (..\User\Examples\EPD_2in13d_test.c)(0x5D035097)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_2in13d_test.o --omf_browse epd-demo\epd_2in13d_test.crf --depend epd-demo\epd_2in13d_test.d)
-I (..\User\Examples\EPD_Test.h)(0x5D9FEA48)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\GUI\GUI_Paint.h)(0x5DCB7612)
-I (..\User\GUI\../Fonts/fonts.h)(0x5BD6A308)
-I (..\User\Examples\imagedata.h)(0x5DCB76A1)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
-I (..\User\e-Paper\EPD_2in13d.h)(0x5D01E581)
-F (..\User\Examples\EPD_4in2_test.c)(0x5DCB78AB)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_4in2_test.o --omf_browse epd-demo\epd_4in2_test.crf --depend epd-demo\epd_4in2_test.d)
-I (..\User\Examples\EPD_Test.h)(0x5D9FEA48)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\GUI\GUI_Paint.h)(0x5DCB7612)
-I (..\User\GUI\../Fonts/fonts.h)(0x5BD6A308)
-I (..\User\Examples\imagedata.h)(0x5DCB76A1)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
-I (..\User\e-Paper\EPD_4in2.h)(0x5DCB7577)
-I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
-F (..\User\Examples\EPD_4in2bc_test.c)(0x5D0214A3)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_4in2bc_test.o --omf_browse epd-demo\epd_4in2bc_test.crf --depend epd-demo\epd_4in2bc_test.d)
-I (..\User\Examples\EPD_Test.h)(0x5D9FEA48)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\GUI\GUI_Paint.h)(0x5DCB7612)
-I (..\User\GUI\../Fonts/fonts.h)(0x5BD6A308)
-I (..\User\Examples\imagedata.h)(0x5DCB76A1)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
-I (..\User\e-Paper\EPD_4in2bc.h)(0x5D07619A)
-F (..\User\Examples\EPD_5in83_test.c)(0x5D0214A2)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_5in83_test.o --omf_browse epd-demo\epd_5in83_test.crf --depend epd-demo\epd_5in83_test.d)
-I (..\User\Examples\EPD_Test.h)(0x5D9FEA48)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\GUI\GUI_Paint.h)(0x5DCB7612)
-I (..\User\GUI\../Fonts/fonts.h)(0x5BD6A308)
-I (..\User\Examples\imagedata.h)(0x5DCB76A1)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
-I (..\User\e-Paper\EPD_5in83.h)(0x5D02215F)
-F (..\User\Examples\EPD_5in83bc_test.c)(0x5D02161D)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_5in83bc_test.o --omf_browse epd-demo\epd_5in83bc_test.crf --depend epd-demo\epd_5in83bc_test.d)
-I (..\User\Examples\EPD_Test.h)(0x5D9FEA48)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\GUI\GUI_Paint.h)(0x5DCB7612)
-I (..\User\GUI\../Fonts/fonts.h)(0x5BD6A308)
-I (..\User\Examples\imagedata.h)(0x5DCB76A1)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
-I (..\User\e-Paper\EPD_5in83bc.h)(0x5D0761C1)
-F (..\User\Examples\EPD_7in5_test.c)(0x5D021FB7)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_7in5_test.o --omf_browse epd-demo\epd_7in5_test.crf --depend epd-demo\epd_7in5_test.d)
-I (..\User\Examples\EPD_Test.h)(0x5D9FEA48)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\GUI\GUI_Paint.h)(0x5DCB7612)
-I (..\User\GUI\../Fonts/fonts.h)(0x5BD6A308)
-I (..\User\Examples\imagedata.h)(0x5DCB76A1)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
-I (..\User\e-Paper\EPD_7in5.h)(0x5D022133)
-F (..\User\Examples\EPD_7in5bc_test.c)(0x5D022510)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_7in5bc_test.o --omf_browse epd-demo\epd_7in5bc_test.crf --depend epd-demo\epd_7in5bc_test.d)
-I (..\User\Examples\EPD_Test.h)(0x5D9FEA48)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\GUI\GUI_Paint.h)(0x5DCB7612)
-I (..\User\GUI\../Fonts/fonts.h)(0x5BD6A308)
-I (..\User\Examples\imagedata.h)(0x5DCB76A1)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
-I (..\User\e-Paper\EPD_7in5bc.h)(0x5D0761FC)
-F (..\User\Examples\EPD_1in02_test.c)(0x5D9FECA6)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_1in02_test.o --omf_browse epd-demo\epd_1in02_test.crf --depend epd-demo\epd_1in02_test.d)
-I (..\User\Examples\EPD_Test.h)(0x5D9FEA48)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\GUI\GUI_Paint.h)(0x5DCB7612)
-I (..\User\GUI\../Fonts/fonts.h)(0x5BD6A308)
-I (..\User\Examples\imagedata.h)(0x5DCB76A1)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
-I (..\User\e-Paper\EPD_1in02d.h)(0x5D905F08)
-I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
-F (..\User\Examples\EPD_7in5_V2_test.c)(0x5D9BE93D)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_7in5_v2_test.o --omf_browse epd-demo\epd_7in5_v2_test.crf --depend epd-demo\epd_7in5_v2_test.d)
-I (..\User\Examples\EPD_Test.h)(0x5D9FEA48)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\GUI\GUI_Paint.h)(0x5DCB7612)
-I (..\User\GUI\../Fonts/fonts.h)(0x5BD6A308)
-I (..\User\Examples\imagedata.h)(0x5DCB76A1)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
-I (..\User\e-Paper\EPD_7in5_V2.h)(0x5D917B1A)
-F (..\User\Examples\EPD_7in5b_V2_test.c)(0x5D9BEE7B)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_7in5b_v2_test.o --omf_browse epd-demo\epd_7in5b_v2_test.crf --depend epd-demo\epd_7in5b_v2_test.d)
-I (..\User\Examples\EPD_Test.h)(0x5D9FEA48)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\GUI\GUI_Paint.h)(0x5DCB7612)
-I (..\User\GUI\../Fonts/fonts.h)(0x5BD6A308)
-I (..\User\Examples\imagedata.h)(0x5DCB76A1)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
-I (..\User\e-Paper\EPD_7in5b_V2.h)(0x5D9BED1F)
-F (..\User\e-Paper\EPD_1in54.c)(0x5D070BBD)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_1in54.o --omf_browse epd-demo\epd_1in54.crf --depend epd-demo\epd_1in54.d)
-I (..\User\e-Paper\EPD_1in54.h)(0x5D01E68E)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-F (..\User\e-Paper\EPD_1in54_V2.c)(0x5D087E77)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_1in54_v2.o --omf_browse epd-demo\epd_1in54_v2.crf --depend epd-demo\epd_1in54_v2.d)
-I (..\User\e-Paper\EPD_1in54_V2.h)(0x5D01E6B7)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-F (..\User\e-Paper\EPD_1in54b.c)(0x5D01E6CB)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_1in54b.o --omf_browse epd-demo\epd_1in54b.crf --depend epd-demo\epd_1in54b.d)
-I (..\User\e-Paper\EPD_1in54b.h)(0x5D01E7B5)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-F (..\User\e-Paper\EPD_1in54c.c)(0x5D01E6DA)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_1in54c.o --omf_browse epd-demo\epd_1in54c.crf --depend epd-demo\epd_1in54c.d)
-I (..\User\e-Paper\EPD_1in54c.h)(0x5D01E7B5)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-F (..\User\e-Paper\EPD_2in7.c)(0x5D9F0E5B)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_2in7.o --omf_browse epd-demo\epd_2in7.crf --depend epd-demo\epd_2in7.d)
-I (..\User\e-Paper\EPD_2in7.h)(0x5DCB761C)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-F (..\User\e-Paper\EPD_2in7b.c)(0x5D074CF0)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_2in7b.o --omf_browse epd-demo\epd_2in7b.crf --depend epd-demo\epd_2in7b.d)
-I (..\User\e-Paper\EPD_2in7b.h)(0x5D01E7B5)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-F (..\User\e-Paper\EPD_2in9.c)(0x5D11D101)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_2in9.o --omf_browse epd-demo\epd_2in9.crf --depend epd-demo\epd_2in9.d)
-I (..\User\e-Paper\EPD_2in9.h)(0x5D01E7B5)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-F (..\User\e-Paper\EPD_2in9bc.c)(0x5D0762A0)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_2in9bc.o --omf_browse epd-demo\epd_2in9bc.crf --depend epd-demo\epd_2in9bc.d)
-I (..\User\e-Paper\EPD_2in9bc.h)(0x5D076105)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-F (..\User\e-Paper\EPD_2in9d.c)(0x5D9FF0F7)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_2in9d.o --omf_browse epd-demo\epd_2in9d.crf --depend epd-demo\epd_2in9d.d)
-I (..\User\e-Paper\EPD_2in9d.h)(0x5D022DA1)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-F (..\User\e-Paper\EPD_2in13.c)(0x5D0A19C9)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_2in13.o --omf_browse epd-demo\epd_2in13.crf --depend epd-demo\epd_2in13.d)
-I (..\User\e-Paper\EPD_2in13.h)(0x5D01E802)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-F (..\User\e-Paper\EPD_2in13_V2.c)(0x5D9FE132)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_2in13_v2.o --omf_browse epd-demo\epd_2in13_v2.crf --depend epd-demo\epd_2in13_v2.d)
-I (..\User\e-Paper\EPD_2in13_V2.h)(0x5D01E93F)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-F (..\User\e-Paper\EPD_2in13bc.c)(0x5D076173)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_2in13bc.o --omf_browse epd-demo\epd_2in13bc.crf --depend epd-demo\epd_2in13bc.d)
-I (..\User\e-Paper\EPD_2in13bc.h)(0x5D07615D)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-F (..\User\e-Paper\EPD_2in13d.c)(0x5D01E968)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_2in13d.o --omf_browse epd-demo\epd_2in13d.crf --depend epd-demo\epd_2in13d.d)
-I (..\User\e-Paper\EPD_2in13d.h)(0x5D01E581)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-F (..\User\e-Paper\EPD_4in2.c)(0x5DCB7568)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_4in2.o --omf_browse epd-demo\epd_4in2.crf --depend epd-demo\epd_4in2.d)
-I (..\User\e-Paper\EPD_4in2.h)(0x5DCB7577)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-F (..\User\e-Paper\EPD_4in2bc.c)(0x5D076191)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_4in2bc.o --omf_browse epd-demo\epd_4in2bc.crf --depend epd-demo\epd_4in2bc.d)
-I (..\User\e-Paper\EPD_4in2bc.h)(0x5D07619A)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-F (..\User\e-Paper\EPD_5in83.c)(0x5D022150)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_5in83.o --omf_browse epd-demo\epd_5in83.crf --depend epd-demo\epd_5in83.d)
-I (..\User\e-Paper\EPD_5in83.h)(0x5D02215F)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-F (..\User\e-Paper\EPD_5in83bc.c)(0x5D07624B)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_5in83bc.o --omf_browse epd-demo\epd_5in83bc.crf --depend epd-demo\epd_5in83bc.d)
-I (..\User\e-Paper\EPD_5in83bc.h)(0x5D0761C1)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-F (..\User\e-Paper\EPD_7in5.c)(0x5D0C70D3)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_7in5.o --omf_browse epd-demo\epd_7in5.crf --depend epd-demo\epd_7in5.d)
-I (..\User\e-Paper\EPD_7in5.h)(0x5D022133)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-F (..\User\e-Paper\EPD_7in5bc.c)(0x5D07625F)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_7in5bc.o --omf_browse epd-demo\epd_7in5bc.crf --depend epd-demo\epd_7in5bc.d)
-I (..\User\e-Paper\EPD_7in5bc.h)(0x5D0761FC)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-F (..\User\e-Paper\EPD_7in5_V2.c)(0x5D9BE71C)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_7in5_v2.o --omf_browse epd-demo\epd_7in5_v2.crf --depend epd-demo\epd_7in5_v2.d)
-I (..\User\e-Paper\EPD_7in5_V2.h)(0x5D917B1A)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-F (..\User\e-Paper\EPD_7in5b_V2.c)(0x5D9BF26B)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_7in5b_v2.o --omf_browse epd-demo\epd_7in5b_v2.crf --depend epd-demo\epd_7in5b_v2.d)
-I (..\User\e-Paper\EPD_7in5b_V2.h)(0x5D9BED1F)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-F (..\User\e-Paper\EPD_1in02d.c)(0x5D9FEA1D)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\epd_1in02d.o --omf_browse epd-demo\epd_1in02d.crf --depend epd-demo\epd_1in02d.d)
-I (..\User\e-Paper\EPD_1in02d.h)(0x5D905F08)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-F (..\User\Config\DEV_Config.c)(0x5D906511)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\dev_config.o --omf_browse epd-demo\dev_config.crf --depend epd-demo\dev_config.d)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-F (..\User\GUI\GUI_Paint.c)(0x5D9F17E9)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\gui_paint.o --omf_browse epd-demo\gui_paint.crf --depend epd-demo\gui_paint.d)
-I (..\User\GUI\GUI_Paint.h)(0x5DCB7612)
-I (..\User\Config\DEV_Config.h)(0x5D90651B)
-I (../Inc/main.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5AF29D1D)
-I (../Inc/stm32f1xx_hal_conf.h)(0x5BEF8F98)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x5AF29D1D)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h)(0x5AF29CE5)
-I (../Drivers/CMSIS/Include/core_cm3.h)(0x5AF29CFB)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (../Drivers/CMSIS/Include/core_cmInstr.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Include/core_cmFunc.h)(0x5AF29CFB)
-I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x5AF29CE5)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h)(0x5AF29D1D)
-I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5AF29D1D)
-I (..\User\GUI\../Fonts/fonts.h)(0x5BD6A308)
-I (..\User\Config\Debug.h)(0x5BEFB7E6)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
-I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
-I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x599ECD2E)
-F (..\User\Fonts\font8.c)(0x5B3C9236)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\font8.o --omf_browse epd-demo\font8.crf --depend epd-demo\font8.d)
-I (..\User\Fonts\fonts.h)(0x5BD6A308)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-F (..\User\Fonts\font12.c)(0x5B3C9236)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\font12.o --omf_browse epd-demo\font12.crf --depend epd-demo\font12.d)
-I (..\User\Fonts\fonts.h)(0x5BD6A308)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-F (..\User\Fonts\font12CN.c)(0x5A9E48CE)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\font12cn.o --omf_browse epd-demo\font12cn.crf --depend epd-demo\font12cn.d)
-I (..\User\Fonts\fonts.h)(0x5BD6A308)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-F (..\User\Fonts\font16.c)(0x5B3C9236)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\font16.o --omf_browse epd-demo\font16.crf --depend epd-demo\font16.d)
-I (..\User\Fonts\fonts.h)(0x5BD6A308)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-F (..\User\Fonts\font20.c)(0x5B3C9236)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\font20.o --omf_browse epd-demo\font20.crf --depend epd-demo\font20.d)
-I (..\User\Fonts\fonts.h)(0x5BD6A308)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-F (..\User\Fonts\font24.c)(0x5B3C9236)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\font24.o --omf_browse epd-demo\font24.crf --depend epd-demo\font24.d)
-I (..\User\Fonts\fonts.h)(0x5BD6A308)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-F (..\User\Fonts\font24CN.c)(0x5A9E4AFB)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include -I ..\User\Config -I ..\User\e-Paper -I ..\User\Fonts -I ..\User\GUI -I ..\User\Examples-I.\RTE\_epd-demo-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F10X_HD -DUSE_HAL_DRIVER -DSTM32F103xE-o epd-demo\font24cn.o --omf_browse epd-demo\font24cn.crf --depend epd-demo\font24cn.d)
-I (..\User\Fonts\fonts.h)(0x5BD6A308)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-F (..\User\Readme_CN.txt)(0x5D0779C0)()
-F (..\User\Readme_EN.txt)(0x5D0779FA)()

@@ -22,9 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-extern const unsigned char *IMAGE_DATA[2];
-extern const unsigned char IMAGE_DATA_1[];
-extern const unsigned char IMAGE_DATA_2[];
+extern const unsigned char IMAGE_DATA[];
 /* FILE END */
 
 

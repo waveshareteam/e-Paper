@@ -1,11 +1,11 @@
 /*****************************************************************************
-* | File      	:	EPD_7IN5B_V2_7in5.c
+* | File      	:	EPD_7IN5b_V2.c
 * | Author      :   Waveshare team
 * | Function    :   Electronic paper driver
 * | Info        :
 *----------------
-* |	This version:   V2.0
-* | Date        :   2018-11-09
+* |	This version:   V2.1
+* | Date        :   2020-11-30
 * | Info        :
 ******************************************************************************
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -136,6 +136,17 @@ UBYTE EPD_7IN5B_V2_Init(void)
 
     EPD_7IN5B_V2_SendCommand(0X60);			//TCON SETTING
     EPD_7IN5B_V2_SendData(0x22);
+	
+	EPD_7IN5B_V2_SendCommand(0X82);
+	EPD_7IN5B_V2_SendData(0x08);
+	EPD_7IN5B_V2_SendCommand(0X30);
+	EPD_7IN5B_V2_SendData(0x06);
+				
+    EPD_7IN5B_V2_SendCommand(0x65);  // Resolution setting
+    EPD_7IN5B_V2_SendData(0x00);
+    EPD_7IN5B_V2_SendData(0x00);//800*480
+    EPD_7IN5B_V2_SendData(0x00);
+    EPD_7IN5B_V2_SendData(0x00);
 
     return 0;
 }
