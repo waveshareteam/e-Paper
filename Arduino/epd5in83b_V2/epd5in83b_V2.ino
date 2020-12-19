@@ -41,10 +41,10 @@ void setup() {
   epd.Clear();
   
   Serial.print("draw image\r\n ");
+  epd.DisplayPicture(IMAGE_DATA, 0);
   epd.DisplayPicture(IMAGE_DATA, 1);
   epd.DisplayPicture(IMAGE_DATA, 2);
   epd.DisplayPicture(IMAGE_DATA, 3);
-  epd.DisplayPicture(IMAGE_DATA, 4);
   
   delay(2000);
 }
