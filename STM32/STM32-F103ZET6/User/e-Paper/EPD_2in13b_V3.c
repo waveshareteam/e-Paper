@@ -30,7 +30,7 @@
 ******************************************************************************/
 #include "EPD_2in13b_V3.h"
 #include "Debug.h"
-//元太屏
+
 /******************************************************************************
 function :	Software reset
 parameter:
@@ -40,9 +40,9 @@ static void EPD_2IN13B_V3_Reset(void)
     DEV_Digital_Write(EPD_CS_PIN, 1);
     
     DEV_Digital_Write(EPD_RST_PIN, 1);
-    DEV_Delay_ms(1000);
+    DEV_Delay_ms(100);
     DEV_Digital_Write(EPD_RST_PIN, 0);
-    DEV_Delay_ms(10);
+    DEV_Delay_ms(2);
     DEV_Digital_Write(EPD_RST_PIN, 1);
     DEV_Delay_ms(10);
 }

@@ -1,11 +1,11 @@
 /*****************************************************************************
-* | File      	:	EPD_7in5.h
+* | File      	:	EPD_7in5b_V2.h
 * | Author      :   Waveshare team
 * | Function    :   Electronic paper driver
 * | Info        :
 *----------------
-* |	This version:   V2.0
-* | Date        :   2018-11-09
+* |	This version:   V2.1
+* | Date        :   2020-11-30
 * | Info        :   
 * 1.Remove:ImageBuff[EPD_HEIGHT * EPD_WIDTH / 8]
 * 2.Change:EPD_Display(UBYTE *Image)

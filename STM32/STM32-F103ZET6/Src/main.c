@@ -82,8 +82,9 @@ int main(void)
 //		EPD_2in7b_test();
 
 //		EPD_2in9_test();
+//		EPD_2in9_V2_test();
 //		EPD_2in9bc_test();
-//		EPD_2in9b_V2_test();
+//		EPD_2in9b_V3_test();
 //		EPD_2in9d_test();
 
 //		EPD_2in13_test();
@@ -93,15 +94,17 @@ int main(void)
 //		EPD_2in13d_test();
 	
 //		EPD_2in66_test();
-	
+//		EPD_2in66b_test();
+		
 //		EPD_3in7_test();
 	
 //		EPD_4in2_test();
 //		EPD_4in2bc_test();
-
+//		EPD_4in2b_V2_test();
 //		EPD_5in65f_test();
 	
 //		EPD_5in83_test();
+//		EPD_5in83_V2_test();
 //		EPD_5in83bc_test();
 //		EPD_5in83b_V2_test();
 
