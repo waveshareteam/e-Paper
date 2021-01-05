@@ -33,8 +33,6 @@
 
 int EPD_7in5_HD_test(void)
 {
-while(1)
-{
     printf("EPD_7IN5_HD_test Demo\r\n");
     if(DEV_Module_Init()!=0){
         return -1;
@@ -119,7 +117,7 @@ while(1)
     // close 5V
     printf("close 5V, Module enters 0 power consumption ...\r\n");
     DEV_Module_Exit();
-}   
+  
     return 0;
 }
 

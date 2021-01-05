@@ -80,11 +80,10 @@ static void EPD_5in83_V2_ReadBusy(void)
 	Debug("e-Paper busy\r\n");
 	do {
 		EPD_5in83_V2_SendCommand(0x71);
-		DEV_Delay_ms(50);    
+		DEV_Delay_ms(10);    
 	}
 	while(!DEV_Digital_Read(EPD_BUSY_PIN));   
 	Debug("e-Paper busy release\r\n");
-	DEV_Delay_ms(50);    
 }
 
 /******************************************************************************

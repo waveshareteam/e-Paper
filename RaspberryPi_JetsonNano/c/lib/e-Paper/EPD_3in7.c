@@ -214,7 +214,7 @@ void EPD_3IN7_4Gray_Init(void)
      
     EPD_3IN7_SendCommand(0x2C); // set vcom value
     EPD_3IN7_SendData(0x44);
-    
+
     EPD_3IN7_SendCommand(0x37); // set display option, these setting turn on previous function
     EPD_3IN7_SendData(0x00);
     EPD_3IN7_SendData(0x00);
@@ -260,7 +260,7 @@ void EPD_3IN7_1Gray_Init(void)
     EPD_3IN7_SendCommand(0x47);
     EPD_3IN7_SendData(0xF7);
     EPD_3IN7_ReadBusy_HIGH(); 
-    
+
     EPD_3IN7_SendCommand(0x01); // setting gaet number
     EPD_3IN7_SendData(0xDF);
     EPD_3IN7_SendData(0x01);
@@ -548,30 +548,30 @@ notes:
 ******************************************************************************/
 void EPD_3IN7_1Gray_Display_Part(const UBYTE *Image, UWORD Xstart, UWORD Ystart, UWORD Xend, UWORD Yend)
 {
-  UWORD i, Width;
-  Width = (Xend-Xstart)%8 == 0 ? (Xend-Xstart)/8 : (Xend-Xstart)/8+1;
-  UWORD IMAGE_COUNTER = Width * (Yend-Ystart);
+	UWORD i, Width;
+	Width = (Xend-Xstart)%8 == 0 ? (Xend-Xstart)/8 : (Xend-Xstart)/8+1;
+	UWORD IMAGE_COUNTER = Width * (Yend-Ystart);
 
-  EPD_3IN7_SendCommand(0x44);
-  EPD_3IN7_SendData(Xstart & 0xff);
-  EPD_3IN7_SendData((Xstart>>8) & 0x03);
-  EPD_3IN7_SendData(Xend & 0xff);
-  EPD_3IN7_SendData((Xend>>8) & 0x03);
-  EPD_3IN7_SendCommand(0x45);
-  EPD_3IN7_SendData(Ystart & 0xff);
-  EPD_3IN7_SendData((Ystart>>8) & 0x03);
-  EPD_3IN7_SendData(Yend & 0xff);
-  EPD_3IN7_SendData((Yend>>8) & 0x03);
+	EPD_3IN7_SendCommand(0x44);
+	EPD_3IN7_SendData(Xstart & 0xff);
+	EPD_3IN7_SendData((Xstart>>8) & 0x03);
+	EPD_3IN7_SendData(Xend & 0xff);
+	EPD_3IN7_SendData((Xend>>8) & 0x03);
+	EPD_3IN7_SendCommand(0x45);
+	EPD_3IN7_SendData(Ystart & 0xff);
+	EPD_3IN7_SendData((Ystart>>8) & 0x03);
+	EPD_3IN7_SendData(Yend & 0xff);
+	EPD_3IN7_SendData((Yend>>8) & 0x03);
 
-  EPD_3IN7_SendCommand(0x24);
-  for (i = 0; i < IMAGE_COUNTER; i++)
-  {
-    EPD_3IN7_SendData(Image[i]);
-  }
-  
-  EPD_3IN7_Load_LUT(2);
-  EPD_3IN7_SendCommand(0x20);
-  EPD_3IN7_ReadBusy_HIGH();    
+	EPD_3IN7_SendCommand(0x24);
+	for (i = 0; i < IMAGE_COUNTER; i++)
+	{
+	EPD_3IN7_SendData(Image[i]);
+	}
+
+	EPD_3IN7_Load_LUT(2);
+	EPD_3IN7_SendCommand(0x20);
+	EPD_3IN7_ReadBusy_HIGH();    
 }
 
 /******************************************************************************

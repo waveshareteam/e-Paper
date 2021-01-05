@@ -96,7 +96,7 @@ try:
         epd.display_1Gray(epd.getbuffer(time_image))
         
         num = num + 1
-        if(num == 10):
+        if(num == 20):
             break
             
     logging.info("Clear...")

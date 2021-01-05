@@ -152,45 +152,6 @@ void EPD_5IN65F_Clear(UBYTE color)
 
 /******************************************************************************
 function:
-		show 7 kind of color block 
-******************************************************************************/
-void EPD_5IN65F_Show7Block(void)
-{
-    unsigned long i,j,k;
-    unsigned char const Color_seven[8] =
-	{EPD_5IN65F_BLACK,EPD_5IN65F_BLUE,EPD_5IN65F_GREEN,EPD_5IN65F_ORANGE,
-	EPD_5IN65F_RED,EPD_5IN65F_YELLOW,EPD_5IN65F_WHITE,EPD_5IN65F_WHITE};
-    EPD_5IN65F_SendCommand(0x61);//Set Resolution setting
-    EPD_5IN65F_SendData(0x02);
-    EPD_5IN65F_SendData(0x58);
-    EPD_5IN65F_SendData(0x01);
-    EPD_5IN65F_SendData(0xC0);
-    EPD_5IN65F_SendCommand(0x10);
-    for(i=0; i<224; i++) {
-        for(k = 0 ; k < 4; k ++) {
-            for(j = 0 ; j < 75; j ++) {
-                EPD_5IN65F_SendData((Color_seven[k]<<4) |Color_seven[k]);
-            }
-        }
-    }
-    for(i=0; i<224; i++) {
-        for(k = 4 ; k < 8; k ++) {
-            for(j = 0 ; j < 75; j ++) {
-                EPD_5IN65F_SendData((Color_seven[k]<<4) |Color_seven[k]);
-            }
-        }
-    }
-    EPD_5IN65F_SendCommand(0x04);//0x04
-    EPD_5IN65F_BusyHigh();
-    EPD_5IN65F_SendCommand(0x12);//0x12
-    EPD_5IN65F_BusyHigh();
-    EPD_5IN65F_SendCommand(0x02);  //0x02
-    EPD_5IN65F_BusyLow();
-	DEV_Delay_ms(200);
-}
-
-/******************************************************************************
-function:
 		refresh display
 ******************************************************************************/
 void EPD_5IN65F_Display(const UBYTE *image)
@@ -236,19 +197,19 @@ void EPD_5IN65F_Display_part(const UBYTE *image, UWORD xstart, UWORD ystart,
     EPD_5IN65F_SendCommand(0x10);
     for(i=0; i<EPD_5IN65F_HEIGHT; i++) {
         for(j=0; j< EPD_5IN65F_WIDTH/2; j++) {
-						if(i<image_heigh+ystart && i>=ystart && j<(image_width+xstart)/2 && j>=xstart/2) {
-							EPD_5IN65F_SendData(image[(j-xstart/2) + (image_width/2*(i-ystart))]);
-							// printf("0x%x, ", image[j+((EPD_5IN65F_WIDTH/2)*i)]);
-							// k++;
-							// if(k == 16) {
-								// printf("\r\n");
-								// k = 0;
-							// }
-						}
-						else {
-							EPD_5IN65F_SendData(0x11);
-						}
-				}
+			if(i<image_heigh+ystart && i>=ystart && j<(image_width+xstart)/2 && j>=xstart/2) {
+				EPD_5IN65F_SendData(image[(j-xstart/2) + (image_width/2*(i-ystart))]);
+				// printf("0x%x, ", image[j+((EPD_5IN65F_WIDTH/2)*i)]);
+				// k++;
+				// if(k == 16) {
+					// printf("\r\n");
+					// k = 0;
+				// }
+			}
+			else {
+				EPD_5IN65F_SendData(0x11);
+			}
+		}
     }
     EPD_5IN65F_SendCommand(0x04);//0x04
     EPD_5IN65F_BusyHigh();

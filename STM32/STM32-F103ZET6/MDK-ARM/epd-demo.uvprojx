@@ -628,6 +628,11 @@
               <FilePath>..\User\Examples\EPD_3in7_test.c</FilePath>
             </File>
             <File>
+              <FileName>EPD_4in01f_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Examples\EPD_4in01f_test.c</FilePath>
+            </File>
+            <File>
               <FileName>EPD_4in2_test.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\Examples\EPD_4in2_test.c</FilePath>
@@ -806,6 +811,11 @@
               <FileName>EPD_3in7.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\e-Paper\EPD_3in7.c</FilePath>
+            </File>
+            <File>
+              <FileName>EPD_4in01f.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\e-Paper\EPD_4in01f.c</FilePath>
             </File>
             <File>
               <FileName>EPD_4in2.c</FileName>

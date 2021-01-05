@@ -1,4 +1,4 @@
-/*    DEV_Delay_ms(2000);//important, at least 2s/*****************************************************************************
+/*****************************************************************************
 * | File      	:   EPD_5in65f_test.c
 * | Author      :   Waveshare team
 * | Function    :   5.65inch F e-paper test demo
@@ -47,9 +47,6 @@ int EPD_5in65f_test(void)
     printf("%ld S\r\n",finish.tv_sec-start.tv_sec);
     DEV_Delay_ms(100);
 	
-	// EPD_5IN65F_Show7Block();
-	// DEV_Delay_ms(10000);
-	
     UBYTE *BlackImage;
     /* you have to edit the startup_stm32fxxx.s file and set a big enough heap size */
     UDOUBLE Imagesize = ((EPD_5IN65F_WIDTH % 2 == 0)? (EPD_5IN65F_WIDTH / 2 ): (EPD_5IN65F_WIDTH / 2 + 1)) * EPD_5IN65F_HEIGHT;
@@ -66,6 +63,14 @@ int EPD_5in65f_test(void)
     GUI_ReadBmp_RGB_7Color("./pic/5in65f3.bmp", 0, 0);
 	EPD_5IN65F_Display(BlackImage);
     // EPD_5IN65F_Display_part(BlackImage, 0, 0, 600, 260);
+    DEV_Delay_ms(4000);
+#endif
+
+#if 1
+    printf("show image for array\r\n");
+    Paint_Clear(EPD_5IN65F_WHITE);
+    GUI_ReadBmp_RGB_7Color("./pic/5in65f.bmp", 0, 0);
+	EPD_5IN65F_Display(BlackImage);
     DEV_Delay_ms(4000);
 #endif
 
