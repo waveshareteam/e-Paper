@@ -45,7 +45,7 @@ void setup() {
   epd.DisplayPicture(IMAGE_DATA, 1);
   epd.DisplayPicture(IMAGE_DATA, 2);
   epd.DisplayPicture(IMAGE_DATA, 3);
-  
+
   delay(2000);
 }
 

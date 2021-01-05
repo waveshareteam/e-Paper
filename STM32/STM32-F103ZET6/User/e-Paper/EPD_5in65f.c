@@ -150,46 +150,6 @@ void EPD_5IN65F_Clear(UBYTE color)
 }
 
 /******************************************************************************
-function :	show 7 kind of color block
-parameter:
-******************************************************************************/
-void EPD_5IN65F_Show7Block(void)
-{
-    unsigned long i,j,k;
-    unsigned char const Color_seven[8] =
-	{EPD_5IN65F_BLACK,EPD_5IN65F_BLUE,EPD_5IN65F_GREEN,EPD_5IN65F_ORANGE,
-	EPD_5IN65F_RED,EPD_5IN65F_YELLOW,EPD_5IN65F_WHITE,EPD_5IN65F_WHITE};
-    EPD_5IN65F_SendCommand(0x61);//Set Resolution setting
-    EPD_5IN65F_SendData(0x02);
-    EPD_5IN65F_SendData(0x58);
-    EPD_5IN65F_SendData(0x01);
-    EPD_5IN65F_SendData(0xC0);
-    EPD_5IN65F_SendCommand(0x10);
-
-    for(i=0; i<224; i++) {
-        for(k = 0 ; k < 4; k ++) {
-            for(j = 0 ; j < 75; j ++) {
-                EPD_5IN65F_SendData((Color_seven[k]<<4) |Color_seven[k]);
-            }
-        }
-    }
-    for(i=0; i<224; i++) {
-        for(k = 4 ; k < 8; k ++) {
-            for(j = 0 ; j < 75; j ++) {
-                EPD_5IN65F_SendData((Color_seven[k]<<4) |Color_seven[k]);
-            }
-        }
-    }
-    EPD_5IN65F_SendCommand(0x04);//0x04
-    EPD_5IN65F_BusyHigh();
-    EPD_5IN65F_SendCommand(0x12);//0x12
-    EPD_5IN65F_BusyHigh();
-    EPD_5IN65F_SendCommand(0x02);  //0x02
-    EPD_5IN65F_BusyLow();
-	DEV_Delay_ms(200);
-}
-
-/******************************************************************************
 function :	Sends the image buffer in RAM to e-Paper and displays
 parameter:
 ******************************************************************************/

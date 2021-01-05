@@ -195,7 +195,7 @@ function:
 void EPD_4IN01F_Display(const UBYTE *image)
 {
     unsigned long i, j;
-	// UBYTE k = 0;
+	UBYTE k = 0;
     EPD_4IN01F_SendCommand(0x61);//Set Resolution setting
     EPD_4IN01F_SendData(0x02);
     EPD_4IN01F_SendData(0x80);
@@ -205,12 +205,12 @@ void EPD_4IN01F_Display(const UBYTE *image)
     for(i=0; i<EPD_4IN01F_HEIGHT; i++) {
         for(j=0; j<EPD_4IN01F_WIDTH/2; j++) {
             EPD_4IN01F_SendData(image[j+((EPD_4IN01F_WIDTH/2)*i)]);
-			// printf("0x%x, ", image[j+((EPD_4IN01F_WIDTH/2)*i)]);
-			// k++;
-			// if(k == 16) {
-				// printf("\n");
-				// k = 0;
-			// }
+			printf("0x%x, ", image[j+((EPD_4IN01F_WIDTH/2)*i)]);
+			k++;
+			if(k == 16) {
+				printf("\n");
+				k = 0;
+			}
 		}
 	}
     EPD_4IN01F_SendCommand(0x04);//0x04

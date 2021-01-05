@@ -31,6 +31,8 @@
 #include "EPD_4in2b_V2.h"
 #include <time.h> 
 
+
+
 int EPD_4in2b_V2_test(void)
 {
     printf("EPD_4IN2B_V2_test Demo\r\n");

@@ -126,12 +126,6 @@ UBYTE EPD_7IN5_V2_Init(void)
     EPD_SendData(0x01);		//gate 480
     EPD_SendData(0xE0);
 
-    // EPD_SendCommand(0x06);
-    // EPD_SendData(0xff);
-    // EPD_SendData(0xff);
-    // EPD_SendData(0xff);
-    // EPD_SendData(0xff);
-
     EPD_SendCommand(0X15);
     EPD_SendData(0x00);
 

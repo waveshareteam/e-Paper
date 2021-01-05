@@ -48,7 +48,7 @@ try:
     draw.chord((200, 50, 250, 100), 0, 360, fill = 0)
     epd.display(epd.getbuffer(Himage))
     time.sleep(3)
-    
+
     epd.Clear()
     logging.info("2.Drawing on the Vertical image...")
     Himage = Image.new('RGB', (epd.height, epd.width), 0xffffff)  # 255: clear the frame
@@ -71,7 +71,7 @@ try:
     draw.chord((200, 50, 250, 100), 0, 360, fill = 0)
     epd.display(epd.getbuffer(Himage))
     time.sleep(3)
-    
+
     epd.Clear()
     logging.info("3.read bmp file")
     Himage = Image.open(os.path.join(picdir, '4.01inch-e-Paper.bmp'))

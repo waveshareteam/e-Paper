@@ -91,7 +91,7 @@ void Epd::Reset(void) {
     DigitalWrite(reset_pin, HIGH);
     DelayMs(200);   
     DigitalWrite(reset_pin, LOW);
-    DelayMs(5);
+    DelayMs(2);
     DigitalWrite(reset_pin, HIGH);
     DelayMs(200);   
 }

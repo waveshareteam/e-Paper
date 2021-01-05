@@ -49,7 +49,6 @@ Color Index
 #define EPD_5IN65F_HEIGHT      448
 
 void EPD_5IN65F_Clear(UBYTE color);
-void EPD_5IN65F_Show7Block(void);
 void EPD_5IN65F_Sleep(void);
 void EPD_5IN65F_Display(const UBYTE *image);
 void EPD_5IN65F_Init(void);

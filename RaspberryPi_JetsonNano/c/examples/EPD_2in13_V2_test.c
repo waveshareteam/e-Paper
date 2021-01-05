@@ -56,7 +56,7 @@ int EPD_2in13_V2_test(void)
     Paint_SetMirroring(MIRROR_HORIZONTAL); //
     Paint_Clear(WHITE);
 
-#if 0   // show bmp
+#if 1   // show bmp
     printf("show window BMP-----------------\r\n");
     Paint_SelectImage(BlackImage);
     Paint_Clear(WHITE);
@@ -82,7 +82,7 @@ int EPD_2in13_V2_test(void)
     DEV_Delay_ms(2000);
 #endif
 
-#if 0   // Drawing on the image
+#if 1   // Drawing on the image
     printf("Drawing\r\n");
     //1.Select Image
     Paint_SelectImage(BlackImage);
@@ -150,7 +150,7 @@ int EPD_2in13_V2_test(void)
     Paint_DrawString_CN(60, 55, "Î¢Ñ©µç×Ó", &Font24CN, WHITE, BLACK);
 
     EPD_2IN13_V2_Display(BlackImage);
-    DEV_Delay_ms(20000);
+    DEV_Delay_ms(2000);
 #endif
 
 #if 1   //Partial refresh, example shows time    		

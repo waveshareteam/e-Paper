@@ -42,7 +42,7 @@ void setup() {
   
   Serial.print("draw image\r\n ");
   epd.EPD_5IN65F_Display_part(gImage_5in65f, 204, 153, 192, 143);
-//  epd.EPD_5IN65F_Show7Block();
+
   delay(2000);
 }
 

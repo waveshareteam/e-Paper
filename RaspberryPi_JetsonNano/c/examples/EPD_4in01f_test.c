@@ -60,9 +60,9 @@ int EPD_4in01f_test(void)
 #if 1
     printf("show image for array\r\n");
     Paint_Clear(EPD_4IN01F_WHITE);
-    GUI_ReadBmp_RGB_7Color("./pic/4in01f.bmp", 0, 0);
+    GUI_ReadBmp_RGB_7Color("./pic/4in01-1.bmp", 0, 0);
 	EPD_4IN01F_Display(BlackImage);
-    // EPD_4IN01F_Display_part(BlackImage, 0, 0, 600, 260);
+    // EPD_4IN01F_Display_part(BlackImage, 0, 0, 640, 200);
     DEV_Delay_ms(4000); 
 #endif
 	
