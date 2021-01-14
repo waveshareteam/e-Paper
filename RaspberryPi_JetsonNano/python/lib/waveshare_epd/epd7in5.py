@@ -87,10 +87,10 @@ class EPD:
         self.send_data2([0x37, 0x00])
         
         self.send_command(0x00) # PANEL_SETTING
-        self.send_data([0xCF, 0x08])
+        self.send_data2([0xCF, 0x08])
         
         self.send_command(0x06) # BOOSTER_SOFT_START
-        self.send_data([0xc7, 0xcc, 0x28])
+        self.send_data2([0xc7, 0xcc, 0x28])
         
         self.send_command(0x04) # POWER_ON
         self.ReadBusy()

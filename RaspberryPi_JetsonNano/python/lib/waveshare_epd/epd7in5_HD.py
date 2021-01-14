@@ -97,34 +97,17 @@ class EPD:
 
         self.send_command(0x0C);  # Soft start setting
         self.send_data2([0xAE, 0xC7, 0xC3, 0xC0, 0x40])
-        #self.send_data(0xAE);
-        #self.send_data(0xC7);
-        #self.send_data(0xC3);
-        #self.send_data(0xC0);
-        #self.send_data(0x40); 
-
 
         self.send_command(0x01);  # Set MUX as 527
         self.send_data2([0xAF, 0x02, 0x01])
-        #self.send_data(0xAF);
-        #self.send_data(0x02);
-        #self.send_data(0x01);#0x01
 
         self.send_command(0x11);  # Data entry mode      
         self.send_data(0x01);
 
         self.send_command(0x44); 
         self.send_data2([0x00, 0x00, 0x6F, 0x03]) # RAM x address start at 0
-        #self.send_data(0x00); # RAM x address start at 0
-        #self.send_data(0x00); 
-        #self.send_data(0x6F); 
-        #self.send_data(0x03); 
         self.send_command(0x45); 
         self.send_data2([0xAF, 0x02, 0x00, 0x00])
-        #self.send_data(0xAF); 
-        #self.send_data(0x02);
-        #self.send_data(0x00); 
-        #self.send_data(0x00);
 
         self.send_command(0x3C); # VBD
         self.send_data(0x05); # LUT1, for white
@@ -155,7 +138,7 @@ class EPD:
         else:
             logging.warning("Wrong image dimensions: must be " + str(self.width) + "x" + str(self.height))
             # return a blank buffer
-            return [0x00] * (int(self.width/8) * self.height)
+            return [0xff] * int(self.width * self.height / 8)
 
         buf = bytearray(img.tobytes('raw'))
         return buf
