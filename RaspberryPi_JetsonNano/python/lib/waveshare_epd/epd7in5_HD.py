@@ -65,6 +65,12 @@ class EPD:
         epdconfig.spi_writebyte([data])
         epdconfig.digital_write(self.cs_pin, 1)
         
+    def send_data2(self, data):
+        epdconfig.digital_write(self.dc_pin, 1)
+        epdconfig.digital_write(self.cs_pin, 0)
+        epdconfig.spi_writebyte2(data)
+        epdconfig.digital_write(self.cs_pin, 1)
+        
     def ReadBusy(self):
         logging.debug("e-Paper busy")
         busy = epdconfig.digital_read(self.busy_pin)
@@ -90,31 +96,18 @@ class EPD:
         self.ReadBusy();
 
         self.send_command(0x0C);  # Soft start setting
-        self.send_data(0xAE);
-        self.send_data(0xC7);
-        self.send_data(0xC3);
-        self.send_data(0xC0);
-        self.send_data(0x40); 
-
+        self.send_data2([0xAE, 0xC7, 0xC3, 0xC0, 0x40])
 
         self.send_command(0x01);  # Set MUX as 527
-        self.send_data(0xAF);
-        self.send_data(0x02);
-        self.send_data(0x01);#0x01
+        self.send_data2([0xAF, 0x02, 0x01])
 
         self.send_command(0x11);  # Data entry mode      
         self.send_data(0x01);
 
         self.send_command(0x44); 
-        self.send_data(0x00); # RAM x address start at 0
-        self.send_data(0x00); 
-        self.send_data(0x6F); 
-        self.send_data(0x03); 
+        self.send_data2([0x00, 0x00, 0x6F, 0x03]) # RAM x address start at 0
         self.send_command(0x45); 
-        self.send_data(0xAF); 
-        self.send_data(0x02);
-        self.send_data(0x00); 
-        self.send_data(0x00);
+        self.send_data2([0xAF, 0x02, 0x00, 0x00])
 
         self.send_command(0x3C); # VBD
         self.send_data(0x05); # LUT1, for white
@@ -129,46 +122,32 @@ class EPD:
         self.ReadBusy();
 
         self.send_command(0x4E); # set RAM x address count to 0;
-        self.send_data(0x00);
-        self.send_data(0x00);
+        self.send_data2([0x00, 0x00])
         self.send_command(0x4F); 
-        self.send_data(0x00);
-        self.send_data(0x00);
+        self.send_data2([0x00, 0x00])
         # EPD hardware init end
         return 0
 
     def getbuffer(self, image):
-        # logging.debug("bufsiz = ",int(self.width/8) * self.height)
-        buf = [0xFF] * (int(self.width/8) * self.height)
-        image_monocolor = image.convert('1')
-        imwidth, imheight = image_monocolor.size
-        pixels = image_monocolor.load()
-        # logging.debug("imwidth = %d, imheight = %d",imwidth,imheight)
+        img = image
+        imwidth, imheight = img.size
         if(imwidth == self.width and imheight == self.height):
-            logging.debug("Vertical")
-            for y in range(imheight):
-                for x in range(imwidth):
-                    # Set the bits for the column of pixels at the current position.
-                    if pixels[x, y] == 0:
-                        buf[int((x + y * self.width) / 8)] &= ~(0x80 >> (x % 8))
+            img = img.convert('1')
         elif(imwidth == self.height and imheight == self.width):
-            logging.debug("Horizontal")
-            for y in range(imheight):
-                for x in range(imwidth):
-                    newx = y
-                    newy = self.height - x - 1
-                    if pixels[x, y] == 0:
-                        buf[int((newx + newy*self.width) / 8)] &= ~(0x80 >> (y % 8))
+            img = img.rotate(90, expand=True).convert('1')
+        else:
+            logging.warning("Wrong image dimensions: must be " + str(self.width) + "x" + str(self.height))
+            # return a blank buffer
+            return [0xff] * int(self.width * self.height / 8)
+
+        buf = bytearray(img.tobytes('raw'))
         return buf
         
     def display(self, image):
         self.send_command(0x4F); 
-        self.send_data(0x00);
-        self.send_data(0x00);
+        self.send_data2([0x00, 0x00])
         self.send_command(0x24);
-        for i in range(0, int(self.width * self.height / 8)):
-            self.send_data(image[i]);
-                
+        self.send_data2(image)
         self.send_command(0x22);
         self.send_data(0xF7);#Load LUT from MCU(0x32)
         self.send_command(0x20);
@@ -176,16 +155,14 @@ class EPD:
         self.ReadBusy();
         
     def Clear(self):
+        buf = [0xff] * int(self.width * self.height / 8)
         self.send_command(0x4F); 
-        self.send_data(0x00);
-        self.send_data(0x00);
+        self.send_data2([0x00, 0x00])
         self.send_command(0x24)
-        for i in range(0, int(self.width * self.height / 8)):
-            self.send_data(0xff)
+        self.send_data2(buf)
             
         self.send_command(0x26)
-        for i in range(0, int(self.width * self.height / 8)):
-            self.send_data(0xff)
+        self.send_data2(buf)
                 
         self.send_command(0x22);
         self.send_data(0xF7);#Load LUT from MCU(0x32)

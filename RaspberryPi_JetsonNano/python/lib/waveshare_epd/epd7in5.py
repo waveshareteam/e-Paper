@@ -65,6 +65,12 @@ class EPD:
         epdconfig.spi_writebyte([data])
         epdconfig.digital_write(self.cs_pin, 1)
         
+    def send_data2(self, data):
+        epdconfig.digital_write(self.dc_pin, 1)
+        epdconfig.digital_write(self.cs_pin, 0)
+        epdconfig.spi_writebyte2(data)
+        epdconfig.digital_write(self.cs_pin, 1)
+        
     def ReadBusy(self):
         logging.debug("e-Paper busy")
         while(epdconfig.digital_read(self.busy_pin) == 0):      # 0: idle, 1: busy
@@ -78,17 +84,13 @@ class EPD:
         self.reset()
         
         self.send_command(0x01) # POWER_SETTING
-        self.send_data(0x37)
-        self.send_data(0x00)
+        self.send_data2([0x37, 0x00])
         
         self.send_command(0x00) # PANEL_SETTING
-        self.send_data(0xCF)
-        self.send_data(0x08)
+        self.send_data2([0xCF, 0x08])
         
         self.send_command(0x06) # BOOSTER_SOFT_START
-        self.send_data(0xc7)
-        self.send_data(0xcc)
-        self.send_data(0x28)
+        self.send_data2([0xc7, 0xcc, 0x28])
         
         self.send_command(0x04) # POWER_ON
         self.ReadBusy()
@@ -121,72 +123,50 @@ class EPD:
         return 0
 
     def getbuffer(self, image):
-        logging.debug("1234")
-        buf = [0x00] * int(self.width * self.height / 4)
-        image_monocolor = image.convert('1')
-        imwidth, imheight = image_monocolor.size
-        pixels = image_monocolor.load()
-        logging.debug('imwidth = %d  imheight =  %d ',imwidth, imheight)
+        img = image
+        imwidth, imheight = img.size
+        halfwidth = int(self.width / 2)
+        buf = [0x33] * halfwidth * self.height
+        
         if(imwidth == self.width and imheight == self.height):
-            for y in range(imheight):
-                for x in range(imwidth):
-                    # Set the bits for the column of pixels at the current position.
-                    if pixels[x, y] < 64:           # black
-                        buf[int((x + y * self.width) / 4)] &= ~(0xC0 >> (x % 4 * 2))
-                    elif pixels[x, y] < 192:     # convert gray to red
-                        buf[int((x + y * self.width) / 4)] &= ~(0xC0 >> (x % 4 * 2))
-                        buf[int((x + y * self.width) / 4)] |= 0x40 >> (x % 4 * 2)
-                    else:                           # white
-                        buf[int((x + y * self.width) / 4)] |= 0xC0 >> (x % 4 * 2)
+            img = img.convert('1')
         elif(imwidth == self.height and imheight == self.width):
-            for y in range(imheight):
-                for x in range(imwidth):
-                    newx = y
-                    newy = self.height - x - 1                    
-                    if pixels[x, y] < 64:           # black
-                        buf[int((newx + newy*self.width) / 4)] &= ~(0xC0 >> (y % 4 * 2))
-                    elif pixels[x, y] < 192:     # convert gray to red
-                        buf[int((newx + newy*self.width) / 4)] &= ~(0xC0 >> (y % 4 * 2))
-                        buf[int((newx + newy*self.width) / 4)] |= 0x40 >> (y % 4 * 2)
-                    else:                           # white
-                        buf[int((newx + newy*self.width) / 4)] |= 0xC0 >> (y % 4 * 2)
-        return buf    
+            img = img.rotate(90, expand=True).convert('1')
+            imwidth, imheight = img.size
+        else:
+            logging.warning("Wrong image dimensions: must be " + str(self.width) + "x" + str(self.height))
+            # return a blank buffer
+            return buf
+        
+        pixels = img.load()
+
+        for y in range(imheight):
+            offset = y * halfwidth
+            for x in range(1, imwidth, 2):
+                i = offset + x // 2
+                if(pixels[x-1, y] > 191):
+                    if(pixels[x, y] > 191):
+                        buf[i] = 0x33
+                    else:
+                        buf[i] = 0x30
+                else:
+                    if(pixels[x, y] > 191):
+                        buf[i] = 0x03
+                    else:
+                        buf[i] = 0x00
+        return buf
         
     def display(self, image):
         self.send_command(0x10)
-        for i in range(0, int(self.width / 4 * self.height)):
-            temp1 = image[i]
-            j = 0
-            while (j < 4):
-                if ((temp1 & 0xC0) == 0xC0):
-                    temp2 = 0x03
-                elif ((temp1 & 0xC0) == 0x00):
-                    temp2 = 0x00
-                else:
-                    temp2 = 0x04
-                temp2 = (temp2 << 4) & 0xFF
-                temp1 = (temp1 << 2) & 0xFF
-                j += 1
-                if((temp1 & 0xC0) == 0xC0):
-                    temp2 |= 0x03
-                elif ((temp1 & 0xC0) == 0x00):
-                    temp2 |= 0x00
-                else:
-                    temp2 |= 0x04
-                temp1 = (temp1 << 2) & 0xFF
-                self.send_data(temp2)
-                j += 1
-                
+        self.send_data2(image)
         self.send_command(0x12)
         epdconfig.delay_ms(100)
         self.ReadBusy()
         
     def Clear(self):
+        buf = [0x33] * int(self.width * self.height / 2)
         self.send_command(0x10)
-        for i in range(0, int(self.width / 4 * self.height)):
-            for j in range(0, 4):
-                self.send_data(0x33)
-                
+        self.send_data2(buf)
         self.send_command(0x12)
         self.ReadBusy()
 
