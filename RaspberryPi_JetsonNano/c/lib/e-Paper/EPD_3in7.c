@@ -552,6 +552,9 @@ void EPD_3IN7_1Gray_Display_Part(const UBYTE *Image, UWORD Xstart, UWORD Ystart,
 	Width = (Xend-Xstart)%8 == 0 ? (Xend-Xstart)/8 : (Xend-Xstart)/8+1;
 	UWORD IMAGE_COUNTER = Width * (Yend-Ystart);
 
+	Xend -= 1;
+	Yend -= 1;
+
 	EPD_3IN7_SendCommand(0x44);
 	EPD_3IN7_SendData(Xstart & 0xff);
 	EPD_3IN7_SendData((Xstart>>8) & 0x03);
@@ -563,13 +566,20 @@ void EPD_3IN7_1Gray_Display_Part(const UBYTE *Image, UWORD Xstart, UWORD Ystart,
 	EPD_3IN7_SendData(Yend & 0xff);
 	EPD_3IN7_SendData((Yend>>8) & 0x03);
 
+    EPD_3IN7_SendCommand(0x4E); // SET_RAM_X_ADDRESS_COUNTER
+    EPD_3IN7_SendData(Xstart & 0xFF);
+
+    EPD_3IN7_SendCommand(0x4F); // SET_RAM_Y_ADDRESS_COUNTER
+    EPD_3IN7_SendData(Ystart & 0xFF);
+    EPD_3IN7_SendData((Ystart >> 8) & 0xFF);
+	
 	EPD_3IN7_SendCommand(0x24);
 	for (i = 0; i < IMAGE_COUNTER; i++)
 	{
 	EPD_3IN7_SendData(Image[i]);
 	}
 
-	EPD_3IN7_Load_LUT(2);
+	EPD_3IN7_Load_LUT(3);
 	EPD_3IN7_SendCommand(0x20);
 	EPD_3IN7_ReadBusy_HIGH();    
 }

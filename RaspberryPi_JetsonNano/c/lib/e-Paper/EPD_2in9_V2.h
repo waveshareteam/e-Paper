@@ -38,12 +38,10 @@
 #define EPD_2IN9_V2_HEIGHT      296
 
 void EPD_2IN9_V2_Init(void);
-void _EPD_2IN9_V2_Init(void);
 void EPD_2IN9_V2_Clear(void);
 void EPD_2IN9_V2_Display(UBYTE *Image);
 void EPD_2IN9_V2_Display_Base(UBYTE *Image);
 void EPD_2IN9_V2_Display_Partial(UBYTE *Image);
-void _EPD_2IN9_V2_Display_Partial(UBYTE *Image);
 void EPD_2IN9_V2_Sleep(void);
 
 #endif

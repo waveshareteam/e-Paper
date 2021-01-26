@@ -111,7 +111,7 @@ int EPD_1in54_test(void)
     DEV_Delay_ms(2000);
 #endif
 
-#if 0   //Partial refresh, example shows time    		
+#if 1   //Partial refresh, example shows time    		
     printf("Partial refresh\r\n");
     EPD_1IN54_Init(EPD_1IN54_PART);
     Paint_SelectImage(BlackImage);

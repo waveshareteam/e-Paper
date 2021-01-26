@@ -113,6 +113,7 @@ int EPD_3in7_test(void)
 #endif
 
 #if 1 // partial update, just 1 Gray mode
+    Paint_NewImage(BlackImage, 50, 120, 270, WHITE);
     EPD_3IN7_1Gray_Init();       //init 1 Gray mode
     EPD_3IN7_1Gray_Clear();
     Paint_SelectImage(BlackImage);
@@ -123,7 +124,7 @@ int EPD_3in7_test(void)
     sPaint_time.Hour = 12;
     sPaint_time.Min = 34;
     sPaint_time.Sec = 56;
-    UBYTE num = 10;
+    UBYTE num = 15;
     for (;;) {
         sPaint_time.Sec = sPaint_time.Sec + 1;
         if (sPaint_time.Sec == 60) {
@@ -139,8 +140,9 @@ int EPD_3in7_test(void)
                 }
             }
         }
-        Paint_ClearWindows(300, 0, 479, 80, WHITE);
-        Paint_DrawTime(300, 20, &sPaint_time, &Font20, WHITE, BLACK);
+	    Paint_Clear(WHITE);
+		Paint_DrawRectangle(1, 1, 120, 50, BLACK, DOT_PIXEL_1X1, DRAW_FILL_EMPTY);
+        Paint_DrawTime(10, 15, &sPaint_time, &Font20, WHITE, BLACK);
 
         num = num - 1;
         if(num == 0) {
@@ -148,8 +150,7 @@ int EPD_3in7_test(void)
         }
 
         printf("Part refresh...\r\n");
-        EPD_3IN7_1Gray_Display(BlackImage);
-        // EPD_3IN7_1Gray_Display_Part(BlackImage, 0, 0, 279, 180);
+        EPD_3IN7_1Gray_Display_Part(BlackImage, 40, 30, 90, 150); // Xstart must be a multiple of 8
         DEV_Delay_ms(500);
     }
 

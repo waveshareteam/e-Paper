@@ -1,7 +1,7 @@
 /**
  *  @filename   :   epd2in9_V2.h
  *  @brief      :   Header file for e-paper display library epd2in9_V2.cpp
- *  @author     :   Yehui from Waveshare
+ *  @author     :   
  *  
  *  Copyright (C) Waveshare     Nov 09 2020
  *
@@ -71,7 +71,8 @@ private:
     unsigned int dc_pin;
     unsigned int cs_pin;
     unsigned int busy_pin;
-
+		
+	void SetLut(void);
     void SetMemoryArea(int x_start, int y_start, int x_end, int y_end);
     void SetMemoryPointer(int x, int y);
 };

@@ -111,6 +111,15 @@ void EPD_2IN9_V2_ReadBusy(void)
     Debug("e-Paper busy release\r\n");
 }
 
+static void EPD_2IN9_V2_LUT(void)
+{       
+	UBYTE count;
+	EPD_2IN9_V2_SendCommand(0x32);
+	for(count=0; count<153; count++) 
+		EPD_2IN9_V2_SendData(_WF_PARTIAL_2IN9[count]); 
+	EPD_2IN9_V2_ReadBusy();
+}
+
 /******************************************************************************
 function :	Turn On Display
 parameter:
@@ -126,7 +135,7 @@ static void EPD_2IN9_V2_TurnOnDisplay(void)
 static void EPD_2IN9_V2_TurnOnDisplay_Partial(void)
 {
 	EPD_2IN9_V2_SendCommand(0x22); //Display Update Control
-	EPD_2IN9_V2_SendData(0xFF);   
+	EPD_2IN9_V2_SendData(0x0F);   
 	EPD_2IN9_V2_SendCommand(0x20); //Activate Display Update Sequence
 	EPD_2IN9_V2_ReadBusy();
 }
@@ -256,8 +265,26 @@ void EPD_2IN9_V2_Display_Partial(UBYTE *Image)
     DEV_Digital_Write(EPD_RST_PIN, 1);
     DEV_Delay_ms(10);
 
+	EPD_2IN9_V2_LUT();
+	EPD_2IN9_V2_SendCommand(0x37); 
+	EPD_2IN9_V2_SendData(0x00);  
+	EPD_2IN9_V2_SendData(0x00);  
+	EPD_2IN9_V2_SendData(0x00);  
+	EPD_2IN9_V2_SendData(0x00); 
+	EPD_2IN9_V2_SendData(0x00);  	
+	EPD_2IN9_V2_SendData(0x40);  
+	EPD_2IN9_V2_SendData(0x00);  
+	EPD_2IN9_V2_SendData(0x00);   
+	EPD_2IN9_V2_SendData(0x00);  
+	EPD_2IN9_V2_SendData(0x00);
+
 	EPD_2IN9_V2_SendCommand(0x3C); //BorderWavefrom
 	EPD_2IN9_V2_SendData(0x80);	
+
+	EPD_2IN9_V2_SendCommand(0x22); 
+	EPD_2IN9_V2_SendData(0xC0);   
+	EPD_2IN9_V2_SendCommand(0x20); 
+	EPD_2IN9_V2_ReadBusy();  
 	
 	EPD_2IN9_V2_SetWindows(0, 0, EPD_2IN9_V2_WIDTH-1, EPD_2IN9_V2_HEIGHT-1);
 	EPD_2IN9_V2_SetCursor(0, 0);

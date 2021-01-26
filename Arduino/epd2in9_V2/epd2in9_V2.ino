@@ -127,5 +127,5 @@ void loop() {
   epd.SetFrameMemory_Partial(paint.GetImage(), 80, 72, paint.GetWidth(), paint.GetHeight());
   epd.DisplayFrame_Partial();
 
-  delay(500);
+  // delay(300);
 }

@@ -39,7 +39,7 @@ static void EPD_4IN01F_Reset(void)
     DEV_Digital_Write(EPD_RST_PIN, 1);
     DEV_Delay_ms(200);
     DEV_Digital_Write(EPD_RST_PIN, 0);
-    DEV_Delay_ms(5);
+    DEV_Delay_ms(2);
     DEV_Digital_Write(EPD_RST_PIN, 1);
     DEV_Delay_ms(200);
 }
@@ -74,17 +74,20 @@ function:
 ******************************************************************************/
 static void EPD_4IN01F_BusyHigh(void)// If BUSYN=0 then waiting
 {
-	printf("e-Paper busy \r\n");
-    while(!(DEV_Digital_Read(EPD_BUSY_PIN)))
-		DEV_Delay_ms(500);
-	printf("e-Paper busy release \r\n");
+	printf("BusyHigh \r\n");
+    while(!(DEV_Digital_Read(EPD_BUSY_PIN))) {
+		DEV_Delay_ms(50);
+	}
+	printf("BusyHigh Release \r\n" );
 }
+
 static void EPD_4IN01F_BusyLow(void)// If BUSYN=1 then waiting
 {
-	printf("e-Paper busy \r\n");
-    while(DEV_Digital_Read(EPD_BUSY_PIN))
-		DEV_Delay_ms(500);
-	printf("e-Paper busy release \r\n");
+	printf("BusyLow \r\n");
+    while(DEV_Digital_Read(EPD_BUSY_PIN)) {
+		DEV_Delay_ms(50);
+	}
+	printf("BusyLow Release \r\n");
 }
 
 /******************************************************************************
@@ -140,13 +143,36 @@ void EPD_4IN01F_Clear(UBYTE color)
         for(int j=0; j<EPD_4IN01F_WIDTH/2; j++)
             EPD_4IN01F_SendData((color<<4)|color);
     }
+	DEV_Delay_ms(500);
     EPD_4IN01F_SendCommand(0x04);//0x04
     EPD_4IN01F_BusyHigh();
     EPD_4IN01F_SendCommand(0x12);//0x12
     EPD_4IN01F_BusyHigh();
     EPD_4IN01F_SendCommand(0x02);  //0x02
     EPD_4IN01F_BusyLow();
-    DEV_Delay_ms(500);
+    // DEV_Delay_ms(500);
+}
+
+void EPD_4IN01F_ReClear(void)
+{
+    EPD_4IN01F_SendCommand(0x61);//Set Resolution setting
+    EPD_4IN01F_SendData(0x02);
+    EPD_4IN01F_SendData(0x80);
+    EPD_4IN01F_SendData(0x01);
+    EPD_4IN01F_SendData(0x90);
+    EPD_4IN01F_SendCommand(0x10);
+    for(int i=0; i<EPD_4IN01F_HEIGHT; i++) {
+        for(int j=0; j<EPD_4IN01F_WIDTH/2; j++)
+            EPD_4IN01F_SendData(0x77);
+    }
+	DEV_Delay_ms(500);
+    EPD_4IN01F_SendCommand(0x04);//0x04
+    EPD_4IN01F_BusyHigh();
+    EPD_4IN01F_SendCommand(0x12);//0x12
+    EPD_4IN01F_BusyHigh();
+    EPD_4IN01F_SendCommand(0x02);  //0x02
+    EPD_4IN01F_BusyLow();
+    // DEV_Delay_ms(500);
 }
 
 /******************************************************************************
@@ -165,16 +191,16 @@ void EPD_4IN01F_Show7Block(void)
     EPD_4IN01F_SendData(0x01);
     EPD_4IN01F_SendData(0x90);
     EPD_4IN01F_SendCommand(0x10);
-    for(i=0; i<224; i++) {
+    for(i=0; i<EPD_4IN01F_HEIGHT/2; i++) {
         for(k = 0 ; k < 4; k ++) {
-            for(j = 0 ; j < 75; j ++) {
+            for(j = 0 ; j < EPD_4IN01F_WIDTH/8; j ++) {
                 EPD_4IN01F_SendData((Color_seven[k]<<4) |Color_seven[k]);
             }
         }
     }
-    for(i=0; i<224; i++) {
+    for(i=0; i<EPD_4IN01F_HEIGHT/2; i++) {
         for(k = 4 ; k < 8; k ++) {
-            for(j = 0 ; j < 75; j ++) {
+            for(j = 0 ; j < EPD_4IN01F_WIDTH/8; j ++) {
                 EPD_4IN01F_SendData((Color_seven[k]<<4) |Color_seven[k]);
             }
         }
@@ -185,7 +211,7 @@ void EPD_4IN01F_Show7Block(void)
     EPD_4IN01F_BusyHigh();
     EPD_4IN01F_SendCommand(0x02);  //0x02
     EPD_4IN01F_BusyLow();
-	DEV_Delay_ms(200);
+	// DEV_Delay_ms(200);
 }
 
 /******************************************************************************
@@ -195,7 +221,7 @@ function:
 void EPD_4IN01F_Display(const UBYTE *image)
 {
     unsigned long i, j;
-	UBYTE k = 0;
+	// UBYTE k = 0;
     EPD_4IN01F_SendCommand(0x61);//Set Resolution setting
     EPD_4IN01F_SendData(0x02);
     EPD_4IN01F_SendData(0x80);
@@ -205,12 +231,12 @@ void EPD_4IN01F_Display(const UBYTE *image)
     for(i=0; i<EPD_4IN01F_HEIGHT; i++) {
         for(j=0; j<EPD_4IN01F_WIDTH/2; j++) {
             EPD_4IN01F_SendData(image[j+((EPD_4IN01F_WIDTH/2)*i)]);
-			printf("0x%x, ", image[j+((EPD_4IN01F_WIDTH/2)*i)]);
-			k++;
-			if(k == 16) {
-				printf("\n");
-				k = 0;
-			}
+			// printf("0x%x, ", image[j+((EPD_4IN01F_WIDTH/2)*i)]);
+			// k++;
+			// if(k == 16) {
+				// printf("\n");
+				// k = 0;
+			// }
 		}
 	}
     EPD_4IN01F_SendCommand(0x04);//0x04
@@ -219,7 +245,7 @@ void EPD_4IN01F_Display(const UBYTE *image)
     EPD_4IN01F_BusyHigh();
     EPD_4IN01F_SendCommand(0x02);  //0x02
     EPD_4IN01F_BusyLow();
-	DEV_Delay_ms(200);
+	// DEV_Delay_ms(200);
 }
 
 void EPD_4IN01F_Display_part(const UBYTE *image, UWORD xstart, UWORD ystart, 
@@ -255,7 +281,7 @@ void EPD_4IN01F_Display_part(const UBYTE *image, UWORD xstart, UWORD ystart,
     EPD_4IN01F_BusyHigh();
     EPD_4IN01F_SendCommand(0x02);  //0x02
     EPD_4IN01F_BusyLow();
-	DEV_Delay_ms(200);
+	// DEV_Delay_ms(200);
 }
 
 /******************************************************************************
@@ -264,7 +290,7 @@ function:
 ******************************************************************************/
 void EPD_4IN01F_Sleep(void)
 {
-    DEV_Delay_ms(100);
+    // DEV_Delay_ms(100);
     EPD_4IN01F_SendCommand(0x07);
     EPD_4IN01F_SendData(0xA5);
 }

@@ -68,9 +68,9 @@ int EPD_2in66b_test(void)
 #if 1   // show bmp
     printf("show bmp------------------------\r\n");
     Paint_SelectImage(BlackImage);
-    GUI_ReadBmp("./pic/f_b.bmp", 0, 0);
+    GUI_ReadBmp("./pic/2in66b_b.bmp", 0, 0);
     Paint_SelectImage(RedImage);
-    GUI_ReadBmp("./pic/f_r.bmp", 0, 0);
+    GUI_ReadBmp("./pic/2in66b_r.bmp", 0, 0);
     EPD_2IN66B_Display(BlackImage, RedImage);
     DEV_Delay_ms(2000);
 #endif

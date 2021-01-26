@@ -135,7 +135,7 @@ int EPD_2in7b_test(void)
     // close 5V
     printf("close 5V, Module enters 0 power consumption ...\r\n");
     DEV_Module_Exit();
-DEV_Delay_ms(12000);    
+	DEV_Delay_ms(2000);    
     return 0;
 }
 
