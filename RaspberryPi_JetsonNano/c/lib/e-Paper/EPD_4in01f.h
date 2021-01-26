@@ -49,6 +49,7 @@ Color Index
 #define EPD_4IN01F_HEIGHT      400
 
 void EPD_4IN01F_Clear(UBYTE color);
+void EPD_4IN01F_ReClear(void);
 void EPD_4IN01F_Sleep(void);
 void EPD_Init(void);
 void EPD_4IN01F_Show7Block(void);

@@ -173,4 +173,3 @@ int EPD_2in9_V2_test(void)
     DEV_Module_Exit();
     return 0;
 }
-

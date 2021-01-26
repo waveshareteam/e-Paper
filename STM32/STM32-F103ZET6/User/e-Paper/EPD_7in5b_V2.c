@@ -225,14 +225,13 @@ void EPD_7IN5B_V2_Display(const UBYTE *blackimage, const UBYTE *ryimage)
     Width =(EPD_7IN5B_V2_WIDTH % 8 == 0)?(EPD_7IN5B_V2_WIDTH / 8 ):(EPD_7IN5B_V2_WIDTH / 8 + 1);
     Height = EPD_7IN5B_V2_HEIGHT;
 
- //send black data
+	//send black data
     EPD_7IN5B_V2_SendCommand(0x10);
     for (UDOUBLE j = 0; j < Height; j++) {
         for (UDOUBLE i = 0; i < Width; i++) {
             EPD_7IN5B_V2_SendData(blackimage[i + j * Width]);
         }
     }
-    EPD_7IN5B_V2_SendCommand(0x92); 
 
     //send red data
     EPD_7IN5B_V2_SendCommand(0x13);
@@ -255,8 +254,7 @@ void EPD_7IN5B_V2_WritePicture(const UBYTE *blackimage, UBYTE Block)
 	if(Block == 0){
 		EPD_7IN5B_V2_SendCommand(0x10);
 	}else if(Block == 2){
-		EPD_7IN5B_V2_SendCommand(0x92); 
-    EPD_7IN5B_V2_SendCommand(0x13);
+		EPD_7IN5B_V2_SendCommand(0x13);
 	}
 	for (UDOUBLE j = 0; j < Height/2; j++) {
         for (UDOUBLE i = 0; i < Width; i++) {

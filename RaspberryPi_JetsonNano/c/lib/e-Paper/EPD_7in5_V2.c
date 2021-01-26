@@ -82,9 +82,8 @@ static void EPD_WaitUntilIdle(void)
 		EPD_SendCommand(0x71);
 		DEV_Delay_ms(20);  
 	}while(!(DEV_Digital_Read(EPD_BUSY_PIN)));   
-	DEV_Delay_ms(100);      
+	DEV_Delay_ms(20);      
     Debug("e-Paper busy release\r\n");
-		
 }
 
 

@@ -114,15 +114,17 @@ parameter:
 ******************************************************************************/
 static void EPD_2in13_V3_SetWindows(UWORD Xstart, UWORD Ystart, UWORD Xend, UWORD Yend)
 {
+	// Ystart = 295 - Ystart;
+	
     EPD_2in13_V3_SendCommand(0x44); // SET_RAM_X_ADDRESS_START_END_POSITION
     EPD_2in13_V3_SendData((Xstart>>3) & 0xFF);
     EPD_2in13_V3_SendData((Xend>>3) & 0xFF);
 	
     EPD_2in13_V3_SendCommand(0x45); // SET_RAM_Y_ADDRESS_START_END_POSITION
-    EPD_2in13_V3_SendData(Ystart & 0xFF);
-    EPD_2in13_V3_SendData((Ystart >> 8) & 0xFF);
     EPD_2in13_V3_SendData(Yend & 0xFF);
     EPD_2in13_V3_SendData((Yend >> 8) & 0xFF);
+    EPD_2in13_V3_SendData(Ystart & 0xFF);
+    EPD_2in13_V3_SendData((Ystart >> 8) & 0xFF);
 }
 
 /******************************************************************************
@@ -131,6 +133,8 @@ parameter:
 ******************************************************************************/
 static void EPD_2in13_V3_SetCursor(UWORD Xstart, UWORD Ystart)
 {
+	Ystart = 295 - Ystart;
+	
     EPD_2in13_V3_SendCommand(0x4E); // SET_RAM_X_ADDRESS_COUNTER
     EPD_2in13_V3_SendData(Xstart & 0xFF);
 
@@ -155,13 +159,13 @@ void EPD_2in13_V3_Init(void)
 	EPD_2in13_V3_SendCommand(0x01); //Driver output control      
 	EPD_2in13_V3_SendData(0x27);
 	EPD_2in13_V3_SendData(0x01);
-	EPD_2in13_V3_SendData(0x00);
+	EPD_2in13_V3_SendData(0x01);
 
 	EPD_2in13_V3_SendCommand(0x11); //data entry mode       
-	EPD_2in13_V3_SendData(0x03);
+	EPD_2in13_V3_SendData(0x01);
 
-	EPD_2in13_V3_SetWindows(0, 0, EPD_2in13_V3_WIDTH-1, EPD_2in13_V3_HEIGHT-1);
-
+	EPD_2in13_V3_SetWindows(0, 0, EPD_2in13_V3_WIDTH-1, 296-1);
+	
 	EPD_2in13_V3_SendCommand(0x3C); //BorderWavefrom
 	EPD_2in13_V3_SendData(0x05);	
 
@@ -171,7 +175,7 @@ void EPD_2in13_V3_Init(void)
 
 	EPD_2in13_V3_SendCommand(0x18); //Read built-in temperature sensor
 	EPD_2in13_V3_SendData(0x80);	
-
+	
 	EPD_2in13_V3_SetCursor(0, 0);
 	EPD_2in13_V3_ReadBusy();
 }
@@ -226,8 +230,8 @@ void EPD_2in13_V3_Display_Base(UBYTE *Image)
 void EPD_2in13_V3_Display_Partial(UBYTE *Image)
 {
 	UWORD i;
-
-//Reset
+	
+	//Reset
     DEV_Digital_Write(EPD_RST_PIN, 0);
     DEV_Delay_ms(5);
     DEV_Digital_Write(EPD_RST_PIN, 1);
@@ -236,14 +240,14 @@ void EPD_2in13_V3_Display_Partial(UBYTE *Image)
 	EPD_2in13_V3_SendCommand(0x3C); //BorderWavefrom
 	EPD_2in13_V3_SendData(0x80);	
 	
-	EPD_2in13_V3_SetWindows(0, 0, EPD_2in13_V3_WIDTH-1, EPD_2in13_V3_HEIGHT-1);
+	EPD_2in13_V3_SetWindows(0, 0, EPD_2in13_V3_WIDTH-1, 296-1);
 	EPD_2in13_V3_SetCursor(0, 0);
 
 	EPD_2in13_V3_SendCommand(0x24);   //Write Black and White image to RAM
 	for(i=0;i<4736;i++)
 	{
 		EPD_2in13_V3_SendData(Image[i]);
-	} 
+	}
 	EPD_2in13_V3_TurnOnDisplay_Partial();
 }
 

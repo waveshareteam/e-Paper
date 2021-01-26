@@ -111,6 +111,7 @@ int EPD_5in65f_test(void)
 #endif
     printf("e-Paper Clear...\r\n");
     EPD_5IN65F_Clear(EPD_5IN65F_WHITE);
+    EPD_5IN65F_Clear(EPD_5IN65F_WHITE);
     DEV_Delay_ms(1000); 
 	
 	printf("e-Paper Sleep...\r\n");

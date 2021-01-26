@@ -56,7 +56,7 @@ int EPD_4in01f_test(void)
     }
     Paint_NewImage(BlackImage, EPD_4IN01F_WIDTH, EPD_4IN01F_HEIGHT, 0, EPD_4IN01F_WHITE);
     Paint_SetScale(7);
-	
+
 #if 1
     printf("show image for array\r\n");
     Paint_Clear(EPD_4IN01F_WHITE);

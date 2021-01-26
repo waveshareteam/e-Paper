@@ -33,7 +33,7 @@ try:
     drawblack = ImageDraw.Draw(HBlackimage)
     drawry = ImageDraw.Draw(HRYimage)
     drawblack.text((10, 0), 'hello world', font = font24, fill = 0)
-    drawblack.text((10, 20), '2.9inch e-Paper bc', font = font24, fill = 0)
+    drawblack.text((10, 20), '2.66inch e-Paper b', font = font24, fill = 0)
     drawblack.text((150, 0), u'微雪电子', font = font24, fill = 0)    
     drawblack.line((20, 50, 70, 100), fill = 0)
     drawblack.line((70, 50, 20, 100), fill = 0)

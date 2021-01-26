@@ -550,6 +550,7 @@ Section Cross References
     epd_2in9_v2.o(.text) refers to stm32f1xx_hal_gpio.o(.text) for HAL_GPIO_ReadPin
     epd_2in9_v2.o(.text) refers to stm32f1xx_hal.o(.text) for HAL_Delay
     epd_2in9_v2.o(.text) refers to dev_config.o(.text) for DEV_SPI_WriteByte
+    epd_2in9_v2.o(.text) refers to epd_2in9_v2.o(.data) for .data
     epd_2in9bc.o(.text) refers to printf3.o(i.__0printf$3) for __2printf
     epd_2in9bc.o(.text) refers to stm32f1xx_hal.o(.text) for HAL_Delay
     epd_2in9bc.o(.text) refers to stm32f1xx_hal_gpio.o(.text) for HAL_GPIO_ReadPin
@@ -1280,7 +1281,7 @@ Removing Unused input sections from the image.
     Removing epd_2in9_v2.o(.rev16_text), (4 bytes).
     Removing epd_2in9_v2.o(.revsh_text), (4 bytes).
     Removing epd_2in9_v2.o(.rrx_text), (6 bytes).
-    Removing epd_2in9_v2.o(.text), (788 bytes).
+    Removing epd_2in9_v2.o(.text), (908 bytes).
     Removing epd_2in9_v2.o(.data), (159 bytes).
     Removing epd_2in9bc.o(.rev16_text), (4 bytes).
     Removing epd_2in9bc.o(.revsh_text), (4 bytes).
@@ -1388,7 +1389,7 @@ Removing Unused input sections from the image.
     Removing epd_7in5b_v2.o(.rev16_text), (4 bytes).
     Removing epd_7in5b_v2.o(.revsh_text), (4 bytes).
     Removing epd_7in5b_v2.o(.rrx_text), (6 bytes).
-    Removing epd_7in5b_v2.o(.text), (892 bytes).
+    Removing epd_7in5b_v2.o(.text), (880 bytes).
     Removing epd_7in5b_hd.o(.rev16_text), (4 bytes).
     Removing epd_7in5b_hd.o(.revsh_text), (4 bytes).
     Removing epd_7in5b_hd.o(.rrx_text), (6 bytes).
@@ -1424,7 +1425,7 @@ Removing Unused input sections from the image.
     Removing cdrcmple.o(.text), (48 bytes).
     Removing depilogue.o(.text), (186 bytes).
 
-450 unused section(s) (total 963099 bytes) removed from the image.
+450 unused section(s) (total 963207 bytes) removed from the image.
 
 ==============================================================================
 

@@ -19,7 +19,6 @@ try:
     logging.info("epd2in7b_V2 Demo")
     
     epd = epd2in7b_V2.EPD()
-
     logging.info("init and Clear")
     epd.init()
     epd.Clear()

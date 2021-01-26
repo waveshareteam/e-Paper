@@ -79,12 +79,48 @@ parameter:
 static void EPD_2IN7B_V2_ReadBusy(void)
 {
     Debug("e-Paper busy\r\n");
-    while(DEV_Digital_Read(EPD_BUSY_PIN) == 0) {      //0: busy, 1: idle
-        DEV_Delay_ms(100);
+    while(DEV_Digital_Read(EPD_BUSY_PIN) == 1) {      //1: busy, 0: idle
+        DEV_Delay_ms(10);
     }    
     Debug("e-Paper busy release\r\n");
 }
 
+static void EPD_2IN7B_V2_TurnOnDisplay(void)
+{
+	EPD_2IN7B_V2_SendCommand(0x20); 
+	EPD_2IN7B_V2_ReadBusy();
+}
+
+/******************************************************************************
+function :	Setting the display window
+parameter:
+******************************************************************************/
+static void EPD_2IN7B_V2_SetWindows(UWORD Xstart, UWORD Ystart, UWORD Xend, UWORD Yend)
+{
+    EPD_2IN7B_V2_SendCommand(0x44); // SET_RAM_X_ADDRESS_START_END_POSITION
+    EPD_2IN7B_V2_SendData((Xstart>>3) & 0xFF);
+    EPD_2IN7B_V2_SendData((Xend>>3) & 0xFF);
+	
+    EPD_2IN7B_V2_SendCommand(0x45); // SET_RAM_Y_ADDRESS_START_END_POSITION
+    EPD_2IN7B_V2_SendData(Ystart & 0xFF);
+    EPD_2IN7B_V2_SendData((Ystart >> 8) & 0xFF);
+    EPD_2IN7B_V2_SendData(Yend & 0xFF);
+    EPD_2IN7B_V2_SendData((Yend >> 8) & 0xFF);
+}
+
+/******************************************************************************
+function :	Set Cursor
+parameter:
+******************************************************************************/
+static void EPD_2IN7B_V2_SetCursor(UWORD Xstart, UWORD Ystart)
+{
+    EPD_2IN7B_V2_SendCommand(0x4E); // SET_RAM_X_ADDRESS_COUNTER
+    EPD_2IN7B_V2_SendData(Xstart & 0xFF);
+
+    EPD_2IN7B_V2_SendCommand(0x4F); // SET_RAM_Y_ADDRESS_COUNTER
+    EPD_2IN7B_V2_SendData(Ystart & 0xFF);
+    EPD_2IN7B_V2_SendData((Ystart >> 8) & 0xFF);
+}
 
 /******************************************************************************
 function :	Initialize the e-Paper register
@@ -95,55 +131,19 @@ void EPD_2IN7B_V2_Init(void)
 	EPD_2IN7B_V2_Reset();
 
 	EPD_2IN7B_V2_ReadBusy();
-
-	EPD_2IN7B_V2_SendCommand(0x4D);     
-	EPD_2IN7B_V2_SendData(0xAA);
-
-	EPD_2IN7B_V2_SendCommand(0x87);     
-	EPD_2IN7B_V2_SendData(0x28);   
-
-	EPD_2IN7B_V2_SendCommand(0x84);     
-	EPD_2IN7B_V2_SendData(0x00);
-
-	EPD_2IN7B_V2_SendCommand(0x83);     
-	EPD_2IN7B_V2_SendData(0x05);
-
-	EPD_2IN7B_V2_SendCommand(0xA8);     
-	EPD_2IN7B_V2_SendData(0xDF);          
-
-	EPD_2IN7B_V2_SendCommand(0xA9);     
-	EPD_2IN7B_V2_SendData(0x05);
-
-	EPD_2IN7B_V2_SendCommand(0xB1);     
-	EPD_2IN7B_V2_SendData(0xE8);  
-
-	EPD_2IN7B_V2_SendCommand(0xAB);     
-	EPD_2IN7B_V2_SendData(0xA1);   
-
-	EPD_2IN7B_V2_SendCommand(0xB9);     
-	EPD_2IN7B_V2_SendData(0x10);   
-
-	EPD_2IN7B_V2_SendCommand(0x88);     
-	EPD_2IN7B_V2_SendData(0x80);   
-
-	EPD_2IN7B_V2_SendCommand(0x90);     
-	EPD_2IN7B_V2_SendData(0x02);
-
-	EPD_2IN7B_V2_SendCommand(0x86);     
-	EPD_2IN7B_V2_SendData(0x15);
-
-	EPD_2IN7B_V2_SendCommand(0x91);     
-	EPD_2IN7B_V2_SendData(0x8D); 
-
-	EPD_2IN7B_V2_SendCommand(0x50);    
-	EPD_2IN7B_V2_SendData(0x57);
-	
-	EPD_2IN7B_V2_SendCommand(0xAA);    
-	EPD_2IN7B_V2_SendData(0x0F);
+	EPD_2IN7B_V2_SendCommand(0x12);    
+	EPD_2IN7B_V2_ReadBusy();
 	
 	EPD_2IN7B_V2_SendCommand(0x00);    
-	EPD_2IN7B_V2_SendData(0x8f);
+	EPD_2IN7B_V2_SendData(0x27);
+	EPD_2IN7B_V2_SendData(0x01);
+	EPD_2IN7B_V2_SendData(0x00);
+	
+	EPD_2IN7B_V2_SendCommand(0x11);    
+	EPD_2IN7B_V2_SendData(0x03);
 
+	EPD_2IN7B_V2_SetWindows(0, 0, EPD_2IN7B_V2_WIDTH-1, EPD_2IN7B_V2_HEIGHT-1);
+	EPD_2IN7B_V2_SetCursor(0, 0);
 }
 
 /******************************************************************************
@@ -156,29 +156,21 @@ void EPD_2IN7B_V2_Clear(void)
     Width = (EPD_2IN7B_V2_WIDTH % 8 == 0)? (EPD_2IN7B_V2_WIDTH / 8 ): (EPD_2IN7B_V2_WIDTH / 8 + 1);
     Height = EPD_2IN7B_V2_HEIGHT;
 
-    EPD_2IN7B_V2_SendCommand(0x10);
+    EPD_2IN7B_V2_SendCommand(0x24);
     for (UWORD j = 0; j < Height; j++) {
         for (UWORD i = 0; i < Width; i++) {
             EPD_2IN7B_V2_SendData(0Xff);
         }
     }
 
-    EPD_2IN7B_V2_SendCommand(0x13);
+    EPD_2IN7B_V2_SendCommand(0x26);
     for (UWORD j = 0; j < Height; j++) {
         for (UWORD i = 0; i < Width; i++) {
             EPD_2IN7B_V2_SendData(0X00);
         }
     }
 
-	EPD_2IN7B_V2_SendCommand(0x04); // Power ON 
-	EPD_2IN7B_V2_ReadBusy();
-	DEV_Delay_ms(10);
-	EPD_2IN7B_V2_SendCommand(0x12);  // Display Refresh
-	EPD_2IN7B_V2_ReadBusy(); 
-	DEV_Delay_ms(10);
-	EPD_2IN7B_V2_SendCommand(0x02);  // Power OFF
-	EPD_2IN7B_V2_ReadBusy(); 
-	DEV_Delay_ms(20);
+	EPD_2IN7B_V2_TurnOnDisplay();
 }
 
 /******************************************************************************
@@ -191,30 +183,21 @@ void EPD_2IN7B_V2_Display(UBYTE *Imageblack, UBYTE *Imagered)
     Width = (EPD_2IN7B_V2_WIDTH % 8 == 0)? (EPD_2IN7B_V2_WIDTH / 8 ): (EPD_2IN7B_V2_WIDTH / 8 + 1);
     Height = EPD_2IN7B_V2_HEIGHT;
 
-    EPD_2IN7B_V2_SendCommand(0x10);
+    EPD_2IN7B_V2_SendCommand(0x24);
     for (UWORD j = 0; j < Height; j++) {
         for (UWORD i = 0; i < Width; i++) {
             EPD_2IN7B_V2_SendData(Imageblack[i + j * Width]);
         }
     }
     
-    EPD_2IN7B_V2_SendCommand(0x13);
+    EPD_2IN7B_V2_SendCommand(0x26);
     for (UWORD j = 0; j < Height; j++) {
         for (UWORD i = 0; i < Width; i++) {
             EPD_2IN7B_V2_SendData(~Imagered[i + j * Width]);
         }
     }
 
-
-	EPD_2IN7B_V2_SendCommand(0x04); // Power ON 
-	EPD_2IN7B_V2_ReadBusy();
-	DEV_Delay_ms(10);
-	EPD_2IN7B_V2_SendCommand(0x12);  // Display Refresh
-	EPD_2IN7B_V2_ReadBusy(); 
-	DEV_Delay_ms(10);
-	EPD_2IN7B_V2_SendCommand(0x02);  // Power OFF
-	EPD_2IN7B_V2_ReadBusy(); 
-	DEV_Delay_ms(20);
+	EPD_2IN7B_V2_TurnOnDisplay();
 }
 
 /******************************************************************************
@@ -223,6 +206,6 @@ parameter:
 ******************************************************************************/
 void EPD_2IN7B_V2_Sleep(void)
 {
-  	EPD_2IN7B_V2_SendCommand(0x07);  // Deep sleep
-  	EPD_2IN7B_V2_SendData(0xA5);
+  	EPD_2IN7B_V2_SendCommand(0x10);  // Deep sleep
+  	EPD_2IN7B_V2_SendData(0x01);
 }

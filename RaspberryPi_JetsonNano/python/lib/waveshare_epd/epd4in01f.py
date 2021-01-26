@@ -56,9 +56,9 @@ class EPD:
     # Hardware reset
     def reset(self):
         epdconfig.digital_write(self.reset_pin, 1)
-        epdconfig.delay_ms(200) 
+        epdconfig.delay_ms(200)
         epdconfig.digital_write(self.reset_pin, 0)
-        epdconfig.delay_ms(2)
+        epdconfig.delay_ms(1)
         epdconfig.digital_write(self.reset_pin, 1)
         epdconfig.delay_ms(200)
 
@@ -77,13 +77,13 @@ class EPD:
     def ReadBusyHigh(self):
         logging.debug("e-Paper busy")
         while(epdconfig.digital_read(self.busy_pin) == 0):      # 0: idle, 1: busy
-            epdconfig.delay_ms(100)
+            epdconfig.delay_ms(10)
         logging.debug("e-Paper busy release")
         
     def ReadBusyLow(self):
         logging.debug("e-Paper busy")
         while(epdconfig.digital_read(self.busy_pin) == 1):      # 0: idle, 1: busy
-            epdconfig.delay_ms(100)    
+            epdconfig.delay_ms(10)    
         logging.debug("e-Paper busy release")
         
     def init(self):
@@ -196,7 +196,7 @@ class EPD:
         self.ReadBusyHigh()
         self.send_command(0x02)  #0x02
         self.ReadBusyLow()
-        epdconfig.delay_ms(500)
+        # epdconfig.delay_ms(500)
         
     def Clear(self):
         self.send_command(0x61)#Set Resolution setting
@@ -222,10 +222,10 @@ class EPD:
         self.ReadBusyHigh()
         self.send_command(0x02)  #0x02
         self.ReadBusyLow()
-        epdconfig.delay_ms(500)
+        # epdconfig.delay_ms(500)
 
     def sleep(self):
-        epdconfig.delay_ms(500)
+        # epdconfig.delay_ms(500)
         self.send_command(0x07) # DEEP_SLEEP
         self.send_data(0XA5)
 

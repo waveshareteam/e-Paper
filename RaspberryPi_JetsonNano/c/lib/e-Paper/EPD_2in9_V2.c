@@ -111,14 +111,13 @@ void EPD_2IN9_V2_ReadBusy(void)
     Debug("e-Paper busy release\r\n");
 }
 
-static void _EPD_2IN9_V2_LUT(void)
-{        
+static void EPD_2IN9_V2_LUT(void)
+{       
 	UBYTE count;
 	EPD_2IN9_V2_SendCommand(0x32);
 	for(count=0; count<153; count++) 
 		EPD_2IN9_V2_SendData(_WF_PARTIAL_2IN9[count]); 
 	EPD_2IN9_V2_ReadBusy();
- 
 }
 
 /******************************************************************************
@@ -134,14 +133,6 @@ static void EPD_2IN9_V2_TurnOnDisplay(void)
 }
 
 static void EPD_2IN9_V2_TurnOnDisplay_Partial(void)
-{
-	EPD_2IN9_V2_SendCommand(0x22); //Display Update Control
-	EPD_2IN9_V2_SendData(0xFF);   
-	EPD_2IN9_V2_SendCommand(0x20); //Activate Display Update Sequence
-	EPD_2IN9_V2_ReadBusy();
-}
-
-static void _EPD_2IN9_V2_TurnOnDisplay_Partial(void)
 {
 	EPD_2IN9_V2_SendCommand(0x22); //Display Update Control
 	EPD_2IN9_V2_SendData(0x0F);   
@@ -190,47 +181,23 @@ void EPD_2IN9_V2_Init(void)
 	DEV_Delay_ms(100);
 
 	EPD_2IN9_V2_ReadBusy();   
-	EPD_2IN9_V2_SendCommand(0x12);  //SWRESET
-	EPD_2IN9_V2_ReadBusy();   
-
+	EPD_2IN9_V2_SendCommand(0x12); // soft reset
+	EPD_2IN9_V2_ReadBusy();
+	
 	EPD_2IN9_V2_SendCommand(0x01); //Driver output control      
 	EPD_2IN9_V2_SendData(0x27);
 	EPD_2IN9_V2_SendData(0x01);
 	EPD_2IN9_V2_SendData(0x00);
-
+	
 	EPD_2IN9_V2_SendCommand(0x11); //data entry mode       
 	EPD_2IN9_V2_SendData(0x03);
-
+	
 	EPD_2IN9_V2_SetWindows(0, 0, EPD_2IN9_V2_WIDTH-1, EPD_2IN9_V2_HEIGHT-1);
-
-	EPD_2IN9_V2_SendCommand(0x3C); //BorderWavefrom
-	EPD_2IN9_V2_SendData(0x05);	
-
+	
 	EPD_2IN9_V2_SendCommand(0x21); //  Display update control
 	EPD_2IN9_V2_SendData(0x00);
 	EPD_2IN9_V2_SendData(0x80);	
-
-	EPD_2IN9_V2_SendCommand(0x18); //Read built-in temperature sensor
-	EPD_2IN9_V2_SendData(0x80);	
-
-	EPD_2IN9_V2_SetCursor(0, 0);
-	EPD_2IN9_V2_ReadBusy();
-}
-
-void _EPD_2IN9_V2_Init(void)
-{
-	EPD_2IN9_V2_Reset();
-	DEV_Delay_ms(100);
-
-	EPD_2IN9_V2_ReadBusy();   
-	EPD_2IN9_V2_SendCommand(0x12); // soft reset
-	EPD_2IN9_V2_ReadBusy();
 	
-	EPD_2IN9_V2_SendCommand(0x11); //data entry mode       
-	EPD_2IN9_V2_SendData(0x03);
-	
-	EPD_2IN9_V2_SetWindows(0, 0, EPD_2IN9_V2_WIDTH-1, EPD_2IN9_V2_HEIGHT-1);
-
 	EPD_2IN9_V2_SetCursor(0, 0);
 	EPD_2IN9_V2_ReadBusy();	
 }
@@ -292,31 +259,7 @@ void EPD_2IN9_V2_Display_Partial(UBYTE *Image)
     DEV_Digital_Write(EPD_RST_PIN, 1);
     DEV_Delay_ms(10);
 
-	EPD_2IN9_V2_SendCommand(0x3C); //BorderWavefrom
-	EPD_2IN9_V2_SendData(0x80);	
-	
-	EPD_2IN9_V2_SetWindows(0, 0, EPD_2IN9_V2_WIDTH-1, EPD_2IN9_V2_HEIGHT-1);
-	EPD_2IN9_V2_SetCursor(0, 0);
-
-	EPD_2IN9_V2_SendCommand(0x24);   //Write Black and White image to RAM
-	for(i=0;i<4736;i++)
-	{
-		EPD_2IN9_V2_SendData(Image[i]);
-	} 
-	EPD_2IN9_V2_TurnOnDisplay_Partial();
-}
-
-void _EPD_2IN9_V2_Display_Partial(UBYTE *Image)
-{
-	UWORD i;
-
-//Reset
-    DEV_Digital_Write(EPD_RST_PIN, 0);
-    DEV_Delay_ms(5);
-    DEV_Digital_Write(EPD_RST_PIN, 1);
-    DEV_Delay_ms(10);
-
-	_EPD_2IN9_V2_LUT();
+	EPD_2IN9_V2_LUT();
 	EPD_2IN9_V2_SendCommand(0x37); 
 	EPD_2IN9_V2_SendData(0x00);  
 	EPD_2IN9_V2_SendData(0x00);  
@@ -345,7 +288,7 @@ void _EPD_2IN9_V2_Display_Partial(UBYTE *Image)
 	{
 		EPD_2IN9_V2_SendData(Image[i]);
 	} 
-	_EPD_2IN9_V2_TurnOnDisplay_Partial();
+	EPD_2IN9_V2_TurnOnDisplay_Partial();
 }
 
 /******************************************************************************
