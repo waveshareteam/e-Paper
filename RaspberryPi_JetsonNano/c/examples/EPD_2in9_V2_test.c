@@ -33,7 +33,7 @@
 
 int EPD_2in9_V2_test(void)
 {
-    printf("_EPD_2IN9_V2_test Demo\r\n");
+    printf("EPD_2IN9_V2_test Demo\r\n");
     if(DEV_Module_Init()!=0){
         return -1;
     }
