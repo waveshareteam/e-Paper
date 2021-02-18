@@ -7,10 +7,6 @@
 # * | This version:   V4.0
 # * | Date        :   2019-06-20
 # # | Info        :   python demo
-#
-# Modifications by Dmitry Brant:
-# - Oct 2020: New routines for faster SPI data transfer.
-#
 # -----------------------------------------------------------------------------
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documnetation files (the "Software"), to deal
@@ -128,6 +124,7 @@ class EPD:
         if(imwidth == self.width and imheight == self.height):
             img = img.convert('1')
         elif(imwidth == self.height and imheight == self.width):
+            # image has correct dimensions, but needs to be rotated
             img = img.rotate(90, expand=True).convert('1')
         else:
             logging.warning("Wrong image dimensions: must be " + str(self.width) + "x" + str(self.height))
