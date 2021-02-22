@@ -75,12 +75,16 @@ function:
 ******************************************************************************/
 static void EPD_5IN65F_BusyHigh(void)// If BUSYN=0 then waiting
 {
+	Debug("BusyHigh \r\n");
     while(!(DEV_Digital_Read(EPD_BUSY_PIN)));
+	Debug("BusyHigh Release \r\n");
 }
 
 static void EPD_5IN65F_BusyLow(void)// If BUSYN=1 then waiting
 {
+	Debug("BusyLow \r\n");
     while(DEV_Digital_Read(EPD_BUSY_PIN));
+	Debug("BusyLow Release \r\n");
 }
 
 /******************************************************************************
@@ -99,6 +103,10 @@ void EPD_5IN65F_Init(void)
     EPD_5IN65F_SendData(0x00);
     EPD_5IN65F_SendData(0x23);
     EPD_5IN65F_SendData(0x23);
+	
+	EPD_5IN65F_SendCommand(0x82);
+    EPD_5IN65F_SendData(0x1d);
+	
     EPD_5IN65F_SendCommand(0x03);
     EPD_5IN65F_SendData(0x00);
     EPD_5IN65F_SendCommand(0x06);

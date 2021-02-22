@@ -58,17 +58,29 @@ int EPD_13in3_test(void)
     Paint_NewImage(BlackImage, EPD_13IN3_WIDTH, EPD_13IN3_HEIGHT, 0, WHITE);
 	Paint_Clear(WHITE);
 	
-#if 0   // show bmp
+#if 1   // show bmp
 	Paint_NewImage(BlackImage, EPD_13IN3_WIDTH, EPD_13IN3_HEIGHT, 0, WHITE);
-    printf("show window BMP-----------------\r\n");
-    Paint_SelectImage(BlackImage);
-    GUI_ReadBmp("./pic/100x100.bmp", 10, 10);
-    EPD_13IN3_Display(BlackImage);
-    DEV_Delay_ms(3000);
-
     printf("show bmp------------------------\r\n");
     Paint_SelectImage(BlackImage);
-    GUI_ReadBmp("./pic/2in9.bmp", 0, 0);
+    GUI_ReadBmp("./pic/13in3.bmp", 0, 0);
+    EPD_13IN3_Display(BlackImage);
+    DEV_Delay_ms(3000);
+#endif
+
+#if 1   // show bmp
+	Paint_NewImage(BlackImage, EPD_13IN3_WIDTH, EPD_13IN3_HEIGHT, 0, WHITE);
+    printf("show bmp------------------------\r\n");
+    Paint_SelectImage(BlackImage);
+    GUI_ReadBmp("./pic/13in3_1.bmp", 0, 0);
+    EPD_13IN3_Display(BlackImage);
+    DEV_Delay_ms(3000);
+#endif
+
+#if 1   // show bmp
+	Paint_NewImage(BlackImage, EPD_13IN3_WIDTH, EPD_13IN3_HEIGHT, 0, WHITE);
+    printf("show bmp------------------------\r\n");
+    Paint_SelectImage(BlackImage);
+    GUI_ReadBmp("./pic/13in3_2.bmp", 0, 0);
     EPD_13IN3_Display(BlackImage);
     DEV_Delay_ms(3000);
 #endif

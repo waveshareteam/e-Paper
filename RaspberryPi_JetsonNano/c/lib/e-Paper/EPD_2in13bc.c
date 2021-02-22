@@ -168,7 +168,7 @@ void EPD_2IN13BC_Init(void)
     EPD_2IN13BC_SendData(0x8F);
 	
     EPD_2IN13BC_SendCommand(0x50); // VCOM_AND_DATA_INTERVAL_SETTING
-    EPD_2IN13BC_SendData(0xF0);
+    EPD_2IN13BC_SendData(0x70);
     EPD_2IN13BC_SendCommand(0x61); // RESOLUTION_SETTING
     EPD_2IN13BC_SendData(EPD_2IN13BC_WIDTH); // width: 104
     EPD_2IN13BC_SendData(EPD_2IN13BC_HEIGHT >> 8); // height: 212

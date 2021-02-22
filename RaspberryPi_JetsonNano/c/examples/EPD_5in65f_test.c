@@ -59,10 +59,9 @@ int EPD_5in65f_test(void)
 	
 #if 1
     printf("show image for array\r\n");
-    Paint_Clear(EPD_5IN65F_WHITE);
-    GUI_ReadBmp_RGB_7Color("./pic/5in65f3.bmp", 0, 0);
-	EPD_5IN65F_Display(BlackImage);
-    // EPD_5IN65F_Display_part(BlackImage, 0, 0, 600, 260);
+
+	EPD_5IN65F_Display(flagimage);
+
     DEV_Delay_ms(4000);
 #endif
 

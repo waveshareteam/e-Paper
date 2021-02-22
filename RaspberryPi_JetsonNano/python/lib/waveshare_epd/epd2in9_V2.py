@@ -68,11 +68,11 @@ class EPD:
     # Hardware reset
     def reset(self):
         epdconfig.digital_write(self.reset_pin, 1)
-        epdconfig.delay_ms(200) 
+        epdconfig.delay_ms(50) 
         epdconfig.digital_write(self.reset_pin, 0)
-        epdconfig.delay_ms(5)
+        epdconfig.delay_ms(2)
         epdconfig.digital_write(self.reset_pin, 1)
-        epdconfig.delay_ms(200)   
+        epdconfig.delay_ms(50)   
 
     def send_command(self, command):
         epdconfig.digital_write(self.dc_pin, 0)
@@ -89,7 +89,7 @@ class EPD:
     def ReadBusy(self):
         logging.debug("e-Paper busy")
         while(epdconfig.digital_read(self.busy_pin) == 1):      #  0: idle, 1: busy
-            epdconfig.delay_ms(200) 
+            epdconfig.delay_ms(10) 
         logging.debug("e-Paper busy release")  
 
     def TurnOnDisplay(self):
@@ -211,12 +211,12 @@ class EPD:
         
     def display_Partial(self, image):
         if (image == None):
-            return          
-
+            return
+            
         epdconfig.digital_write(self.reset_pin, 0)
-        epdconfig.delay_ms(5)
+        epdconfig.delay_ms(2)
         epdconfig.digital_write(self.reset_pin, 1)
-        epdconfig.delay_ms(10)   
+        epdconfig.delay_ms(2)   
         
         self.SendLut();
         self.send_command(0x37); 
@@ -232,7 +232,7 @@ class EPD:
         self.send_data(0x00);
 
         self.send_command(0x3C); #BorderWavefrom
-        self.send_data(0x80);	
+        self.send_data(0x80);
 
         self.send_command(0x22); 
         self.send_data(0xC0);   
@@ -241,7 +241,7 @@ class EPD:
 
         self.SetWindow(0, 0, self.width - 1, self.height - 1)
         self.SetCursor(0, 0)
-    
+        
         self.send_command(0x24) # WRITE_RAM
         for j in range(0, self.height):
             for i in range(0, int(self.width / 8)):

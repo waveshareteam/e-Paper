@@ -15,14 +15,6 @@ int main(void)
 {
     // Exception handling:ctrl + c
     signal(SIGINT, Handler);
-
-    // if(DEV_Module_Init()!=0){
-        // return -1;
-    // }
-	
-	// while(1) {
-	    // DEV_Delay_ms(10000); 
-	// }
 	
 	// EPD_1in54_DES_test();
 	// EPD_2in13_DES_test();
@@ -41,7 +33,6 @@ int main(void)
 
     // EPD_2in7_test();
     // EPD_2in7b_test();
-
 	// EPD_2in7b_V2_test();
 
     // EPD_2in9_test();
@@ -89,7 +80,15 @@ int main(void)
 	
 	// EPD_13in3_test();
 	
-	// DEV_Module_Exit();
-
+	
+	/*	For Test
+    if(DEV_Module_Init()!=0){
+        return -1;
+    }
+	while(1) {
+	    DEV_Delay_ms(10000); 
+	}
+	DEV_Module_Exit();
+	*/
     return 0;
 }

@@ -22,3 +22,4 @@
 2020-12-09: Added new program 2.9inch V2 e-Paper routine.
 2020-12-09: Added new program 5.83inch V2 e-Paper routine.
 2020-12-25: Added new program 4.01inch (F) e-Paper routine.
+2021-02-22: Added new program 2.7inch B V2 e-Paper routine.

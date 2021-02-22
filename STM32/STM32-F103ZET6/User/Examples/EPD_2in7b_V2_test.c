@@ -1,11 +1,11 @@
 /*****************************************************************************
-* | File      	:   EPD_2in9bc_test.c
+* | File      	:   EPD_2IN7b_V2_test.c
 * | Author      :   Waveshare team
-* | Function    :   2.9inch B&C e-paper test demo
+* | Function    :   2.7inch e-paper b V2 test demo
 * | Info        :
 *----------------
 * |	This version:   V1.0
-* | Date        :   2019-06-12
+* | Date        :   2020-10-20
 * | Info        :
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -28,63 +28,50 @@
 #
 ******************************************************************************/
 #include "EPD_Test.h"
-#include "EPD_2in9bc.h"
-#include <time.h> 
+#include "EPD_2in7b_V2.h"
 
-
-
-int EPD_2in9bc_test(void)
+int EPD_2in7b_V2_test(void)
 {
-    printf("EPD_2IN9BC_test Demo\r\n");
+    printf("EPD_2IN7B_V2_test Demo\r\n");
     if(DEV_Module_Init()!=0){
         return -1;
     }
     
     printf("e-Paper Init and Clear...\r\n");
-    
-    struct timespec start={0,0}, finish={0,0}; 
-    clock_gettime(CLOCK_REALTIME,&start);
-    EPD_2IN9BC_Init();
-    EPD_2IN9BC_Clear();
-    clock_gettime(CLOCK_REALTIME,&finish);
-    printf("%ld S\r\n",finish.tv_sec-start.tv_sec);
+    EPD_2IN7B_V2_Init();
+
+    EPD_2IN7B_V2_Clear();
     DEV_Delay_ms(500);
 
     //Create a new image cache named IMAGE_BW and fill it with white
-    UBYTE *BlackImage, *RYImage; // Red or Yellow
-    UWORD Imagesize = ((EPD_2IN9BC_WIDTH % 8 == 0)? (EPD_2IN9BC_WIDTH / 8 ): (EPD_2IN9BC_WIDTH / 8 + 1)) * EPD_2IN9BC_HEIGHT;
+    UBYTE *BlackImage, *RedImage;
+    UWORD Imagesize = ((EPD_2IN7B_V2_WIDTH % 8 == 0)? (EPD_2IN7B_V2_WIDTH / 8 ): (EPD_2IN7B_V2_WIDTH / 8 + 1)) * EPD_2IN7B_V2_HEIGHT;
     if((BlackImage = (UBYTE *)malloc(Imagesize)) == NULL) {
         printf("Failed to apply for black memory...\r\n");
         return -1;
     }
-    if((RYImage = (UBYTE *)malloc(Imagesize)) == NULL) {
+    if((RedImage = (UBYTE *)malloc(Imagesize)) == NULL) {
         printf("Failed to apply for red memory...\r\n");
         return -1;
     }
-    printf("NewImage:BlackImage and RYImage\r\n");
-    Paint_NewImage(BlackImage, EPD_2IN9BC_WIDTH, EPD_2IN9BC_HEIGHT, 270, WHITE);
-    Paint_NewImage(RYImage, EPD_2IN9BC_WIDTH, EPD_2IN9BC_HEIGHT, 270, WHITE);
+    printf("NewImage:BlackImage and RedImage\r\n");
+    Paint_NewImage(BlackImage, EPD_2IN7B_V2_WIDTH, EPD_2IN7B_V2_HEIGHT, 270, WHITE);
+    Paint_NewImage(RedImage, EPD_2IN7B_V2_WIDTH, EPD_2IN7B_V2_HEIGHT, 270, WHITE);
 
     //Select Image
     Paint_SelectImage(BlackImage);
     Paint_Clear(WHITE);
-    Paint_SelectImage(RYImage);
+    Paint_SelectImage(RedImage);
     Paint_Clear(WHITE);
-    
-#if 1   // show bmp
-    printf("show window BMP-----------------\r\n");
-    Paint_SelectImage(BlackImage);
-    GUI_ReadBmp("./pic/100x100.bmp", 50, 10);
-    Paint_SelectImage(RYImage);
-    Paint_Clear(WHITE);    
-    EPD_2IN9BC_Display(BlackImage, RYImage);
-    DEV_Delay_ms(2000);
-#endif
 
-#if 1   // show image for array    
+#if 1   // show image for array   
     printf("show image for array\r\n");
-    EPD_2IN9BC_Display(gImage_2in9bc_b, gImage_2in9bc_ry);
-    DEV_Delay_ms(2000);
+    Paint_SelectImage(BlackImage);
+    Paint_DrawBitMap(gImage_2in7b_Black);
+    Paint_SelectImage(RedImage);
+    Paint_DrawBitMap(gImage_2in7b_Red);
+    EPD_2IN7B_V2_Display(BlackImage, RedImage);
+    DEV_Delay_ms(4000);
 #endif
 
 #if 1   // Drawing on the image
@@ -105,7 +92,7 @@ int EPD_2in9bc_test(void)
     Paint_DrawNum(10, 50, 987654321, &Font16, WHITE, BLACK);
 
     //2.Draw red image
-    Paint_SelectImage(RYImage);
+    Paint_SelectImage(RedImage);
     Paint_Clear(WHITE);
     Paint_DrawCircle(160, 95, 20, BLACK, DOT_PIXEL_1X1, DRAW_FILL_EMPTY);
     Paint_DrawCircle(210, 95, 20, BLACK, DOT_PIXEL_1X1, DRAW_FILL_FULL);
@@ -116,24 +103,21 @@ int EPD_2in9bc_test(void)
     Paint_DrawNum(10, 33, 123456789, &Font12, BLACK, WHITE);
 
     printf("EPD_Display\r\n");
-    EPD_2IN9BC_Display(BlackImage, RYImage);
-    DEV_Delay_ms(2000);
+    EPD_2IN7B_V2_Display(BlackImage, RedImage);
+    DEV_Delay_ms(4000);
 #endif
 
     printf("Clear...\r\n");
-    EPD_2IN9BC_Clear();
+    EPD_2IN7B_V2_Clear();
 
     printf("Goto Sleep...\r\n");
-    EPD_2IN9BC_Sleep();
+    EPD_2IN7B_V2_Sleep();
     free(BlackImage);
-    free(RYImage);
     BlackImage = NULL;
-    RYImage = NULL;
     DEV_Delay_ms(2000);//important, at least 2s
     // close 5V
     printf("close 5V, Module enters 0 power consumption ...\r\n");
-    DEV_Module_Exit();
-    
+    DEV_Module_Exit(); 
     return 0;
 }
 

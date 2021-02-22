@@ -64,21 +64,21 @@ int EPD_2in13bc_test(void)
     Paint_Clear(WHITE);
 
 #if 1   // show bmp
-    printf("show window BMP-----------------\r\n");
-    Paint_SelectImage(BlackImage);
-    GUI_ReadBmp("./pic/100x100.bmp", 10, 0);
-    Paint_SelectImage(RYImage);
-    Paint_Clear(WHITE);    
-    EPD_2IN13BC_Display(BlackImage, RYImage);
-    DEV_Delay_ms(2000);
+    // printf("show window BMP-----------------\r\n");
+    // Paint_SelectImage(BlackImage);
+    // GUI_ReadBmp("./pic/100x100.bmp", 10, 0);
+    // Paint_SelectImage(RYImage);
+    // Paint_Clear(WHITE);    
+    // EPD_2IN13BC_Display(BlackImage, RYImage);
+    // DEV_Delay_ms(2000);
 
     printf("show red bmp------------------------\r\n");
     Paint_SelectImage(BlackImage);
-    GUI_ReadBmp("./pic/2in13bc-b.bmp", 0, 0);
+    GUI_ReadBmp("./pic/2in13_b1.bmp", 0, 0);
     Paint_SelectImage(RYImage);
-    GUI_ReadBmp("./pic/2in13bc-ry.bmp", 0, 0);
+    GUI_ReadBmp("./pic/2in13_y1.bmp", 0, 0);
     EPD_2IN13BC_Display(BlackImage, RYImage);
-    // DEV_Delay_ms(2000);
+    DEV_Delay_ms(2000);
 
 #endif    
     

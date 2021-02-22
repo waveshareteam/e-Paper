@@ -1,12 +1,13 @@
 /*****************************************************************************
-* | File      	:	  EPD_Test.h
+* | File      	:   EPD_2in7b_V2.h
 * | Author      :   Waveshare team
-* | Function    :   e-Paper test Demo
+* | Function    :   2.7inch e-paper b V2
 * | Info        :
 *----------------
 * |	This version:   V1.0
-* | Date        :   2019-06-11
-* | Info        :   
+* | Date        :   2020-10-20
+* | Info        :
+* -----------------------------------------------------------------------------
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documnetation files (the "Software"), to deal
@@ -27,62 +28,18 @@
 # THE SOFTWARE.
 #
 ******************************************************************************/
-#ifndef _EPD_TEST_H_
-#define _EPD_TEST_H_
+#ifndef __EPD_2IN7B_V2_H_
+#define __EPD_2IN7B_V2_H_
 
 #include "DEV_Config.h"
-#include "GUI_Paint.h"
-#include "imagedata.h"
-#include "Debug.h"
-#include <stdlib.h> // malloc() free()
 
-int EPD_1in02d_test(void);
+// Display resolution
+#define EPD_2IN7B_V2_WIDTH       176
+#define EPD_2IN7B_V2_HEIGHT      264
 
-int EPD_1in54_test(void);
-int EPD_1in54_V2_test(void);
-int EPD_1in54b_test(void);
-int EPD_1in54b_V2_test(void);
-int EPD_1in54c_test(void);
+void EPD_2IN7B_V2_Init(void);
+void EPD_2IN7B_V2_Clear(void);
+void EPD_2IN7B_V2_Display(UBYTE *Imageblack, UBYTE *Imagered);
+void EPD_2IN7B_V2_Sleep(void);
 
-int EPD_2in7_test(void);
-int EPD_2in7b_test(void);
-int EPD_2in7b_V2_test(void);
-
-int EPD_2in9_test(void);
-int EPD_2in9_V2_test(void);
-int EPD_2in9bc_test(void);
-int EPD_2in9b_V3_test(void);
-int EPD_2in9d_test(void);
-
-int EPD_2in13_test(void);
-int EPD_2in13_V2_test(void);
-int EPD_2in13bc_test(void);
-int EPD_2in13b_V3_test(void);
-int EPD_2in13d_test(void);
-
-int EPD_2in66_test(void);
-int EPD_2in66b_test(void);
-
-int EPD_3in7_test(void);
-
-int EPD_4in01f_test(void);
-
-int EPD_4in2_test(void);
-int EPD_4in2bc_test(void);
-int EPD_4in2b_V2_test(void);
-
-int EPD_5in65f_test(void);
-	
-int EPD_5in83_test(void);
-int EPD_5in83_V2_test(void);
-int EPD_5in83bc_test(void);
-int EPD_5in83b_V2_test(void);
-
-int EPD_7in5_test(void);
-int EPD_7in5_V2_test(void);
-int EPD_7in5bc_test(void);
-int EPD_7in5b_V2_test(void);
-
-int EPD_7in5_HD_test(void);
-int EPD_7in5b_HD_test(void);
 #endif
