@@ -19,6 +19,7 @@ try:
     logging.info("epd2in7b_V2 Demo")
     
     epd = epd2in7b_V2.EPD()
+
     logging.info("init and Clear")
     epd.init()
     epd.Clear()
@@ -60,7 +61,7 @@ try:
     drawred = ImageDraw.Draw(LRedimage)
     
     drawblack.text((2, 0), 'hello world', font = font18, fill = 0)
-    drawblack.text((2, 20), '2.9inch epd', font = font18, fill = 0)
+    drawblack.text((2, 20), '2.7inch epd', font = font18, fill = 0)
     drawblack.text((20, 50), u'微雪电子', font = font18, fill = 0)
     drawblack.line((10, 90, 60, 140), fill = 0)
     drawblack.line((60, 90, 10, 140), fill = 0)

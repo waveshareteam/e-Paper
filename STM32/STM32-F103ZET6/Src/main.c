@@ -80,6 +80,7 @@ int main(void)
 
 //		EPD_2in7_test();
 //		EPD_2in7b_test();
+//		EPD_2in7b_V2_test();
 
 //		EPD_2in9_test();
 //		EPD_2in9_V2_test();

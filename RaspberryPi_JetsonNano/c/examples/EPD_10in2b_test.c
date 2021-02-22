@@ -65,29 +65,16 @@ int EPD_10in2b_test(void)
     Paint_NewImage(RedImage, EPD_10IN2b_WIDTH, EPD_10IN2b_HEIGHT, 0, WHITE);
 	Paint_Clear(WHITE);
 	
-#if 0   // show bmp
-	Paint_NewImage(BlackImage, EPD_10IN2b_WIDTH, EPD_10IN2b_HEIGHT, 0, WHITE);
+#if 1   // show bmp
+	// Paint_NewImage(BlackImage, EPD_10IN2b_WIDTH, EPD_10IN2b_HEIGHT, 0, WHITE);
     printf("show window BMP-----------------\r\n");
     Paint_SelectImage(BlackImage);
-    GUI_ReadBmp("./pic/100x100.bmp", 10, 10);
-    EPD_10IN2b_Display(BlackImage);
-    DEV_Delay_ms(3000);
+    GUI_ReadBmp("./pic/10in2_b.bmp", 0, 0);
 
     printf("show bmp------------------------\r\n");
-    Paint_SelectImage(BlackImage);
-    GUI_ReadBmp("./pic/2in9.bmp", 0, 0);
-    EPD_10IN2b_Display(BlackImage);
-    DEV_Delay_ms(3000);
-#endif
-
-#if 0  //show image for array  
-    Paint_NewImage(BlackImage, EPD_10IN2b_WIDTH, EPD_10IN2b_HEIGHT, 0, WHITE);  
-    printf("show image for array\r\n");
-    Paint_SelectImage(BlackImage);
-    Paint_Clear(WHITE);
-    Paint_DrawBitMap(gImage_2in9);
-
-    EPD_10IN2b_Display(BlackImage);
+    Paint_SelectImage(RedImage);
+    GUI_ReadBmp("./pic/10in2_r.bmp", 0, 0);
+    EPD_10IN2b_Display(BlackImage, RedImage);
     DEV_Delay_ms(3000);
 #endif
 
@@ -115,8 +102,8 @@ int EPD_10in2b_test(void)
     Paint_DrawLine(85, 95, 125, 95, BLACK, DOT_PIXEL_1X1, LINE_STYLE_DOTTED);
     Paint_DrawLine(105, 75, 105, 115, BLACK, DOT_PIXEL_1X1, LINE_STYLE_DOTTED);
 
-    Paint_DrawString_EN(10, 0, "waveshare", &Font16, BLACK, WHITE);
-    Paint_DrawString_EN(10, 20, "hello world", &Font12, WHITE, BLACK);
+    Paint_DrawString_EN(10, 10, "waveshare", &Font16, BLACK, WHITE);
+    Paint_DrawString_EN(10, 30, "hello world", &Font12, WHITE, BLACK);
 
     Paint_DrawNum(10, 33, 123456789, &Font12, BLACK, WHITE);
     Paint_DrawNum(10, 50, 987654321, &Font16, WHITE, BLACK);
@@ -146,6 +133,21 @@ int EPD_10in2b_test(void)
     DEV_Delay_ms(3000);
 #endif
 
+	
+#if 1   // show bmp
+    printf("show window BMP-----------------\r\n");
+    Paint_SelectImage(BlackImage);
+    Paint_Clear(WHITE);
+    GUI_ReadBmp("./pic/10in2_b1.bmp", 0, 0);
+
+    printf("show bmp------------------------\r\n");
+    Paint_SelectImage(RedImage);
+    Paint_Clear(WHITE);
+    GUI_ReadBmp("./pic/10in2_r1.bmp", 0, 0);
+    EPD_10IN2b_Display(BlackImage, RedImage);
+    DEV_Delay_ms(3000);
+#endif
+
 	printf("Clear...\r\n");
     EPD_10IN2b_Clear();
 	
@@ -153,6 +155,8 @@ int EPD_10in2b_test(void)
     EPD_10IN2b_Sleep();
     free(BlackImage);
     BlackImage = NULL;
+    free(RedImage);
+    RedImage = NULL;
     DEV_Delay_ms(2000);//important, at least 2s
     // close 5V
     printf("close 5V, Module enters 0 power consumption ...\r\n");

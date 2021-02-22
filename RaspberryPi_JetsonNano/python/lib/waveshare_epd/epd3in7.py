@@ -171,7 +171,7 @@ class EPD:
         self.send_data(0x03)
 
         self.send_command(0x3C) # set border 
-        self.send_data(0x00)
+        self.send_data(0x03)
         
         self.send_command(0x0C) # set booster strength
         self.send_data(0xAE)

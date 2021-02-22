@@ -74,6 +74,7 @@ try:
     epd.display(epd.getbuffer(Himage2))
     time.sleep(2)
     
+
     # partial update
     logging.info("5.show time")
     time_image = Image.new('1', (epd.height, epd.width), 255)

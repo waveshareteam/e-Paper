@@ -73,6 +73,7 @@ void Epd::WaitUntilIdle(void)
 	DelayMs(200);
 }
 
+// High Direction
 int Epd::HDirInit(void)
 {
 	/* this calls the peripheral hardware interface, see epdif */
@@ -125,6 +126,7 @@ int Epd::HDirInit(void)
 	return 0;
 }
 
+// Low Direction
 int Epd::LDirInit(void)
 {
 	/* this calls the peripheral hardware interface, see epdif */

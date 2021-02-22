@@ -265,7 +265,7 @@ void EPD_2IN9_V2_Display_Partial(UBYTE *Image)
 	EPD_2IN9_V2_SendData(0x00);  
 	EPD_2IN9_V2_SendData(0x00);  
 	EPD_2IN9_V2_SendData(0x00); 
-	EPD_2IN9_V2_SendData(0x00);  	
+	EPD_2IN9_V2_SendData(0x00);  
 	EPD_2IN9_V2_SendData(0x40);  
 	EPD_2IN9_V2_SendData(0x00);  
 	EPD_2IN9_V2_SendData(0x00);   
