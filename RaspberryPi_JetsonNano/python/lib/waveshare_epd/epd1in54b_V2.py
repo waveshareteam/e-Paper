@@ -168,7 +168,7 @@ class EPD:
         self.send_command(0x10) #enter deep sleep
         self.send_data(0x01) 
 
-    def Dev_exit(self):
+        epdconfig.delay_ms(2000)
         epdconfig.module_exit()
 
 ### END OF FILE ###

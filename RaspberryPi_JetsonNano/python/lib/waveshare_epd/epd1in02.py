@@ -340,7 +340,7 @@ class EPD:
         self.send_data(0xA5)
         epdconfig.delay_ms(200)
 
-    def Dev_exit(self):
+        epdconfig.delay_ms(2000)
         epdconfig.module_exit()
 
 ### END OF FILE ###
