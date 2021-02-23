@@ -235,6 +235,6 @@ class EPD:
         self.send_data(0XA5)
         epdconfig.digital_write(self.reset_pin, 0)
 
-    def Dev_exit(self):
-        epdconfig.module_exit()      
+        epdconfig.delay_ms(2000)
+        epdconfig.module_exit() 
         

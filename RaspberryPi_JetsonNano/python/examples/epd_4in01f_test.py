@@ -96,9 +96,6 @@ try:
     epd.Clear()
     logging.info("Goto Sleep...")
     epd.sleep()
-    time.sleep(30)
-    
-    epd.Dev_exit()
     
 except IOError as e:
     logging.info(e)
