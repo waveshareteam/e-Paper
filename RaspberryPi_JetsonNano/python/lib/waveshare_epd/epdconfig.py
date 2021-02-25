@@ -56,12 +56,6 @@ class RaspberryPi:
     def delay_ms(self, delaytime):
         time.sleep(delaytime / 1000.0)
 
-    def spi_writebyte(self, data):
-        self.SPI.writebytes(data)
-
-    def spi_writebyte2(self, data):
-        self.SPI.writebytes2(data)
-
     def module_init(self):
         self.GPIO.setmode(self.GPIO.BCM)
         self.GPIO.setwarnings(False)
@@ -85,7 +79,32 @@ class RaspberryPi:
         self.GPIO.output(self.DC_PIN, 0)
 
         self.GPIO.cleanup()
+    
+    def reset(self, delay_a, delay_b, delay_c):
+        self.GPIO.output(self.RST_PIN, 1)
+        self.delay_ms(delay_a) 
+        self.GPIO.output(self.RST_PIN, 0)
+        self.delay_ms(delay_b)
+        self.GPIO.output(self.RST_PIN, 1)
+        self.delay_ms(delay_c)   
 
+    def send_command(self, command):
+        self.GPIO.output(self.DC_PIN, 0)
+        self.GPIO.output(self.CS_PIN, 0)
+        self.SPI.writebytes([command])
+        self.GPIO.output(self.CS_PIN, 1)
+
+    def send_data(self, data):
+        self.GPIO.output(self.DC_PIN, 1)
+        self.GPIO.output(self.CS_PIN, 0)
+        self.SPI.writebytes([data])
+        self.GPIO.output(self.CS_PIN, 1)
+        
+    def send_data2(self, data):
+        self.GPIO.output(self.DC_PIN, 1)
+        self.GPIO.output(self.CS_PIN, 0)
+        self.SPI.writebytes2(data)
+        self.GPIO.output(self.CS_PIN, 1)
 
 class JetsonNano:
     # Pin definition
@@ -122,9 +141,6 @@ class JetsonNano:
     def delay_ms(self, delaytime):
         time.sleep(delaytime / 1000.0)
 
-    def spi_writebyte(self, data):
-        self.SPI.SYSFS_software_spi_transfer(data[0])
-
     def module_init(self):
         self.GPIO.setmode(self.GPIO.BCM)
         self.GPIO.setwarnings(False)
@@ -144,7 +160,26 @@ class JetsonNano:
         self.GPIO.output(self.DC_PIN, 0)
 
         self.GPIO.cleanup()
+        
+    def reset(self):
+        self.GPIO.output(self.reset_pin, 1)
+        self.delay_ms(200) 
+        self.GPIO.output(self.reset_pin, 0)
+        self.delay_ms(2)
+        self.GPIO.output(self.reset_pin, 1)
+        self.delay_ms(200)   
 
+    def send_command(self, command):
+        self.GPIO.output(self.dc_pin, 0)
+        self.GPIO.output(self.cs_pin, 0)
+        self.SPI.SYSFS_software_spi_transfer(command)
+        self.GPIO.output(self.cs_pin, 1)
+
+    def send_data(self, data):
+        self.GPIO.output(self.dc_pin, 1)
+        self.GPIO.output(self.cs_pin, 0)
+        self.SPI.SYSFS_software_spi_transfer(data)
+        self.GPIO.output(self.cs_pin, 1)
 
 if os.path.exists('/sys/bus/platform/drivers/gpiomem-bcm2835'):
     implementation = RaspberryPi()

@@ -37,33 +37,9 @@ EPD_HEIGHT      = 448
 
 class EPD:
     def __init__(self):
-        self.reset_pin = epdconfig.RST_PIN
-        self.dc_pin = epdconfig.DC_PIN
         self.busy_pin = epdconfig.BUSY_PIN
-        self.cs_pin = epdconfig.CS_PIN
         self.width = EPD_WIDTH
         self.height = EPD_HEIGHT
-    
-    # Hardware reset
-    def reset(self):
-        epdconfig.digital_write(self.reset_pin, 1)
-        epdconfig.delay_ms(200) 
-        epdconfig.digital_write(self.reset_pin, 0)
-        epdconfig.delay_ms(2)
-        epdconfig.digital_write(self.reset_pin, 1)
-        epdconfig.delay_ms(200)   
-
-    def send_command(self, command):
-        epdconfig.digital_write(self.dc_pin, 0)
-        epdconfig.digital_write(self.cs_pin, 0)
-        epdconfig.spi_writebyte([command])
-        epdconfig.digital_write(self.cs_pin, 1)
-
-    def send_data(self, data):
-        epdconfig.digital_write(self.dc_pin, 1)
-        epdconfig.digital_write(self.cs_pin, 0)
-        epdconfig.spi_writebyte([data])
-        epdconfig.digital_write(self.cs_pin, 1)
         
     def ReadBusy(self):
         logging.debug("e-Paper busy")
@@ -75,47 +51,47 @@ class EPD:
         if (epdconfig.module_init() != 0):
             return -1
         # EPD hardware init start
-        self.reset()
+        epdconfig.reset(200, 2, 200)
         
-        self.send_command(0x01) # POWER_SETTING
-        self.send_data(0x37)
-        self.send_data(0x00)
+        epdconfig.send_command(0x01) # POWER_SETTING
+        epdconfig.send_data(0x37)
+        epdconfig.send_data(0x00)
         
-        self.send_command(0x00) # PANEL_SETTING
-        self.send_data(0xCF)
-        self.send_data(0x08)
+        epdconfig.send_command(0x00) # PANEL_SETTING
+        epdconfig.send_data(0xCF)
+        epdconfig.send_data(0x08)
         
-        self.send_command(0x06) # BOOSTER_SOFT_START
-        self.send_data(0xc7)
-        self.send_data(0xcc)
-        self.send_data(0x28)
+        epdconfig.send_command(0x06) # BOOSTER_SOFT_START
+        epdconfig.send_data(0xc7)
+        epdconfig.send_data(0xcc)
+        epdconfig.send_data(0x28)
         
-        self.send_command(0x04) # POWER_ON
+        epdconfig.send_command(0x04) # POWER_ON
         self.ReadBusy()
         
-        self.send_command(0x30) # PLL_CONTROL
-        self.send_data(0x3c)
+        epdconfig.send_command(0x30) # PLL_CONTROL
+        epdconfig.send_data(0x3c)
         
-        self.send_command(0x41) # TEMPERATURE_CALIBRATION
-        self.send_data(0x00)
+        epdconfig.send_command(0x41) # TEMPERATURE_CALIBRATION
+        epdconfig.send_data(0x00)
         
-        self.send_command(0x50) # VCOM_AND_DATA_INTERVAL_SETTING
-        self.send_data(0x77)
+        epdconfig.send_command(0x50) # VCOM_AND_DATA_INTERVAL_SETTING
+        epdconfig.send_data(0x77)
         
-        self.send_command(0x60) # TCON_SETTING
-        self.send_data(0x22)
+        epdconfig.send_command(0x60) # TCON_SETTING
+        epdconfig.send_data(0x22)
         
-        self.send_command(0x61) # TCON_RESOLUTION
-        self.send_data(0x02) # source 600
-        self.send_data(0x58)
-        self.send_data(0x01) # gate 448
-        self.send_data(0xC0)
+        epdconfig.send_command(0x61) # TCON_RESOLUTION
+        epdconfig.send_data(0x02) # source 600
+        epdconfig.send_data(0x58)
+        epdconfig.send_data(0x01) # gate 448
+        epdconfig.send_data(0xC0)
         
-        self.send_command(0x82) # VCM_DC_SETTING
-        self.send_data(0x1E) # decide by LUT file
+        epdconfig.send_command(0x82) # VCM_DC_SETTING
+        epdconfig.send_data(0x1E) # decide by LUT file
         
-        self.send_command(0xe5) # FLASH MODE
-        self.send_data(0x03)
+        epdconfig.send_command(0xe5) # FLASH MODE
+        epdconfig.send_data(0x03)
         
         # EPD hardware init end
         return 0
@@ -152,7 +128,7 @@ class EPD:
         return buf
 
     def display(self, image):
-        self.send_command(0x10)
+        epdconfig.send_command(0x10)
         for i in range(0, int(self.width / 4 * self.height)):
             temp1 = image[i]
             j = 0
@@ -173,26 +149,26 @@ class EPD:
                 else:
                     temp2 |= 0x04
                 temp1 = (temp1 << 2) & 0xFF
-                self.send_data(temp2)
+                epdconfig.send_data(temp2)
                 j += 1
                 
-        self.send_command(0x12)
+        epdconfig.send_command(0x12)
         epdconfig.delay_ms(100)
         self.ReadBusy()
         
     def Clear(self):
-        self.send_command(0x10)
+        epdconfig.send_command(0x10)
         for i in range(0, int(self.width / 4 * self.height)):
             for j in range(0, 4):
-                self.send_data(0x33)
-        self.send_command(0x12)
+                epdconfig.send_data(0x33)
+        epdconfig.send_command(0x12)
         self.ReadBusy()
 
     def sleep(self):
-        self.send_command(0x02) # POWER_OFF
+        epdconfig.send_command(0x02) # POWER_OFF
         self.ReadBusy()
-        self.send_command(0x07) # DEEP_SLEEP
-        self.send_data(0XA5)
+        epdconfig.send_command(0x07) # DEEP_SLEEP
+        epdconfig.send_data(0XA5)
         
         epdconfig.delay_ms(2000)
         epdconfig.module_exit()

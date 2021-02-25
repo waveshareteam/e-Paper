@@ -37,10 +37,7 @@ EPD_HEIGHT      = 264
 
 class EPD:
     def __init__(self):
-        self.reset_pin = epdconfig.RST_PIN
-        self.dc_pin = epdconfig.DC_PIN
         self.busy_pin = epdconfig.BUSY_PIN
-        self.cs_pin = epdconfig.CS_PIN
         self.width = EPD_WIDTH
         self.height = EPD_HEIGHT
 
@@ -95,28 +92,7 @@ class EPD:
         0x00, 0x04, 0x10, 0x00, 0x00, 0x05,
         0x00, 0x03, 0x0E, 0x00, 0x00, 0x0A,
         0x00, 0x23, 0x00, 0x00, 0x00, 0x01
-    ]
-
-    # Hardware reset
-    def reset(self):
-        epdconfig.digital_write(self.reset_pin, 1)
-        epdconfig.delay_ms(200) 
-        epdconfig.digital_write(self.reset_pin, 0)
-        epdconfig.delay_ms(2)
-        epdconfig.digital_write(self.reset_pin, 1)
-        epdconfig.delay_ms(200)   
-
-    def send_command(self, command):
-        epdconfig.digital_write(self.dc_pin, 0)
-        epdconfig.digital_write(self.cs_pin, 0)
-        epdconfig.spi_writebyte([command])
-        epdconfig.digital_write(self.cs_pin, 1)
-
-    def send_data(self, data):
-        epdconfig.digital_write(self.dc_pin, 1)
-        epdconfig.digital_write(self.cs_pin, 0)
-        epdconfig.spi_writebyte([data])
-        epdconfig.digital_write(self.cs_pin, 1)
+    ] 
         
     def ReadBusy(self):
         logging.debug("e-Paper busy")
@@ -125,83 +101,83 @@ class EPD:
         logging.debug("e-Paper busy release")
         
     def set_lut(self):
-        self.send_command(0x20)               # vcom
+        epdconfig.send_command(0x20)               # vcom
         for count in range(0, 44):
-            self.send_data(self.lut_vcom_dc[count])
-        self.send_command(0x21)         # ww --
+            epdconfig.send_data(self.lut_vcom_dc[count])
+        epdconfig.send_command(0x21)         # ww --
         for count in range(0, 42):
-            self.send_data(self.lut_ww[count])
-        self.send_command(0x22)         # bw r
+            epdconfig.send_data(self.lut_ww[count])
+        epdconfig.send_command(0x22)         # bw r
         for count in range(0, 42):
-            self.send_data(self.lut_bw[count])
-        self.send_command(0x23)         # wb w
+            epdconfig.send_data(self.lut_bw[count])
+        epdconfig.send_command(0x23)         # wb w
         for count in range(0, 42):
-            self.send_data(self.lut_bb[count])
-        self.send_command(0x24)         # bb b
+            epdconfig.send_data(self.lut_bb[count])
+        epdconfig.send_command(0x24)         # bb b
         for count in range(0, 42):
-            self.send_data(self.lut_wb[count])
+            epdconfig.send_data(self.lut_wb[count])
             
     def init(self):
         if (epdconfig.module_init() != 0):
             return -1
             
-        self.reset()
+        epdconfig.reset(200, 2, 200)
 
-        self.send_command(0x04) # POWER_ON
+        epdconfig.send_command(0x04) # POWER_ON
         self.ReadBusy()
 
-        self.send_command(0x00) # PANEL_SETTING
-        self.send_data(0xaf) #KW-BF   KWR-AF    BWROTP 0f
+        epdconfig.send_command(0x00) # PANEL_SETTING
+        epdconfig.send_data(0xaf) #KW-BF   KWR-AF    BWROTP 0f
         
-        self.send_command(0x30) # PLL_CONTROL
-        self.send_data(0x3a) #3A 100HZ   29 150Hz 39 200HZ    31 171HZ
+        epdconfig.send_command(0x30) # PLL_CONTROL
+        epdconfig.send_data(0x3a) #3A 100HZ   29 150Hz 39 200HZ    31 171HZ
 
-        self.send_command(0x01) # POWER_SETTING
-        self.send_data(0x03) # VDS_EN, VDG_EN
-        self.send_data(0x00) # VCOM_HV, VGHL_LV[1], VGHL_LV[0]
-        self.send_data(0x2b) # VDH
-        self.send_data(0x2b) # VDL
-        self.send_data(0x09) # VDHR
+        epdconfig.send_command(0x01) # POWER_SETTING
+        epdconfig.send_data(0x03) # VDS_EN, VDG_EN
+        epdconfig.send_data(0x00) # VCOM_HV, VGHL_LV[1], VGHL_LV[0]
+        epdconfig.send_data(0x2b) # VDH
+        epdconfig.send_data(0x2b) # VDL
+        epdconfig.send_data(0x09) # VDHR
 
-        self.send_command(0x06) # BOOSTER_SOFT_START
-        self.send_data(0x07)
-        self.send_data(0x07)
-        self.send_data(0x17)
-
-        # Power optimization
-        self.send_command(0xF8)
-        self.send_data(0x60)
-        self.send_data(0xA5)
+        epdconfig.send_command(0x06) # BOOSTER_SOFT_START
+        epdconfig.send_data(0x07)
+        epdconfig.send_data(0x07)
+        epdconfig.send_data(0x17)
 
         # Power optimization
-        self.send_command(0xF8)
-        self.send_data(0x89)
-        self.send_data(0xA5)
+        epdconfig.send_command(0xF8)
+        epdconfig.send_data(0x60)
+        epdconfig.send_data(0xA5)
 
         # Power optimization
-        self.send_command(0xF8)
-        self.send_data(0x90)
-        self.send_data(0x00)
+        epdconfig.send_command(0xF8)
+        epdconfig.send_data(0x89)
+        epdconfig.send_data(0xA5)
+
+        # Power optimization
+        epdconfig.send_command(0xF8)
+        epdconfig.send_data(0x90)
+        epdconfig.send_data(0x00)
         
         # Power optimization
-        self.send_command(0xF8)
-        self.send_data(0x93)
-        self.send_data(0x2A)
+        epdconfig.send_command(0xF8)
+        epdconfig.send_data(0x93)
+        epdconfig.send_data(0x2A)
 
         # Power optimization
-        self.send_command(0xF8)
-        self.send_data(0x73)
-        self.send_data(0x41)
+        epdconfig.send_command(0xF8)
+        epdconfig.send_data(0x73)
+        epdconfig.send_data(0x41)
 
-        self.send_command(0x82) # VCM_DC_SETTING_REGISTER
-        self.send_data(0x12)                   
-        self.send_command(0x50) # VCOM_AND_DATA_INTERVAL_SETTING
-        self.send_data(0x87) # define by OTP
+        epdconfig.send_command(0x82) # VCM_DC_SETTING_REGISTER
+        epdconfig.send_data(0x12)                   
+        epdconfig.send_command(0x50) # VCOM_AND_DATA_INTERVAL_SETTING
+        epdconfig.send_data(0x87) # define by OTP
 
         self.set_lut()
 
-        self.send_command(0x16) # PARTIAL_DISPLAY_REFRESH
-        self.send_data(0x00)
+        epdconfig.send_command(0x16) # PARTIAL_DISPLAY_REFRESH
+        epdconfig.send_data(0x00)
         
         return 0
 
@@ -230,39 +206,39 @@ class EPD:
         return buf
 
     def display(self, imageblack, imagered):
-        self.send_command(0x10)
+        epdconfig.send_command(0x10)
         for i in range(0, int(self.width * self.height / 8)):
-            self.send_data(~imageblack[i])
-        self.send_command(0x11)
+            epdconfig.send_data(~imageblack[i])
+        epdconfig.send_command(0x11)
         
-        self.send_command(0x13)
+        epdconfig.send_command(0x13)
         for i in range(0, int(self.width * self.height / 8)):
-            self.send_data(~imagered[i])
-        self.send_command(0x11)
+            epdconfig.send_data(~imagered[i])
+        epdconfig.send_command(0x11)
         
-        self.send_command(0x12) 
+        epdconfig.send_command(0x12) 
         self.ReadBusy()
         
     def Clear(self):
-        self.send_command(0x10)
+        epdconfig.send_command(0x10)
         for i in range(0, int(self.width * self.height / 8)):
-            self.send_data(0x00)
-        self.send_command(0x11) 
+            epdconfig.send_data(0x00)
+        epdconfig.send_command(0x11) 
         
-        self.send_command(0x13)
+        epdconfig.send_command(0x13)
         for i in range(0, int(self.width * self.height / 8)):
-            self.send_data(0x00)
-        self.send_command(0x11)
+            epdconfig.send_data(0x00)
+        epdconfig.send_command(0x11)
         
-        self.send_command(0x12) 
+        epdconfig.send_command(0x12) 
         self.ReadBusy()
 
     def sleep(self):
-        self.send_command(0X50)
-        self.send_data(0xf7)
-        self.send_command(0X02)
-        self.send_command(0X07)
-        self.send_data(0xA5)
+        epdconfig.send_command(0X50)
+        epdconfig.send_data(0xf7)
+        epdconfig.send_command(0X02)
+        epdconfig.send_command(0X07)
+        epdconfig.send_data(0xA5)
         
         epdconfig.delay_ms(2000)
         epdconfig.module_exit()

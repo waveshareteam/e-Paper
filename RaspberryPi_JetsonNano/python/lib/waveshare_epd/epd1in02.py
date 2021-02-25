@@ -37,10 +37,7 @@ EPD_HEIGHT      = 128
 
 class EPD:
     def __init__(self):
-        self.reset_pin = epdconfig.RST_PIN
-        self.dc_pin = epdconfig.DC_PIN
         self.busy_pin = epdconfig.BUSY_PIN
-        self.cs_pin = epdconfig.CS_PIN
         self.width = EPD_WIDTH
         self.height = EPD_HEIGHT
     
@@ -86,152 +83,131 @@ class EPD:
     0x00,  0x00,  0x00,  0x00,  0x00,  0x00,  
     0x00,  0x00,  0x00,  0x00,  0x00,  0x00,  
     ]
-        
-    # Hardware reset
-    def reset(self):
-        epdconfig.digital_write(self.reset_pin, 1)
-        epdconfig.delay_ms(200) 
-        epdconfig.digital_write(self.reset_pin, 0)         # module reset
-        epdconfig.delay_ms(2)
-        epdconfig.digital_write(self.reset_pin, 1)
-        epdconfig.delay_ms(200)   
 
-    def send_command(self, command):
-        epdconfig.digital_write(self.dc_pin, 0)
-        epdconfig.digital_write(self.cs_pin, 0)
-        epdconfig.spi_writebyte([command])
-        epdconfig.digital_write(self.cs_pin, 1)
-
-    def send_data(self, data):
-        epdconfig.digital_write(self.dc_pin, 1)
-        epdconfig.digital_write(self.cs_pin, 0)
-        epdconfig.spi_writebyte([data])
-        epdconfig.digital_write(self.cs_pin, 1)
-        
     def ReadBusy(self):
         logging.debug("e-Paper busy")
-        self.send_command(0x71)
+        epdconfig.send_command(0x71)
         busy = epdconfig.digital_read(self.busy_pin)
         busy =not(busy & 0x01)
         while(busy):
-            self.send_command(0x71)
+            epdconfig.send_command(0x71)
             busy = epdconfig.digital_read(self.busy_pin)
             busy =not(busy & 0x01)
         epdconfig.delay_ms(800)
         logging.debug("e-Paper busy release")        
 
     def TurnOnDisplay(self):
-        self.send_command(0x12)
+        epdconfig.send_command(0x12)
         epdconfig.delay_ms(10)
         self.ReadBusy()
 
     def SetFulltReg(self):
-        self.send_command(0x23)
+        epdconfig.send_command(0x23)
         for count in range(0, 42):
-            self.send_data(self.lut_w1[count]) 
+            epdconfig.send_data(self.lut_w1[count]) 
         
-        self.send_command(0x24)
+        epdconfig.send_command(0x24)
         for count in range(0, 42):
-            self.send_data(self.lut_b1[count])     
+            epdconfig.send_data(self.lut_b1[count])     
 
     def SetPartReg(self):
-        self.send_command(0x23)
+        epdconfig.send_command(0x23)
         for count in range(0, 42):
-            self.send_data(self.lut_w[count]) 
+            epdconfig.send_data(self.lut_w[count]) 
         
-        self.send_command(0x24)
+        epdconfig.send_command(0x24)
         for count in range(0, 42):
-            self.send_data(self.lut_b[count])     
+            epdconfig.send_data(self.lut_b[count])     
 
     def Init(self):
         if (epdconfig.module_init() != 0):
             return -1
         # EPD hardware init start
-        self.reset()
+        epdconfig.reset(200, 2, 200)
         
-        self.send_command(0xD2)			
-        self.send_data(0x3F)
+        epdconfig.send_command(0xD2)			
+        epdconfig.send_data(0x3F)
 
-        self.send_command(0x00)  			
-        self.send_data (0x6F)  #from outside
+        epdconfig.send_command(0x00)  			
+        epdconfig.send_data (0x6F)  #from outside
 
-        self.send_command(0x01)  #power setting
-        self.send_data (0x03)	    
-        self.send_data (0x00)
-        self.send_data (0x2b)		
-        self.send_data (0x2b) 
+        epdconfig.send_command(0x01)  #power setting
+        epdconfig.send_data (0x03)	    
+        epdconfig.send_data (0x00)
+        epdconfig.send_data (0x2b)		
+        epdconfig.send_data (0x2b) 
 
-        self.send_command(0x06)  #Configuring the charge pump
-        self.send_data(0x3f)
+        epdconfig.send_command(0x06)  #Configuring the charge pump
+        epdconfig.send_data(0x3f)
 
-        self.send_command(0x2A)  #Setting XON and the options of LUT
-        self.send_data(0x00) 
-        self.send_data(0x00) 
+        epdconfig.send_command(0x2A)  #Setting XON and the options of LUT
+        epdconfig.send_data(0x00) 
+        epdconfig.send_data(0x00) 
 
-        self.send_command(0x30)  #Set the clock frequency
-        self.send_data(0x17) #50Hz
+        epdconfig.send_command(0x30)  #Set the clock frequency
+        epdconfig.send_data(0x17) #50Hz
 
-        self.send_command(0x50)  #Set VCOM and data output interval
-        self.send_data(0x57)			
+        epdconfig.send_command(0x50)  #Set VCOM and data output interval
+        epdconfig.send_data(0x57)			
 
-        self.send_command(0x60)  #Set The non-overlapping period of Gate and Source.
-        self.send_data(0x22)
+        epdconfig.send_command(0x60)  #Set The non-overlapping period of Gate and Source.
+        epdconfig.send_data(0x22)
 
-        self.send_command(0x61)  #resolution setting
-        self.send_data (0x50)    #source 128 	 
-        self.send_data (0x80)       
+        epdconfig.send_command(0x61)  #resolution setting
+        epdconfig.send_data (0x50)    #source 128 	 
+        epdconfig.send_data (0x80)       
 
-        self.send_command(0x82)  #sets VCOM_DC value
-        self.send_data(0x12)  #-1v
+        epdconfig.send_command(0x82)  #sets VCOM_DC value
+        epdconfig.send_data(0x12)  #-1v
 
-        self.send_command(0xe3)#Set POWER SAVING
-        self.send_data(0x33)
+        epdconfig.send_command(0xe3)#Set POWER SAVING
+        epdconfig.send_data(0x33)
         self.SetFulltReg()	
-        self.send_command(0x04)     		#power on
+        epdconfig.send_command(0x04)     		#power on
         self.ReadBusy()
         # EPD hardware init end
         return 0
     
     def Partial_Init(self):
-        self.reset()
+        epdconfig.reset(200, 2, 200)
         
-        self.send_command(0xD2)
-        self.send_data(0x3F)
+        epdconfig.send_command(0xD2)
+        epdconfig.send_data(0x3F)
 
-        self.send_command(0x00)
-        self.send_data (0x6F)  #from outside
+        epdconfig.send_command(0x00)
+        epdconfig.send_data (0x6F)  #from outside
 
-        self.send_command(0x01)  #power setting
-        self.send_data (0x03)
-        self.send_data (0x00)
-        self.send_data (0x2b)
-        self.send_data (0x2b)
+        epdconfig.send_command(0x01)  #power setting
+        epdconfig.send_data (0x03)
+        epdconfig.send_data (0x00)
+        epdconfig.send_data (0x2b)
+        epdconfig.send_data (0x2b)
 
-        self.send_command(0x06)  #Configuring the charge pump
-        self.send_data(0x3f)
+        epdconfig.send_command(0x06)  #Configuring the charge pump
+        epdconfig.send_data(0x3f)
 
-        self.send_command(0x2A)  #Setting XON and the options of LUT
-        self.send_data(0x00)
-        self.send_data(0x00)
+        epdconfig.send_command(0x2A)  #Setting XON and the options of LUT
+        epdconfig.send_data(0x00)
+        epdconfig.send_data(0x00)
 
-        self.send_command(0x30)  #Set the clock frequency
-        self.send_data(0x17)
+        epdconfig.send_command(0x30)  #Set the clock frequency
+        epdconfig.send_data(0x17)
 
-        self.send_command(0x50)  #Set VCOM and data output interval
-        self.send_data(0xf2)
+        epdconfig.send_command(0x50)  #Set VCOM and data output interval
+        epdconfig.send_data(0xf2)
 
-        self.send_command(0x60)  #Set The non-overlapping period of Gate and Source.
-        self.send_data(0x22)
+        epdconfig.send_command(0x60)  #Set The non-overlapping period of Gate and Source.
+        epdconfig.send_data(0x22)
 
-        self.send_command(0x82)  #Set VCOM_DC value
-        self.send_data(0x12)#-1v
+        epdconfig.send_command(0x82)  #Set VCOM_DC value
+        epdconfig.send_data(0x12)#-1v
 
-        self.send_command(0xe3)#Set POWER SAVING
-        self.send_data(0x33)
+        epdconfig.send_command(0xe3)#Set POWER SAVING
+        epdconfig.send_data(0x33)
 
         self.SetPartReg()	
 
-        self.send_command(0x04)#Set POWER SAVING	
+        epdconfig.send_command(0x04)#Set POWER SAVING	
         self.ReadBusy()
         # EPD hardware init end
         return 0
@@ -267,15 +243,15 @@ class EPD:
         else:
             Width = self.width / 8 + 1
             
-        self.send_command(0x10)
+        epdconfig.send_command(0x10)
         for j in range(0, self.height):
             for i in range(0, int(Width)):
-                self.send_data(0xff)  
+                epdconfig.send_data(0xff)  
         
-        self.send_command(0x13)
+        epdconfig.send_command(0x13)
         for j in range(0, self.height):
             for i in range(0, int(Width)):
-                self.send_data(image[i + j * int(Width)])  
+                epdconfig.send_data(image[i + j * int(Width)])  
         self.TurnOnDisplay()
         
     def Clear(self):
@@ -287,28 +263,28 @@ class EPD:
             
         Height = self.height
         
-        self.send_command(0x10)
+        epdconfig.send_command(0x10)
         for j in range(0, Height):
             for i in range(0, int(Width)):
-                self.send_data(0x00)  
+                epdconfig.send_data(0x00)  
         
-        self.send_command(0x13)
+        epdconfig.send_command(0x13)
         for j in range(0, Height):
             for i in range(0, int(Width)):
-                self.send_data(0xff)  
+                epdconfig.send_data(0xff)  
         self.TurnOnDisplay()
 
     def DisplayPartial(self, old_Image, Image):
 
         # Set partial Windows */
-        self.send_command(0x91)		#This command makes the display enter partial mode
-        self.send_command(0x90)		#resolution setting
-        self.send_data(0)           #x-start
-        self.send_data(79)       #x-end
+        epdconfig.send_command(0x91)		#This command makes the display enter partial mode
+        epdconfig.send_command(0x90)		#resolution setting
+        epdconfig.send_data(0)           #x-start
+        epdconfig.send_data(79)       #x-end
 
-        self.send_data(0)
-        self.send_data(127)  #y-end
-        self.send_data(0x00)
+        epdconfig.send_data(0)
+        epdconfig.send_data(127)  #y-end
+        epdconfig.send_data(0x00)
        
         # Width = (self.width % 8 == 0)? (self.width / 8 ): (self.width / 8 + 1)
         if(self.width % 8 == 0):
@@ -318,26 +294,26 @@ class EPD:
             
         Height = self.height
         # send data
-        self.send_command(0x10)
+        epdconfig.send_command(0x10)
         for j in range(0, Height):
             for i in range(0, int(Width)):
-                self.send_data(old_Image[i + j * int(Width)])
+                epdconfig.send_data(old_Image[i + j * int(Width)])
 
-        self.send_command(0x13)
+        epdconfig.send_command(0x13)
         for j in range(0, Height):
             for i in range(0, int(Width)):
-                self.send_data(Image[i + j * int(Width)])
+                epdconfig.send_data(Image[i + j * int(Width)])
 
         # Set partial refresh
         self.TurnOnDisplay()
 
     def Sleep(self):
-        self.send_command(0x50)
-        self.send_data(0xf7)
-        self.send_command(0x02)
+        epdconfig.send_command(0x50)
+        epdconfig.send_data(0xf7)
+        epdconfig.send_command(0x02)
         self.ReadBusy()
-        self.send_command(0x07)
-        self.send_data(0xA5)
+        epdconfig.send_command(0x07)
+        epdconfig.send_data(0xA5)
         epdconfig.delay_ms(200)
 
         epdconfig.delay_ms(2000)

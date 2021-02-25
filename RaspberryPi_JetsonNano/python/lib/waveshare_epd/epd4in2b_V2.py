@@ -36,39 +36,15 @@ EPD_HEIGHT      = 300
 
 class EPD:
     def __init__(self):
-        self.reset_pin = epdconfig.RST_PIN
-        self.dc_pin = epdconfig.DC_PIN
         self.busy_pin = epdconfig.BUSY_PIN
-        self.cs_pin = epdconfig.CS_PIN
         self.width = EPD_WIDTH
-        self.height = EPD_HEIGHT
-
-    # Hardware reset
-    def reset(self):
-        epdconfig.digital_write(self.reset_pin, 1)
-        epdconfig.delay_ms(200) 
-        epdconfig.digital_write(self.reset_pin, 0)
-        epdconfig.delay_ms(5)
-        epdconfig.digital_write(self.reset_pin, 1)
-        epdconfig.delay_ms(200)   
-
-    def send_command(self, command):
-        epdconfig.digital_write(self.dc_pin, 0)
-        epdconfig.digital_write(self.cs_pin, 0)
-        epdconfig.spi_writebyte([command])
-        epdconfig.digital_write(self.cs_pin, 1)
-
-    def send_data(self, data):
-        epdconfig.digital_write(self.dc_pin, 1)
-        epdconfig.digital_write(self.cs_pin, 0)
-        epdconfig.spi_writebyte([data])
-        epdconfig.digital_write(self.cs_pin, 1)
+        self.height = EPD_HEIGHT 
         
     def ReadBusy(self):
         logging.debug("e-Paper busy")
-        self.send_command(0x71);
+        epdconfig.send_command(0x71);
         while(epdconfig.digital_read(self.busy_pin) == 0): # 0: idle, 1: busy
-            self.send_command(0x71);
+            epdconfig.send_command(0x71);
             epdconfig.delay_ms(20)
         logging.debug("e-Paper busy release")
             
@@ -76,13 +52,13 @@ class EPD:
         if (epdconfig.module_init() != 0):
             return -1
             
-        self.reset()
+        epdconfig.reset(200, 5, 200)
         
-        self.send_command(0x04); 
+        epdconfig.send_command(0x04); 
         self.ReadBusy();
 
-        self.send_command(0x00);
-        self.send_data(0x0f);
+        epdconfig.send_command(0x00);
+        epdconfig.send_data(0x0f);
         
         return 0
 
@@ -111,39 +87,39 @@ class EPD:
         return buf
 
     def display(self, imageblack, imagered):
-        self.send_command(0x10)
+        epdconfig.send_command(0x10)
         for i in range(0, int(self.width * self.height / 8)):
-            self.send_data(imageblack[i])
+            epdconfig.send_data(imageblack[i])
         
-        self.send_command(0x13)
+        epdconfig.send_command(0x13)
         for i in range(0, int(self.width * self.height / 8)):
-            self.send_data(imagered[i])
+            epdconfig.send_data(imagered[i])
         
-        self.send_command(0x12) 
+        epdconfig.send_command(0x12) 
         epdconfig.delay_ms(20)
         self.ReadBusy()
         
     def Clear(self):
-        self.send_command(0x10)
+        epdconfig.send_command(0x10)
         for i in range(0, int(self.width * self.height / 8)):
-            self.send_data(0xFF)
+            epdconfig.send_data(0xFF)
             
-        self.send_command(0x13)
+        epdconfig.send_command(0x13)
         for i in range(0, int(self.width * self.height / 8)):
-            self.send_data(0xFF)
+            epdconfig.send_data(0xFF)
         
-        self.send_command(0x12) 
+        epdconfig.send_command(0x12) 
         epdconfig.delay_ms(20)
         self.ReadBusy()
 
     def sleep(self):
-        self.send_command(0X50);
-        self.send_data(0xf7);		#border floating	
+        epdconfig.send_command(0X50);
+        epdconfig.send_data(0xf7);		#border floating	
 
-        self.send_command(0X02);  	#power off
+        epdconfig.send_command(0X02);  	#power off
         self.ReadBusy(); #waiting for the electronic paper IC to release the idle signal
-        self.send_command(0X07);  	#deep sleep
-        self.send_data(0xA5);
+        epdconfig.send_command(0X07);  	#deep sleep
+        epdconfig.send_data(0xA5);
         
         epdconfig.delay_ms(2000)
         epdconfig.module_exit()

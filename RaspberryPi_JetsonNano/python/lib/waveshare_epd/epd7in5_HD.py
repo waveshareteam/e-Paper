@@ -37,39 +37,9 @@ EPD_HEIGHT      = 528
 
 class EPD:
     def __init__(self):
-        self.reset_pin = epdconfig.RST_PIN
-        self.dc_pin = epdconfig.DC_PIN
         self.busy_pin = epdconfig.BUSY_PIN
-        self.cs_pin = epdconfig.CS_PIN
         self.width = EPD_WIDTH
         self.height = EPD_HEIGHT
-    
-    # Hardware reset
-    def reset(self):
-        epdconfig.digital_write(self.reset_pin, 1)
-        epdconfig.delay_ms(200) 
-        epdconfig.digital_write(self.reset_pin, 0)
-        epdconfig.delay_ms(2)
-        epdconfig.digital_write(self.reset_pin, 1)
-        epdconfig.delay_ms(200)   
-
-    def send_command(self, command):
-        epdconfig.digital_write(self.dc_pin, 0)
-        epdconfig.digital_write(self.cs_pin, 0)
-        epdconfig.spi_writebyte([command])
-        epdconfig.digital_write(self.cs_pin, 1)
-
-    def send_data(self, data):
-        epdconfig.digital_write(self.dc_pin, 1)
-        epdconfig.digital_write(self.cs_pin, 0)
-        epdconfig.spi_writebyte([data])
-        epdconfig.digital_write(self.cs_pin, 1)
-        
-    def send_data2(self, data):
-        epdconfig.digital_write(self.dc_pin, 1)
-        epdconfig.digital_write(self.cs_pin, 0)
-        epdconfig.spi_writebyte2(data)
-        epdconfig.digital_write(self.cs_pin, 1)
         
     def ReadBusy(self):
         logging.debug("e-Paper busy")
@@ -82,49 +52,49 @@ class EPD:
         if (epdconfig.module_init() != 0):
             return -1
         # EPD hardware init start
-        self.reset()
+        epdconfig.reset(200, 2, 200)
         
         self.ReadBusy();
-        self.send_command(0x12);  #SWRESET
+        epdconfig.send_command(0x12);  #SWRESET
         self.ReadBusy();
 
-        self.send_command(0x46);  # Auto Write Red RAM
-        self.send_data(0xf7);
+        epdconfig.send_command(0x46);  # Auto Write Red RAM
+        epdconfig.send_data(0xf7);
         self.ReadBusy();
-        self.send_command(0x47);  # Auto Write  B/W RAM
-        self.send_data(0xf7);
-        self.ReadBusy();
-
-        self.send_command(0x0C);  # Soft start setting
-        self.send_data2([0xAE, 0xC7, 0xC3, 0xC0, 0x40])
-
-        self.send_command(0x01);  # Set MUX as 527
-        self.send_data2([0xAF, 0x02, 0x01])
-
-        self.send_command(0x11);  # Data entry mode      
-        self.send_data(0x01);
-
-        self.send_command(0x44); 
-        self.send_data2([0x00, 0x00, 0x6F, 0x03]) # RAM x address start at 0
-        self.send_command(0x45); 
-        self.send_data2([0xAF, 0x02, 0x00, 0x00])
-
-        self.send_command(0x3C); # VBD
-        self.send_data(0x05); # LUT1, for white
-
-        self.send_command(0x18);
-        self.send_data(0X80);
-
-
-        self.send_command(0x22);
-        self.send_data(0XB1); #Load Temperature and waveform setting.
-        self.send_command(0x20);
+        epdconfig.send_command(0x47);  # Auto Write  B/W RAM
+        epdconfig.send_data(0xf7);
         self.ReadBusy();
 
-        self.send_command(0x4E); # set RAM x address count to 0;
-        self.send_data2([0x00, 0x00])
-        self.send_command(0x4F); 
-        self.send_data2([0x00, 0x00])
+        epdconfig.send_command(0x0C);  # Soft start setting
+        epdconfig.send_data2([0xAE, 0xC7, 0xC3, 0xC0, 0x40])
+
+        epdconfig.send_command(0x01);  # Set MUX as 527
+        epdconfig.send_data2([0xAF, 0x02, 0x01])
+
+        epdconfig.send_command(0x11);  # Data entry mode      
+        epdconfig.send_data(0x01);
+
+        epdconfig.send_command(0x44); 
+        epdconfig.send_data2([0x00, 0x00, 0x6F, 0x03]) # RAM x address start at 0
+        epdconfig.send_command(0x45); 
+        epdconfig.send_data2([0xAF, 0x02, 0x00, 0x00])
+
+        epdconfig.send_command(0x3C); # VBD
+        epdconfig.send_data(0x05); # LUT1, for white
+
+        epdconfig.send_command(0x18);
+        epdconfig.send_data(0X80);
+
+
+        epdconfig.send_command(0x22);
+        epdconfig.send_data(0XB1); #Load Temperature and waveform setting.
+        epdconfig.send_command(0x20);
+        self.ReadBusy();
+
+        epdconfig.send_command(0x4E); # set RAM x address count to 0;
+        epdconfig.send_data2([0x00, 0x00])
+        epdconfig.send_command(0x4F); 
+        epdconfig.send_data2([0x00, 0x00])
         # EPD hardware init end
         return 0
 
@@ -144,35 +114,35 @@ class EPD:
         return buf
         
     def display(self, image):
-        self.send_command(0x4F); 
-        self.send_data2([0x00, 0x00])
-        self.send_command(0x24);
-        self.send_data2(image)
-        self.send_command(0x22);
-        self.send_data(0xF7);#Load LUT from MCU(0x32)
-        self.send_command(0x20);
+        epdconfig.send_command(0x4F); 
+        epdconfig.send_data2([0x00, 0x00])
+        epdconfig.send_command(0x24);
+        epdconfig.send_data2(image)
+        epdconfig.send_command(0x22);
+        epdconfig.send_data(0xF7);#Load LUT from MCU(0x32)
+        epdconfig.send_command(0x20);
         epdconfig.delay_ms(10);
         self.ReadBusy();
         
     def Clear(self):
         buf = [0xff] * int(self.width * self.height / 8)
-        self.send_command(0x4F); 
-        self.send_data2([0x00, 0x00])
-        self.send_command(0x24)
-        self.send_data2(buf)
+        epdconfig.send_command(0x4F); 
+        epdconfig.send_data2([0x00, 0x00])
+        epdconfig.send_command(0x24)
+        epdconfig.send_data2(buf)
             
-        self.send_command(0x26)
-        self.send_data2(buf)
+        epdconfig.send_command(0x26)
+        epdconfig.send_data2(buf)
                 
-        self.send_command(0x22);
-        self.send_data(0xF7);#Load LUT from MCU(0x32)
-        self.send_command(0x20);
+        epdconfig.send_command(0x22);
+        epdconfig.send_data(0xF7);#Load LUT from MCU(0x32)
+        epdconfig.send_command(0x20);
         epdconfig.delay_ms(10);
         self.ReadBusy();
 
     def sleep(self):
-        self.send_command(0x10);
-        self.send_data(0x01);
+        epdconfig.send_command(0x10);
+        epdconfig.send_data(0x01);
         
         epdconfig.delay_ms(2000)
         epdconfig.module_exit()

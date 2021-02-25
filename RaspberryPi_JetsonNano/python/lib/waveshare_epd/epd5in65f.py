@@ -38,10 +38,7 @@ EPD_HEIGHT      = 448
 
 class EPD:
     def __init__(self):
-        self.reset_pin = epdconfig.RST_PIN
-        self.dc_pin = epdconfig.DC_PIN
         self.busy_pin = epdconfig.BUSY_PIN
-        self.cs_pin = epdconfig.CS_PIN
         self.width = EPD_WIDTH
         self.height = EPD_HEIGHT
         self.BLACK  = 0x000000   #   0000  BGR
@@ -51,28 +48,6 @@ class EPD:
         self.RED    = 0x0000ff   #   0100
         self.YELLOW = 0x00ffff   #   0101
         self.ORANGE = 0x0080ff   #   0110
-        
-        
-    # Hardware reset
-    def reset(self):
-        epdconfig.digital_write(self.reset_pin, 1)
-        epdconfig.delay_ms(600) 
-        epdconfig.digital_write(self.reset_pin, 0)
-        epdconfig.delay_ms(2)
-        epdconfig.digital_write(self.reset_pin, 1)
-        epdconfig.delay_ms(200)
-
-    def send_command(self, command):
-        epdconfig.digital_write(self.dc_pin, 0)
-        epdconfig.digital_write(self.cs_pin, 0)
-        epdconfig.spi_writebyte([command])
-        epdconfig.digital_write(self.cs_pin, 1)
-
-    def send_data(self, data):
-        epdconfig.digital_write(self.dc_pin, 1)
-        epdconfig.digital_write(self.cs_pin, 0)
-        epdconfig.spi_writebyte([data])
-        epdconfig.digital_write(self.cs_pin, 1)
         
     def ReadBusyHigh(self):
         logging.debug("e-Paper busy")
@@ -90,42 +65,42 @@ class EPD:
         if (epdconfig.module_init() != 0):
             return -1
         # EPD hardware init start
-        self.reset()
+        epdconfig.reset(600, 2, 200)
         
         self.ReadBusyHigh()
-        self.send_command(0x00)
-        self.send_data(0xEF)
-        self.send_data(0x08)
-        self.send_command(0x01)
-        self.send_data(0x37)
-        self.send_data(0x00)
-        self.send_data(0x23)
-        self.send_data(0x23)
-        self.send_command(0x03)
-        self.send_data(0x00)
-        self.send_command(0x06)
-        self.send_data(0xC7)
-        self.send_data(0xC7)
-        self.send_data(0x1D)
-        self.send_command(0x30)
-        self.send_data(0x3c)
-        self.send_command(0x40)
-        self.send_data(0x00)
-        self.send_command(0x50)
-        self.send_data(0x37)
-        self.send_command(0x60)
-        self.send_data(0x22)
-        self.send_command(0x61)
-        self.send_data(0x02)
-        self.send_data(0x58)
-        self.send_data(0x01)
-        self.send_data(0xC0)
-        self.send_command(0xE3)
-        self.send_data(0xAA)
+        epdconfig.send_command(0x00)
+        epdconfig.send_data(0xEF)
+        epdconfig.send_data(0x08)
+        epdconfig.send_command(0x01)
+        epdconfig.send_data(0x37)
+        epdconfig.send_data(0x00)
+        epdconfig.send_data(0x23)
+        epdconfig.send_data(0x23)
+        epdconfig.send_command(0x03)
+        epdconfig.send_data(0x00)
+        epdconfig.send_command(0x06)
+        epdconfig.send_data(0xC7)
+        epdconfig.send_data(0xC7)
+        epdconfig.send_data(0x1D)
+        epdconfig.send_command(0x30)
+        epdconfig.send_data(0x3c)
+        epdconfig.send_command(0x40)
+        epdconfig.send_data(0x00)
+        epdconfig.send_command(0x50)
+        epdconfig.send_data(0x37)
+        epdconfig.send_command(0x60)
+        epdconfig.send_data(0x22)
+        epdconfig.send_command(0x61)
+        epdconfig.send_data(0x02)
+        epdconfig.send_data(0x58)
+        epdconfig.send_data(0x01)
+        epdconfig.send_data(0xC0)
+        epdconfig.send_command(0xE3)
+        epdconfig.send_data(0xAA)
         
         epdconfig.delay_ms(100)
-        self.send_command(0x50)
-        self.send_data(0x37)
+        epdconfig.send_command(0x50)
+        epdconfig.send_data(0x37)
         # EPD hardware init end
         return 0
 
@@ -186,33 +161,33 @@ class EPD:
         return buf
 
     def display(self,image):
-        self.send_command(0x61)#Set Resolution setting
-        self.send_data(0x02)
-        self.send_data(0x58)
-        self.send_data(0x01)
-        self.send_data(0xC0)
-        self.send_command(0x10)
+        epdconfig.send_command(0x61)#Set Resolution setting
+        epdconfig.send_data(0x02)
+        epdconfig.send_data(0x58)
+        epdconfig.send_data(0x01)
+        epdconfig.send_data(0xC0)
+        epdconfig.send_command(0x10)
         for i in range(0, int(EPD_HEIGHT)):
             for j in range(0, int(EPD_WIDTH/2)):
-                self.send_data((image[j+(int(EPD_WIDTH/2)*i)]))
-        self.send_command(0x04)#0x04
+                epdconfig.send_data((image[j+(int(EPD_WIDTH/2)*i)]))
+        epdconfig.send_command(0x04)#0x04
         self.ReadBusyHigh()
-        self.send_command(0x12)#0x12
+        epdconfig.send_command(0x12)#0x12
         self.ReadBusyHigh()
-        self.send_command(0x02)  #0x02
+        epdconfig.send_command(0x02)  #0x02
         self.ReadBusyLow()
         epdconfig.delay_ms(500)
         
     def Clear(self):
-        self.send_command(0x61)#Set Resolution setting
-        self.send_data(0x02)
-        self.send_data(0x58)
-        self.send_data(0x01)
-        self.send_data(0xC0)
-        self.send_command(0x10)
+        epdconfig.send_command(0x61)#Set Resolution setting
+        epdconfig.send_data(0x02)
+        epdconfig.send_data(0x58)
+        epdconfig.send_data(0x01)
+        epdconfig.send_data(0xC0)
+        epdconfig.send_command(0x10)
         for i in range(0, int(EPD_HEIGHT)):
             for j in range(0, int(EPD_WIDTH/2)):
-                self.send_data(0x11)
+                epdconfig.send_data(0x11)
         #BLACK   0x00    /// 0000
         #WHITE   0x11    /// 0001
         #GREEN   0x22    /// 0010
@@ -221,18 +196,18 @@ class EPD:
         #YELLOW  0x55    /// 0101
         #ORANGE  0x66    /// 0110
         #CLEAN   0x77    /// 0111   unavailable  Afterimage
-        self.send_command(0x04)#0x04
+        epdconfig.send_command(0x04)#0x04
         self.ReadBusyHigh()
-        self.send_command(0x12)#0x12
+        epdconfig.send_command(0x12)#0x12
         self.ReadBusyHigh()
-        self.send_command(0x02)  #0x02
+        epdconfig.send_command(0x02)  #0x02
         self.ReadBusyLow()
         epdconfig.delay_ms(500)
 
     def sleep(self):
         epdconfig.delay_ms(500)
-        self.send_command(0x07) # DEEP_SLEEP
-        self.send_data(0XA5)
+        epdconfig.send_command(0x07) # DEEP_SLEEP
+        epdconfig.send_data(0XA5)
         epdconfig.digital_write(self.reset_pin, 0)
 
         epdconfig.delay_ms(2000)

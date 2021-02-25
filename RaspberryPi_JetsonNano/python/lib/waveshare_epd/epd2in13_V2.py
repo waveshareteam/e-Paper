@@ -38,10 +38,7 @@ EPD_HEIGHT      = 250
 
 class EPD:
     def __init__(self):
-        self.reset_pin = epdconfig.RST_PIN
-        self.dc_pin = epdconfig.DC_PIN
         self.busy_pin = epdconfig.BUSY_PIN
-        self.cs_pin = epdconfig.CS_PIN
         self.width = EPD_WIDTH
         self.height = EPD_HEIGHT
         
@@ -81,133 +78,112 @@ class EPD:
         0x00,0x00,0x00,0x00,0x00,                       # TP6 A~D RP6
 
         0x15,0x41,0xA8,0x32,0x30,0x0A,
-    ]
-        
-    # Hardware reset
-    def reset(self):
-        epdconfig.digital_write(self.reset_pin, 1)
-        epdconfig.delay_ms(200) 
-        epdconfig.digital_write(self.reset_pin, 0)
-        epdconfig.delay_ms(5)
-        epdconfig.digital_write(self.reset_pin, 1)
-        epdconfig.delay_ms(200)   
-
-    def send_command(self, command):
-        epdconfig.digital_write(self.dc_pin, 0)
-        epdconfig.digital_write(self.cs_pin, 0)
-        epdconfig.spi_writebyte([command])
-        epdconfig.digital_write(self.cs_pin, 1)
-
-    def send_data(self, data):
-        epdconfig.digital_write(self.dc_pin, 1)
-        epdconfig.digital_write(self.cs_pin, 0)
-        epdconfig.spi_writebyte([data])
-        epdconfig.digital_write(self.cs_pin, 1)
+    ]  
         
     def ReadBusy(self):
         while(epdconfig.digital_read(self.busy_pin) == 1):      # 0: idle, 1: busy
             epdconfig.delay_ms(100)    
 
     def TurnOnDisplay(self):
-        self.send_command(0x22)
-        self.send_data(0xC7)
-        self.send_command(0x20)        
+        epdconfig.send_command(0x22)
+        epdconfig.send_data(0xC7)
+        epdconfig.send_command(0x20)        
         self.ReadBusy()
         
     def TurnOnDisplayPart(self):
-        self.send_command(0x22)
-        self.send_data(0x0c)
-        self.send_command(0x20)        
+        epdconfig.send_command(0x22)
+        epdconfig.send_data(0x0c)
+        epdconfig.send_command(0x20)        
         self.ReadBusy()
         
     def init(self, update):
         if (epdconfig.module_init() != 0):
             return -1
         # EPD hardware init start
-        self.reset()
+        epdconfig.reset(200, 5, 200)
         if(update == self.FULL_UPDATE):
             self.ReadBusy()
-            self.send_command(0x12) # soft reset
+            epdconfig.send_command(0x12) # soft reset
             self.ReadBusy()
 
-            self.send_command(0x74) #set analog block control
-            self.send_data(0x54)
-            self.send_command(0x7E) #set digital block control
-            self.send_data(0x3B)
+            epdconfig.send_command(0x74) #set analog block control
+            epdconfig.send_data(0x54)
+            epdconfig.send_command(0x7E) #set digital block control
+            epdconfig.send_data(0x3B)
 
-            self.send_command(0x01) #Driver output control
-            self.send_data(0xF9)
-            self.send_data(0x00)
-            self.send_data(0x00)
+            epdconfig.send_command(0x01) #Driver output control
+            epdconfig.send_data(0xF9)
+            epdconfig.send_data(0x00)
+            epdconfig.send_data(0x00)
 
-            self.send_command(0x11) #data entry mode
-            self.send_data(0x01)
+            epdconfig.send_command(0x11) #data entry mode
+            epdconfig.send_data(0x01)
 
-            self.send_command(0x44) #set Ram-X address start/end position
-            self.send_data(0x00)
-            self.send_data(0x0F)    #0x0C-->(15+1)*8=128
+            epdconfig.send_command(0x44) #set Ram-X address start/end position
+            epdconfig.send_data(0x00)
+            epdconfig.send_data(0x0F)    #0x0C-->(15+1)*8=128
 
-            self.send_command(0x45) #set Ram-Y address start/end position
-            self.send_data(0xF9)   #0xF9-->(249+1)=250
-            self.send_data(0x00)
-            self.send_data(0x00)
-            self.send_data(0x00)
+            epdconfig.send_command(0x45) #set Ram-Y address start/end position
+            epdconfig.send_data(0xF9)   #0xF9-->(249+1)=250
+            epdconfig.send_data(0x00)
+            epdconfig.send_data(0x00)
+            epdconfig.send_data(0x00)
             
-            self.send_command(0x3C) #BorderWavefrom
-            self.send_data(0x03)
+            epdconfig.send_command(0x3C) #BorderWavefrom
+            epdconfig.send_data(0x03)
 
-            self.send_command(0x2C)     #VCOM Voltage
-            self.send_data(0x55)    #
+            epdconfig.send_command(0x2C)     #VCOM Voltage
+            epdconfig.send_data(0x55)    #
 
-            self.send_command(0x03)
-            self.send_data(self.lut_full_update[70])
+            epdconfig.send_command(0x03)
+            epdconfig.send_data(self.lut_full_update[70])
 
-            self.send_command(0x04) #
-            self.send_data(self.lut_full_update[71])
-            self.send_data(self.lut_full_update[72])
-            self.send_data(self.lut_full_update[73])
+            epdconfig.send_command(0x04) #
+            epdconfig.send_data(self.lut_full_update[71])
+            epdconfig.send_data(self.lut_full_update[72])
+            epdconfig.send_data(self.lut_full_update[73])
 
-            self.send_command(0x3A)     #Dummy Line
-            self.send_data(self.lut_full_update[74])
-            self.send_command(0x3B)     #Gate time
-            self.send_data(self.lut_full_update[75])
+            epdconfig.send_command(0x3A)     #Dummy Line
+            epdconfig.send_data(self.lut_full_update[74])
+            epdconfig.send_command(0x3B)     #Gate time
+            epdconfig.send_data(self.lut_full_update[75])
 
-            self.send_command(0x32)
+            epdconfig.send_command(0x32)
             for count in range(70):
-                self.send_data(self.lut_full_update[count])
+                epdconfig.send_data(self.lut_full_update[count])
 
-            self.send_command(0x4E)   # set RAM x address count to 0
-            self.send_data(0x00)
-            self.send_command(0x4F)   # set RAM y address count to 0X127
-            self.send_data(0xF9)
-            self.send_data(0x00)
+            epdconfig.send_command(0x4E)   # set RAM x address count to 0
+            epdconfig.send_data(0x00)
+            epdconfig.send_command(0x4F)   # set RAM y address count to 0X127
+            epdconfig.send_data(0xF9)
+            epdconfig.send_data(0x00)
             self.ReadBusy()
         else:
-            self.send_command(0x2C)     #VCOM Voltage
-            self.send_data(0x26)
+            epdconfig.send_command(0x2C)     #VCOM Voltage
+            epdconfig.send_data(0x26)
 
             self.ReadBusy()
 
-            self.send_command(0x32)
+            epdconfig.send_command(0x32)
             for count in range(70):
-                self.send_data(self.lut_partial_update[count])
+                epdconfig.send_data(self.lut_partial_update[count])
 
-            self.send_command(0x37)
-            self.send_data(0x00)
-            self.send_data(0x00)
-            self.send_data(0x00)
-            self.send_data(0x00)
-            self.send_data(0x40)
-            self.send_data(0x00)
-            self.send_data(0x00)
+            epdconfig.send_command(0x37)
+            epdconfig.send_data(0x00)
+            epdconfig.send_data(0x00)
+            epdconfig.send_data(0x00)
+            epdconfig.send_data(0x00)
+            epdconfig.send_data(0x40)
+            epdconfig.send_data(0x00)
+            epdconfig.send_data(0x00)
 
-            self.send_command(0x22)
-            self.send_data(0xC0)
-            self.send_command(0x20)
+            epdconfig.send_command(0x22)
+            epdconfig.send_data(0xC0)
+            epdconfig.send_command(0x20)
             self.ReadBusy()
 
-            self.send_command(0x3C) #BorderWavefrom
-            self.send_data(0x01)
+            epdconfig.send_command(0x3C) #BorderWavefrom
+            epdconfig.send_data(0x01)
         return 0
 
     def getbuffer(self, image):
@@ -246,10 +222,10 @@ class EPD:
         else:
             linewidth = int(self.width/8) + 1
 
-        self.send_command(0x24)
+        epdconfig.send_command(0x24)
         for j in range(0, self.height):
             for i in range(0, linewidth):
-                self.send_data(image[i + j * linewidth])   
+                epdconfig.send_data(image[i + j * linewidth])   
         self.TurnOnDisplay()
         
     def displayPartial(self, image):
@@ -258,16 +234,16 @@ class EPD:
         else:
             linewidth = int(self.width/8) + 1
 
-        self.send_command(0x24)
+        epdconfig.send_command(0x24)
         for j in range(0, self.height):
             for i in range(0, linewidth):
-                self.send_data(image[i + j * linewidth])   
+                epdconfig.send_data(image[i + j * linewidth])   
                 
                 
-        self.send_command(0x26)
+        epdconfig.send_command(0x26)
         for j in range(0, self.height):
             for i in range(0, linewidth):
-                self.send_data(~image[i + j * linewidth])  
+                epdconfig.send_data(~image[i + j * linewidth])  
         self.TurnOnDisplayPart()
 
     def displayPartBaseImage(self, image):
@@ -276,16 +252,16 @@ class EPD:
         else:
             linewidth = int(self.width/8) + 1
 
-        self.send_command(0x24)
+        epdconfig.send_command(0x24)
         for j in range(0, self.height):
             for i in range(0, linewidth):
-                self.send_data(image[i + j * linewidth])   
+                epdconfig.send_data(image[i + j * linewidth])   
                 
                 
-        self.send_command(0x26)
+        epdconfig.send_command(0x26)
         for j in range(0, self.height):
             for i in range(0, linewidth):
-                self.send_data(image[i + j * linewidth])  
+                epdconfig.send_data(image[i + j * linewidth])  
         self.TurnOnDisplay()
     
     def Clear(self, color):
@@ -295,25 +271,25 @@ class EPD:
             linewidth = int(self.width/8) + 1
         # logging.debug(linewidth)
         
-        self.send_command(0x24)
+        epdconfig.send_command(0x24)
         for j in range(0, self.height):
             for i in range(0, linewidth):
-                self.send_data(color)
+                epdconfig.send_data(color)
                 
-        # self.send_command(0x26)
+        # epdconfig.send_command(0x26)
         # for j in range(0, self.height):
             # for i in range(0, linewidth):
-                # self.send_data(color)   
+                # epdconfig.send_data(color)   
                 
         self.TurnOnDisplay()
 
     def sleep(self):
-        # self.send_command(0x22) #POWER OFF
-        # self.send_data(0xC3)
-        # self.send_command(0x20)
+        # epdconfig.send_command(0x22) #POWER OFF
+        # epdconfig.send_data(0xC3)
+        # epdconfig.send_command(0x20)
 
-        self.send_command(0x10) #enter deep sleep
-        self.send_data(0x03)
+        epdconfig.send_command(0x10) #enter deep sleep
+        epdconfig.send_data(0x03)
         epdconfig.delay_ms(2000)
         epdconfig.module_exit()
 

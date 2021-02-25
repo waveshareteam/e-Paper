@@ -36,36 +36,9 @@ EPD_HEIGHT      = 296
 
 class EPD:
     def __init__(self):
-        self.reset_pin = epdconfig.RST_PIN
-        self.dc_pin = epdconfig.DC_PIN
         self.busy_pin = epdconfig.BUSY_PIN
-        self.cs_pin = epdconfig.CS_PIN
         self.width = EPD_WIDTH
         self.height = EPD_HEIGHT
-        
-    # Hardware reset
-    def reset(self):
-        epdconfig.digital_write(self.reset_pin, 1)
-        epdconfig.delay_ms(200) 
-        epdconfig.digital_write(self.reset_pin, 0)
-        epdconfig.delay_ms(5)
-        epdconfig.digital_write(self.reset_pin, 1)
-        epdconfig.delay_ms(200)   
-
-
-    def send_command(self, command):
-        epdconfig.digital_write(self.dc_pin, 0)
-        epdconfig.digital_write(self.cs_pin, 0)
-        epdconfig.spi_writebyte([command])
-        epdconfig.digital_write(self.cs_pin, 1)
-
-
-    def send_data(self, data):
-        epdconfig.digital_write(self.dc_pin, 1)
-        epdconfig.digital_write(self.cs_pin, 0)
-        epdconfig.spi_writebyte([data])
-        epdconfig.digital_write(self.cs_pin, 1)
-
 
     def ReadBusy(self):
         logging.debug("e-Paper busy")
@@ -78,20 +51,20 @@ class EPD:
         if (epdconfig.module_init() != 0):
             return -1
         # EPD hardware init start
-        self.reset()
+        epdconfig.reset(200, 5, 200)
         
-        self.send_command(0x12)
+        epdconfig.send_command(0x12)
         epdconfig.delay_ms(30)
         self.ReadBusy()
 
-        self.send_command(0x11) # setting gaet number
-        self.send_data(0x03)
+        epdconfig.send_command(0x11) # setting gaet number
+        epdconfig.send_data(0x03)
         
         self.setWindows(0, 0, self.width-1, self.height-1)
         
-        self.send_command(0x21)
-        self.send_data(0x00)
-        self.send_data(0x80)
+        epdconfig.send_command(0x21)
+        epdconfig.send_data(0x00)
+        epdconfig.send_data(0x80)
         
         self.setCursor(0, 0)
         self.ReadBusy()
@@ -99,26 +72,26 @@ class EPD:
         return 0
 
     def setWindows(self, Xstart, Ystart, Xend, Yend):
-        self.send_command(0x44); # SET_RAM_X_ADDRESS_START_END_POSITION
-        self.send_data((Xstart>>3) & 0x1F);
-        self.send_data((Xend>>3) & 0x1F);
+        epdconfig.send_command(0x44); # SET_RAM_X_ADDRESS_START_END_POSITION
+        epdconfig.send_data((Xstart>>3) & 0x1F);
+        epdconfig.send_data((Xend>>3) & 0x1F);
         
-        self.send_command(0x45); # SET_RAM_Y_ADDRESS_START_END_POSITION
-        self.send_data(Ystart & 0xFF);
-        self.send_data((Ystart >> 8) & 0x01);
-        self.send_data(Yend & 0xFF);
-        self.send_data((Yend >> 8) & 0x01);
+        epdconfig.send_command(0x45); # SET_RAM_Y_ADDRESS_START_END_POSITION
+        epdconfig.send_data(Ystart & 0xFF);
+        epdconfig.send_data((Ystart >> 8) & 0x01);
+        epdconfig.send_data(Yend & 0xFF);
+        epdconfig.send_data((Yend >> 8) & 0x01);
 
     def setCursor(self, Xstart, Ystart):
-        self.send_command(0x4E); # SET_RAM_X_ADDRESS_COUNTER
-        self.send_data(Xstart & 0x1F);
+        epdconfig.send_command(0x4E); # SET_RAM_X_ADDRESS_COUNTER
+        epdconfig.send_data(Xstart & 0x1F);
 
-        self.send_command(0x4F); # SET_RAM_Y_ADDRESS_COUNTER
-        self.send_data(Ystart & 0xFF);
-        self.send_data((Ystart >> 8) & 0x01);
+        epdconfig.send_command(0x4F); # SET_RAM_Y_ADDRESS_COUNTER
+        epdconfig.send_data(Ystart & 0xFF);
+        epdconfig.send_data((Ystart >> 8) & 0x01);
         
     def turnon_display(self):
-        self.send_command(0x20)
+        epdconfig.send_command(0x20)
         self.ReadBusy()
 
     def getbuffer(self, image):
@@ -149,43 +122,43 @@ class EPD:
         if (Blackimage == None or Redimage == None):
             return            
 
-        self.send_command(0x4E)
-        self.send_data(0x01)
-        self.send_command(0x4F)
-        self.send_data(0x27)
-        self.send_data(0x01)
+        epdconfig.send_command(0x4E)
+        epdconfig.send_data(0x01)
+        epdconfig.send_command(0x4F)
+        epdconfig.send_data(0x27)
+        epdconfig.send_data(0x01)
 
-        self.send_command(0x24)
+        epdconfig.send_command(0x24)
         for j in range(0, self.height):
             for i in range(0, int(self.width / 8)):
-                self.send_data(Blackimage[i + j * int(self.width / 8)])   
+                epdconfig.send_data(Blackimage[i + j * int(self.width / 8)])   
 
-        self.send_command(0x26)
+        epdconfig.send_command(0x26)
         for j in range(0, self.height):
             for i in range(0, int(self.width / 8)):
-                self.send_data(~Redimage[i + j * int(self.width / 8)]) 
+                epdconfig.send_data(~Redimage[i + j * int(self.width / 8)]) 
                 
         self.turnon_display()
         
 
     def Clear(self):
 
-        self.send_command(0x24)
+        epdconfig.send_command(0x24)
         for j in range(0, self.height):
             for i in range(0, int(self.width / 8)):
-                self.send_data(0xff)   
+                epdconfig.send_data(0xff)   
 
-        self.send_command(0x26)
+        epdconfig.send_command(0x26)
         for j in range(0, self.height):
             for i in range(0, int(self.width / 8)):
-                self.send_data(0x00) 
+                epdconfig.send_data(0x00) 
 
         self.turnon_display()
 
 
     def sleep(self):
-        self.send_command(0X10) # DEEP_SLEEP_MODE
-        self.send_data(0x01)
+        epdconfig.send_command(0X10) # DEEP_SLEEP_MODE
+        epdconfig.send_data(0x01)
 
         epdconfig.delay_ms(2000)
         epdconfig.module_exit()

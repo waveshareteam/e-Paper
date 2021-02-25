@@ -36,39 +36,15 @@ EPD_HEIGHT      = 212
 
 class EPD:
     def __init__(self):
-        self.reset_pin = epdconfig.RST_PIN
-        self.dc_pin = epdconfig.DC_PIN
         self.busy_pin = epdconfig.BUSY_PIN
-        self.cs_pin = epdconfig.CS_PIN
         self.width = EPD_WIDTH
-        self.height = EPD_HEIGHT
-
-    # Hardware reset
-    def reset(self):
-        epdconfig.digital_write(self.reset_pin, 1)
-        epdconfig.delay_ms(200) 
-        epdconfig.digital_write(self.reset_pin, 0)
-        epdconfig.delay_ms(2)
-        epdconfig.digital_write(self.reset_pin, 1)
-        epdconfig.delay_ms(200)   
-
-    def send_command(self, command):
-        epdconfig.digital_write(self.dc_pin, 0)
-        epdconfig.digital_write(self.cs_pin, 0)
-        epdconfig.spi_writebyte([command])
-        epdconfig.digital_write(self.cs_pin, 1)
-
-    def send_data(self, data):
-        epdconfig.digital_write(self.dc_pin, 1)
-        epdconfig.digital_write(self.cs_pin, 0)
-        epdconfig.spi_writebyte([data])
-        epdconfig.digital_write(self.cs_pin, 1)
+        self.height = EPD_HEIGHT 
         
     def ReadBusy(self):
         logging.debug("e-Paper busy")
-        self.send_command(0x71);
+        epdconfig.send_command(0x71);
         while(epdconfig.digital_read(self.busy_pin) == 0): 
-            self.send_command(0x71);
+            epdconfig.send_command(0x71);
             epdconfig.delay_ms(100)
         logging.debug("e-Paper busy release")
 
@@ -76,21 +52,21 @@ class EPD:
         if (epdconfig.module_init() != 0):
             return -1
             
-        self.reset()
-        self.send_command(0x04);  
+        epdconfig.reset(200, 2, 200)
+        epdconfig.send_command(0x04);  
         self.ReadBusy();#waiting for the electronic paper IC to release the idle signal
 
-        self.send_command(0x00);    #panel setting
-        self.send_data(0x0f);   #LUT from OTP,128x296
-        self.send_data(0x89);    #Temperature sensor, boost and other related timing settings
+        epdconfig.send_command(0x00);    #panel setting
+        epdconfig.send_data(0x0f);   #LUT from OTP,128x296
+        epdconfig.send_data(0x89);    #Temperature sensor, boost and other related timing settings
 
-        self.send_command(0x61);    #resolution setting
-        self.send_data (0x68);  
-        self.send_data (0x00);  
-        self.send_data (0xD4);
+        epdconfig.send_command(0x61);    #resolution setting
+        epdconfig.send_data (0x68);  
+        epdconfig.send_data (0x00);  
+        epdconfig.send_data (0xD4);
 
-        self.send_command(0X50);    #VCOM AND DATA INTERVAL SETTING
-        self.send_data(0x77);   #WBmode:VBDF 17|D7 VBDW 97 VBDB 57
+        epdconfig.send_command(0X50);    #VCOM AND DATA INTERVAL SETTING
+        epdconfig.send_data(0x77);   #WBmode:VBDF 17|D7 VBDW 97 VBDB 57
                             # WBRmode:VBDF F7 VBDW 77 VBDB 37  VBDR B7
         
         return 0
@@ -120,38 +96,38 @@ class EPD:
         return buf
 
     def display(self, imageblack, imagered):
-        self.send_command(0x10)
+        epdconfig.send_command(0x10)
         for i in range(0, int(self.width * self.height / 8)):
-            self.send_data(imageblack[i])
+            epdconfig.send_data(imageblack[i])
         
-        self.send_command(0x13)
+        epdconfig.send_command(0x13)
         for i in range(0, int(self.width * self.height / 8)):
-            self.send_data(imagered[i])
+            epdconfig.send_data(imagered[i])
         
-        self.send_command(0x12) # REFRESH
+        epdconfig.send_command(0x12) # REFRESH
         epdconfig.delay_ms(100)
         self.ReadBusy()
         
     def Clear(self):
-        self.send_command(0x10)
+        epdconfig.send_command(0x10)
         for i in range(0, int(self.width * self.height / 8)):
-            self.send_data(0xFF)
+            epdconfig.send_data(0xFF)
         
-        self.send_command(0x13)
+        epdconfig.send_command(0x13)
         for i in range(0, int(self.width * self.height / 8)):
-            self.send_data(0xFF)
+            epdconfig.send_data(0xFF)
         
-        self.send_command(0x12) # REFRESH
+        epdconfig.send_command(0x12) # REFRESH
         epdconfig.delay_ms(100)
         self.ReadBusy()
 
     def sleep(self):
-        self.send_command(0X50) 
-        self.send_data(0xf7)
-        self.send_command(0X02) 
+        epdconfig.send_command(0X50) 
+        epdconfig.send_data(0xf7)
+        epdconfig.send_command(0X02) 
         self.ReadBusy()
-        self.send_command(0x07) # DEEP_SLEEP
-        self.send_data(0xA5) # check code
+        epdconfig.send_command(0x07) # DEEP_SLEEP
+        epdconfig.send_data(0xA5) # check code
         
         epdconfig.delay_ms(2000)
         epdconfig.module_exit()
