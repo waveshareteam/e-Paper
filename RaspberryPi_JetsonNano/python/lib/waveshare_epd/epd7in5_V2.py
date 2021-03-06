@@ -40,7 +40,7 @@ class EPD:
         self.busy_pin = epdconfig.BUSY_PIN
         self.width = EPD_WIDTH
         self.height = EPD_HEIGHT
-        
+
     def ReadBusy(self):
         logging.debug("e-Paper busy")
         epdconfig.send_command(0x71)
@@ -89,47 +89,39 @@ class EPD:
         return 0
 
     def getbuffer(self, image):
-        # logging.debug("bufsiz = ",int(self.width/8) * self.height)
-        buf = [0xFF] * (int(self.width/8) * self.height)
-        image_monocolor = image.convert('1')
-        imwidth, imheight = image_monocolor.size
-        pixels = image_monocolor.load()
-        # logging.debug("imwidth = %d, imheight = %d",imwidth,imheight)
+        img = image
+        imwidth, imheight = img.size
         if(imwidth == self.width and imheight == self.height):
-            logging.debug("Vertical")
-            for y in range(imheight):
-                for x in range(imwidth):
-                    # Set the bits for the column of pixels at the current position.
-                    if pixels[x, y] == 0:
-                        buf[int((x + y * self.width) / 8)] &= ~(0x80 >> (x % 8))
+            img = img.convert('1')
         elif(imwidth == self.height and imheight == self.width):
-            logging.debug("Horizontal")
-            for y in range(imheight):
-                for x in range(imwidth):
-                    newx = y
-                    newy = self.height - x - 1
-                    if pixels[x, y] == 0:
-                        buf[int((newx + newy*self.width) / 8)] &= ~(0x80 >> (y % 8))
+            # image has correct dimensions, but needs to be rotated
+            img = img.rotate(90, expand=True).convert('1')
+        else:
+            logging.warning("Wrong image dimensions: must be " + str(self.width) + "x" + str(self.height))
+            # return a blank buffer
+            return [0x00] * (int(self.width/8) * self.height)
+
+        buf = bytearray(img.tobytes('raw'))
+        # The bytes need to be inverted, because in the PIL world 0=black and 1=white, but
+        # in the e-paper world 0=white and 1=black.
+        for i in range(len(buf)):
+            buf[i] ^= 0xFF
         return buf
-        
+
     def display(self, image):
         epdconfig.send_command(0x13)
-        for i in range(0, int(self.width * self.height / 8)):
-            epdconfig.send_data(~image[i])
-                
+        epdconfig.send_data2(image)
+
         epdconfig.send_command(0x12)
         epdconfig.delay_ms(100)
         self.ReadBusy()
-        
+
     def Clear(self):
+        buf = [0x00] * (int(self.width/8) * self.height)
         epdconfig.send_command(0x10)
-        for i in range(0, int(self.width * self.height / 8)):
-            epdconfig.send_data(0x00)
-            
+        epdconfig.send_data2(buf)
         epdconfig.send_command(0x13)
-        for i in range(0, int(self.width * self.height / 8)):
-            epdconfig.send_data(0x00)
-                
+        epdconfig.send_data2(buf)
         epdconfig.send_command(0x12)
         epdconfig.delay_ms(100)
         self.ReadBusy()
