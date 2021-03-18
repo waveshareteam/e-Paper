@@ -115,7 +115,7 @@ int EPD_2in9d_test(void)
     sPaint_time.Hour = 12;
     sPaint_time.Min = 34;
     sPaint_time.Sec = 56;
-    UBYTE num = 20;
+    UBYTE num = 10;
     for (;;) {
         sPaint_time.Sec = sPaint_time.Sec + 1;
         if (sPaint_time.Sec == 60) {
@@ -141,17 +141,17 @@ int EPD_2in9d_test(void)
         EPD_2IN9D_DisplayPart(BlackImage);
         DEV_Delay_ms(500);//Analog clock 1s
     }
-
 #endif
-    printf("Clear...\r\n");
-//    EPD_2IN9D_Init();
-    EPD_2IN9D_Clear();
 
+	printf("Clear...\r\n");
+	EPD_2IN9D_Init();
+    EPD_2IN9D_Clear();
+	DEV_Delay_ms(2000);//important, at least 2s
     printf("Goto Sleep...\r\n");
     EPD_2IN9D_Sleep();
     free(BlackImage);
     BlackImage = NULL;
-    DEV_Delay_ms(2000);//important, at least 2s
+    DEV_Delay_ms(3000);//important, at least 2s
     // close 5V
     printf("close 5V, Module enters 0 power consumption ...\r\n");
     DEV_Module_Exit();

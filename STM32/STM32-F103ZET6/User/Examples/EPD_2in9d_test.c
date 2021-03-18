@@ -127,14 +127,14 @@ int EPD_2in9d_test(void)
 
 #endif
     printf("Clear...\r\n");
-//    EPD_2IN9D_Init();
+    EPD_2IN9D_Init();
     EPD_2IN9D_Clear();
-
+    DEV_Delay_ms(2000);//important, at least 2s
     printf("Goto Sleep...\r\n");
     EPD_2IN9D_Sleep();
     free(BlackImage);
     BlackImage = NULL;
-
+    DEV_Delay_ms(2000);//important, at least 2s
     // close 5V
     printf("close 5V, Module enters 0 power consumption ...\r\n");
     DEV_Module_Exit();

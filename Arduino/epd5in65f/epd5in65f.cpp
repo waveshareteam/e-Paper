@@ -71,7 +71,7 @@ int Epd::Init(void) {
     SendData(0x1D);
     SendCommand(0x30);
     SendData(0x3C);
-    SendCommand(0x40);
+    SendCommand(0x41);
     SendData(0x00);
     SendCommand(0x50);
     SendData(0x37);

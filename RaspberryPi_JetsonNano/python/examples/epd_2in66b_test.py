@@ -28,8 +28,8 @@ try:
     
     # Drawing on the Horizontal image
     logging.info("1.Drawing on the Horizontal image...")
-    HBlackimage = Image.new('1', (epd.height, epd.width), 255)  # 298*126
-    HRYimage = Image.new('1', (epd.height, epd.width), 255)  # 298*126  ryimage: red or yellow image  
+    HBlackimage = Image.new('1', (epd.height, epd.width), 255)  # 296*152
+    HRYimage = Image.new('1', (epd.height, epd.width), 255)  # 296*152  ryimage: red or yellow image  
     drawblack = ImageDraw.Draw(HBlackimage)
     drawry = ImageDraw.Draw(HRYimage)
     drawblack.text((10, 0), 'hello world', font = font24, fill = 0)
@@ -62,8 +62,8 @@ try:
     
     # Drawing on the Vertical image
     logging.info("4.Drawing on the Vertical image...")
-    LBlackimage = Image.new('1', (epd.width, epd.height), 255)  # 126*298
-    LRYimage = Image.new('1', (epd.width, epd.height), 255)  # 126*298
+    LBlackimage = Image.new('1', (epd.width, epd.height), 255)  # 152*296
+    LRYimage = Image.new('1', (epd.width, epd.height), 255)  # 152*296
     drawblack = ImageDraw.Draw(LBlackimage)
     drawry = ImageDraw.Draw(LRYimage)
     time.sleep(3)

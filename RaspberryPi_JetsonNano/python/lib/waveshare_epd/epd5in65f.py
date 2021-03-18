@@ -109,7 +109,7 @@ class EPD:
         self.send_data(0x1D)
         self.send_command(0x30)
         self.send_data(0x3c)
-        self.send_command(0x40)
+        self.send_command(0x41)
         self.send_data(0x00)
         self.send_command(0x50)
         self.send_data(0x37)

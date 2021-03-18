@@ -236,7 +236,7 @@ class EPD:
 
         self.send_command(0x22); 
         self.send_data(0xC0);   
-        self.send_command(0x20); 
+        self.send_command(0x20);
         self.ReadBusy();
 
         self.SetWindow(0, 0, self.width - 1, self.height - 1)

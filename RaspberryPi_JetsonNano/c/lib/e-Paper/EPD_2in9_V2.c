@@ -112,7 +112,7 @@ void EPD_2IN9_V2_ReadBusy(void)
 }
 
 static void EPD_2IN9_V2_LUT(void)
-{       
+{
 	UBYTE count;
 	EPD_2IN9_V2_SendCommand(0x32);
 	for(count=0; count<153; count++) 

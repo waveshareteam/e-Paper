@@ -146,9 +146,17 @@ void Epd::WaitUntilIdle(void) {
  */
 void Epd::Reset(void) {
     DigitalWrite(reset_pin, LOW);
-    DelayMs(200);
+    DelayMs(2);
     DigitalWrite(reset_pin, HIGH);
-    DelayMs(200);   
+    DelayMs(20);
+    DigitalWrite(reset_pin, LOW);
+    DelayMs(2);
+    DigitalWrite(reset_pin, HIGH);
+    DelayMs(20);   
+    DigitalWrite(reset_pin, LOW);
+    DelayMs(2);
+    DigitalWrite(reset_pin, HIGH);
+    DelayMs(20);   
 }
 
 /**

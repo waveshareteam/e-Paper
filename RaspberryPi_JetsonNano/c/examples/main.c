@@ -53,6 +53,7 @@ int main(void)
 	// EPD_4in01f_test();
 
     // EPD_4in2_test();
+	// EPD_4in2_V2_test();
     // EPD_4in2bc_test();
     // EPD_4in2b_V2_test();
 
@@ -81,14 +82,15 @@ int main(void)
 	// EPD_13in3_test();
 	
 	
-	/*	For Test
-    if(DEV_Module_Init()!=0){
-        return -1;
-    }
-	while(1) {
-	    DEV_Delay_ms(10000); 
-	}
-	DEV_Module_Exit();
-	*/
+	// 	For Test
+    // if(DEV_Module_Init()!=0){
+        // return -1;
+    // }
+	// while(1) {
+	    // EPD_7in5b_V2_test(); 
+		// DEV_Delay_ms(10000);
+	// }
+	// DEV_Module_Exit();
+	// 
     return 0;
 }
