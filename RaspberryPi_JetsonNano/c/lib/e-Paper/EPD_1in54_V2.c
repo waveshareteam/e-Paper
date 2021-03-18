@@ -30,6 +30,29 @@
 #include "EPD_1in54_V2.h"
 #include "Debug.h"
 
+const unsigned char WF_PARTIAL_1IN54[159] =
+{
+0x0,0x40,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,
+0x80,0x80,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,
+0x40,0x40,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,
+0x0,0x80,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,
+0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,
+0xF,0x0,0x0,0x0,0x0,0x0,0x1,
+0x1,0x1,0x0,0x0,0x0,0x0,0x0,
+0x0,0x0,0x0,0x0,0x0,0x0,0x0,
+0x0,0x0,0x0,0x0,0x0,0x0,0x0,
+0x0,0x0,0x0,0x0,0x0,0x0,0x0,
+0x0,0x0,0x0,0x0,0x0,0x0,0x0,
+0x0,0x0,0x0,0x0,0x0,0x0,0x0,
+0x0,0x0,0x0,0x0,0x0,0x0,0x0,
+0x0,0x0,0x0,0x0,0x0,0x0,0x0,
+0x0,0x0,0x0,0x0,0x0,0x0,0x0,
+0x0,0x0,0x0,0x0,0x0,0x0,0x0,
+0x0,0x0,0x0,0x0,0x0,0x0,0x0,
+0x22,0x22,0x22,0x22,0x22,0x22,0x0,0x0,0x0,
+0x02,0x17,0x41,0xB0,0x32,0x28,
+};
+
 /******************************************************************************
 function :	Software reset
 parameter:
@@ -78,7 +101,7 @@ static void EPD_1IN54_V2_ReadBusy(void)
 {
     Debug("e-Paper busy\r\n");
     while(DEV_Digital_Read(EPD_BUSY_PIN) == 1) {      //LOW: idle, HIGH: busy
-        DEV_Delay_ms(100);
+        DEV_Delay_ms(10);
     }
     Debug("e-Paper busy release\r\n");
 }
@@ -91,7 +114,7 @@ static void EPD_1IN54_V2_TurnOnDisplay(void)
 {
     EPD_1IN54_V2_SendCommand(0x22);
     EPD_1IN54_V2_SendData(0xF7);
-    EPD_1IN54_V2_SendCommand(0x20);
+	EPD_1IN54_V2_SendCommand(0x20);
     EPD_1IN54_V2_ReadBusy();
 }
 
@@ -105,6 +128,37 @@ static void EPD_1IN54_V2_TurnOnDisplayPart(void)
     EPD_1IN54_V2_SendData(0xFF);
     EPD_1IN54_V2_SendCommand(0x20);
     EPD_1IN54_V2_ReadBusy();
+}
+
+static void EPD_1IN54_V2_SetLut(void)
+{
+	EPD_1IN54_V2_SendCommand(0x32);
+	for(UBYTE i=0; i<153; i++)
+		EPD_1IN54_V2_SendData(WF_PARTIAL_1IN54[i]);
+	EPD_1IN54_V2_ReadBusy();
+}
+
+static void EPD_1IN54_V2_SetWindows(UWORD Xstart, UWORD Ystart, UWORD Xend, UWORD Yend)
+{
+    EPD_1IN54_V2_SendCommand(0x44); // SET_RAM_X_ADDRESS_START_END_POSITION
+    EPD_1IN54_V2_SendData((Xstart>>3) & 0xFF);
+    EPD_1IN54_V2_SendData((Xend>>3) & 0xFF);
+	
+    EPD_1IN54_V2_SendCommand(0x45); // SET_RAM_Y_ADDRESS_START_END_POSITION
+    EPD_1IN54_V2_SendData(Ystart & 0xFF);
+    EPD_1IN54_V2_SendData((Ystart >> 8) & 0xFF);
+    EPD_1IN54_V2_SendData(Yend & 0xFF);
+    EPD_1IN54_V2_SendData((Yend >> 8) & 0xFF);
+}
+
+static void EPD_1IN54_V2_SetCursor(UWORD Xstart, UWORD Ystart)
+{
+    EPD_1IN54_V2_SendCommand(0x4E); // SET_RAM_X_ADDRESS_COUNTER
+    EPD_1IN54_V2_SendData(Xstart & 0xFF);
+
+    EPD_1IN54_V2_SendCommand(0x4F); // SET_RAM_Y_ADDRESS_COUNTER
+    EPD_1IN54_V2_SendData(Ystart & 0xFF);
+    EPD_1IN54_V2_SendData((Ystart >> 8) & 0xFF);
 }
 
 /******************************************************************************
@@ -127,15 +181,16 @@ void EPD_1IN54_V2_Init(void)
     EPD_1IN54_V2_SendCommand(0x11); //data entry mode
     EPD_1IN54_V2_SendData(0x01);
 
-    EPD_1IN54_V2_SendCommand(0x44); //set Ram-X address start/end position
-    EPD_1IN54_V2_SendData(0x00);
-    EPD_1IN54_V2_SendData(0x18);    //0x0C-->(18+1)*8=200
+    // EPD_1IN54_V2_SendCommand(0x44); //set Ram-X address start/end position
+    // EPD_1IN54_V2_SendData(0x00);
+    // EPD_1IN54_V2_SendData(0x18);    //0x0C-->(18+1)*8=200
 
-    EPD_1IN54_V2_SendCommand(0x45); //set Ram-Y address start/end position
-    EPD_1IN54_V2_SendData(0xC7);   //0xC7-->(199+1)=200
-    EPD_1IN54_V2_SendData(0x00);
-    EPD_1IN54_V2_SendData(0x00);
-    EPD_1IN54_V2_SendData(0x00);
+    // EPD_1IN54_V2_SendCommand(0x45); //set Ram-Y address start/end position
+    // EPD_1IN54_V2_SendData(0xC7);   //0xC7-->(199+1)=200
+    // EPD_1IN54_V2_SendData(0x00);
+    // EPD_1IN54_V2_SendData(0x00);
+    // EPD_1IN54_V2_SendData(0x00);
+	EPD_1IN54_V2_SetWindows(0, EPD_1IN54_V2_HEIGHT-1, EPD_1IN54_V2_WIDTH-1, 0);
 
     EPD_1IN54_V2_SendCommand(0x3C); //BorderWavefrom
     EPD_1IN54_V2_SendData(0x01);
@@ -147,12 +202,13 @@ void EPD_1IN54_V2_Init(void)
     EPD_1IN54_V2_SendData(0XB1);
     EPD_1IN54_V2_SendCommand(0x20);
 
-    EPD_1IN54_V2_SendCommand(0x4E);   // set RAM x address count to 0;
-    EPD_1IN54_V2_SendData(0x00);
-    EPD_1IN54_V2_SendCommand(0x4F);   // set RAM y address count to 0X199;
-    EPD_1IN54_V2_SendData(0xC7);
-    EPD_1IN54_V2_SendData(0x00);
-    EPD_1IN54_V2_ReadBusy();
+    // EPD_1IN54_V2_SendCommand(0x4E);   // set RAM x address count to 0;
+    // EPD_1IN54_V2_SendData(0x00);
+    // EPD_1IN54_V2_SendCommand(0x4F);   // set RAM y address count to 0X199;
+    // EPD_1IN54_V2_SendData(0xC7);
+    // EPD_1IN54_V2_SendData(0x00);
+    EPD_1IN54_V2_SetCursor(0, EPD_1IN54_V2_HEIGHT-1);
+	EPD_1IN54_V2_ReadBusy();
 }
 
 /******************************************************************************
@@ -241,9 +297,23 @@ void EPD_1IN54_V2_DisplayPart(UBYTE *Image)
     Height = EPD_1IN54_V2_HEIGHT;
 
     DEV_Digital_Write(EPD_RST_PIN, 0);
-    DEV_Delay_ms(10);
+    DEV_Delay_ms(2);
     DEV_Digital_Write(EPD_RST_PIN, 1);
-    DEV_Delay_ms(10);
+    DEV_Delay_ms(5);
+	
+	EPD_1IN54_V2_SetLut();
+	EPD_1IN54_V2_SendCommand(0x37); 
+	EPD_1IN54_V2_SendData(0x00);  
+	EPD_1IN54_V2_SendData(0x00);  
+	EPD_1IN54_V2_SendData(0x00);  
+	EPD_1IN54_V2_SendData(0x00); 
+	EPD_1IN54_V2_SendData(0x00);  
+	EPD_1IN54_V2_SendData(0x40);  
+	EPD_1IN54_V2_SendData(0x00);  
+	EPD_1IN54_V2_SendData(0x00);   
+	EPD_1IN54_V2_SendData(0x00);  
+	EPD_1IN54_V2_SendData(0x00);
+	
     EPD_1IN54_V2_SendCommand(0x3C); //BorderWavefrom
     EPD_1IN54_V2_SendData(0x80);
 	
@@ -257,6 +327,7 @@ void EPD_1IN54_V2_DisplayPart(UBYTE *Image)
     }
     EPD_1IN54_V2_TurnOnDisplayPart();
 }
+
 /******************************************************************************
 function :	Enter sleep mode
 parameter:

@@ -75,7 +75,7 @@ try:
     logging.info("4.read bmp file on window")
     Himage2 = Image.new('1', (epd.height, epd.width), 255)  # 255: clear the frame
     Himage2_Other = Image.new('1', (epd.height, epd.width), 255)  # 255: clear the frame
-    bmp = Image.open(os.path.join(picdir, '100x100.bmp'))
+    bmp = Image.open(os.path.join(picdir, '2in9.bmp'))
     Himage2.paste(bmp, (50,10))
     Himage2_Other.paste(bmp, (50,300))
     epd.display(epd.getbuffer(Himage2), epd.getbuffer(Himage2_Other))

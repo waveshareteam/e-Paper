@@ -99,23 +99,23 @@ class EPD:
         return 0
 
     def setWindows(self, Xstart, Ystart, Xend, Yend):
-        self.send_command(0x44); # SET_RAM_X_ADDRESS_START_END_POSITION
-        self.send_data((Xstart>>3) & 0x1F);
-        self.send_data((Xend>>3) & 0x1F);
+        self.send_command(0x44) # SET_RAM_X_ADDRESS_START_END_POSITION
+        self.send_data((Xstart>>3) & 0x1F)
+        self.send_data((Xend>>3) & 0x1F)
         
-        self.send_command(0x45); # SET_RAM_Y_ADDRESS_START_END_POSITION
-        self.send_data(Ystart & 0xFF);
-        self.send_data((Ystart >> 8) & 0x01);
-        self.send_data(Yend & 0xFF);
-        self.send_data((Yend >> 8) & 0x01);
+        self.send_command(0x45) # SET_RAM_Y_ADDRESS_START_END_POSITION
+        self.send_data(Ystart & 0xFF)
+        self.send_data((Ystart >> 8) & 0x01)
+        self.send_data(Yend & 0xFF)
+        self.send_data((Yend >> 8) & 0x01)
 
     def setCursor(self, Xstart, Ystart):
-        self.send_command(0x4E); # SET_RAM_X_ADDRESS_COUNTER
-        self.send_data(Xstart & 0x1F);
+        self.send_command(0x4E) # SET_RAM_X_ADDRESS_COUNTER
+        self.send_data(Xstart & 0x1F)
 
-        self.send_command(0x4F); # SET_RAM_Y_ADDRESS_COUNTER
-        self.send_data(Ystart & 0xFF);
-        self.send_data((Ystart >> 8) & 0x01);
+        self.send_command(0x4F) # SET_RAM_Y_ADDRESS_COUNTER
+        self.send_data(Ystart & 0xFF)
+        self.send_data((Ystart >> 8) & 0x01)
         
     def turnon_display(self):
         self.send_command(0x20)
@@ -148,13 +148,6 @@ class EPD:
     def display(self, Blackimage, Redimage):
         if (Blackimage == None or Redimage == None):
             return            
-
-        self.send_command(0x4E)
-        self.send_data(0x01)
-        self.send_command(0x4F)
-        self.send_data(0x27)
-        self.send_data(0x01)
-
         self.send_command(0x24)
         for j in range(0, self.height):
             for i in range(0, int(self.width / 8)):
@@ -169,7 +162,6 @@ class EPD:
         
 
     def Clear(self):
-
         self.send_command(0x24)
         for j in range(0, self.height):
             for i in range(0, int(self.width / 8)):

@@ -55,7 +55,7 @@ int EPD_4in2_test(void)
     Paint_NewImage(BlackImage, EPD_4IN2_WIDTH, EPD_4IN2_HEIGHT, 0, WHITE);
     
 
-#if 0  // show bmp
+#if 1  // show bmp
     printf("show window BMP-----------------\r\n");
     Paint_SelectImage(BlackImage);
     Paint_Clear(WHITE);

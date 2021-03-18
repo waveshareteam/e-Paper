@@ -202,11 +202,19 @@ class EPD:
     # Hardware reset
     def reset(self):
         epdconfig.digital_write(self.reset_pin, 1)
-        epdconfig.delay_ms(200) 
+        epdconfig.delay_ms(20) 
         epdconfig.digital_write(self.reset_pin, 0)
         epdconfig.delay_ms(5)
         epdconfig.digital_write(self.reset_pin, 1)
-        epdconfig.delay_ms(200)   
+        epdconfig.delay_ms(20)   
+        epdconfig.digital_write(self.reset_pin, 0)
+        epdconfig.delay_ms(5)
+        epdconfig.digital_write(self.reset_pin, 1)
+        epdconfig.delay_ms(20)   
+        epdconfig.digital_write(self.reset_pin, 0)
+        epdconfig.delay_ms(5)
+        epdconfig.digital_write(self.reset_pin, 1)
+        epdconfig.delay_ms(20)
 
     def send_command(self, command):
         epdconfig.digital_write(self.dc_pin, 0)

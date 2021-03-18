@@ -82,9 +82,9 @@ void EPD_2in13_V3_ReadBusy(void)
 	{	 //=1 BUSY
 		if(DEV_Digital_Read(EPD_BUSY_PIN)==0) 
 			break;
-		DEV_Delay_ms(50);
+		DEV_Delay_ms(10);
 	}
-	DEV_Delay_ms(50);
+	DEV_Delay_ms(10);
     Debug("e-Paper busy release\r\n");
 }
 

@@ -1,37 +1,14 @@
 /*****************************************************************************
-* | File      	:   EPD_2in9d.c
+* | File      	:   EPD_4in2_V2_V2_V2.h
 * | Author      :   Waveshare team
-* | Function    :   2.9inch e-paper d
+* | Function    :   4.2inch e-paper V2
 * | Info        :
 *----------------
-* |	This version:   V3.1
-* | Date        :   2021-03-18
+* |	This version:   V1.0
+* | Date        :   2021-02-23
 * | Info        :
 * -----------------------------------------------------------------------------
-* V3.0(2019-06-12):
-* 1.Change:
-*    lut_vcomDC[]  => EPD_2IN9D_lut_vcomDC[]
-*    lut_ww[] => EPD_2IN9D_lut_ww[]
-*    lut_bw[] => EPD_2IN9D_lut_bw[]
-*    lut_wb[] => EPD_2IN9D_lut_wb[]
-*    lut_bb[] => EPD_2IN9D_lut_bb[]
-*    lut_vcom1[] => EPD_2IN9D_lut_vcom1[]
-*    lut_ww1[] => EPD_2IN9D_lut_ww1[]
-*    lut_bw1[] => EPD_2IN9D_lut_bw1[]
-*    lut_wb1[] => EPD_2IN9D_lut_wb1[]
-*    lut_bb1[] => EPD_2IN9D_lut_bb1[]
-*    EPD_Reset() => EPD_2IN9D_Reset()
-*    EPD_SendCommand() => EPD_2IN9D_SendCommand()
-*    EPD_SendData() => EPD_2IN9D_SendData()
-*    EPD_WaitUntilIdle() => EPD_2IN9D_ReadBusy()
-*    EPD_SetFullReg() => EPD_2IN9D_SetFullReg()
-*    EPD_SetPartReg() => EPD_2IN9D_SetPartReg()
-*    EPD_TurnOnDisplay() => EPD_2IN9D_TurnOnDisplay()
-*    EPD_Init() => EPD_2IN9D_Init()
-*    EPD_Clear() => EPD_2IN9D_Clear()
-*    EPD_Display() => EPD_2IN9D_Display()
-*    EPD_Sleep() => EPD_2IN9D_Sleep()
-*
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documnetation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
@@ -51,19 +28,20 @@
 # THE SOFTWARE.
 #
 ******************************************************************************/
-#ifndef __EPD_2IN9D_H_
-#define __EPD_2IN9D_H_
+#ifndef _EPD_4IN2_V2_H_
+#define _EPD_4IN2_V2_H_
 
 #include "DEV_Config.h"
 
 // Display resolution
-#define EPD_2IN9D_WIDTH   128
-#define EPD_2IN9D_HEIGHT  296
+#define EPD_4IN2_V2_WIDTH       400
+#define EPD_4IN2_V2_HEIGHT      300
 
-void EPD_2IN9D_Init(void);
-void EPD_2IN9D_Clear(void);
-void EPD_2IN9D_Display(UBYTE *Image);
-void EPD_2IN9D_DisplayPart(UBYTE *Image);
-void EPD_2IN9D_Sleep(void);
+void EPD_4IN2_V2_Init(void);
+void EPD_4IN2_V2_Clear(void);
+void EPD_4IN2_V2_Display(UBYTE *Image);
+void EPD_4IN2_V2_Display_Base(UBYTE *Image);
+void EPD_4IN2_V2_PartialDisplay(UBYTE *Image, UWORD x, UWORD y, UWORD w, UWORD l);
+void EPD_4IN2_V2_Sleep(void);
 
 #endif

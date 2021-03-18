@@ -72,10 +72,10 @@ int EPD_7in5b_V2_test(void)
 #if 1   // show bmp
     printf("show window BMP-----------------\r\n");
     Paint_SelectImage(BlackImage);
-    GUI_ReadBmp("./pic/100x100.bmp", 10, 0);
+    GUI_ReadBmp("./pic/2in9.bmp", 50, 100);
     Paint_SelectImage(RYImage);
-    Paint_Clear(WHITE);    
-    GUI_ReadBmp("./pic/100x100.bmp", 200, 0);
+    Paint_Clear(WHITE);
+    GUI_ReadBmp("./pic/2in9.bmp", 350, 100);
     EPD_7IN5B_V2_Display(BlackImage, RYImage);
     DEV_Delay_ms(2000);
 

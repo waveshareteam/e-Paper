@@ -49,7 +49,7 @@ try:
     epd.display(epd.getbuffer(Himage))
     time.sleep(3)
     
-    logging.info("2.Drawing on the Vertical image...")
+    # logging.info("2.Drawing on the Vertical image...")
     Himage = Image.new('RGB', (epd.height, epd.width), 0xffffff)  # 255: clear the frame
     draw = ImageDraw.Draw(Himage)
     draw.text((10, 0), 'hello world', font = font24, fill = 0)
@@ -72,21 +72,11 @@ try:
     time.sleep(3)
     
     logging.info("3.read bmp file")
+    Himage = Image.open(os.path.join(picdir, '5in65f0.bmp'))
+    epd.display(epd.getbuffer(Himage))
+    time.sleep(3)
+    
     Himage = Image.open(os.path.join(picdir, '5in65f.bmp'))
-    epd.display(epd.getbuffer(Himage))
-    time.sleep(3)
-    
-    Himage = Image.open(os.path.join(picdir, '5in65f2.bmp'))
-    epd.display(epd.getbuffer(Himage))
-    time.sleep(3)
-    
-    
-    Himage = Image.open(os.path.join(picdir, '5in65f3.bmp'))
-    epd.display(epd.getbuffer(Himage))
-    time.sleep(3)
-    
-    
-    Himage = Image.open(os.path.join(picdir, '5in65f4.bmp'))
     epd.display(epd.getbuffer(Himage))
     time.sleep(3)
     

@@ -73,6 +73,7 @@ int EPD_3in7_test(void);
 int EPD_4in01f_test(void);
 
 int EPD_4in2_test(void);
+int EPD_4in2_V2_test(void);
 int EPD_4in2bc_test(void);
 int EPD_4in2b_V2_test(void);
 

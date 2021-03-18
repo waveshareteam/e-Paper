@@ -1,12 +1,13 @@
 /*****************************************************************************
-* | File      	:   EPD_2in9d_test.c
+* | File      	:   EPD_4in2_V2_V2_test.c
 * | Author      :   Waveshare team
-* | Function    :   2.9inch e-paper d test demo
+* | Function    :   4.2inch e-paper V2 test demo
 * | Info        :
 *----------------
 * |	This version:   V1.0
-* | Date        :   2019-06-13
+* | Date        :   2021-02-23
 * | Info        :
+* -----------------------------------------------------------------------------
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documnetation files (the "Software"), to deal
@@ -28,53 +29,53 @@
 #
 ******************************************************************************/
 #include "EPD_Test.h"
-#include "EPD_2in9d.h"
+#include "EPD_4in2_V2.h"
+#include <string.h>
 
-int EPD_2in9d_test(void)
+int EPD_4in2_V2_test(void)
 {
-    printf("EPD_2IN9D_test Demo\r\n");
+    printf("EPD_4IN2_V2_test Demo\r\n");
     if(DEV_Module_Init()!=0){
         return -1;
     }
 
     printf("e-Paper Init and Clear...\r\n");
-    EPD_2IN9D_Init();
-    EPD_2IN9D_Clear();
+    EPD_4IN2_V2_Init();
+    EPD_4IN2_V2_Clear();
     DEV_Delay_ms(500);
 
     //Create a new image cache
     UBYTE *BlackImage;
     /* you have to edit the startup_stm32fxxx.s file and set a big enough heap size */
-    UWORD Imagesize = ((EPD_2IN9D_WIDTH % 8 == 0)? (EPD_2IN9D_WIDTH / 8 ): (EPD_2IN9D_WIDTH / 8 + 1)) * EPD_2IN9D_HEIGHT;
+    UWORD Imagesize = ((EPD_4IN2_V2_WIDTH % 8 == 0)? (EPD_4IN2_V2_WIDTH / 8 ): (EPD_4IN2_V2_WIDTH / 8 + 1)) * EPD_4IN2_V2_HEIGHT;
     if((BlackImage = (UBYTE *)malloc(Imagesize)) == NULL) {
         printf("Failed to apply for black memory...\r\n");
         return -1;
     }
     printf("Paint_NewImage\r\n");
-    Paint_NewImage(BlackImage, EPD_2IN9D_WIDTH, EPD_2IN9D_HEIGHT, 270, WHITE);
+    Paint_NewImage(BlackImage, EPD_4IN2_V2_WIDTH, EPD_4IN2_V2_HEIGHT, 0, WHITE);
 
-#if 1   // show bmp
+#if 1  // show bmp
     printf("show window BMP-----------------\r\n");
     Paint_SelectImage(BlackImage);
     Paint_Clear(WHITE);
     GUI_ReadBmp("./pic/100x100.bmp", 10, 10);
-    EPD_2IN9D_Display(BlackImage);
+    EPD_4IN2_V2_Display(BlackImage);
     DEV_Delay_ms(2000);
 
     printf("show bmp------------------------\r\n");
     Paint_SelectImage(BlackImage);
-    GUI_ReadBmp("./pic/2in9d.bmp", 0, 0);
-    EPD_2IN9D_Display(BlackImage);
+    GUI_ReadBmp("./pic/4in2.bmp", 0, 0);
+    EPD_4IN2_V2_Display(BlackImage);
     DEV_Delay_ms(2000);
-#endif    
-    
-#if 1   //show image for array    
+#endif        
+
+#if 0   // show image for array   
     printf("show image for array\r\n");
     Paint_SelectImage(BlackImage);
     Paint_Clear(WHITE);
-    Paint_DrawBitMap(gImage_2in9);
-
-    EPD_2IN9D_Display(BlackImage);
+    Paint_DrawBitMap(gImage_4in2);
+    EPD_4IN2_V2_Display(BlackImage);
     DEV_Delay_ms(2000);
 #endif
 
@@ -90,7 +91,7 @@ int EPD_2in9d_test(void)
     Paint_DrawPoint(10, 90, BLACK, DOT_PIXEL_2X2, DOT_STYLE_DFT);
     Paint_DrawPoint(10, 100, BLACK, DOT_PIXEL_3X3, DOT_STYLE_DFT);
     Paint_DrawLine(20, 70, 70, 120, BLACK, DOT_PIXEL_1X1, LINE_STYLE_SOLID);
-    Paint_DrawLine(70, 70, 20, 120, BLACK, DOT_PIXEL_1X1, LINE_STYLE_SOLID);    
+    Paint_DrawLine(70, 70, 20, 120, BLACK, DOT_PIXEL_1X1, LINE_STYLE_SOLID);
     Paint_DrawRectangle(20, 70, 70, 120, BLACK, DOT_PIXEL_1X1, DRAW_FILL_EMPTY);
     Paint_DrawRectangle(80, 70, 130, 120, BLACK, DOT_PIXEL_1X1, DRAW_FILL_FULL);
     Paint_DrawCircle(45, 95, 20, BLACK, DOT_PIXEL_1X1, DRAW_FILL_EMPTY);
@@ -101,57 +102,56 @@ int EPD_2in9d_test(void)
     Paint_DrawString_EN(10, 20, "hello world", &Font12, WHITE, BLACK);
     Paint_DrawNum(10, 33, 123456789, &Font12, BLACK, WHITE);
     Paint_DrawNum(10, 50, 987654321, &Font16, WHITE, BLACK);
-    Paint_DrawString_CN(130, 0, "你好abc", &Font12CN, BLACK, WHITE);
+    Paint_DrawString_CN(130, 0, " 你好abc", &Font12CN, BLACK, WHITE);
     Paint_DrawString_CN(130, 20, "微雪电子", &Font24CN, WHITE, BLACK);
 
     printf("EPD_Display\r\n");
-    EPD_2IN9D_Display(BlackImage);
-    DEV_Delay_ms(2000);
+    // EPD_4IN2_V2_Display(BlackImage);
+	EPD_4IN2_V2_Display_Base(BlackImage);
+	DEV_Delay_ms(2000);
 #endif
 
-#if 1   //Partial refresh, example shows time    		
-    printf("Partial refresh\r\n");
-    PAINT_TIME sPaint_time;
+#if 1
+	printf("Partial refresh\r\n");
+    Paint_NewImage(BlackImage, 200, 50, 0, WHITE);
+	PAINT_TIME sPaint_time;
     sPaint_time.Hour = 12;
     sPaint_time.Min = 34;
     sPaint_time.Sec = 56;
     UBYTE num = 10;
-    for (;;) {
-        sPaint_time.Sec = sPaint_time.Sec + 1;
-        if (sPaint_time.Sec == 60) {
-            sPaint_time.Min = sPaint_time.Min + 1;
-            sPaint_time.Sec = 0;
-            if (sPaint_time.Min == 60) {
-                sPaint_time.Hour =  sPaint_time.Hour + 1;
-                sPaint_time.Min = 0;
-                if (sPaint_time.Hour == 24) {
-                    sPaint_time.Hour = 0;
-                    sPaint_time.Min = 0;
-                    sPaint_time.Sec = 0;
-                }
-            }
-        }
-        Paint_ClearWindows(150, 80, 150 + Font20.Width * 7, 80 + Font20.Height, WHITE);
-        Paint_DrawTime(150, 80, &sPaint_time, &Font20, WHITE, BLACK);
-
-        num = num - 1;
-        if(num == 0) {
-            break;
-        }
-        EPD_2IN9D_DisplayPart(BlackImage);
-        DEV_Delay_ms(500);//Analog clock 1s
+	for (;;) {
+		sPaint_time.Sec = sPaint_time.Sec + 1;
+		if (sPaint_time.Sec == 60) {
+			sPaint_time.Min = sPaint_time.Min + 1;
+			sPaint_time.Sec = 0;
+			if (sPaint_time.Min == 60) {
+				sPaint_time.Hour =  sPaint_time.Hour + 1;
+				sPaint_time.Min = 0;
+				if (sPaint_time.Hour == 24) {
+					sPaint_time.Hour = 0;
+					sPaint_time.Min = 0;
+					sPaint_time.Sec = 0;
+				}
+			}
+		}
+		Paint_Clear(WHITE);
+		Paint_DrawTime(20, 10, &sPaint_time, &Font20, WHITE, BLACK);
+		EPD_4IN2_V2_PartialDisplay(BlackImage, 80, 200, 200, 50);
+		DEV_Delay_ms(500);//Analog clock 1s
+		num = num - 1;
+		if(num == 0) {
+			break;
+		}
     }
 #endif
 
-	printf("Clear...\r\n");
-	EPD_2IN9D_Init();
-    EPD_2IN9D_Clear();
-	DEV_Delay_ms(2000);//important, at least 2s
+    EPD_4IN2_V2_Init();
+    EPD_4IN2_V2_Clear();
     printf("Goto Sleep...\r\n");
-    EPD_2IN9D_Sleep();
+    EPD_4IN2_V2_Sleep();
     free(BlackImage);
     BlackImage = NULL;
-    DEV_Delay_ms(3000);//important, at least 2s
+    DEV_Delay_ms(2000);//important, at least 2s
     // close 5V
     printf("close 5V, Module enters 0 power consumption ...\r\n");
     DEV_Module_Exit();
