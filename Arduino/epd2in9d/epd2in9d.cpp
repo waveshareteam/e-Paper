@@ -32,57 +32,6 @@
 #include "epd2in9d.h"
 
 /**
- * full screen update LUT
-**/
-const unsigned char EPD_2IN9D_lut_vcomDC[] = {
-    0x00, 0x08, 0x00, 0x00, 0x00, 0x02,
-    0x60, 0x28, 0x28, 0x00, 0x00, 0x01,
-    0x00, 0x14, 0x00, 0x00, 0x00, 0x01,
-    0x00, 0x12, 0x12, 0x00, 0x00, 0x01,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00,
-};
-const unsigned char EPD_2IN9D_lut_ww[] = {
-    0x40, 0x08, 0x00, 0x00, 0x00, 0x02,
-    0x90, 0x28, 0x28, 0x00, 0x00, 0x01,
-    0x40, 0x14, 0x00, 0x00, 0x00, 0x01,
-    0xA0, 0x12, 0x12, 0x00, 0x00, 0x01,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-};
-const unsigned char EPD_2IN9D_lut_bw[] = {
-    0x40, 0x17, 0x00, 0x00, 0x00, 0x02,
-    0x90, 0x0F, 0x0F, 0x00, 0x00, 0x03,
-    0x40, 0x0A, 0x01, 0x00, 0x00, 0x01,
-    0xA0, 0x0E, 0x0E, 0x00, 0x00, 0x02,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-};
-const unsigned char EPD_2IN9D_lut_wb[] = {
-    0x80, 0x08, 0x00, 0x00, 0x00, 0x02,
-    0x90, 0x28, 0x28, 0x00, 0x00, 0x01,
-    0x80, 0x14, 0x00, 0x00, 0x00, 0x01,
-    0x50, 0x12, 0x12, 0x00, 0x00, 0x01,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-};
-const unsigned char EPD_2IN9D_lut_bb[] = {
-    0x80, 0x08, 0x00, 0x00, 0x00, 0x02,
-    0x90, 0x28, 0x28, 0x00, 0x00, 0x01,
-    0x80, 0x14, 0x00, 0x00, 0x00, 0x01,
-    0x50, 0x12, 0x12, 0x00, 0x00, 0x01,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-};
-
-
-/**
  * partial screen update LUT
 **/
 const unsigned char EPD_2IN9D_lut_vcom1[] = {
@@ -175,44 +124,7 @@ void Epd::WaitUntilIdle(void)
         busy = DigitalRead(busy_pin);
         busy =!(busy & 0x01);
     } while(busy);
-    DelayMs(200);
-}
-
-
-/******************************************************************************
-function :	LUT download
-parameter:
-******************************************************************************/
-void Epd::SetFullReg(void)
-{
-    SendCommand(0X50);			//VCOM AND DATA INTERVAL SETTING
-    SendData(0xb7);		//WBmode:VBDF 17|D7 VBDW 97 VBDB 57		WBRmode:VBDF F7 VBDW 77 VBDB 37  VBDR B7
-
-    unsigned int count;
-    SendCommand(0x20);
-    for(count=0; count<44; count++) {
-        SendData(EPD_2IN9D_lut_vcomDC[count]);
-    }
-
-    SendCommand(0x21);
-    for(count=0; count<42; count++) {
-        SendData(EPD_2IN9D_lut_ww[count]);
-    }
-
-    SendCommand(0x22);
-    for(count=0; count<42; count++) {
-        SendData(EPD_2IN9D_lut_bw[count]);
-    }
-
-    SendCommand(0x23);
-    for(count=0; count<42; count++) {
-        SendData(EPD_2IN9D_lut_wb[count]);
-    }
-
-    SendCommand(0x24);
-    for(count=0; count<42; count++) {
-        SendData(EPD_2IN9D_lut_bb[count]);
-    }
+    DelayMs(20);
 }
 
 /******************************************************************************
@@ -221,10 +133,38 @@ parameter:
 ******************************************************************************/
 void Epd::SetPartReg(void)
 {
-    SendCommand(0x82);			//vcom_DC setting
+	
+    SendCommand(0x01);	//POWER SETTING
+    SendData(0x03);
     SendData(0x00);
+    SendData(0x2b);
+    SendData(0x2b);
+    SendData(0x03);
+
+    SendCommand(0x06);	//boost soft start
+    SendData(0x17);     //A
+    SendData(0x17);     //B
+    SendData(0x17);     //C
+
+    SendCommand(0x04);
+    WaitUntilIdle();
+
+    SendCommand(0x00);	//panel setting
+    SendData(0xbf);     //LUT from OTP，128x296
+
+    SendCommand(0x30);	//PLL setting
+    SendData(0x3a);     // 3a 100HZ   29 150Hz 39 200HZ	31 171HZ
+
+    SendCommand(0x61);	//resolution setting
+    SendData(EPD_WIDTH);
+    SendData((EPD_WIDTH >> 8) & 0xff);
+    SendData(EPD_HEIGHT & 0xff);
+
+    SendCommand(0x82);	//vcom_DC setting
+    SendData(0x12);
+	
     SendCommand(0X50);
-    SendData(0xb7);
+    SendData(0x97);
 
     unsigned int count;
     SendCommand(0x20);
@@ -270,35 +210,19 @@ int Epd::Init(void)
 
     Reset();
 
-    SendCommand(0x01);	//POWER SETTING
-    SendData(0x03);
-    SendData(0x00);
-    SendData(0x2b);
-    SendData(0x2b);
-    SendData(0x03);
+	SendCommand(0x04);  
+	WaitUntilIdle();//waiting for the electronic paper IC to release the idle signal
 
-    SendCommand(0x06);	//boost soft start
-    SendData(0x17);     //A
-    SendData(0x17);     //B
-    SendData(0x17);     //C
+	SendCommand(0x00);			//panel setting
+	SendData(0x1f);		//LUT from OTP，KW-BF   KWR-AF	BWROTP 0f	BWOTP 1f
 
-    SendCommand(0x04);
-    WaitUntilIdle();
+	SendCommand(0x61);			//resolution setting
+	SendData (0x80);        	 
+	SendData (0x01);		
+	SendData (0x28);	
 
-    SendCommand(0x00);	//panel setting
-    SendData(0xbf);     //LUT from OTP，128x296
-    SendData(0x0e);     //VCOM to 0V fast
-
-    SendCommand(0x30);	//PLL setting
-    SendData(0x3a);     // 3a 100HZ   29 150Hz 39 200HZ	31 171HZ
-
-    SendCommand(0x61);	//resolution setting
-    SendData(EPD_WIDTH);
-    SendData((EPD_HEIGHT >> 8) & 0xff);
-    SendData(EPD_HEIGHT & 0xff);
-
-    SendCommand(0x82);	//vcom_DC setting
-    SendData(0x28);
+	SendCommand(0X50);			//VCOM AND DATA INTERVAL SETTING			
+	
 
     return 0;
 }
@@ -311,11 +235,19 @@ int Epd::Init(void)
 void Epd::Reset(void)
 {
     DigitalWrite(reset_pin, HIGH);
-    DelayMs(200);
+    DelayMs(20);
     DigitalWrite(reset_pin, LOW);                //module reset
-    DelayMs(10);
+    DelayMs(2);
     DigitalWrite(reset_pin, HIGH);
-    DelayMs(200);
+    DelayMs(20);
+    DigitalWrite(reset_pin, LOW);                //module reset
+    DelayMs(2);
+    DigitalWrite(reset_pin, HIGH);
+    DelayMs(20);
+    DigitalWrite(reset_pin, LOW);                //module reset
+    DelayMs(2);
+    DigitalWrite(reset_pin, HIGH);
+    DelayMs(20);
 }
 
 void Epd::Clear(void)
@@ -338,7 +270,6 @@ void Epd::Clear(void)
         }
     }
 
-    SetFullReg();
     TurnOnDisplay();
 }
 
@@ -363,7 +294,6 @@ void Epd::Display(const unsigned char* frame_buffer)
     }
     // Dev_Delay_ms(10);
 
-    SetFullReg();
     TurnOnDisplay();
 }
 

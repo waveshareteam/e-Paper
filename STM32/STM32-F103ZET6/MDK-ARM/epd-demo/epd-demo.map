@@ -1159,7 +1159,7 @@ Removing Unused input sections from the image.
     Removing epd_2in9d_test.o(.rev16_text), (4 bytes).
     Removing epd_2in9d_test.o(.revsh_text), (4 bytes).
     Removing epd_2in9d_test.o(.rrx_text), (6 bytes).
-    Removing epd_2in9d_test.o(.text), (1048 bytes).
+    Removing epd_2in9d_test.o(.text), (1068 bytes).
     Removing epd_2in13_test.o(.rev16_text), (4 bytes).
     Removing epd_2in13_test.o(.revsh_text), (4 bytes).
     Removing epd_2in13_test.o(.rrx_text), (6 bytes).
@@ -1319,8 +1319,8 @@ Removing Unused input sections from the image.
     Removing epd_2in9d.o(.rev16_text), (4 bytes).
     Removing epd_2in9d.o(.revsh_text), (4 bytes).
     Removing epd_2in9d.o(.rrx_text), (6 bytes).
-    Removing epd_2in9d.o(.text), (1044 bytes).
-    Removing epd_2in9d.o(.constdata), (424 bytes).
+    Removing epd_2in9d.o(.text), (1012 bytes).
+    Removing epd_2in9d.o(.constdata), (212 bytes).
     Removing epd_2in13.o(.rev16_text), (4 bytes).
     Removing epd_2in13.o(.revsh_text), (4 bytes).
     Removing epd_2in13.o(.rrx_text), (6 bytes).
@@ -1365,7 +1365,7 @@ Removing Unused input sections from the image.
     Removing epd_4in2.o(.rev16_text), (4 bytes).
     Removing epd_4in2.o(.revsh_text), (4 bytes).
     Removing epd_4in2.o(.rrx_text), (6 bytes).
-    Removing epd_4in2.o(.text), (1732 bytes).
+    Removing epd_4in2.o(.text), (1796 bytes).
     Removing epd_4in2.o(.constdata), (634 bytes).
     Removing epd_4in2bc.o(.rev16_text), (4 bytes).
     Removing epd_4in2bc.o(.revsh_text), (4 bytes).
@@ -1450,7 +1450,7 @@ Removing Unused input sections from the image.
     Removing cdrcmple.o(.text), (48 bytes).
     Removing depilogue.o(.text), (186 bytes).
 
-458 unused section(s) (total 964795 bytes) removed from the image.
+458 unused section(s) (total 964635 bytes) removed from the image.
 
 ==============================================================================
 

@@ -271,11 +271,19 @@ parameter:
 static void EPD_4IN2_Reset(void)
 {
     DEV_Digital_Write(EPD_RST_PIN, 1);
-    DEV_Delay_ms(200);
+    DEV_Delay_ms(20);
     DEV_Digital_Write(EPD_RST_PIN, 0);
     DEV_Delay_ms(2);
     DEV_Digital_Write(EPD_RST_PIN, 1);
-    DEV_Delay_ms(200);
+    DEV_Delay_ms(20);
+    DEV_Digital_Write(EPD_RST_PIN, 0);
+    DEV_Delay_ms(2);
+    DEV_Digital_Write(EPD_RST_PIN, 1);
+    DEV_Delay_ms(20);
+    DEV_Digital_Write(EPD_RST_PIN, 0);
+    DEV_Delay_ms(2);
+    DEV_Digital_Write(EPD_RST_PIN, 1);
+    DEV_Delay_ms(20);
 }
 
 /******************************************************************************

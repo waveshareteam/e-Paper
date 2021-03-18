@@ -105,7 +105,7 @@ void EPD_5IN65F_Init(void)
     EPD_5IN65F_SendData(0x1D);
     EPD_5IN65F_SendCommand(0x30);
     EPD_5IN65F_SendData(0x3C);
-    EPD_5IN65F_SendCommand(0x40);
+    EPD_5IN65F_SendCommand(0x41);
     EPD_5IN65F_SendData(0x00);
     EPD_5IN65F_SendCommand(0x50);
     EPD_5IN65F_SendData(0x37);

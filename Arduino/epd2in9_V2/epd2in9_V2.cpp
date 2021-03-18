@@ -374,7 +374,7 @@ void Epd::SetMemoryPointer(int x, int y) {
 void Epd::Sleep() {
     SendCommand(0x10);
     SendData(0x01);
-    WaitUntilIdle();
+    // WaitUntilIdle();
 }
 
 /* END OF FILE */
