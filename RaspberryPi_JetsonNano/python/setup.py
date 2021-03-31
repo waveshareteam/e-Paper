@@ -6,5 +6,11 @@ setup(
     author='Waveshare',
     package_dir={'': 'lib'},
     packages=['waveshare_epd'],
+    install_requires=[
+        'RPi.GPIO',
+        'spidev',
+        'Pillow',
+        'numpy'
+    ],
 )
 
