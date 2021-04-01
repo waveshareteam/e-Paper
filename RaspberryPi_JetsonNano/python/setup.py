@@ -6,7 +6,7 @@ dependencies = ['Pillow', 'numpy']
 if os.path.exists('/sys/bus/platform/drivers/gpiomem-bcm2835'):
     dependencies += ['RPi.GPIO', 'spidev']
 else:
-    dependencies += ['Jetson.GPIO', 'smbus']
+    dependencies += ['Jetson.GPIO']
 
 setup(
     name='waveshare-epd',
