@@ -410,7 +410,7 @@ class EPD:
             for x in range(imwidth):
                 for y in range(imheight):
                     newx = y
-                    newy = x
+                    newy = self.height - x - 1
                     if(pixels[x, y] == 0xC0):
                         pixels[x, y] = 0x80
                     elif (pixels[x, y] == 0x80):
