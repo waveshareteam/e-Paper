@@ -88,6 +88,26 @@ const unsigned char EPD_2IN13_V2_lut_partial_update[]= { //20 bytes
 
     0x15,0x41,0xA8,0x32,0x30,0x0A,
 };
+
+// EPD_2IN13_V2_WIDTH = 122
+// EPD_2IN13_V2_HEIGHT = 250
+// (122 + 1) * 250 = 30750
+#define VAL_20(X) X, X, X, X, X, X, X, X, X, X, X, X, X, X, X, X, X, X, X, X
+#define VAL_50(X) VAL_20(X), VAL_20(X), X, X, X, X, X, X, X, X, X, X
+#define VAL_100(X) VAL_20(X), VAL_20(X), VAL_20(X), VAL_20(X), VAL_20(X)
+#define VAL_200(X) VAL_100(X), VAL_100(X)
+#define VAL_500(X) VAL_100(X), VAL_100(X), VAL_100(X), VAL_100(X), VAL_100(X)
+#define VAL_2500(X) VAL_500(X), VAL_500(X), VAL_500(X), VAL_500(X), VAL_500(X)
+#define VAL_5000(X) VAL_2500(X), VAL_2500(X)
+#define VAL_12500(X) VAL_2500(X), VAL_2500(X), VAL_2500(X), VAL_2500(X), VAL_2500(X)
+#define VAL_25000(X) VAL_12500(X), VAL_12500(X)
+#define EPD_2IN13_V2_CLEAR_VAR 0xFF
+const uint8_t EPD_2IN13_V2_clear_image[] = {
+    VAL_25000(EPD_2IN13_V2_CLEAR_VAR), VAL_5000(EPD_2IN13_V2_CLEAR_VAR),
+    VAL_500(EPD_2IN13_V2_CLEAR_VAR), VAL_200(EPD_2IN13_V2_CLEAR_VAR),
+    VAL_50(EPD_2IN13_V2_CLEAR_VAR)
+};
+
 /******************************************************************************
 function :	Software reset
 parameter:
@@ -289,15 +309,9 @@ void EPD_2IN13_V2_Clear(void)
     UWORD Width, Height;
     Width = (EPD_2IN13_V2_WIDTH % 8 == 0)? (EPD_2IN13_V2_WIDTH / 8 ): (EPD_2IN13_V2_WIDTH / 8 + 1);
     Height = EPD_2IN13_V2_HEIGHT;
-    uint32_t len = Height * Width;
-    uint8_t data[len];
-
-    for (UWORD n = 0; n < len; n++) {
-        data[n] = 0xFF;
-    }
 
     EPD_2IN13_V2_SendCommand(0x24);
-    EPD_2IN13_V2_SendData_nByte(&data[0], len);
+    EPD_2IN13_V2_SendData_nByte((uint8_t*)&EPD_2IN13_V2_clear_image[0], Width * Height);
 
     EPD_2IN13_V2_TurnOnDisplay();
 }
