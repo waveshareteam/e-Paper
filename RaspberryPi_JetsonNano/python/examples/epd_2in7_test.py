@@ -23,7 +23,7 @@ try:
     '''2Gray(Black and white) display'''
     logging.info("init and Clear")
     epd.init()
-    epd.Clear(0xFF)
+    epd.Clear()
     font24 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 24)
     font18 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 18)
     font35 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 35)
@@ -100,7 +100,7 @@ try:
     time.sleep(2)
 
     logging.info("Clear...")
-    epd.Clear(0xFF)
+    epd.Clear()
     logging.info("Goto Sleep...")
     epd.sleep()
         
