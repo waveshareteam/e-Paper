@@ -36,6 +36,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <sys/poll.h>
 
 int SYSFS_GPIO_Export(int Pin)
 {
@@ -107,6 +108,32 @@ int SYSFS_GPIO_Direction(int Pin, int Dir)
     return 0;
 }
 
+int SYSFS_GPIO_Edge(int Pin, int edge)
+{
+    const char *edge_str[]  = {"rising","falling","both"};
+	const int edge_str_l[]  = {6, 7, 4};
+    char path[DIR_MAXSIZ];
+    int fd;
+    
+    snprintf(path, DIR_MAXSIZ, "/sys/class/gpio/gpio%d/edge", Pin);
+    fd = open(path, O_WRONLY);
+    if (fd < 0) {
+        SYSFS_GPIO_Debug( "Set Edge failed: Pin%d\n", Pin);
+        return -1;
+    }
+
+	if (edge>2) edge=2;
+    if (write(fd, edge_str[edge], edge_str_l[edge]) < 0) {
+        SYSFS_GPIO_Debug("failed to set edge!\r\n");
+        return -1;
+    }
+
+	SYSFS_GPIO_Debug("Pin%d:%s edge\r\n", Pin, edge_str[edge]);
+    
+    close(fd);
+    return 0;
+}
+
 int SYSFS_GPIO_Read(int Pin)
 {
     char path[DIR_MAXSIZ];
@@ -122,11 +149,56 @@ int SYSFS_GPIO_Read(int Pin)
 
     if (read(fd, value_str, 3) < 0) {
         SYSFS_GPIO_Debug( "failed to read value!\n");
+        close(fd);
         return -1;
     }
 
     close(fd);
     return(atoi(value_str));
+}
+
+int SYSFS_GPIO_Wait(int Pin, int value)
+{
+    char path[DIR_MAXSIZ];
+    char value_str[3];
+    int fd;
+    struct pollfd pfd[1];
+    
+    SYSFS_GPIO_Edge(Pin, SYSFS_GPIO_BOTH);
+    snprintf(path, DIR_MAXSIZ, "/sys/class/gpio/gpio%d/value", Pin);
+    fd = open(path, O_RDONLY);
+    if (fd < 0) {
+        SYSFS_GPIO_Debug( "Read failed Pin%d\n", Pin);
+        return -1;
+    }
+
+	while (1) {
+		int n;
+		if (read(fd, value_str, 3) < 0) {
+			SYSFS_GPIO_Debug( "failed to read value!\n");
+			close(fd);
+			return -1;
+		}
+		if (atoi(value_str) == value) break;
+		pfd[0].fd=fd;
+		pfd[0].events=POLLPRI;
+		n = poll(pfd, 1, -1);
+		if (n < 0) {
+			SYSFS_GPIO_Debug( "poll failed: %m!\n");
+			close(fd);
+			return -1;
+		}
+		/* lseek(0) doesn't seem to work reliably */
+		close(fd);
+		fd = open(path, O_RDONLY);
+		if (fd < 0) {
+			SYSFS_GPIO_Debug( "open failed: %m\n");
+			return -1;
+		}
+	}
+
+    close(fd);
+    return 0;
 }
 
 int SYSFS_GPIO_Write(int Pin, int value)
@@ -144,6 +216,7 @@ int SYSFS_GPIO_Write(int Pin, int value)
 
     if (write(fd, &s_values_str[value == LOW ? 0 : 1], 1) < 0) {
         SYSFS_GPIO_Debug( "failed to write value!\n");
+        close(fd);
         return -1;
     }
     

@@ -77,10 +77,10 @@ parameter:
 ******************************************************************************/
 static void EPD_7IN5_HD_WaitUntilIdle(void)
 {
+	DEV_Delay_ms(10);
+	if(DEV_Digital_Read(EPD_BUSY_PIN) == 0) return;
     Debug("e-Paper busy\r\n");
-    do{
-        DEV_Delay_ms(10);
-    }while(DEV_Digital_Read(EPD_BUSY_PIN) == 1);   
+	DEV_Digital_Wait(EPD_BUSY_PIN, 0);      //1: busy, 0: idle
     DEV_Delay_ms(200);      
     Debug("e-Paper busy release\r\n");
     

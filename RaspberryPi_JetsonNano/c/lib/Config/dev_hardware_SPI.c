@@ -330,18 +330,13 @@ Info:
 uint8_t DEV_HARDWARE_SPI_TransferByte(uint8_t buf)
 {
     uint8_t rbuf[1];
-    tr.len = 1;
-    tr.tx_buf =  (unsigned long)&buf;
-    tr.rx_buf =  (unsigned long)rbuf;
-    
-    //ioctl Operation, transmission of data
-    if ( ioctl(hardware_SPI.fd, SPI_IOC_MESSAGE(1), &tr) < 1 )  
-        DEV_HARDWARE_SPI_Debug("can't send spi message\r\n"); 
+	rbuf[0] = buf;
+    DEV_HARDWARE_SPI_Transfer(rbuf, 1);
     return rbuf[0];
 }
 
 /******************************************************************************
-function: The SPI port reads a byte
+function: The SPI port reads some bytes
 parameter:
 Info: Return read data
 ******************************************************************************/
