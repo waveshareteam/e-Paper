@@ -200,7 +200,7 @@ void EPD_3IN7_4Gray_Init(void)
     EPD_3IN7_SendData(0x03);
 
     EPD_3IN7_SendCommand(0x3C); // set border 
-    EPD_3IN7_SendData(0x00);
+    EPD_3IN7_SendData(0x03);
 
     EPD_3IN7_SendCommand(0x0C); // set booster strength
     EPD_3IN7_SendData(0xAE);
@@ -278,7 +278,7 @@ void EPD_3IN7_1Gray_Init(void)
     EPD_3IN7_SendData(0x03);
 
     EPD_3IN7_SendCommand(0x3C); // set border 
-    EPD_3IN7_SendData(0x00);
+    EPD_3IN7_SendData(0x03);
 
     EPD_3IN7_SendCommand(0x0C); // set booster strength
     EPD_3IN7_SendData(0xAE);
