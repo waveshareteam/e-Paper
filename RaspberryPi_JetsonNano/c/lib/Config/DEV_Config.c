@@ -114,7 +114,7 @@ void DEV_SPI_Write_nByte(uint8_t *pData, uint32_t Len)
 #ifdef RPI
 #ifdef USE_BCM2835_LIB
 	char rData[Len];
-	bcm2835_spi_transfernb(pData,rData,Len);
+	bcm2835_spi_transfernb((char *)pData,rData,Len);
 #elif USE_WIRINGPI_LIB
 	wiringPiSPIDataRW(0, pData, Len);
 #elif USE_DEV_LIB

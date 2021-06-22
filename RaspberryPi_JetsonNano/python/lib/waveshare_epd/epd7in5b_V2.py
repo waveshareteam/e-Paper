@@ -73,13 +73,20 @@ class EPD:
             self.send_command(0x71)
             busy = epdconfig.digital_read(self.busy_pin)
         epdconfig.delay_ms(200)
-            
+        logging.debug("e-Paper busy release")
+        
     def init(self):
         if (epdconfig.module_init() != 0):
             return -1
             
         self.reset()
         
+        # self.send_command(0x06)     # btst
+        # self.send_data(0x17)
+        # self.send_data(0x17)
+        # self.send_data(0x38)        # If an exception is displayed, try using 0x38
+        # self.send_data(0x17)
+
         self.send_command(0x01);			#POWER SETTING
         self.send_data(0x07);
         self.send_data(0x07);    #VGH=20V,VGL=-20V
