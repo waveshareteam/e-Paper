@@ -29,6 +29,7 @@
 ******************************************************************************/
 #include "EPD_Test.h"
 #include "EPD_2in7.h"
+#include <time.h> 
 
 int EPD_2in7_test(void)
 {
@@ -39,8 +40,12 @@ int EPD_2in7_test(void)
 
     printf("e-Paper Init and Clear...\r\n");
     EPD_2IN7_Init();
+	
+	struct timespec start={0,0}, finish={0,0}; 
+    clock_gettime(CLOCK_REALTIME,&start);
     EPD_2IN7_Clear();
-    DEV_Delay_ms(500);
+	clock_gettime(CLOCK_REALTIME,&finish);
+    printf("%ld S\r\n",finish.tv_sec-start.tv_sec);	
 
     //Create a new image cache
     UBYTE *BlackImage;
