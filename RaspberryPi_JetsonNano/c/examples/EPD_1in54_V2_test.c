@@ -114,23 +114,24 @@ int EPD_1in54_V2_test(void)
     Paint_DrawString_CN(5, 155, "Î¢Ñ©µç×Ó", &Font24CN, WHITE, BLACK);
 
     EPD_1IN54_V2_Display(BlackImage);
+	
     DEV_Delay_ms(2000);
 #endif
 
 #if 1   //Partial refresh, example shows time    
-
     // The image of the previous frame must be uploaded, otherwise the
     // first few seconds will display an exception.
-    EPD_1IN54_V2_Init();
-    EPD_1IN54_V2_DisplayPartBaseImage(BlackImage);
-
+	EPD_1IN54_V2_DisplayPartBaseImage(BlackImage);
+	
+	// enter partial mode
+	EPD_1IN54_V2_Init_Partial();
     printf("Partial refresh\r\n");
     Paint_SelectImage(BlackImage);
     PAINT_TIME sPaint_time;
     sPaint_time.Hour = 12;
     sPaint_time.Min = 34;
     sPaint_time.Sec = 56;
-    UBYTE num = 20;
+    UBYTE num = 15;
     for (;;) {
         sPaint_time.Sec = sPaint_time.Sec + 1;
         if (sPaint_time.Sec == 60) {
