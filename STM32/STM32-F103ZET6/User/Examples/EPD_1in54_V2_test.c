@@ -61,7 +61,7 @@ int EPD_1in54_V2_test(void)
     DEV_Delay_ms(2000);
 #endif
 
-#if 0   // Drawing on the image
+#if 1   // Drawing on the image
     printf("Drawing\r\n");
     //1.Select Image
     Paint_SelectImage(BlackImage);
@@ -86,27 +86,29 @@ int EPD_1in54_V2_test(void)
     Paint_DrawString_EN(5, 85, "waveshare", &Font20, BLACK, WHITE);
     Paint_DrawNum(5, 110, 123456789, &Font20, BLACK, WHITE);
 
-    Paint_DrawString_CN(5, 135,"ÄãºÃabc", &Font12CN, BLACK, WHITE);
-    Paint_DrawString_CN(5, 155, "Î¢Ñ©µç×Ó", &Font24CN, WHITE, BLACK);
+    Paint_DrawString_CN(5, 135,"ï¿½ï¿½ï¿½abc", &Font12CN, BLACK, WHITE);
+    Paint_DrawString_CN(5, 155, "Î¢Ñ©ï¿½ï¿½ï¿½ï¿½", &Font24CN, WHITE, BLACK);
 
     EPD_1IN54_V2_Display(BlackImage);
     DEV_Delay_ms(2000);
 #endif
 
-#if 0   //Partial refresh, example shows time    
+#if 1   //Partial refresh, example shows time    
 
     // The image of the previous frame must be uploaded, otherwise the
     // first few seconds will display an exception.
-    EPD_1IN54_V2_Init();
+    
     EPD_1IN54_V2_DisplayPartBaseImage(BlackImage);
 
+    // enter partial mode
+	EPD_1IN54_V2_Init_Partial();
     printf("Partial refresh\r\n");
     Paint_SelectImage(BlackImage);
     PAINT_TIME sPaint_time;
     sPaint_time.Hour = 12;
     sPaint_time.Min = 34;
     sPaint_time.Sec = 56;
-    UBYTE num = 20;
+    UBYTE num = 10;
     for (;;) {
         sPaint_time.Sec = sPaint_time.Sec + 1;
         if (sPaint_time.Sec == 60) {

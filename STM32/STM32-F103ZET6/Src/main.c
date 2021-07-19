@@ -102,7 +102,7 @@ int main(void)
 //		EPD_1in54b_V2_test();
 //		EPD_1in54c_test();
 
-		EPD_2in7_test();
+//		EPD_2in7_test();
 //		EPD_2in7b_test();
 //		EPD_2in7b_V2_test();
 
