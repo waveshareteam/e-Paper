@@ -202,10 +202,12 @@ void Epd::SendData(unsigned char data) {
  */
 void Epd::WaitUntilIdle(void) {
     unsigned char busy;
+    Serial.print("e-Paper Busy\r\n ");
     do{
         SendCommand(0x71);
         busy = DigitalRead(busy_pin);
     }while(busy == 0);
+    Serial.print("e-Paper Busy Release\r\n ");
     DelayMs(20);
 }
 
@@ -215,6 +217,8 @@ void Epd::WaitUntilIdle(void) {
  *          see Epd::Sleep();
  */
 void Epd::Reset(void) {
+    DigitalWrite(reset_pin, HIGH);
+    DelayMs(20); 
     DigitalWrite(reset_pin, LOW);                //module reset    
     DelayMs(4);
     DigitalWrite(reset_pin, HIGH);
@@ -296,10 +300,10 @@ void Epd::Sleep(void) {
 
 void Epd::Clear(void) {
     
-    SendCommand(0x10);
-    for(unsigned long i=0; i<height*width; i++) {
-        SendData(0x00);
-    }
+    // SendCommand(0x10);
+    // for(unsigned long i=0; i<height*width; i++) {
+    //     SendData(0x00);
+    // }
     SendCommand(0x13);
     for(unsigned long i=0; i<height*width; i++)	{
         SendData(0x00);
