@@ -72,7 +72,8 @@ private:
     unsigned int cs_pin;
     unsigned int busy_pin;
 		
-	void SetLut(void);
+	void SetLut(unsigned char *lut);
+    void SetLut_by_host(unsigned char *lut);
     void SetMemoryArea(int x_start, int y_start, int x_end, int y_end);
     void SetMemoryPointer(int x, int y);
 };

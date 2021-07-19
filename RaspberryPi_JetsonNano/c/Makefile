@@ -14,7 +14,7 @@ JETSON_DEV_C = $(wildcard $(DIR_BIN)/sysfs_software_spi.o $(DIR_BIN)/sysfs_gpio.
 DEBUG = -D DEBUG
 
  USELIB_RPI = USE_BCM2835_LIB
-# USELIB_RPI = USE_WIRINGPI_LIB
+#USELIB_RPI = USE_WIRINGPI_LIB
 # USELIB_RPI = USE_DEV_LIB
 
 LIB_RPI=-Wl,--gc-sections

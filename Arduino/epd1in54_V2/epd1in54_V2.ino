@@ -58,7 +58,7 @@ void setup()
 
   Serial.println("e-Paper show pic");
   epd.HDirInit();
-  epd.Display(IMAGE_DATA);
+  // epd.Display(IMAGE_DATA);
 
   //Part display
   epd.HDirInit();
@@ -73,7 +73,7 @@ void setup()
   for (i = 0; i < 10; i++) {
     paint.Clear(UNCOLORED);
     paint.DrawStringAt(10, 10, str[i], &Font24, COLORED);
-    epd.SetFrameMemory(paint.GetImage(), 80, 70, paint.GetWidth(), paint.GetHeight());
+    epd.SetFrameMemoryPartial(paint.GetImage(), 80, 70, paint.GetWidth(), paint.GetHeight());
     epd.DisplayPartFrame();
     delay(100);
   }
