@@ -43,6 +43,8 @@ void setup() {
 
     Serial.print("e-Paper Clear\r\n ");
     epd.Clear();
+
+    epd.Sleep();
 }
 
 void loop() {
