@@ -263,23 +263,23 @@ void Epd::SetLut_by_host(unsigned char* lut_vcom,  unsigned char* lut_ww, unsign
 	unsigned char count;
 
 	SendCommand(0x20); //VCOM	
-	for(count=0; count<60; count++)
+	for(count=0; count<42; count++)
 		SendData(lut_vcom[count]);
 
 	SendCommand(0x21); //LUTBW
-	for(count=0; count<60; count++)
+	for(count=0; count<42; count++)
 		SendData(lut_ww[count]);
 
 	SendCommand(0x22); //LUTBW
-	for(count=0; count<60; count++)
+	for(count=0; count<42; count++)
 		SendData(lut_bw[count]);
 
 	SendCommand(0x23); //LUTWB
-	for(count=0; count<60; count++)
+	for(count=0; count<42; count++)
 		SendData(lut_wb[count]);
 
 	SendCommand(0x24); //LUTBB
-	for(count=0; count<60; count++)
+	for(count=0; count<42; count++)
 		SendData(lut_bb[count]);
 }
 

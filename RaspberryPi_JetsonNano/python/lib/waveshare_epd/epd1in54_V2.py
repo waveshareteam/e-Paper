@@ -174,31 +174,31 @@ class EPD:
         self.send_data(lut[158])
       
     def SetWindows(self, Xstart, Ystart, Xend, Yend):
-        self.send_command(0x44); # SET_RAM_X_ADDRESS_START_END_POSITION
-        self.send_data((Xstart>>3) & 0xFF);
-        self.send_data((Xend>>3) & 0xFF);
+        self.send_command(0x44) # SET_RAM_X_ADDRESS_START_END_POSITION
+        self.send_data((Xstart>>3) & 0xFF)
+        self.send_data((Xend>>3) & 0xFF)
         
-        self.send_command(0x45); # SET_RAM_Y_ADDRESS_START_END_POSITION
-        self.send_data(Ystart & 0xFF);
-        self.send_data((Ystart >> 8) & 0xFF);
-        self.send_data(Yend & 0xFF);
-        self.send_data((Yend >> 8) & 0xFF);
+        self.send_command(0x45) # SET_RAM_Y_ADDRESS_START_END_POSITION
+        self.send_data(Ystart & 0xFF)
+        self.send_data((Ystart >> 8) & 0xFF)
+        self.send_data(Yend & 0xFF)
+        self.send_data((Yend >> 8) & 0xFF)
     
 
     def SetCursor(self, Xstart, Ystart):
-        self.send_command(0x4E); # SET_RAM_X_ADDRESS_COUNTER
-        self.send_data(Xstart & 0xFF);
+        self.send_command(0x4E) # SET_RAM_X_ADDRESS_COUNTER
+        self.send_data(Xstart & 0xFF)
 
-        self.send_command(0x4F); # SET_RAM_Y_ADDRESS_COUNTER
-        self.send_data(Ystart & 0xFF);
-        self.send_data((Ystart >> 8) & 0xFF);
+        self.send_command(0x4F) # SET_RAM_Y_ADDRESS_COUNTER
+        self.send_data(Ystart & 0xFF)
+        self.send_data((Ystart >> 8) & 0xFF)
 
     def init(self, isPartial):
         if (epdconfig.module_init() != 0):
             return -1
             
         if(isPartial):
-            logging.debug("full refresh")
+            logging.debug("partial refresh")
             self.reset()
             self.ReadBusy()
             
@@ -225,7 +225,7 @@ class EPD:
             self.ReadBusy()
         
         else:
-            logging.debug("partial refresh")
+            logging.debug("full refresh")
             # EPD hardware init start
             self.reset()
             

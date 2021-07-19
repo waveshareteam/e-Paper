@@ -148,23 +148,23 @@ static void EPD_7IN5_V2_LUT(UBYTE* lut_vcom,  UBYTE* lut_ww, UBYTE* lut_bw, UBYT
 	UBYTE count;
 
 	EPD_SendCommand(0x20); //VCOM	
-	for(count=0; count<60; count++)
+	for(count=0; count<42; count++)
 		EPD_SendData(lut_vcom[count]);
 
 	EPD_SendCommand(0x21); //LUTBW
-	for(count=0; count<60; count++)
+	for(count=0; count<42; count++)
 		EPD_SendData(lut_ww[count]);
 
 	EPD_SendCommand(0x22); //LUTBW
-	for(count=0; count<60; count++)
+	for(count=0; count<42; count++)
 		EPD_SendData(lut_bw[count]);
 
 	EPD_SendCommand(0x23); //LUTWB
-	for(count=0; count<60; count++)
+	for(count=0; count<42; count++)
 		EPD_SendData(lut_wb[count]);
 
 	EPD_SendCommand(0x24); //LUTBB
-	for(count=0; count<60; count++)
+	for(count=0; count<42; count++)
 		EPD_SendData(lut_bb[count]);
 }
 
