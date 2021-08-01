@@ -40,6 +40,8 @@ import io
 EPD_WIDTH       = 600
 EPD_HEIGHT      = 448
 
+logger = logging.getLogger(__name__)
+
 class EPD:
     def __init__(self):
         self.reset_pin = epdconfig.RST_PIN
@@ -85,16 +87,16 @@ class EPD:
         epdconfig.digital_write(self.cs_pin, 1)
 
     def ReadBusyHigh(self):
-        logging.debug("e-Paper busy")
+        logger.debug("e-Paper busy")
         while(epdconfig.digital_read(self.busy_pin) == 0):      # 0: idle, 1: busy
             epdconfig.delay_ms(100)
-        logging.debug("e-Paper busy release")
+        logger.debug("e-Paper busy release")
 
     def ReadBusyLow(self):
-        logging.debug("e-Paper busy")
+        logger.debug("e-Paper busy")
         while(epdconfig.digital_read(self.busy_pin) == 1):      # 0: idle, 1: busy
             epdconfig.delay_ms(100)
-        logging.debug("e-Paper busy release")
+        logger.debug("e-Paper busy release")
 
     def init(self):
         if (epdconfig.module_init() != 0):
@@ -151,7 +153,7 @@ class EPD:
         elif(imwidth == self.height and imheight == self.width):
             image_temp = image.rotate(90, expand=True)
         else:
-            logging.warning("Invalid image dimensions: %d x %d, expected %d x %d" % (imwidth, imheight, self.width, self.height))
+            logger.warning("Invalid image dimensions: %d x %d, expected %d x %d" % (imwidth, imheight, self.width, self.height))
 
         # Convert the soruce image to the 7 colors, dithering if needed
         image_7color = image_temp.convert("RGB").quantize(palette=pal_image)

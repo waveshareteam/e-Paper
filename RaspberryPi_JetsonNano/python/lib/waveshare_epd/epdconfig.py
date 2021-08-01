@@ -32,6 +32,8 @@ import logging
 import sys
 import time
 
+logger = logging.getLogger(__name__)
+
 
 class RaspberryPi:
     # Pin definition
@@ -77,10 +79,10 @@ class RaspberryPi:
         return 0
 
     def module_exit(self):
-        logging.debug("spi end")
+        logger.debug("spi end")
         self.SPI.close()
 
-        logging.debug("close 5V, Module enters 0 power consumption ...")
+        logger.debug("close 5V, Module enters 0 power consumption ...")
         self.GPIO.output(self.RST_PIN, 0)
         self.GPIO.output(self.DC_PIN, 0)
 
@@ -136,10 +138,10 @@ class JetsonNano:
         return 0
 
     def module_exit(self):
-        logging.debug("spi end")
+        logger.debug("spi end")
         self.SPI.SYSFS_software_spi_end()
 
-        logging.debug("close 5V, Module enters 0 power consumption ...")
+        logger.debug("close 5V, Module enters 0 power consumption ...")
         self.GPIO.output(self.RST_PIN, 0)
         self.GPIO.output(self.DC_PIN, 0)
 

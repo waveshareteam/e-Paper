@@ -35,6 +35,8 @@ from . import epdconfig
 EPD_WIDTH       = 80
 EPD_HEIGHT      = 128
 
+logger = logging.getLogger(__name__)
+
 class EPD:
     def __init__(self):
         self.reset_pin = epdconfig.RST_PIN
@@ -109,7 +111,7 @@ class EPD:
         epdconfig.digital_write(self.cs_pin, 1)
         
     def ReadBusy(self):
-        logging.debug("e-Paper busy")
+        logger.debug("e-Paper busy")
         self.send_command(0x71)
         busy = epdconfig.digital_read(self.busy_pin)
         busy =not(busy & 0x01)
@@ -118,7 +120,7 @@ class EPD:
             busy = epdconfig.digital_read(self.busy_pin)
             busy =not(busy & 0x01)
         epdconfig.delay_ms(800)
-        logging.debug("e-Paper busy release")        
+        logger.debug("e-Paper busy release")        
 
     def TurnOnDisplay(self):
         self.send_command(0x12)
@@ -242,14 +244,14 @@ class EPD:
         imwidth, imheight = image_monocolor.size
         pixels = image_monocolor.load()
         if(imwidth == self.width and imheight == self.height):
-            logging.debug("Horizontal")
+            logger.debug("Horizontal")
             for y in range(imheight):
                 for x in range(imwidth):
                     # Set the bits for the column of pixels at the current position.
                     if pixels[x, y] == 0:
                         buf[int((x + y * self.width) / 8)] &= ~(0x80 >> (x % 8))
         elif(imwidth == self.height and imheight == self.width):
-            logging.debug("Vertical")
+            logger.debug("Vertical")
             for y in range(imheight):
                 for x in range(imwidth):
                     newx = y

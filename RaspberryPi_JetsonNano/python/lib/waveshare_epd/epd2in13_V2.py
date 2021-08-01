@@ -36,6 +36,8 @@ import numpy as np
 EPD_WIDTH       = 122
 EPD_HEIGHT      = 250
 
+logger = logging.getLogger(__name__)
+
 class EPD:
     def __init__(self):
         self.reset_pin = epdconfig.RST_PIN
@@ -222,14 +224,14 @@ class EPD:
         pixels = image_monocolor.load()
         
         if(imwidth == self.width and imheight == self.height):
-            logging.debug("Vertical")
+            logger.debug("Vertical")
             for y in range(imheight):
                 for x in range(imwidth):                    
                     if pixels[x, y] == 0:
                         x = imwidth - x
                         buf[int(x / 8) + y * linewidth] &= ~(0x80 >> (x % 8))
         elif(imwidth == self.height and imheight == self.width):
-            logging.debug("Horizontal")
+            logger.debug("Horizontal")
             for y in range(imheight):
                 for x in range(imwidth):
                     newx = y
@@ -293,7 +295,7 @@ class EPD:
             linewidth = int(self.width/8)
         else:
             linewidth = int(self.width/8) + 1
-        # logging.debug(linewidth)
+        # logger.debug(linewidth)
         
         self.send_command(0x24)
         for j in range(0, self.height):
