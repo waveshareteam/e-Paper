@@ -55,6 +55,9 @@ private:
     unsigned int busy_pin;
     unsigned long width;
     unsigned long height;
+
+	void SetLut(unsigned char *lut);
+    void SetLut_by_host(unsigned char *lut_vcom, unsigned char *lut_ww, unsigned char *lut_bw, unsigned char *lut_wb, unsigned char *lut_bb);
 };
 
 #endif /* EPD7IN5_H */

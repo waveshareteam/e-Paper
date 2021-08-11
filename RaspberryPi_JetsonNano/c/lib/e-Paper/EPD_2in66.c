@@ -97,11 +97,11 @@ parameter:
 static void EPD_2IN66_ReadBusy(void)
 {
     Debug("e-Paper busy\r\n");
-    DEV_Delay_ms(200);
+    DEV_Delay_ms(20);
     while(DEV_Digital_Read(EPD_BUSY_PIN) == 1) {      //LOW: idle, HIGH: busy
         DEV_Delay_ms(5);
     }
-    DEV_Delay_ms(100);
+    DEV_Delay_ms(10);
     Debug("e-Paper busy release\r\n");
 }
 

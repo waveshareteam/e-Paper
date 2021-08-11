@@ -36,6 +36,8 @@ from . import epdconfig
 EPD_WIDTH       = 640
 EPD_HEIGHT      = 400
 
+logger = logging.getLogger(__name__)
+
 class EPD:
     def __init__(self):
         self.reset_pin = epdconfig.RST_PIN
@@ -75,16 +77,16 @@ class EPD:
         epdconfig.digital_write(self.cs_pin, 1)
         
     def ReadBusyHigh(self):
-        logging.debug("e-Paper busy")
+        logger.debug("e-Paper busy")
         while(epdconfig.digital_read(self.busy_pin) == 0):      # 0: idle, 1: busy
             epdconfig.delay_ms(10)
-        logging.debug("e-Paper busy release")
+        logger.debug("e-Paper busy release")
         
     def ReadBusyLow(self):
-        logging.debug("e-Paper busy")
+        logger.debug("e-Paper busy")
         while(epdconfig.digital_read(self.busy_pin) == 1):      # 0: idle, 1: busy
             epdconfig.delay_ms(10)    
-        logging.debug("e-Paper busy release")
+        logger.debug("e-Paper busy release")
         
     def init(self):
         if (epdconfig.module_init() != 0):
@@ -129,7 +131,7 @@ class EPD:
         image_monocolor = image.convert('RGB')#Picture mode conversion
         imwidth, imheight = image_monocolor.size
         pixels = image_monocolor.load()
-        logging.debug('imwidth = %d  imheight =  %d ',imwidth, imheight)
+        logger.debug('imwidth = %d  imheight =  %d ',imwidth, imheight)
         if(imwidth == self.width and imheight == self.height):
             for y in range(imheight):
                 for x in range(imwidth):

@@ -37,6 +37,7 @@
 #define EPD_1IN54_V2_HEIGHT      200
 
 void EPD_1IN54_V2_Init(void);
+void EPD_1IN54_V2_Init_Partial(void);
 void EPD_1IN54_V2_Clear(void);
 void EPD_1IN54_V2_Display(UBYTE *Image);
 void EPD_1IN54_V2_DisplayPartBaseImage(UBYTE *Image);

@@ -67,8 +67,8 @@ try:
     time.sleep(2)
 
     logging.info("3.read bmp file")
-    Himage = Image.open(os.path.join(picdir, '7in5_V2_r.bmp'))
-    Himage_Other = Image.open(os.path.join(picdir, '7in5_V2_b.bmp'))
+    Himage = Image.open(os.path.join(picdir, '7in5_V2_b.bmp'))
+    Himage_Other = Image.open(os.path.join(picdir, '7in5_V2_r.bmp'))
     epd.display(epd.getbuffer(Himage),epd.getbuffer(Himage_Other))
     time.sleep(2)
 

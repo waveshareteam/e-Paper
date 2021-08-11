@@ -35,6 +35,8 @@ from . import epdconfig
 EPD_WIDTH       = 640
 EPD_HEIGHT      = 384
 
+logger = logging.getLogger(__name__)
+
 class EPD:
     def __init__(self):
         self.reset_pin = epdconfig.RST_PIN
@@ -72,10 +74,10 @@ class EPD:
         epdconfig.digital_write(self.cs_pin, 1)
         
     def ReadBusy(self):
-        logging.debug("e-Paper busy")
+        logger.debug("e-Paper busy")
         while(epdconfig.digital_read(self.busy_pin) == 0):      # 0: idle, 1: busy
             epdconfig.delay_ms(100)    
-        logging.debug("e-Paper busy release")
+        logger.debug("e-Paper busy release")
         
     def init(self):
         if (epdconfig.module_init() != 0):
@@ -134,7 +136,7 @@ class EPD:
             img = img.rotate(90, expand=True).convert('1')
             imwidth, imheight = img.size
         else:
-            logging.warning("Wrong image dimensions: must be " + str(self.width) + "x" + str(self.height))
+            logger.warning("Wrong image dimensions: must be " + str(self.width) + "x" + str(self.height))
             # return a blank buffer
             return buf
         

@@ -40,6 +40,8 @@ DC_PIN          = 25
 CS_PIN          = 8
 BUSY_PIN        = 24
 
+logger = logging.getLogger(__name__)
+
 SPI = spidev.SpiDev()
 
 def digital_write(pin, value):
@@ -72,10 +74,10 @@ def module_init():
     return 0
 
 def module_exit():
-    logging.debug("spi end")
+    logger.debug("spi end")
     SPI.close()
 
-    logging.debug("close 5V, Module enters 0 power consumption ...")
+    logger.debug("close 5V, Module enters 0 power consumption ...")
     GPIO.output(RST_PIN, 0)
     GPIO.output(DC_PIN, 0)
 
