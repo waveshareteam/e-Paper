@@ -1220,7 +1220,6 @@ Removing Unused input sections from the image.
     Removing epd_1in54_v2.o(.rrx_text), (6 bytes).
     Removing epd_1in54_v2.o(.text), (1024 bytes).
     Removing epd_1in54_v2.o(.data), (318 bytes).
-    Removing epd_1in54_v2.o(.data), (159 bytes).
     Removing epd_1in54b.o(.rev16_text), (4 bytes).
     Removing epd_1in54b.o(.revsh_text), (4 bytes).
     Removing epd_1in54b.o(.rrx_text), (6 bytes).
@@ -1456,7 +1455,7 @@ Removing Unused input sections from the image.
     Removing cdrcmple.o(.text), (48 bytes).
     Removing depilogue.o(.text), (186 bytes).
 
-461 unused section(s) (total 958922 bytes) removed from the image.
+460 unused section(s) (total 958763 bytes) removed from the image.
 
 ==============================================================================
 
@@ -2138,15 +2137,15 @@ Memory Map of the image
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x08000000   0x08000000   0x00000130   Data   RO            3    RESET               startup_stm32f103xe.o
-    0x08000130   0x08000130   0x00000000   Code   RO         2861  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
-    0x08000130   0x08000130   0x00000004   Code   RO         3161    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
-    0x08000134   0x08000134   0x00000004   Code   RO         3164    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
-    0x08000138   0x08000138   0x00000000   Code   RO         3166    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
-    0x08000138   0x08000138   0x00000000   Code   RO         3168    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
-    0x08000138   0x08000138   0x00000008   Code   RO         3169    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
-    0x08000140   0x08000140   0x00000000   Code   RO         3171    .ARM.Collect$$$$0000000D  mc_w.l(entry10a.o)
-    0x08000140   0x08000140   0x00000000   Code   RO         3173    .ARM.Collect$$$$0000000F  mc_w.l(entry11a.o)
-    0x08000140   0x08000140   0x00000004   Code   RO         3162    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
+    0x08000130   0x08000130   0x00000000   Code   RO         2860  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
+    0x08000130   0x08000130   0x00000004   Code   RO         3160    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
+    0x08000134   0x08000134   0x00000004   Code   RO         3163    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
+    0x08000138   0x08000138   0x00000000   Code   RO         3165    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
+    0x08000138   0x08000138   0x00000000   Code   RO         3167    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
+    0x08000138   0x08000138   0x00000008   Code   RO         3168    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
+    0x08000140   0x08000140   0x00000000   Code   RO         3170    .ARM.Collect$$$$0000000D  mc_w.l(entry10a.o)
+    0x08000140   0x08000140   0x00000000   Code   RO         3172    .ARM.Collect$$$$0000000F  mc_w.l(entry11a.o)
+    0x08000140   0x08000140   0x00000004   Code   RO         3161    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
     0x08000144   0x08000144   0x00000024   Code   RO            4    .text               startup_stm32f103xe.o
     0x08000168   0x08000168   0x00000094   Code   RO           13    .text               main.o
     0x080001fc   0x080001fc   0x00000060   Code   RO          162    .text               gpio.o
@@ -2154,35 +2153,35 @@ Memory Map of the image
     0x08000318   0x08000318   0x000000d8   Code   RO          216    .text               usart.o
     0x080003f0   0x080003f0   0x00000030   Code   RO          246    .text               stm32f1xx_it.o
     0x08000420   0x08000420   0x0000003c   Code   RO          273    .text               stm32f1xx_hal_msp.o
-    0x0800045c   0x0800045c   0x000000c4   Code   RO         2470    .text               system_stm32f1xx.o
-    0x08000520   0x08000520   0x000015e8   Code   RO         2526    .text               stm32f1xx_hal_spi.o
-    0x08001b08   0x08001b08   0x00000188   Code   RO         2550    .text               stm32f1xx_hal.o
-    0x08001c90   0x08001c90   0x000008c8   Code   RO         2580    .text               stm32f1xx_hal_rcc.o
-    0x08002558   0x08002558   0x000003d4   Code   RO         2628    .text               stm32f1xx_hal_gpio.o
-    0x0800292c   0x0800292c   0x00000c48   Code   RO         2652    .text               stm32f1xx_hal_dma.o
-    0x08003574   0x08003574   0x00000224   Code   RO         2676    .text               stm32f1xx_hal_cortex.o
-    0x08003798   0x08003798   0x00000f9c   Code   RO         2840    .text               stm32f1xx_hal_uart.o
-    0x08004734   0x08004734   0x00000024   Code   RO         2868    .text               mc_w.l(memseta.o)
-    0x08004758   0x08004758   0x0000002c   Code   RO         3176    .text               mc_w.l(uidiv.o)
-    0x08004784   0x08004784   0x00000024   Code   RO         3193    .text               mc_w.l(init.o)
-    0x080047a8   0x080047a8   0x00000020   Code   RO         2961    i.__0printf$3       mc_w.l(printf3.o)
-    0x080047c8   0x080047c8   0x0000000e   Code   RO         3203    i.__scatterload_copy  mc_w.l(handlers.o)
-    0x080047d6   0x080047d6   0x00000002   Code   RO         3204    i.__scatterload_null  mc_w.l(handlers.o)
-    0x080047d8   0x080047d8   0x0000000e   Code   RO         3205    i.__scatterload_zeroinit  mc_w.l(handlers.o)
+    0x0800045c   0x0800045c   0x000000c4   Code   RO         2469    .text               system_stm32f1xx.o
+    0x08000520   0x08000520   0x000015e8   Code   RO         2525    .text               stm32f1xx_hal_spi.o
+    0x08001b08   0x08001b08   0x00000188   Code   RO         2549    .text               stm32f1xx_hal.o
+    0x08001c90   0x08001c90   0x000008c8   Code   RO         2579    .text               stm32f1xx_hal_rcc.o
+    0x08002558   0x08002558   0x000003d4   Code   RO         2627    .text               stm32f1xx_hal_gpio.o
+    0x0800292c   0x0800292c   0x00000c48   Code   RO         2651    .text               stm32f1xx_hal_dma.o
+    0x08003574   0x08003574   0x00000224   Code   RO         2675    .text               stm32f1xx_hal_cortex.o
+    0x08003798   0x08003798   0x00000f9c   Code   RO         2839    .text               stm32f1xx_hal_uart.o
+    0x08004734   0x08004734   0x00000024   Code   RO         2867    .text               mc_w.l(memseta.o)
+    0x08004758   0x08004758   0x0000002c   Code   RO         3175    .text               mc_w.l(uidiv.o)
+    0x08004784   0x08004784   0x00000024   Code   RO         3192    .text               mc_w.l(init.o)
+    0x080047a8   0x080047a8   0x00000020   Code   RO         2960    i.__0printf$3       mc_w.l(printf3.o)
+    0x080047c8   0x080047c8   0x0000000e   Code   RO         3202    i.__scatterload_copy  mc_w.l(handlers.o)
+    0x080047d6   0x080047d6   0x00000002   Code   RO         3203    i.__scatterload_null  mc_w.l(handlers.o)
+    0x080047d8   0x080047d8   0x0000000e   Code   RO         3204    i.__scatterload_zeroinit  mc_w.l(handlers.o)
     0x080047e6   0x080047e6   0x00000002   PAD
-    0x080047e8   0x080047e8   0x000001b8   Code   RO         2968    i._printf_core      mc_w.l(printf3.o)
-    0x080049a0   0x080049a0   0x00000010   Data   RO         2471    .constdata          system_stm32f1xx.o
-    0x080049b0   0x080049b0   0x00000008   Data   RO         2472    .constdata          system_stm32f1xx.o
-    0x080049b8   0x080049b8   0x00000020   Data   RO         3201    Region$$Table       anon$$obj.o
+    0x080047e8   0x080047e8   0x000001b8   Code   RO         2967    i._printf_core      mc_w.l(printf3.o)
+    0x080049a0   0x080049a0   0x00000010   Data   RO         2470    .constdata          system_stm32f1xx.o
+    0x080049b0   0x080049b0   0x00000008   Data   RO         2471    .constdata          system_stm32f1xx.o
+    0x080049b8   0x080049b8   0x00000020   Data   RO         3200    Region$$Table       anon$$obj.o
 
 
     Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x080049d8, Size: 0x000010b0, Max: 0x00010000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x080049d8   0x00000004   Data   RW         2473    .data               system_stm32f1xx.o
-    0x20000004   0x080049dc   0x0000000c   Data   RW         2551    .data               stm32f1xx_hal.o
-    0x20000010   0x080049e8   0x00000004   Data   RW         3175    .data               mc_w.l(stdout.o)
+    0x20000000   0x080049d8   0x00000004   Data   RW         2472    .data               system_stm32f1xx.o
+    0x20000004   0x080049dc   0x0000000c   Data   RW         2550    .data               stm32f1xx_hal.o
+    0x20000010   0x080049e8   0x00000004   Data   RW         3174    .data               mc_w.l(stdout.o)
     0x20000014        -       0x00000058   Zero   RW          187    .bss                spi.o
     0x2000006c        -       0x00000040   Zero   RW          217    .bss                usart.o
     0x200000ac   0x080049ec   0x00000004   PAD
@@ -2197,23 +2196,23 @@ Image component sizes
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
         96         10          0          0          0        803   gpio.o
-       148         20          0          0          0     461070   main.o
-       188         18          0          0         88       1429   spi.o
+       148         20          0          0          0     461082   main.o
+       188         18          0          0         88       1437   spi.o
         36          8        304          0       4096        796   startup_stm32f103xe.o
        392         38          0         12          0       7649   stm32f1xx_hal.o
-       548         12          0          0          0      30674   stm32f1xx_hal_cortex.o
+       548         12          0          0          0      30678   stm32f1xx_hal_cortex.o
       3144        164          0          0          0       7109   stm32f1xx_hal_dma.o
        980         30          0          0          0       4391   stm32f1xx_hal_gpio.o
-        60          8          0          0          0        826   stm32f1xx_hal_msp.o
+        60          8          0          0          0        830   stm32f1xx_hal_msp.o
       2248         88          0          0          0       6559   stm32f1xx_hal_rcc.o
       5608        106          0          0          0      19625   stm32f1xx_hal_spi.o
-      3996         46          0          0          0      17432   stm32f1xx_hal_uart.o
+      3996         46          0          0          0      17436   stm32f1xx_hal_uart.o
         48         22          0          0          0       1246   stm32f1xx_it.o
-       196         28         24          4          0       1509   system_stm32f1xx.o
+       196         28         24          4          0       1517   system_stm32f1xx.o
        216         18          0          0         64       1753   usart.o
 
     ----------------------------------------------------------------------
-     17904        616        360         16       4252     562871   Object Totals
+     17904        616        360         16       4252     562911   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          0          0          0          0          4          0   (incl. Padding)
 
@@ -2256,8 +2255,8 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     18544        646        360         20       4252     561955   Grand Totals
-     18544        646        360         20       4252     561955   ELF Image Totals
+     18544        646        360         20       4252     561995   Grand Totals
+     18544        646        360         20       4252     561995   ELF Image Totals
      18544        646        360         20          0          0   ROM Totals
 
 ==============================================================================
