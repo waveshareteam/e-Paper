@@ -32,7 +32,7 @@ try:
     draw = ImageDraw.Draw(Himage)
     draw.text((10, 0), 'hello world', font = font24, fill = 0)
     draw.text((10, 20), '7.5inch e-Paper', font = font24, fill = 0)
-    draw.text((150, 0), u'微雪电子', font = font24, fill = 0)    
+    draw.text((150, 0), u'微雪电子', font = font24, fill = 0)
     draw.line((20, 50, 70, 100), fill = 0)
     draw.line((70, 50, 20, 100), fill = 0)
     draw.rectangle((20, 50, 70, 100), outline = 0)
