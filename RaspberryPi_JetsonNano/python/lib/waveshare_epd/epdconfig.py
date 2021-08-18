@@ -86,9 +86,6 @@ class RaspberryPi:
         self.GPIO.output(self.RST_PIN, 0)
         self.GPIO.output(self.DC_PIN, 0)
 
-        self.GPIO.cleanup()
-
-
 class JetsonNano:
     # Pin definition
     RST_PIN         = 17
