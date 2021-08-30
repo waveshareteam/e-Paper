@@ -203,7 +203,7 @@ class EPD:
         self.ReadBusy()
 
         self.send_command(0X00)			#PANNEL SETTING
-        self.send_data(0x3F)   #KW-3f   KWR-2F	BWROTP 0f	BWOTP 1f
+        self.send_data(0x1F)   #KW-3f   KWR-2F	BWROTP 0f	BWOTP 1f
 
         self.send_command(0x61)        	#tres
         self.send_data(0x03)		#source 800
