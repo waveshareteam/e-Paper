@@ -134,7 +134,7 @@ class EPD:
         while epdconfig.digital_read(self.busy_pin) == 0:
             # self.send_command(0x71)
 	    epdconfig.delay_ms(100)
-            iter += 1
+            count += 1
 	    if count > 150:
                 logger.info("Forced e-paper busy release")
 		break
