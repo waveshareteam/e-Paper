@@ -129,10 +129,8 @@ class EPD:
 
     def ReadBusy(self):
 	logger.debug("e-Paper busy")
-	# self.send_command(0x71)
 	iter = 0
 	while epdconfig.digital_read(self.busy_pin) == 0:
-		# self.send_command(0x71)
 		epdconfig.delay_ms(100)
 		iter += 1
 		if iter > 150:
