@@ -82,6 +82,7 @@ int Epd::Init(void) {
 	SendData(0x90);
 	SendCommand(0xE3);
 	SendData(0xAA);
+	return 0;
 }
 
 /**
