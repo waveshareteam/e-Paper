@@ -25,7 +25,7 @@ int main(void)
     // EPD_1in54_test();
     // EPD_1in54_V2_test();
     // EPD_1in54b_test();
-	// EPD_1in54b_V2_test();
+    // EPD_1in54b_V2_test();
     // EPD_1in54c_test();
 
 	// EPD_2in66_test();
@@ -43,8 +43,8 @@ int main(void)
     // EPD_2in9d_test();
 
     // EPD_2in13_test();
-    // EPD_2in13_V2_test();
-	// EPD_2in13_V3_test();
+	// EPD_2in13_V2_test();
+	EPD_2in13_V3_test();
     // EPD_2in13bc_test();
     // EPD_2in13b_V3_test();
     // EPD_2in13d_test();
@@ -63,14 +63,14 @@ int main(void)
 	// EPD_5in65f_test();
 
     // EPD_5in83_test();
-	// EPD_5in83_V2_test();
+    // EPD_5in83_V2_test();
     // EPD_5in83bc_test();
     // EPD_5in83b_V2_test();
 
 	// EPD_5in84_test();
 	
     // EPD_7in5_test();
-	// EPD_7in5_V2_test();
+    // EPD_7in5_V2_test();
 
     // EPD_7in5bc_test();
     // EPD_7in5b_V2_test();
