@@ -29,6 +29,7 @@
 ******************************************************************************/
 #include "EPD_Test.h"
 #include "EPD_1in54b_V2.h"  
+#include "time.h"
 
 int EPD_1in54b_V2_test(void)
 {
@@ -37,9 +38,13 @@ int EPD_1in54b_V2_test(void)
         return -1;
     }
     EPD_1IN54B_V2_Init();
+    struct timespec start={0,0}, finish={0,0}; 
+    clock_gettime(CLOCK_REALTIME,&start);
     EPD_1IN54B_V2_Clear();
+    clock_gettime(CLOCK_REALTIME,&finish);
+    printf("%ld S\r\n",finish.tv_sec-start.tv_sec);
     DEV_Delay_ms(200);
-    
+
     UBYTE *BlackImage, *RedImage;
     UWORD Imagesize = ((EPD_1IN54B_V2_WIDTH % 8 == 0)? (EPD_1IN54B_V2_WIDTH / 8 ): (EPD_1IN54B_V2_WIDTH / 8 + 1)) * EPD_1IN54B_V2_HEIGHT;
     if((BlackImage = (UBYTE *)malloc(Imagesize)) == NULL) {

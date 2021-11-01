@@ -29,7 +29,6 @@
 ******************************************************************************/
 #include "EPD_Test.h"
 #include "EPD_2in13_V3.h"
-#include <time.h> 
 
 int EPD_2in13_V3_test(void)
 {
@@ -39,13 +38,8 @@ int EPD_2in13_V3_test(void)
     }
 
     Debug("e-Paper Init and Clear...\r\n");
-	EPD_2in13_V3_Init();
-
-	struct timespec start={0,0}, finish={0,0}; 
-    clock_gettime(CLOCK_REALTIME,&start);
+		EPD_2in13_V3_Init();
     EPD_2in13_V3_Clear();
-	clock_gettime(CLOCK_REALTIME,&finish);
-    Debug("%ld S\r\n",finish.tv_sec-start.tv_sec);	
 
     //Create a new image cache
     UBYTE *BlackImage;
@@ -56,28 +50,13 @@ int EPD_2in13_V3_test(void)
     }
     Debug("Paint_NewImage\r\n");
     Paint_NewImage(BlackImage, EPD_2in13_V3_WIDTH, EPD_2in13_V3_HEIGHT, 90, WHITE);
-	Paint_Clear(WHITE);
-	
-#if 1   // show bmp
-	Paint_NewImage(BlackImage, EPD_2in13_V3_WIDTH, EPD_2in13_V3_HEIGHT, 90, WHITE);
-    Debug("show window BMP-----------------\r\n");
-    Paint_SelectImage(BlackImage);
-    GUI_ReadBmp("./pic/100x100.bmp", 10, 10);
-    EPD_2in13_V3_Display(BlackImage);
-    DEV_Delay_ms(3000);
-
-    Debug("show bmp------------------------\r\n");
-    Paint_SelectImage(BlackImage);
-    GUI_ReadBmp("./pic/2in13_1.bmp", 0, 0);
-    EPD_2in13_V3_Display(BlackImage);
-    DEV_Delay_ms(3000);
-#endif
+		Paint_Clear(WHITE);
 
 #if 1   //show image for array    
     Debug("show image for array\r\n");
     Paint_SelectImage(BlackImage);
     Paint_Clear(WHITE);
-    Paint_DrawBitMap(gImage_2in13_2);
+    Paint_DrawBitMap(gImage_2in13);
 
     EPD_2in13_V3_Display(BlackImage);
     DEV_Delay_ms(2000);

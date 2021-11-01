@@ -1,13 +1,12 @@
 /*****************************************************************************
-* | File      	:   EPD_2Iin13_V3.h
+* | File      	:   epd2in13_V3.h
 * | Author      :   Waveshare team
 * | Function    :   2.13inch e-paper V3
 * | Info        :
 *----------------
-* |	This version:   V1.1
-* | Date        :   2021-10-30
+* |	This version:   V1.0
+* | Date        :   2021-11-01
 * | Info        :
-* -----------------------------------------------------------------------------
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documnetation files (the "Software"), to deal
@@ -28,20 +27,48 @@
 # THE SOFTWARE.
 #
 ******************************************************************************/
-#ifndef __EPD_2in13_V3_H_
-#define __EPD_2in13_V3_H_
 
-#include "DEV_Config.h"
+#ifndef epd2in13_V3
+#define epd2in13_V3
+
+#include "epdif.h"
 
 // Display resolution
-#define EPD_2in13_V3_WIDTH       122
-#define EPD_2in13_V3_HEIGHT      250
+#define EPD_WIDTH       122
+#define EPD_HEIGHT      250
 
-void EPD_2in13_V3_Init(void);
-void EPD_2in13_V3_Clear(void);
-void EPD_2in13_V3_Display(UBYTE *Image);
-void EPD_2in13_V3_Display_Base(UBYTE *Image);
-void EPD_2in13_V3_Display_Partial(UBYTE *Image);
-void EPD_2in13_V3_Sleep(void);
+#define FULL			0
+#define PART			1
 
-#endif
+class Epd : EpdIf {
+public:
+    unsigned long width;
+    unsigned long height;
+
+    Epd();
+    ~Epd();
+    int  Init(char Mode);
+    void SendCommand(unsigned char command);
+    void SendData(unsigned char data);
+    void WaitUntilIdle(void);
+	void SetWindows(unsigned char Xstart, unsigned char Ystart, unsigned char Xend, unsigned char Yend);
+	void SetCursor(unsigned char Xstart, unsigned char Ystart);
+	void Lut(unsigned char *lut);
+    void Reset(void);
+    void Clear(void);
+    void Display(const unsigned char* frame_buffer);
+    void DisplayPartBaseImage(const unsigned char* frame_buffer);
+    void DisplayPart(const unsigned char* frame_buffer);
+    void ClearPart(void);
+    
+    void Sleep(void);
+private:
+    unsigned int reset_pin;
+    unsigned int dc_pin;
+    unsigned int cs_pin;
+    unsigned int busy_pin;
+};
+
+#endif /* EPD2IN13_V3_H */
+
+/* END OF FILE */
