@@ -507,6 +507,11 @@
               <FilePath>..\User\Examples\EPD_2in13_V2_test.c</FilePath>
             </File>
             <File>
+              <FileName>EPD_2in13_V3_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Examples\EPD_2in13_V3_test.c</FilePath>
+            </File>
+            <File>
               <FileName>EPD_2in13b_V3_test.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\Examples\EPD_2in13b_V3_test.c</FilePath>
@@ -700,6 +705,11 @@
               <FileName>EPD_2in13_V2.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\e-Paper\EPD_2in13_V2.c</FilePath>
+            </File>
+            <File>
+              <FileName>EPD_2in13_V3.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\e-Paper\EPD_2in13_V3.c</FilePath>
             </File>
             <File>
               <FileName>EPD_2in13bc.c</FileName>
