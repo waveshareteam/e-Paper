@@ -132,10 +132,8 @@ void Epd::SendData(unsigned char data) {
  *  @brief: Wait until the busy_pin goes HIGH
  */
 void Epd::WaitUntilIdle(void) {
-	SendCommand(0x71);
     while(DigitalRead(busy_pin) == 0) {      //0: busy, 1: idle
-        DelayMs(100);
-		SendCommand(0x71);
+        // Wait
     }      
 }
 
@@ -418,10 +416,6 @@ void Epd::ClearFrame(void) {
         SendData(0xFF);  
     }  
     DelayMs(2);
-	SetLut();
-	SendCommand(DISPLAY_REFRESH); 
-    DelayMs(100);
-    WaitUntilIdle();
 }
 
 /**
