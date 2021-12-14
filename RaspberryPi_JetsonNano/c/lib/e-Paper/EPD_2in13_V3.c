@@ -146,6 +146,10 @@ static void EPD_2in13_V3_TurnOnDisplay(void)
 	EPD_2in13_V3_ReadBusy();
 }
 
+/******************************************************************************
+function :	Turn On Display
+parameter:	
+******************************************************************************/
 static void EPD_2in13_V3_TurnOnDisplay_Partial(void)
 {
 	EPD_2in13_V3_SendCommand(0x22); // Display Update Control
@@ -154,6 +158,11 @@ static void EPD_2in13_V3_TurnOnDisplay_Partial(void)
 	EPD_2in13_V3_ReadBusy();
 }
 
+/******************************************************************************
+function :	Set lut
+parameter:	
+    lut :   lut data
+******************************************************************************/
 static void EPD_2IN13_V3_LUT(UBYTE *lut)
 {
 	UBYTE count;
@@ -163,6 +172,11 @@ static void EPD_2IN13_V3_LUT(UBYTE *lut)
 	EPD_2in13_V3_ReadBusy();
 }
 
+/******************************************************************************
+function :	Send lut data and configuration
+parameter:	
+    lut :   lut data
+******************************************************************************/
 static void EPD_2IN13_V2_LUT_by_host(UBYTE *lut)
 {
 	EPD_2IN13_V3_LUT((UBYTE *)lut);			//lut
@@ -181,6 +195,10 @@ static void EPD_2IN13_V2_LUT_by_host(UBYTE *lut)
 /******************************************************************************
 function :	Setting the display window
 parameter:
+	Xstart : X-axis starting position
+	Ystart : Y-axis starting position
+	Xend : End position of X-axis
+	Yend : End position of Y-axis
 ******************************************************************************/
 static void EPD_2in13_V3_SetWindows(UWORD Xstart, UWORD Ystart, UWORD Xend, UWORD Yend)
 {
@@ -198,6 +216,8 @@ static void EPD_2in13_V3_SetWindows(UWORD Xstart, UWORD Ystart, UWORD Xend, UWOR
 /******************************************************************************
 function :	Set Cursor
 parameter:
+	Xstart : X-axis starting position
+	Ystart : Y-axis starting position
 ******************************************************************************/
 static void EPD_2in13_V3_SetCursor(UWORD Xstart, UWORD Ystart)
 {
@@ -270,6 +290,7 @@ void EPD_2in13_V3_Clear(void)
 /******************************************************************************
 function :	Sends the image buffer in RAM to e-Paper and displays
 parameter:
+	Image : Image data
 ******************************************************************************/
 void EPD_2in13_V3_Display(UBYTE *Image)
 {
@@ -291,6 +312,7 @@ void EPD_2in13_V3_Display(UBYTE *Image)
 /******************************************************************************
 function :	Refresh a base image
 parameter:
+	Image : Image data	
 ******************************************************************************/
 void EPD_2in13_V3_Display_Base(UBYTE *Image)
 {  
@@ -316,6 +338,7 @@ void EPD_2in13_V3_Display_Base(UBYTE *Image)
 /******************************************************************************
 function :	Sends the image buffer in RAM to e-Paper and partial refresh
 parameter:
+	Image : Image data
 ******************************************************************************/
 void EPD_2in13_V3_Display_Partial(UBYTE *Image)
 {
