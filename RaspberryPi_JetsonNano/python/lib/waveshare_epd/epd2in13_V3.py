@@ -91,7 +91,10 @@ class EPD:
         0x22,	0x17,	0x41,	0x0,	0x32,	0x36,
     ]
         
-    # Hardware reset
+    '''
+    function :Hardware reset
+    parameter:
+    '''
     def reset(self):
         epdconfig.digital_write(self.reset_pin, 1)
         epdconfig.delay_ms(20) 
@@ -99,43 +102,75 @@ class EPD:
         epdconfig.delay_ms(2)
         epdconfig.digital_write(self.reset_pin, 1)
         epdconfig.delay_ms(20)   
-
+	
+	'''
+    function :send command
+    parameter:
+     command : Command register
+    '''
     def send_command(self, command):
         epdconfig.digital_write(self.dc_pin, 0)
         epdconfig.digital_write(self.cs_pin, 0)
         epdconfig.spi_writebyte([command])
         epdconfig.digital_write(self.cs_pin, 1)
 
+	'''
+    function :send data
+    parameter:
+     data : Write data
+    '''
     def send_data(self, data):
         epdconfig.digital_write(self.dc_pin, 1)
         epdconfig.digital_write(self.cs_pin, 0)
         epdconfig.spi_writebyte([data])
         epdconfig.digital_write(self.cs_pin, 1)
-        
+    
+	'''
+    function :Wait until the busy_pin goes LOW
+    parameter:
+    '''
     def ReadBusy(self):
         logger.debug("e-Paper busy")
         while(epdconfig.digital_read(self.busy_pin) == 1):      # 0: idle, 1: busy
             epdconfig.delay_ms(10)  
         logger.debug("e-Paper busy release")
-
+	
+	'''
+    function : Turn On Display
+    parameter:
+    '''
     def TurnOnDisplay(self):
         self.send_command(0x22) # Display Update Control
         self.send_data(0xC7)
         self.send_command(0x20) # Activate Display Update Sequence
         self.ReadBusy()
-        
+    
+	'''
+    function : Turn On Display Part
+    parameter:
+    '''
     def TurnOnDisplayPart(self):
         self.send_command(0x22) # Display Update Control
         self.send_data(0x0f)    # fast:0x0c, quality:0x0f, 0xcf
         self.send_command(0x20) # Activate Display Update Sequence
         self.ReadBusy()
-        
+    
+	'''
+    function : Set lut
+    parameter:
+        lut : lut data
+    '''    
     def Lut(self, lut):
         self.send_command(0x32)
         for i in range(0, 153):
             self.send_data(lut[i])
         self.ReadBusy()
     
+	'''
+    function : Send lut data and configuration
+    parameter:
+        lut : lut data 
+    '''
     def SetLut(self, lut):
         self.Lut(lut)
         self.send_command(0x3f)
@@ -148,7 +183,15 @@ class EPD:
         self.send_data(lut[157])	# VSL
         self.send_command(0x2c);    # VCOM
         self.send_data(lut[158])
-       
+    
+	'''
+    function : Setting the display window
+    parameter:
+        xstart : X-axis starting position
+        ystart : Y-axis starting position
+        xend : End position of X-axis
+        yend : End position of Y-axis
+    '''
     def SetWindow(self, x_start, y_start, x_end, y_end):
         self.send_command(0x44) # SET_RAM_X_ADDRESS_START_END_POSITION
         # x point must be the multiple of 8 or the last 3 bits will be ignored
@@ -160,7 +203,13 @@ class EPD:
         self.send_data((y_start >> 8) & 0xFF)
         self.send_data(y_end & 0xFF)
         self.send_data((y_end >> 8) & 0xFF)
-
+	
+	'''
+    function : Set Cursor
+    parameter:
+        x : X-axis starting position
+        y : Y-axis starting position
+    '''
     def SetCursor(self, x, y):
         self.send_command(0x4E) # SET_RAM_X_ADDRESS_COUNTER
         # x point must be the multiple of 8 or the last 3 bits will be ignored
@@ -169,7 +218,11 @@ class EPD:
         self.send_command(0x4F) # SET_RAM_Y_ADDRESS_COUNTER
         self.send_data(y & 0xFF)
         self.send_data((y >> 8) & 0xFF)
-       
+    
+	'''
+    function : Initialize the e-Paper register
+    parameter:
+    '''
     def init(self):
         if (epdconfig.module_init() != 0):
             return -1
@@ -205,7 +258,12 @@ class EPD:
         
         self.SetLut(self.lut_full_update)
         return 0
-
+	
+	'''
+	function : Display images
+    parameter:
+		image : Image data
+	'''
     def getbuffer(self, image):
         img = image
         imwidth, imheight = img.size
@@ -222,7 +280,11 @@ class EPD:
         buf = bytearray(img.tobytes('raw'))
         return buf
         
-        
+    '''
+    function : Sends the image buffer in RAM to e-Paper and displays
+    parameter:
+        image : Image data
+    '''
     def display(self, image):
         if self.width%8 == 0:
             linewidth = int(self.width/8)
@@ -234,7 +296,12 @@ class EPD:
             for i in range(0, linewidth):
                 self.send_data(image[i + j * linewidth])   
         self.TurnOnDisplay()
-        
+    
+	'''
+    function : Sends the image buffer in RAM to e-Paper and partial refresh
+    parameter:
+        image : Image data
+    '''  	
     def displayPartial(self, image):
         if self.width%8 == 0:
             linewidth = int(self.width/8)
@@ -274,7 +341,12 @@ class EPD:
             for i in range(0, linewidth):
                 self.send_data(image[i + j * linewidth])   
         self.TurnOnDisplayPart()
-
+	
+	'''
+    function : Refresh a base image
+    parameter:
+        image : Image data
+    '''
     def displayPartBaseImage(self, image):
         if self.width%8 == 0:
             linewidth = int(self.width/8)
@@ -292,6 +364,10 @@ class EPD:
                 self.send_data(image[i + j * linewidth])  
         self.TurnOnDisplay()
     
+    '''
+    function : Clear screen
+    parameter:
+    '''
     def Clear(self, color):
         if self.width%8 == 0:
             linewidth = int(self.width/8)
@@ -305,7 +381,11 @@ class EPD:
                 self.send_data(color)
                 
         self.TurnOnDisplay()
-
+		
+	'''
+    function : Enter sleep mode
+    parameter:
+    '''
     def sleep(self):
         self.send_command(0x10) #enter deep sleep
         self.send_data(0x01)

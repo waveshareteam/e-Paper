@@ -78,6 +78,10 @@ Epd::~Epd()
 {
 };
 
+/******************************************************************************
+function :	Pin definition
+parameter:
+******************************************************************************/
 Epd::Epd()
 {
     reset_pin = RST_PIN;
@@ -88,27 +92,32 @@ Epd::Epd()
     height = EPD_HEIGHT;
 };
 
-/**
- *  @brief: basic function for sending commands
- */
+/******************************************************************************
+function :	send command
+parameter:
+     command : Command register
+******************************************************************************/
 void Epd::SendCommand(unsigned char command)
 {
     DigitalWrite(dc_pin, LOW);
     SpiTransfer(command);
 }
 
-/**
- *  @brief: basic function for sending data
- */
+/******************************************************************************
+function :	send data
+parameter:
+    Data : Write data
+******************************************************************************/
 void Epd::SendData(unsigned char data)
 {
     DigitalWrite(dc_pin, HIGH);
     SpiTransfer(data);
 }
 
-/**
- *  @brief: Wait until the busy_pin goes HIGH
- */
+/******************************************************************************
+function :	Wait until the busy_pin goes LOW
+parameter:
+******************************************************************************/
 void Epd::WaitUntilIdle(void)
 {
     while(1) {      //LOW: idle, HIGH: busy
@@ -118,6 +127,14 @@ void Epd::WaitUntilIdle(void)
     }
 }
 
+/******************************************************************************
+function :	Setting the display window
+parameter:
+	Xstart : X-axis starting position
+	Ystart : Y-axis starting position
+	Xend : End position of X-axis
+	Yend : End position of Y-axis
+******************************************************************************/
 void Epd::SetWindows(unsigned char Xstart, unsigned char Ystart, unsigned char Xend, unsigned char Yend)
 {
     SendCommand(0x44); // SET_RAM_X_ADDRESS_START_END_POSITION
@@ -131,6 +148,12 @@ void Epd::SetWindows(unsigned char Xstart, unsigned char Ystart, unsigned char X
     SendData((Yend >> 8) & 0xFF);
 }
 
+/******************************************************************************
+function :	Set Cursor
+parameter:
+	Xstart : X-axis starting position
+	Ystart : Y-axis starting position
+******************************************************************************/
 void Epd::SetCursor(unsigned char Xstart, unsigned char Ystart)
 {
     SendCommand(0x4E); // SET_RAM_X_ADDRESS_COUNTER
@@ -141,6 +164,11 @@ void Epd::SetCursor(unsigned char Xstart, unsigned char Ystart)
     SendData((Ystart >> 8) & 0xFF);
 }
 
+/******************************************************************************
+function :	Send lut data and configuration
+parameter:	
+    lut :   lut data
+******************************************************************************/
 void Epd::Lut(unsigned char *lut)
 {
 	unsigned char count;
@@ -161,6 +189,11 @@ void Epd::Lut(unsigned char *lut)
 	SendData(*(lut+158));
 }
 
+/******************************************************************************
+function :	Initialize the e-Paper register
+parameter:
+	Mode : Mode selection
+******************************************************************************/
 int Epd::Init(char Mode)
 {
     /* this calls the peripheral hardware interface, see epdif */
@@ -236,11 +269,10 @@ int Epd::Init(char Mode)
     return 0;
 }
 
-/**
- *  @brief: module reset.
- *          often used to awaken the module in deep sleep,
- *          see Epd::Sleep();
- */
+/******************************************************************************
+function :	Software reset
+parameter:
+******************************************************************************/
 void Epd::Reset(void)
 {
     DigitalWrite(reset_pin, HIGH);
@@ -251,6 +283,10 @@ void Epd::Reset(void)
     DelayMs(20);
 }
 
+/******************************************************************************
+function :	Clear screen
+parameter:
+******************************************************************************/
 void Epd::Clear(void)
 {
     int w, h;
@@ -270,6 +306,11 @@ void Epd::Clear(void)
     WaitUntilIdle();
 }
 
+/******************************************************************************
+function :	Sends the image buffer in RAM to e-Paper and displays
+parameter:
+	frame_buffer : Image data
+******************************************************************************/
 void Epd::Display(const unsigned char* frame_buffer)
 {
     int w = (EPD_WIDTH % 8 == 0)? (EPD_WIDTH / 8 ): (EPD_WIDTH / 8 + 1);
@@ -291,6 +332,11 @@ void Epd::Display(const unsigned char* frame_buffer)
     WaitUntilIdle();
 }
 
+/******************************************************************************
+function :	Refresh a base image
+parameter:
+	frame_buffer : Image data	
+******************************************************************************/
 void Epd::DisplayPartBaseImage(const unsigned char* frame_buffer)
 {
     int w = (EPD_WIDTH % 8 == 0)? (EPD_WIDTH / 8 ): (EPD_WIDTH / 8 + 1);
@@ -319,7 +365,12 @@ void Epd::DisplayPartBaseImage(const unsigned char* frame_buffer)
     WaitUntilIdle();
 }
 
-void Epd::DisplayPart(const unsigned char* frame_buffer)
+/******************************************************************************
+function :	Sends the image buffer in RAM to e-Paper and partial refresh
+parameter:
+	frame_buffer : Image data
+******************************************************************************/
+void Epd::DisplayPart(const unsigned char* )
 {
     int w = (EPD_WIDTH % 8 == 0)? (EPD_WIDTH / 8 ): (EPD_WIDTH / 8 + 1);
     int h = EPD_HEIGHT;
@@ -340,6 +391,10 @@ void Epd::DisplayPart(const unsigned char* frame_buffer)
     WaitUntilIdle();
 }
 
+/******************************************************************************
+function :	Clear screen
+parameter:
+******************************************************************************/
 void Epd::ClearPart(void)
 {
     int w, h;
@@ -359,14 +414,10 @@ void Epd::ClearPart(void)
     WaitUntilIdle();
 }
 
-/**
- *  @brief: After this command is transmitted, the chip would enter the
- *          deep-sleep mode to save power.
- *          The deep sleep mode would return to standby by hardware reset.
- *          The only one parameter is a check code, the command would be
- *          executed if check code = 0xA5.
- *          You can use Epd::Init() to awaken
- */
+/******************************************************************************
+function :	Enter sleep mode
+parameter:
+******************************************************************************/
 void Epd::Sleep()
 {
     SendCommand(0x10); //enter deep sleep
