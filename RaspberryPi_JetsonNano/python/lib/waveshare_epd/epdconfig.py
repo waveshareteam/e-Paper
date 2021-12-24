@@ -6,7 +6,7 @@
 # *----------------
 # * | This version:   V1.0
 # * | Date        :   2019-06-21
-# * | Info        :   
+# * | Info        :
 # ******************************************************************************
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documnetation files (the "Software"), to deal
@@ -148,7 +148,54 @@ class JetsonNano:
         self.GPIO.cleanup()
 
 
-if os.path.exists('/sys/bus/platform/drivers/gpiomem-bcm2835'):
+class MicroPython:
+
+    def __init__(self):
+        # preimport utime
+        import utime  # pylint: disable=C0415, W0611
+        from machine import Pin  # pylint: disable=C0415
+        self.DC_PIN = self.dc = Pin('P20')
+        self.dc.mode(Pin.OUT)
+
+        self.CS_PIN = self.cs = Pin('P4')
+        self.cs.mode(Pin.OUT)
+        self.cs.pull(Pin.PULL_UP)
+
+        self.RST_PIN = self.rst = Pin('P19')
+        self.rst.mode(Pin.OUT)
+
+        self.BUSY_PIN = self.busy = Pin('P18')
+        self.busy.mode(Pin.IN)
+
+    def digital_write(self, pin, value):
+        pin.value(value)
+
+    def digital_read(self, pin):
+        return pin.value()
+
+    def spi_writebyte(self, data):
+        self.spi.write(bytes(c & 0xff for c in data))
+
+    def delay_ms(self, delaytime):
+        import utime  # pylint: disable=C0415
+        utime.sleep_ms(delaytime)
+
+    def module_init(self):
+        from machine import Pin, SPI  # pylint: disable=C0415
+        clk = Pin('P21')
+        mosi = Pin('P22')
+        self.spi = SPI(0, mode=SPI.MASTER, baudrate=20000000, polarity=0,
+                       phase=0, pins=(clk, mosi, None))
+        return 0
+
+    def module_exit(self):
+        self.spi.deinit()
+
+
+if getattr(getattr(sys, 'implementation', None),
+           'name', None) == 'micropython':
+    implementation = MicroPython()
+elif os.path.exists('/sys/bus/platform/drivers/gpiomem-bcm2835'):
     implementation = RaspberryPi()
 else:
     implementation = JetsonNano()
