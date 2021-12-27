@@ -145,7 +145,7 @@ class JetsonNano:
         self.GPIO.output(self.RST_PIN, 0)
         self.GPIO.output(self.DC_PIN, 0)
 
-        self.GPIO.cleanup()
+        self.GPIO.cleanup([self.RST_PIN, self.DC_PIN, self.CS_PIN, self.BUSY_PIN])
 
 
 if os.path.exists('/sys/bus/platform/drivers/gpiomem-bcm2835'):
