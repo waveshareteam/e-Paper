@@ -47,6 +47,7 @@ public:
     void DisplayFrame(const UBYTE *Image);
     void SendCommand(unsigned char command);
     void DisplayFrame_Partial(const UBYTE *Image, UWORD Xstart, UWORD Ystart, UWORD iwidth, UWORD iheight);
+    void DisplayFrame_Part(const UBYTE *Image, UWORD Xstart, UWORD Ystart, UWORD Xend, UWORD Yend, bool isGC);
     void SendData(unsigned char data);
     void Sleep(void);
     void Clear(UBYTE mode);
