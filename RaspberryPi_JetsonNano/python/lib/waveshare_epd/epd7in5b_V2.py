@@ -154,10 +154,13 @@ class EPD:
 
     def display(self, imageblack, imagered):
         self.send_command(0x10)
-        self.send_data2(~imageblack)
-        
+        # The black bytes need to be inverted back from what getbuffer did
+        for i in range(len(imageblack)):
+            imageblack[i] ^= 0xFF
+        self.send_data2(imageblack)
+
         self.send_command(0x13)
-        self.send_data2(imagered) #this may need to be ~ inverted
+        self.send_data2(imagered)
         
         self.send_command(0x12)
         epdconfig.delay_ms(100)
