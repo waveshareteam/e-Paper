@@ -154,7 +154,7 @@ class EPD:
 
     def display(self, imageblack, imagered):
         self.send_command(0x10)
-        self.send_data2(imageblack)
+        self.send_data2(~imageblack)
         
         self.send_command(0x13)
         self.send_data2(imagered) #this may need to be ~ inverted
