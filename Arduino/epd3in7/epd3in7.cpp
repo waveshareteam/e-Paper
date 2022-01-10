@@ -223,7 +223,7 @@ void Epd::Reset(void) {
 /******************************************************************************
 function :  Display
 ******************************************************************************/
-void Epd::DisplayFrame(const UBYTE *Image) {
+void Epd::DisplayFrame(const UBYTE *Image, bool isBase) {
     UWORD i;
     UWORD IMAGE_COUNTER = width * height / 8;
 
@@ -238,9 +238,11 @@ void Epd::DisplayFrame(const UBYTE *Image) {
     for (i = 0; i < IMAGE_COUNTER; i++) {
         SendData(pgm_read_byte(&Image[i]));
     }
-    SendCommand(0x26);
-    for (i = 0; i < IMAGE_COUNTER; i++) {
-        SendData(pgm_read_byte(&Image[i]));
+    if(isBase) {
+        SendCommand(0x26);
+        for (i = 0; i < IMAGE_COUNTER; i++) {
+            SendData(pgm_read_byte(&Image[i]));
+        }
     }
 
     Load_LUT(1);
@@ -320,8 +322,11 @@ void Epd::DisplayFrame_Part(const UBYTE *Image, UWORD Xstart, UWORD Ystart, UWOR
         Load_LUT(1);
     else
         Load_LUT(0);
-	SendCommand(0x20);
-	WaitUntilIdle();    
+}
+
+void Epd::TurnOnDisplay(void) {
+    SendCommand(0x20);
+	WaitUntilIdle(); 
 }
 
 /******************************************************************************

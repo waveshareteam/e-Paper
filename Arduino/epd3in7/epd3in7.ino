@@ -49,7 +49,7 @@ void setup() {
     Serial.print("e-Paper Clear\r\n ");
     epd.Clear(1);  
     Serial.print("draw image\r\n ");
-    epd.DisplayFrame(IMAGE_DATA);   // Set base image
+    epd.DisplayFrame(IMAGE_DATA, true);   // Set base image
     delay(3000);
     
     paint.SetWidth(40);
@@ -59,7 +59,7 @@ void setup() {
 
     UBYTE i;
     time_start_ms = millis();
-    for(i=0; i<10; i++) {
+    for(i=0; i<5; i++) {
         time_now_s = (millis() - time_start_ms) / 1000;
         char time_string[] = {'0', '0', ':', '0', '0', '\0'};
         time_string[0] = time_now_s / 60 / 10 + '0';
@@ -71,7 +71,13 @@ void setup() {
         paint.DrawStringAt(20, 10, time_string, &Font16, COLORED);
         Serial.print("refresh------\r\n ");
         // epd.DisplayFrame_Partial(paint.GetImage(), 20, 100, 40, 120); // Width must be a multiple of 8
-        epd.DisplayFrame_Part(paint.GetImage(), 40, 30, 80, 140, false);   // Xstart must be a multiple of 8
+        /* Writes new data to RAM */
+        epd.DisplayFrame_Part(paint.GetImage(), 40+i*40, 30, 80+i*40, 140, false);   // Xstart must be a multiple of 8
+        /* Displays and toggles the RAM currently in use */
+        epd.TurnOnDisplay();
+        /* Writes the last data to another RAM */
+        epd.DisplayFrame_Part(paint.GetImage(), 40+i*40, 30, 80+i*40, 140, false);   // Xstart must be a multiple of 8
+        delay(500);
     }
     
     Serial.print("clear and sleep......\r\n ");
