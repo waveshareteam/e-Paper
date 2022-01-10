@@ -370,7 +370,7 @@ function :	Sends the image buffer in RAM to e-Paper and partial refresh
 parameter:
 	frame_buffer : Image data
 ******************************************************************************/
-void Epd::DisplayPart(const unsigned char* )
+void Epd::DisplayPart(const unsigned char* frame_buffer)
 {
     int w = (EPD_WIDTH % 8 == 0)? (EPD_WIDTH / 8 ): (EPD_WIDTH / 8 + 1);
     int h = EPD_HEIGHT;
