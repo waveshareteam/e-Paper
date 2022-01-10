@@ -286,7 +286,7 @@ void Epd::TurnOnDisplay(void)
 function :	Initialize the e-Paper register
 parameter:
 ******************************************************************************/
-void Epd::Init()
+int Epd::Init()
 {
     /* this calls the peripheral hardware interface, see epdif */
     if (IfInit() != 0) {
@@ -323,6 +323,8 @@ void Epd::Init()
 
     SendCommand(0x82);	//vcom_DC setting
     SendData(0x28);
+    
+    return 0;
 }
 
 void Epd::Clear(void)

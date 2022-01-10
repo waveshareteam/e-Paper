@@ -43,7 +43,7 @@ public:
 
     Epd();
     ~Epd();
-    void Init(void);
+    int Init(void);
     void SendCommand(unsigned char command);
     void SendData(unsigned char data);
     void ReadBusy(void);
