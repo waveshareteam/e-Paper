@@ -229,7 +229,7 @@ static int DEV_Equipment_Testing(void)
 	if(i<5) {
 		printf("Unrecognizable\r\n");
 	} else {
-		char RPI_System[10]   = {"Raspbian"};
+		char RPI_System[10]   = {"Debian GNU"};
 		for(i=0; i<6; i++) {
 			if(RPI_System[i]!= value_str[i]) {
 				printf("Please make JETSON !!!!!!!!!!\r\n");
