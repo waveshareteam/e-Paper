@@ -4,8 +4,8 @@
 # * | Function    :   Electronic paper driver
 # * | Info        :
 # *----------------
-# * | This version:   V4.1
-# * | Date        :   2020-11-30
+# * | This version:   V4.2
+# * | Date        :   2022-01-08
 # # | Info        :   python demo
 # -----------------------------------------------------------------------------
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -66,7 +66,13 @@ class EPD:
         epdconfig.digital_write(self.cs_pin, 0)
         epdconfig.spi_writebyte([data])
         epdconfig.digital_write(self.cs_pin, 1)
-        
+    
+    def send_data2(self, data): #faster
+        epdconfig.digital_write(self.dc_pin, 1)
+        epdconfig.digital_write(self.cs_pin, 0)
+        epdconfig.SPI.writebytes2(data)
+        epdconfig.digital_write(self.cs_pin, 1)
+
     def ReadBusy(self):
         logger.debug("e-Paper busy")
         self.send_command(0x71)
@@ -127,50 +133,47 @@ class EPD:
         return 0
 
     def getbuffer(self, image):
-        # logger.debug("bufsiz = ",int(self.width/8) * self.height)
-        buf = [0xFF] * (int(self.width/8) * self.height)
-        image_monocolor = image.convert('1')
-        imwidth, imheight = image_monocolor.size
-        pixels = image_monocolor.load()
-        logger.debug('imwidth = %d  imheight =  %d ',imwidth, imheight)
+        img = image
+        imwidth, imheight = img.size
         if(imwidth == self.width and imheight == self.height):
-            logger.debug("Horizontal")
-            for y in range(imheight):
-                for x in range(imwidth):
-                    # Set the bits for the column of pixels at the current position.
-                    if pixels[x, y] == 0:
-                        buf[int((x + y * self.width) / 8)] &= ~(0x80 >> (x % 8))
+            img = img.convert('1')
         elif(imwidth == self.height and imheight == self.width):
-            logger.debug("Vertical")
-            for y in range(imheight):
-                for x in range(imwidth):
-                    newx = y
-                    newy = self.height - x - 1
-                    if pixels[x, y] == 0:
-                        buf[int((newx + newy*self.width) / 8)] &= ~(0x80 >> (y % 8))
+            # image has correct dimensions, but needs to be rotated
+            img = img.rotate(90, expand=True).convert('1')
+        else:
+            logger.warning("Wrong image dimensions: must be " + str(self.width) + "x" + str(self.height))
+            # return a blank buffer
+            return [0x00] * (int(self.width/8) * self.height)
+
+        buf = bytearray(img.tobytes('raw'))
+        # The bytes need to be inverted, because in the PIL world 0=black and 1=white, but
+        # in the e-paper world 0=white and 1=black.
+        for i in range(len(buf)):
+            buf[i] ^= 0xFF
         return buf
 
     def display(self, imageblack, imagered):
         self.send_command(0x10)
-        for i in range(0, int(self.width * self.height / 8)):
-            self.send_data(imageblack[i]);
-        
+        # The black bytes need to be inverted back from what getbuffer did
+        for i in range(len(imageblack)):
+            imageblack[i] ^= 0xFF
+        self.send_data2(imageblack)
+
         self.send_command(0x13)
-        for i in range(0, int(self.width * self.height / 8)):
-            self.send_data(~imagered[i]);
+        self.send_data2(imagered)
         
         self.send_command(0x12)
         epdconfig.delay_ms(100)
         self.ReadBusy()
         
     def Clear(self):
+        buf = [0x00] * (int(self.width/8) * self.height)
+        buf2 = [0xff] * (int(self.width/8) * self.height)
         self.send_command(0x10)
-        for i in range(0, int(self.width * self.height / 8)):
-            self.send_data(0xff)
+        self.send_data2(buf2)
             
         self.send_command(0x13)
-        for i in range(0, int(self.width * self.height / 8)):
-            self.send_data(0x00)
+        self.send_data2(buf)
                 
         self.send_command(0x12)
         epdconfig.delay_ms(100)
