@@ -78,18 +78,20 @@ try:
     logging.info("Clear...")
     epd.Clear()
     
-    Himage3 = Image.new('1', (epd.width, epd.height), 0)  # 255: clear the frame
-    draw = ImageDraw.Draw(Himage3)
-    print("Support for partial refresh, but the refresh effect is not good, but it is not recommended")
-    print("Local refresh is off by default and is not recommended.")
     if(0):
+        print("Support for partial refresh, but the refresh effect is not good, but it is not recommended")
+        print("Local refresh is off by default and is not recommended.")
+        Himage3 = Image.new('1', (epd.width, epd.height), 0)  # 255: clear the frame
+        draw = ImageDraw.Draw(Himage3)
+        epd.init_Partial() 
         for j in range(0, int(20)):
-            draw.rectangle((8, 80, 44, 155), fill = 0)
-            draw.text((8, 80), str(j) , font = font35, fill = 1)
-            draw.text((8, 120), str(20-j) , font = font35, fill = 1)
+            draw.rectangle((8, 80, 48, 155), fill = 255)
+            draw.text((8, 80), str(j) , font = font35, fill = 0)
+            draw.text((8, 120), str(20-j) , font = font35, fill = 0)
             epd.EPD_4IN2_PartialDisplay(8, 80, 42, 155, epd.getbuffer(Himage3))
             time.sleep(2);
-
+            
+    
     '''4Gray display'''
     logging.info("5.4Gray display--------------------------------")
     epd.Init_4Gray()

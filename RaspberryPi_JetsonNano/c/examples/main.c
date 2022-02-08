@@ -44,7 +44,7 @@ int main(void)
 
     // EPD_2in13_test();
 	// EPD_2in13_V2_test();
-	EPD_2in13_V3_test();
+	// EPD_2in13_V3_test();
     // EPD_2in13bc_test();
     // EPD_2in13b_V3_test();
     // EPD_2in13d_test();
@@ -53,7 +53,7 @@ int main(void)
 
 	// EPD_4in01f_test();
 
-    // EPD_4in2_test();
+    EPD_4in2_test();
 	// EPD_4in2_V2_test();
     // EPD_4in2bc_test();
     // EPD_4in2b_V2_test();
