@@ -32,51 +32,61 @@
 #define COLORED     0
 #define UNCOLORED   1
 
-UBYTE image[800];
+UBYTE image[700];
 Paint paint(image, 0, 0);    // width should be the multiple of 8 
 UDOUBLE time_start_ms;
 UDOUBLE time_now_s;
 
 void setup() {
-  // put your setup code here, to run once:
-  Serial.begin(115200);
-  Epd epd;
-  if (epd.Init() != 0) {
-    Serial.print("e-Paper init failed");
-    return;
-  }
-  Serial.print("3.7inch e-paper demo\r\n ");
-  Serial.print("e-Paper Clear\r\n ");
-  epd.Clear(1);  
-  Serial.print("draw image\r\n ");
-  epd.DisplayFrame(IMAGE_DATA);
-  delay(4000);
-  epd.Clear(0);
-  
-  UBYTE i;
-  time_start_ms = millis();
-  for(i=0; i<10; i++) {
-    time_now_s = (millis() - time_start_ms) / 1000;
-    char time_string[] = {'0', '0', ':', '0', '0', '\0'};
-    time_string[0] = time_now_s / 60 / 10 + '0';
-    time_string[1] = time_now_s / 60 % 10 + '0';
-    time_string[3] = time_now_s % 60 / 10 + '0';
-    time_string[4] = time_now_s % 60 % 10 + '0';
-    paint.SetWidth(48);
-    paint.SetHeight(100);
+    // put your setup code here, to run once:
+    Serial.begin(115200);
+    Epd epd;
+    if (epd.Init() != 0) {
+        Serial.print("e-Paper init failed");
+        return;
+    }
+    Serial.print("3.7inch e-paper demo\r\n ");
+    Serial.print("e-Paper Clear\r\n ");
+    epd.Clear(1);  
+    Serial.print("draw image\r\n ");
+    epd.DisplayFrame(IMAGE_DATA, true);   // Set base image
+    delay(3000);
+    
+    paint.SetWidth(40);
+    paint.SetHeight(120);
     paint.SetRotate(ROTATE_270);
     paint.Clear(UNCOLORED);
-    paint.DrawStringAt(20, 10, time_string, &Font16, COLORED);
-    Serial.print("refresh------\r\n ");
-    epd.DisplayFrame_Partial(paint.GetImage(), 20, 100, 48, 100);
-  }
-  
-  Serial.print("clear and sleep......\r\n ");
-  epd.Clear(1);
-  epd.Sleep();
+
+    UBYTE i;
+    time_start_ms = millis();
+    for(i=0; i<5; i++) {
+        time_now_s = (millis() - time_start_ms) / 1000;
+        char time_string[] = {'0', '0', ':', '0', '0', '\0'};
+        time_string[0] = time_now_s / 60 / 10 + '0';
+        time_string[1] = time_now_s / 60 % 10 + '0';
+        time_string[3] = time_now_s % 60 / 10 + '0';
+        time_string[4] = time_now_s % 60 % 10 + '0';
+
+        paint.Clear(UNCOLORED);
+        paint.DrawStringAt(20, 10, time_string, &Font16, COLORED);
+        Serial.print("refresh------\r\n ");
+        // epd.DisplayFrame_Partial(paint.GetImage(), 20, 100, 40, 120); // Width must be a multiple of 8
+        /* Writes new data to RAM */
+        epd.DisplayFrame_Part(paint.GetImage(), 40+i*40, 30, 80+i*40, 140, false);   // Xstart must be a multiple of 8
+        /* Displays and toggles the RAM currently in use */
+        epd.TurnOnDisplay();
+        /* Writes the last data to another RAM */
+        epd.DisplayFrame_Part(paint.GetImage(), 40+i*40, 30, 80+i*40, 140, false);   // Xstart must be a multiple of 8
+        delay(500);
+    }
+    
+    Serial.print("clear and sleep......\r\n ");
+    epd.Init();
+    epd.Clear(1);
+    epd.Sleep();
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+    // put your main code here, to run repeatedly:
 
 }

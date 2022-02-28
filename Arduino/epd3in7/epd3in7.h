@@ -44,9 +44,11 @@ public:
     int  Init(void);
     void WaitUntilIdle(void);
     void Reset(void);
-    void DisplayFrame(const UBYTE *Image);
+    void DisplayFrame(const UBYTE *Image, bool isBase);
     void SendCommand(unsigned char command);
     void DisplayFrame_Partial(const UBYTE *Image, UWORD Xstart, UWORD Ystart, UWORD iwidth, UWORD iheight);
+    void DisplayFrame_Part(const UBYTE *Image, UWORD Xstart, UWORD Ystart, UWORD Xend, UWORD Yend, bool isGC);
+    void TurnOnDisplay(void);
     void SendData(unsigned char data);
     void Sleep(void);
     void Clear(UBYTE mode);

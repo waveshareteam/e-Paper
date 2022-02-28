@@ -777,6 +777,36 @@ void Paint_DrawBitMap(const unsigned char* image_buffer)
     }
 }
 
+/******************************************************************************
+function:	paste monochrome bitmap to a frame buff
+parameter:
+    image_buffer ：A picture data converted to a bitmap
+    xStart: The starting x coordinate
+    yStart: The starting y coordinate
+    imageWidth: Original image width
+    imageHeight: Original image height
+    flipColor: Whether the color is reversed
+info:
+    Use this function to paste image data into a buffer
+******************************************************************************/
+void Paint_DrawBitMap_Paste(const unsigned char* image_buffer, UWORD xStart, UWORD yStart, UWORD imageWidth, UWORD imageHeight, UBYTE flipColor)
+{
+    UBYTE color, srcImage;
+    UWORD x, y;
+    UWORD width = (imageWidth%8==0 ? imageWidth/8 : imageWidth/8+1);
+    
+    for (y = 0; y < imageHeight; y++) {
+        for (x = 0; x < imageWidth; x++) {
+            srcImage = image_buffer[y*width + x/8];
+            if(flipColor)
+                color = (((srcImage<<(x%8) & 0x80) == 0) ? 1 : 0);
+            else
+                color = (((srcImage<<(x%8) & 0x80) == 0) ? 0 : 1);
+            Paint_SetPixel(x+xStart, y+yStart, color);
+        }
+    }
+}
+
 ///******************************************************************************
 //function:	SDisplay half of monochrome bitmap
 //parameter:

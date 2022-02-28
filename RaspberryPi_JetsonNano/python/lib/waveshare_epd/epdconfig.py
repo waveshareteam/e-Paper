@@ -81,6 +81,6 @@ def module_exit():
     GPIO.output(RST_PIN, 0)
     GPIO.output(DC_PIN, 0)
 
-    GPIO.cleanup()
+    GPIO.cleanup([RST_PIN, DC_PIN, CS_PIN, BUSY_PIN])
 
 ### END OF FILE ###
