@@ -25,3 +25,4 @@
 2021-02-22: Added new program 2.7inch B V2 e-Paper routine.
 2021-07-19: 1.54v2, 2.13v3, 2.9v2, and 7.5v2 programs all use external waveforms and have improved refresh speed.
 2021-11-01: Added new program 2.13inch V3 e-Paper routine.
+2022-04-26: Added new program 2.13inch B V4 e-Paper routine.
