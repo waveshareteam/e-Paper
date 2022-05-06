@@ -8,7 +8,7 @@ if os.path.exists(libdir):
     sys.path.append(libdir)
 
 import logging
-from waveshare_epd import epd2in13b_V3
+from waveshare_epd import epd2in13b_V4
 import time
 from PIL import Image,ImageDraw,ImageFont
 import traceback
@@ -16,9 +16,9 @@ import traceback
 logging.basicConfig(level=logging.DEBUG)
 
 try:
-    logging.info("epd2in13b_V3 Demo")
+    logging.info("epd2in13b_V4 Demo")
     
-    epd = epd2in13b_V3.EPD()
+    epd = epd2in13b_V4.EPD()
     logging.info("init and Clear")
     epd.init()
     epd.Clear()
@@ -31,12 +31,12 @@ try:
     
     # Drawing on the Horizontal image
     logging.info("1.Drawing on the Horizontal image...") 
-    HBlackimage = Image.new('1', (epd.height, epd.width), 255)  # 298*126
-    HRYimage = Image.new('1', (epd.height, epd.width), 255)  # 298*126  ryimage: red or yellow image  
+    HBlackimage = Image.new('1', (epd.height, epd.width), 255)  # 250*122
+    HRYimage = Image.new('1', (epd.height, epd.width), 255)  # 250*122
     drawblack = ImageDraw.Draw(HBlackimage)
     drawry = ImageDraw.Draw(HRYimage)
     drawblack.text((10, 0), 'hello world', font = font20, fill = 0)
-    drawblack.text((10, 20), '2.13inch e-Paper bc', font = font20, fill = 0)
+    drawblack.text((10, 20), '2.13inch e-Paper b V4', font = font20, fill = 0)
     drawblack.text((120, 0), u'微雪电子', font = font20, fill = 0)    
     drawblack.line((20, 50, 70, 100), fill = 0)
     drawblack.line((70, 50, 20, 100), fill = 0)
@@ -51,12 +51,12 @@ try:
     
     # Drawing on the Vertical image
     logging.info("2.Drawing on the Vertical image...")
-    LBlackimage = Image.new('1', (epd.width, epd.height), 255)  # 126*298
-    LRYimage = Image.new('1', (epd.width, epd.height), 255)  # 126*298
+    LBlackimage = Image.new('1', (epd.width, epd.height), 255)  # 122*250
+    LRYimage = Image.new('1', (epd.width, epd.height), 255)  # 122*250
     drawblack = ImageDraw.Draw(LBlackimage)
     drawry = ImageDraw.Draw(LRYimage)
     drawblack.text((2, 0), 'hello world', font = font18, fill = 0)
-    drawblack.text((2, 20), '2.13 epd b', font = font18, fill = 0)
+    drawblack.text((2, 20), '2.13 epd b V4', font = font18, fill = 0)
     drawblack.text((20, 50), u'微雪电子', font = font18, fill = 0)
     drawblack.line((10, 90, 60, 140), fill = 0)
     drawblack.line((60, 90, 10, 140), fill = 0)
@@ -68,21 +68,21 @@ try:
     time.sleep(2)
     
     logging.info("3.read bmp file")
-    Blackimage = Image.open(os.path.join(picdir, '2in13bc-b.bmp'))
-    RYimage = Image.open(os.path.join(picdir, '2in13bc-ry.bmp'))
+    Blackimage = Image.open(os.path.join(picdir, '2in13b_V4b.bmp'))
+    RYimage = Image.open(os.path.join(picdir, '2in13b_V4b.bmp'))
     epd.display(epd.getbuffer(Blackimage), epd.getbuffer(RYimage))
     time.sleep(2)
     
     logging.info("4.read bmp file on window")
-    blackimage1 = Image.new('1', (epd.height, epd.width), 255)  # 298*126
-    redimage1 = Image.new('1', (epd.height, epd.width), 255)  # 298*126    
+    blackimage1 = Image.new('1', (epd.height, epd.width), 255)  # 250*122
+    redimage1 = Image.new('1', (epd.height, epd.width), 255)  # 250*122
     newimage = Image.open(os.path.join(picdir, '100x100.bmp'))
     blackimage1.paste(newimage, (0,0))
     epd.display(epd.getbuffer(blackimage1), epd.getbuffer(redimage1))
     
     logging.info("Clear...")
     epd.init()
-    epd.Clear()
+    epd.clear()
     
     logging.info("Goto Sleep...")
     epd.sleep()
@@ -92,5 +92,5 @@ except IOError as e:
     
 except KeyboardInterrupt:    
     logging.info("ctrl + c:")
-    epd2in13b_V3.epdconfig.module_exit()
+    epd2in13b_V4.epdconfig.module_exit()
     exit()

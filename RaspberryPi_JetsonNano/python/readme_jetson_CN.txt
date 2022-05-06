@@ -34,7 +34,6 @@ BUSY   ->    24
     sudo apt-get update
     sudo apt-get install python-pip
     sudo apt-get install python-pil
-    sudo apt-get install python-numpy
     sudo pip install Jetson.GPIO
 
 或
@@ -42,7 +41,6 @@ BUSY   ->    24
     sudo apt-get update
     sudo apt-get install python3-pip
     sudo apt-get install python3-pil
-    sudo apt-get install python3-numpy
     sudo pip3 install Jetson.GPIO
 
 4.基本使用：

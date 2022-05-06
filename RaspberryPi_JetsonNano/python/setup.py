@@ -1,7 +1,7 @@
 import sys, os
 from setuptools import setup
 
-dependencies = ['Pillow', 'numpy', 'spidev']
+dependencies = ['Pillow', 'spidev']
 
 if os.path.exists('/sys/bus/platform/drivers/gpiomem-bcm2835'):
     dependencies += ['RPi.GPIO']
