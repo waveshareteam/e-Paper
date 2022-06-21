@@ -28,7 +28,6 @@
 #
 ******************************************************************************/
 #include "DEV_Config.h"
-#include <fcntl.h>
 
 /**
  * GPIO
@@ -202,53 +201,47 @@ void DEV_Delay_ms(UDOUBLE xms)
 
 static int DEV_Equipment_Testing(void)
 {
-	int i;
-	int fd;
-	char value_str[20];
-	fd = open("/etc/issue", O_RDONLY);
-    printf("Current environment: ");
-	while(1) {
-		if (fd < 0) {
-			Debug( "Read failed Pin\n");
-			return -1;
-		}
-		for(i=0;; i++) {
-			if (read(fd, &value_str[i], 1) < 0) {
-				Debug( "failed to read value!\n");
-				return -1;
-			}
-			if(value_str[i] ==32) {
-				printf("\r\n");
-				break;
-			}
-			printf("%c",value_str[i]);
-		}
-		break;
+	FILE *fp;
+	char issue_str[64];
+
+	fp = fopen("/etc/issue", "r");
+	if (fp == NULL) {
+		Debug("Unable to open /etc/issue");
+		return -1;
 	}
+	if (fread(issue_str, 1, sizeof(issue_str), fp) <= 0) {
+		Debug("Unable to read from /etc/issue");
+		return -1;
+	}
+	issue_str[sizeof(issue_str)-1] = '\0';
+	fclose(fp);
+
+	printf("Current environment: ");
 #ifdef RPI
-	if(i<5) {
-		printf("Unrecognizable\r\n");
-	} else {
-		char RPI_System[10]   = {"Raspbian"};
-		for(i=0; i<6; i++) {
-			if(RPI_System[i]!= value_str[i]) {
-				printf("Please make JETSON !!!!!!!!!!\r\n");
-				return -1;
-			}
+	char systems[][9] = {"Raspbian", "Debian", "NixOS"};
+	int detected = 0;
+	for(int i=0; i<3; i++) {
+		if (strstr(issue_str, systems[i]) != NULL) {
+			printf("%s\n", systems[i]);
+			detected = 1;
 		}
+	}
+	if (!detected) {
+		printf("not recognized\n");
+		printf("Built for Raspberry Pi, but unable to detect environment.\n");
+		printf("Perhaps you meant to 'make JETSON' instead?\n");
+		return -1;
 	}
 #endif
 #ifdef JETSON
-	if(i<5) {
-		Debug("Unrecognizable\r\n");
+	char system[] = {"Ubuntu"};
+	if (strstr(issue_str, system) != NULL) {
+		printf("%s\n", system);
 	} else {
-		char JETSON_System[10]= {"Ubuntu"};
-		for(i=0; i<6; i++) {
-			if(JETSON_System[i]!= value_str[i] ) {
-				printf("Please make RPI !!!!!!!!!!\r\n");
-				return -1;
-			}
-		}
+		printf("not recognized\n");
+		printf("Built for Jetson, but unable to detect environment.\n");
+		printf("Perhaps you meant to 'make RPI' instead?\n");
+		return -1;
 	}
 #endif
 	return 0;
