@@ -97,35 +97,23 @@ class JetsonNano:
     BUSY_PIN        = 24
 
     def __init__(self):
-        import ctypes
-        find_dirs = [
-            os.path.dirname(os.path.realpath(__file__)),
-            '/usr/local/lib',
-            '/usr/lib',
-        ]
-        self.SPI = None
-        for find_dir in find_dirs:
-            so_filename = os.path.join(find_dir, 'sysfs_software_spi.so')
-            if os.path.exists(so_filename):
-                self.SPI = ctypes.cdll.LoadLibrary(so_filename)
-                break
-        if self.SPI is None:
-            raise RuntimeError('Cannot find sysfs_software_spi.so')
-
+        import spidev
         import Jetson.GPIO
+
         self.GPIO = Jetson.GPIO
+        self.SPI = spidev.SpiDev()
 
     def digital_write(self, pin, value):
         self.GPIO.output(pin, value)
 
     def digital_read(self, pin):
-        return self.GPIO.input(self.BUSY_PIN)
+        return self.GPIO.input(pin)
 
     def delay_ms(self, delaytime):
         time.sleep(delaytime / 1000.0)
 
     def spi_writebyte(self, data):
-        self.SPI.SYSFS_software_spi_transfer(data[0])
+        self.SPI.writebytes(data)
 
     def module_init(self):
         self.GPIO.setmode(self.GPIO.BCM)
@@ -134,12 +122,16 @@ class JetsonNano:
         self.GPIO.setup(self.DC_PIN, self.GPIO.OUT)
         self.GPIO.setup(self.CS_PIN, self.GPIO.OUT)
         self.GPIO.setup(self.BUSY_PIN, self.GPIO.IN)
-        self.SPI.SYSFS_software_spi_begin()
+
+        # SPI device, bus = 3, device = 0
+        self.SPI.open(3, 0)
+        self.SPI.max_speed_hz = 32_000_000
+        self.SPI.mode = 0b00
         return 0
 
     def module_exit(self):
         logger.debug("spi end")
-        self.SPI.SYSFS_software_spi_end()
+        self.SPI.close()
 
         logger.debug("close 5V, Module enters 0 power consumption ...")
         self.GPIO.output(self.RST_PIN, 0)
