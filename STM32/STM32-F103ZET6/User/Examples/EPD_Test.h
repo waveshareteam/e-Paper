@@ -36,6 +36,10 @@
 #include "Debug.h"
 #include <stdlib.h> // malloc() free()
 
+int EPD_1in64g_test(void);
+int EPD_3in0g_test(void);
+int EPD_7in3g_test(void);
+
 int EPD_1in02d_test(void);
 
 int EPD_1in54_test(void);
@@ -65,6 +69,7 @@ int EPD_2in13d_test(void);
 int EPD_2in66_test(void);
 int EPD_2in66b_test(void);
 
+int EPD_3in52_test(void);
 int EPD_3in7_test(void);
 
 int EPD_4in01f_test(void);

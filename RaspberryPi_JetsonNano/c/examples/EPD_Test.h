@@ -1,11 +1,11 @@
 /*****************************************************************************
-* | File      	:	  EPD_Test.h
+* | File      	:	EPD_Test.h
 * | Author      :   Waveshare team
 * | Function    :   e-Paper test Demo
 * | Info        :
 *----------------
-* |	This version:   V1.0
-* | Date        :   2019-06-11
+* |	This version:   V1.1
+* | Date        :   2022-07-28
 * | Info        :   
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -36,6 +36,10 @@
 #include "ImageData.h"
 #include "Debug.h"
 #include <stdlib.h> // malloc() free()
+
+int EPD_1in64g_test(void);
+int EPD_3in0g_test(void);
+int EPD_7in3g_test(void);
 
 int EPD_1in54_DES_test(void);
 int EPD_2in13_DES_test(void);
@@ -69,6 +73,8 @@ int EPD_2in13bc_test(void);
 int EPD_2in13b_V3_test(void);
 int EPD_2in13b_V4_test(void);
 int EPD_2in13d_test(void);
+
+int EPD_3in52_test(void);
 
 int EPD_3in7_test(void);
 

@@ -21,8 +21,12 @@
 2020-12-03: 2.9inch B V2 e-Paper was renamed 2.9inch B V3 e-Paper.
 2020-12-09: Added new program 2.9inch V2 e-Paper routine.
 2020-12-09: Added new program 5.83inch V2 e-Paper routine.
-2020-12-25: Added new program 4.01inch (F) e-Paper routine.
+2020-12-25: Added new program 4.01inch e-Paper (F) routine.
 2021-02-22: Added new program 2.7inch B V2 e-Paper routine.
 2021-07-19: 1.54v2, 2.13v3, 2.9v2, and 7.5v2 programs all use external waveforms and have improved refresh speed.
 2021-11-01: Added new program 2.13inch V3 e-Paper routine.
 2022-04-26: Added new program 2.13inch B V4 e-Paper routine.
+2022-07-22: Added new programs 1.64inch e-Paper (G) routine.
+2022-07-22: Added new programs 3inch e-Paper (G) routine.
+2022-07-22: Added new programs 7.3inch e-Paper (G) routine.
+2022-07-22: Added new programs 3.52inch e-Paper routine.
