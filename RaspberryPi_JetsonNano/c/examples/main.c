@@ -16,6 +16,10 @@ int main(void)
     // Exception handling:ctrl + c
     signal(SIGINT, Handler);
 	
+    // EPD_1in64g_test();
+    // EPD_3in0g_test();
+    // EPD_7in3g_test();
+
 	// EPD_1in54_DES_test();
 	// EPD_2in13_DES_test();
 	// EPD_2in9_DES_test();
@@ -50,6 +54,7 @@ int main(void)
 	// EPD_2in13b_V4_test();
     // EPD_2in13d_test();
 
+    // EPD_3in52_test();
     // EPD_3in7_test();
 
 	// EPD_4in01f_test();

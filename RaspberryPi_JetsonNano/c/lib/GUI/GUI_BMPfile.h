@@ -6,10 +6,12 @@
 *                Used to shield the underlying layers of each master
 *                and enhance portability
 *----------------
-* |	This version:   V2.2
-* | Date        :   2020-07-08
+* |	This version:   V2.3
+* | Date        :   2020-07-27
 * | Info        :   
 * -----------------------------------------------------------------------------
+* V2.3(2022-07-27):
+* 1.Add GUI_ReadBmp_RGB_4Color()
 * V2.2(2020-07-08):
 * 1.Add GUI_ReadBmp_RGB_7Color()
 * V2.1(2019-10-10):
@@ -85,5 +87,6 @@ typedef struct RGB_QUAD {
 
 UBYTE GUI_ReadBmp(const char *path, UWORD Xstart, UWORD Ystart);
 UBYTE GUI_ReadBmp_4Gray(const char *path, UWORD Xstart, UWORD Ystart);
+UBYTE GUI_ReadBmp_RGB_4Color(const char *path, UWORD Xstart, UWORD Ystart);
 UBYTE GUI_ReadBmp_RGB_7Color(const char *path, UWORD Xstart, UWORD Ystart);
 #endif

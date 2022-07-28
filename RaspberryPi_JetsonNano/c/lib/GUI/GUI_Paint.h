@@ -126,6 +126,14 @@ typedef enum {
 #define  GRAY2 0x02
 #define  GRAY3 0x01 //gray
 #define  GRAY4 0x00 //white
+
+//colour
+#define  Black_4Color   0x00 
+#define  White_4Color   0x01
+#define  Yellow_4Color  0x02
+#define  Red_4Color     0x03
+
+
 /**
  * The size of the point
 **/
