@@ -93,6 +93,10 @@ int main(void)
   MX_USART1_UART_Init();
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
+
+//    EPD_1in64g_test();
+//    EPD_3in0g_test();
+//    EPD_7in3g_test();
 		
 //		EPD_1in02d_test();
 		
@@ -117,12 +121,13 @@ int main(void)
 // 		EPD_2in13_V3_test();
 //		EPD_2in13bc_test();
 //		EPD_2in13b_V3_test();
-      EPD_2in13b_V4_test();
+//      EPD_2in13b_V4_test();
 //		EPD_2in13d_test();
 	
 //		EPD_2in66_test();
 //		EPD_2in66b_test();
 		
+//		EPD_3in52_test();
 //		EPD_3in7_test();
 	
 //		EPD_4in01f_test();	
