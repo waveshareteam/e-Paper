@@ -4,8 +4,8 @@
 # * | Function    :   Electronic paper driver
 # * | Info        :
 # *----------------
-# * | This version:   V1
-# * | Date        :   2019-06-20
+# * | This version:   V1.1
+# * | Date        :   2022-08-10
 # # | Info        :   python demo
 # -----------------------------------------------------------------------------
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -111,6 +111,13 @@ class EPD:
         epdconfig.digital_write(self.cs_pin, 0)
         epdconfig.spi_writebyte([data])
         epdconfig.digital_write(self.cs_pin, 1)
+    
+    # send a lot of data   
+    def send_data2(self, data):
+        epdconfig.digital_write(self.dc_pin, 1)
+        epdconfig.digital_write(self.cs_pin, 0)
+        epdconfig.spi_writebyte2(data)
+        epdconfig.digital_write(self.cs_pin, 1)
         
     def ReadBusy(self):
         logger.debug("e-Paper busy")
@@ -132,8 +139,7 @@ class EPD:
 
     def lut(self, lut):
         self.send_command(0x32) # WRITE_LUT_REGISTER
-        for i in range(0, len(lut)):
-            self.send_data(lut[i])
+        self.send_data2(lut)
             
     def set_lut(self, lut):
         self.lut(lut)
@@ -153,15 +159,15 @@ class EPD:
         self.send_data(lut[158])
       
     def SetWindows(self, Xstart, Ystart, Xend, Yend):
-        self.send_command(0x44); # SET_RAM_X_ADDRESS_START_END_POSITION
-        self.send_data((Xstart>>3) & 0xFF);
-        self.send_data((Xend>>3) & 0xFF);
+        self.send_command(0x44) # SET_RAM_X_ADDRESS_START_END_POSITION
+        self.send_data((Xstart>>3) & 0xFF)
+        self.send_data((Xend>>3) & 0xFF)
         
-        self.send_command(0x45); # SET_RAM_Y_ADDRESS_START_END_POSITION
-        self.send_data(Ystart & 0xFF);
-        self.send_data((Ystart >> 8) & 0xFF);
-        self.send_data(Yend & 0xFF);
-        self.send_data((Yend >> 8) & 0xFF);
+        self.send_command(0x45) # SET_RAM_Y_ADDRESS_START_END_POSITION
+        self.send_data(Ystart & 0xFF)
+        self.send_data((Ystart >> 8) & 0xFF)
+        self.send_data(Yend & 0xFF)
+        self.send_data((Yend >> 8) & 0xFF)
     
 
     def SetCursor(self, Xstart, Ystart):
@@ -239,10 +245,13 @@ class EPD:
             self.set_lut(self.WF_Full_1IN54) # Set lut
         
     def Clear(self, color):
+        if self.width%8 == 0:
+            linewidth = int(self.width/8)
+        else:
+            linewidth = int(self.width/8) + 1
+
         self.send_command(0x24)
-        for j in range(0, self.height):
-            for i in range(0, int(self.width / 8)):
-                self.send_data(color)
+        self.send_data2([color] * self.height * linewidth)
                 
         self.TurnOnDisplay()
         
@@ -273,9 +282,7 @@ class EPD:
             return
             
         self.send_command(0x24)
-        for j in range(0, self.height):
-            for i in range(0, int(self.width / 8)):
-                self.send_data(image[i + j * int(self.width / 8)])   
+        self.send_data2(image)   
         self.TurnOnDisplay()
         
     def displayPartBaseImage(self, image):
@@ -283,14 +290,10 @@ class EPD:
             return
         
         self.send_command(0x24)
-        for j in range(0, self.height):
-            for i in range(0, int(self.width / 8)):
-                self.send_data(image[i + j * int(self.width / 8)])
+        self.send_data2(image)
         
         self.send_command(0x26)
-        for j in range(0, self.height):
-            for i in range(0, int(self.width / 8)):
-                self.send_data(image[i + j * int(self.width / 8)])
+        self.send_data2(image)
                 
         self.TurnOnDisplay()
         
@@ -299,9 +302,7 @@ class EPD:
             return
         
         self.send_command(0x24)
-        for j in range(0, self.height):
-            for i in range(0, int(self.width / 8)):
-                self.send_data(image[i + j * int(self.width / 8)])
+        self.send_data2(image)
                 
         self.TurnOnDisplayPart()
         

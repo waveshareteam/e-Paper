@@ -80,7 +80,8 @@ class EPD:
         epdconfig.spi_writebyte([data])
         epdconfig.digital_write(self.cs_pin, 1)
 
-    def send_data_bulk(self, data):
+    # send a lot of data   
+    def send_data2(self, data):
         epdconfig.digital_write(self.dc_pin, 1)
         epdconfig.digital_write(self.cs_pin, 0)
         epdconfig.spi_writebyte2(data)
@@ -177,7 +178,7 @@ class EPD:
         self.send_data(0xC0)
         self.send_command(0x10)
 
-        self.send_data_bulk(image)
+        self.send_data2(image)
         self.send_command(0x04) #0x04
         self.ReadBusyHigh()
         self.send_command(0x12) #0x12
@@ -196,7 +197,7 @@ class EPD:
 
         # Set all pixels to white
         buf = [0x11] * int(self.width * self.height / 2)
-        self.send_data_bulk(buf)
+        self.send_data2(buf)
 
         self.send_command(0x04) #0x04
         self.ReadBusyHigh()

@@ -16,7 +16,7 @@ import traceback
 logging.basicConfig(level=logging.DEBUG)
 
 try:
-    logging.info("epd1in64g Demo")
+    logging.info("epd7in3g Demo")
 
     BLACK = 0x00
     WHITE = 0x55

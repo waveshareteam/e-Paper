@@ -4,8 +4,8 @@
 # * | Function    :   Electronic paper driver
 # * | Info        :
 # *----------------
-# * | This version:   V1.1
-# * | Date        :   2020-12-03
+# * | This version:   V1.2
+# * | Date        :   2022-08-10
 # # | Info        :   python demo
 # -----------------------------------------------------------------------------
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -65,6 +65,13 @@ class EPD:
         epdconfig.digital_write(self.dc_pin, 1)
         epdconfig.digital_write(self.cs_pin, 0)
         epdconfig.spi_writebyte([data])
+        epdconfig.digital_write(self.cs_pin, 1)
+
+    # send a lot of data   
+    def send_data2(self, data):
+        epdconfig.digital_write(self.dc_pin, 1)
+        epdconfig.digital_write(self.cs_pin, 0)
+        epdconfig.spi_writebyte2(data)
         epdconfig.digital_write(self.cs_pin, 1)
         
     def ReadBusy(self):
@@ -126,12 +133,10 @@ class EPD:
     def display(self, blackimage, ryimage): # ryimage: red or yellow image
         if (blackimage != None):
             self.send_command(0X10)
-            for i in range(0, int(self.width * self.height / 8)):
-                self.send_data(blackimage[i])        
+            self.send_data2(blackimage)        
         if (ryimage != None):
             self.send_command(0X13)
-            for i in range(0, int(self.width * self.height / 8)):
-                self.send_data(ryimage[i])
+            self.send_data2(ryimage)
 
         self.send_command(0x12)
         epdconfig.delay_ms(200) 
@@ -139,11 +144,9 @@ class EPD:
         
     def Clear(self):
         self.send_command(0X10)
-        for i in range(0, int(self.width * self.height / 8)):
-            self.send_data(0xff)
+        self.send_data2([0xff] * int(self.width * self.height / 8))
         self.send_command(0X13)
-        for i in range(0, int(self.width * self.height / 8)):
-            self.send_data(0xff)
+        self.send_data2([0xff] * int(self.width * self.height / 8))
 
         self.send_command(0x12)
         epdconfig.delay_ms(200) 

@@ -165,7 +165,7 @@ class EPD:
         else:
             logger.warning("Invalid image dimensions: %d x %d, expected %d x %d" % (imwidth, imheight, self.width, self.height))
 
-        # Convert the soruce image to the 7 colors, dithering if needed
+        # Convert the soruce image to the 4 colors, dithering if needed
         image_4color = image_temp.convert("RGB").quantize(palette=pal_image)
         buf_4color = bytearray(image_4color.tobytes('raw'))
 

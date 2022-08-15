@@ -22,7 +22,7 @@ try:
     epd = epd2in13d.EPD()
     logging.info("init and Clear")
     epd.init()
-    epd.Clear(0xFF)
+    epd.Clear()
     
     font15 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 15)
     font24 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 24)
@@ -60,7 +60,7 @@ try:
     # partial update
     logging.info("5.show time...")
     # epd.init()    
-    # epd.Clear(0xFF)
+    # epd.Clear()
     # time_image = Image.new('1', (epd.width, epd.height), 255)
     # time_draw = ImageDraw.Draw(time_image)
     # num = 0
@@ -76,7 +76,7 @@ try:
     
     logging.info("Clear...")
     epd.init()
-    epd.Clear(0xFF)
+    epd.Clear()
     
     logging.info("Goto Sleep...")
     epd.sleep()
