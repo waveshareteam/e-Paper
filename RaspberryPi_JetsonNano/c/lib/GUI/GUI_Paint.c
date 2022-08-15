@@ -245,7 +245,6 @@ void Paint_SetPixel(UWORD Xpoint, UWORD Ypoint, UWORD Color)
         UDOUBLE Addr = X / 4 + Y * Paint.WidthByte;
         Color = Color % 4;//Guaranteed color scale is 4  --- 0~3
         UBYTE Rdata = Paint.Image[Addr];
-        
         Rdata = Rdata & (~(0xC0 >> ((X % 4)*2)));//Clear first, then set value
         Paint.Image[Addr] = Rdata | ((Color << 6) >> ((X % 4)*2));
     }else if(Paint.Scale == 7){
@@ -264,14 +263,21 @@ parameter:
 ******************************************************************************/
 void Paint_Clear(UWORD Color)
 {	
-	if(Paint.Scale == 2 || Paint.Scale == 4){
+	if(Paint.Scale == 2) {
 		for (UWORD Y = 0; Y < Paint.HeightByte; Y++) {
 			for (UWORD X = 0; X < Paint.WidthByte; X++ ) {//8 pixel =  1 byte
 				UDOUBLE Addr = X + Y*Paint.WidthByte;
 				Paint.Image[Addr] = Color;
 			}
 		}		
-	}else if(Paint.Scale == 7){
+    }else if(Paint.Scale == 4) {
+        for (UWORD Y = 0; Y < Paint.HeightByte; Y++) {
+			for (UWORD X = 0; X < Paint.WidthByte; X++ ) {
+				UDOUBLE Addr = X + Y*Paint.WidthByte;
+				Paint.Image[Addr] = (Color<<6)|(Color<<4)|(Color<<2)|Color;
+			}
+		}		
+	}else if(Paint.Scale == 7) {
 		for (UWORD Y = 0; Y < Paint.HeightByte; Y++) {
 			for (UWORD X = 0; X < Paint.WidthByte; X++ ) {
 				UDOUBLE Addr = X + Y*Paint.WidthByte;
@@ -279,7 +285,6 @@ void Paint_Clear(UWORD Color)
 			}
 		}		
 	}
-
 }
 
 /******************************************************************************

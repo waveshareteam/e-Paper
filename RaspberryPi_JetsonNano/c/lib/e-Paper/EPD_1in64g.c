@@ -127,7 +127,6 @@ void EPD_1IN64G_Init(void)
     EPD_1IN64G_SendCommand(0xB0);
     EPD_1IN64G_SendData(0x03);//1 boost 20211113
 
-
     EPD_1IN64G_SendCommand(0x00);
     EPD_1IN64G_SendData(0x4F);
     EPD_1IN64G_SendData(0x6B);
@@ -187,9 +186,7 @@ void EPD_1IN64G_Clear(UBYTE color)
     EPD_1IN64G_SendCommand(0x10);
     for (UWORD j = 0; j < Height; j++) {
         for (UWORD i = 0; i < Width; i++) {
-            for(UBYTE k = 0; k < 4; k++) {
-                EPD_1IN64G_SendData(color);
-            }
+                EPD_1IN64G_SendData((color << 6) | (color << 4) | (color << 2) | color);
         }
     }
 
@@ -221,6 +218,10 @@ void EPD_1IN64G_Display(UBYTE *Image)
             EPD_1IN64G_SendData(Image[i + j * Width]);
         }
     }
+    
+    EPD_1IN64G_SendCommand(0x68);
+    EPD_1IN64G_SendData(0x00);
+
     EPD_1IN64G_TurnOnDisplay();
 }
 

@@ -132,7 +132,6 @@ void EPD_7IN3G_Init(void)
     EPD_7IN3G_SendData(0x4F);
     EPD_7IN3G_SendData(0x69);
 
-
     EPD_7IN3G_SendCommand(0x05);
     EPD_7IN3G_SendData(0x40);
     EPD_7IN3G_SendData(0x1F);
@@ -168,9 +167,6 @@ void EPD_7IN3G_Init(void)
     EPD_7IN3G_SendCommand(0x30);
     EPD_7IN3G_SendData(0x08);
 
-
-
-
     EPD_7IN3G_SendCommand(0x50);
     EPD_7IN3G_SendData(0x3F);
 
@@ -203,10 +199,9 @@ void EPD_7IN3G_Clear(UBYTE color)
     EPD_7IN3G_SendCommand(0x10);
     for (UWORD j = 0; j < Height; j++) {
         for (UWORD i = 0; i < Width; i++) {
-            EPD_7IN3G_SendData(color);
+            EPD_7IN3G_SendData((color << 6) | (color << 4) | (color << 2) | color);
         }
     }
-
     EPD_7IN3G_TurnOnDisplay();
 }
 

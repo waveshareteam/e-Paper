@@ -134,12 +134,10 @@ void EPD_3IN0G_Init(void)
     EPD_3IN0G_SendData(0x4F);
     EPD_3IN0G_SendData(0x6B);
 
-
     EPD_3IN0G_SendCommand(0x06);
     EPD_3IN0G_SendData(0xD7);
     EPD_3IN0G_SendData(0xDE);
     EPD_3IN0G_SendData(0x12);
-
 
     EPD_3IN0G_SendCommand(0x61);
     EPD_3IN0G_SendData(0x00);
@@ -177,7 +175,7 @@ void EPD_3IN0G_Clear(UBYTE color)
     EPD_3IN0G_SendCommand(0x10);
     for (UWORD j = 0; j < Height; j++) {
         for (UWORD i = 0; i < Width; i++) {
-            EPD_3IN0G_SendData(color);
+            EPD_3IN0G_SendData((color << 6) | (color << 4) | (color << 2) | color);
         }
     }
 
@@ -203,6 +201,7 @@ void EPD_3IN0G_Display(UBYTE *Image)
             EPD_3IN0G_SendData(Image[i + j * Width]);
         }
     }
+
     EPD_3IN0G_TurnOnDisplay();
 }
 

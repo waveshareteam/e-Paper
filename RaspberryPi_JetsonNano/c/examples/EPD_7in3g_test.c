@@ -61,38 +61,36 @@ int EPD_7in3g_test(void)
     Paint_SetScale(4);
 
 #if 1   // show bmp
-
     printf("show BMP-----------------\r\n");
     Paint_SelectImage(BlackImage);
     GUI_ReadBmp_RGB_4Color("./pic/7.3inch-1.bmp", 0, 0);
     EPD_7IN3G_Display(BlackImage);
     DEV_Delay_ms(2000);
-
 #endif   
 
 #if 1   // Drawing on the image
     //1.Select Image
     printf("SelectImage:BlackImage\r\n");
     Paint_SelectImage(BlackImage);
-    Paint_Clear(0x55);
+    Paint_Clear(EPD_7IN3G_WHITE);
 
     // 2.Drawing on the image
     printf("Drawing:BlackImage\r\n");
-    Paint_DrawPoint(10, 80, Red_4Color, DOT_PIXEL_1X1, DOT_STYLE_DFT);
-    Paint_DrawPoint(10, 90, Yellow_4Color, DOT_PIXEL_2X2, DOT_STYLE_DFT);
-    Paint_DrawPoint(10, 100, Black_4Color, DOT_PIXEL_3X3, DOT_STYLE_DFT);
-    Paint_DrawLine(20, 70, 70, 120, Red_4Color, DOT_PIXEL_1X1, LINE_STYLE_SOLID);
-    Paint_DrawLine(70, 70, 20, 120, Red_4Color, DOT_PIXEL_1X1, LINE_STYLE_SOLID);
-    Paint_DrawRectangle(20, 70, 70, 120, Yellow_4Color, DOT_PIXEL_1X1, DRAW_FILL_EMPTY);
-    Paint_DrawRectangle(80, 70, 130, 120, Yellow_4Color, DOT_PIXEL_1X1, DRAW_FILL_FULL);
-    Paint_DrawCircle(45, 95, 20, Black_4Color, DOT_PIXEL_1X1, DRAW_FILL_EMPTY);
-    Paint_DrawCircle(105, 95, 20, Black_4Color, DOT_PIXEL_1X1, DRAW_FILL_FULL);
-    Paint_DrawLine(85, 95, 125, 95, Red_4Color, DOT_PIXEL_1X1, LINE_STYLE_DOTTED);
-    Paint_DrawLine(105, 75, 105, 115, Yellow_4Color, DOT_PIXEL_1X1, LINE_STYLE_DOTTED);
-    Paint_DrawString_EN(10, 0, "Red, yellow, white and black", &Font16, Red_4Color, Yellow_4Color);
-    Paint_DrawString_EN(10, 35, "Four color e-Paper", &Font12, Yellow_4Color, Black_4Color);
-    Paint_DrawString_CN(10, 125, "΢ѩ����", &Font24CN, Red_4Color, White_4Color);
-    Paint_DrawNum(10, 50, 123456, &Font12, Red_4Color, White_4Color);
+    Paint_DrawPoint(10, 80, EPD_7IN3G_RED, DOT_PIXEL_1X1, DOT_STYLE_DFT);
+    Paint_DrawPoint(10, 90, EPD_7IN3G_YELLOW, DOT_PIXEL_2X2, DOT_STYLE_DFT);
+    Paint_DrawPoint(10, 100, EPD_7IN3G_BLACK, DOT_PIXEL_3X3, DOT_STYLE_DFT);
+    Paint_DrawLine(20, 70, 70, 120, EPD_7IN3G_RED, DOT_PIXEL_1X1, LINE_STYLE_SOLID);
+    Paint_DrawLine(70, 70, 20, 120, EPD_7IN3G_RED, DOT_PIXEL_1X1, LINE_STYLE_SOLID);
+    Paint_DrawRectangle(20, 70, 70, 120, EPD_7IN3G_YELLOW, DOT_PIXEL_1X1, DRAW_FILL_EMPTY);
+    Paint_DrawRectangle(80, 70, 130, 120, EPD_7IN3G_YELLOW, DOT_PIXEL_1X1, DRAW_FILL_FULL);
+    Paint_DrawCircle(45, 95, 20, EPD_7IN3G_BLACK, DOT_PIXEL_1X1, DRAW_FILL_EMPTY);
+    Paint_DrawCircle(105, 95, 20, EPD_7IN3G_BLACK, DOT_PIXEL_1X1, DRAW_FILL_FULL);
+    Paint_DrawLine(85, 95, 125, 95, EPD_7IN3G_RED, DOT_PIXEL_1X1, LINE_STYLE_DOTTED);
+    Paint_DrawLine(105, 75, 105, 115, EPD_7IN3G_YELLOW, DOT_PIXEL_1X1, LINE_STYLE_DOTTED);
+    Paint_DrawString_EN(10, 0, "Red, yellow, white and black", &Font16, EPD_7IN3G_RED, EPD_7IN3G_YELLOW);
+    Paint_DrawString_EN(10, 35, "Four color e-Paper", &Font12, EPD_7IN3G_YELLOW, EPD_7IN3G_BLACK);
+    Paint_DrawString_CN(10, 125, "΢ѩ����", &Font24CN, EPD_7IN3G_RED, EPD_7IN3G_WHITE);
+    Paint_DrawNum(10, 50, 123456, &Font12, EPD_7IN3G_RED, EPD_7IN3G_WHITE);
 
     printf("EPD_Display\r\n");
     EPD_7IN3G_Display(BlackImage);
@@ -103,58 +101,24 @@ int EPD_7in3g_test(void)
     //1.Select Image
     printf("SelectImage:BlackImage\r\n");
     Paint_SelectImage(BlackImage);
-    Paint_Clear(0x55);
+    Paint_Clear(EPD_7IN3G_WHITE);
+
+    int hNumber, hWidth, vNumber, vWidth;
+    hNumber = 50;
+	hWidth = EPD_7IN3G_HEIGHT/hNumber; // 800/50=16
+    vNumber = 48;
+	vWidth = EPD_7IN3G_WIDTH/vNumber; // 480/48=10
 
     // 2.Drawing on the image
     printf("Drawing:BlackImage\r\n");
-    // Paint_DrawRectangle(1, 1, 121, 368, Red_4Color, DOT_PIXEL_1X1, DRAW_FILL_FULL);
-    // Paint_DrawRectangle(392, 1, 512, 368, Yellow_4Color, DOT_PIXEL_1X1, DRAW_FILL_FULL);
-    // Paint_DrawRectangle(1, 112, 512, 256, Black_4Color, DOT_PIXEL_1X1, DRAW_FILL_FULL);
-    UBYTE iWidth = EPD_7IN3G_WIDTH/8;
-    UBYTE iHeight = EPD_7IN3G_HEIGHT/8;
-    for(UBYTE i=0; i<8; i++) {
-        if(i%2 == 0)
-            Paint_DrawRectangle(1, 1+(i*iHeight), 800, (i+1)*iHeight, Red_4Color, DOT_PIXEL_1X1, DRAW_FILL_FULL);
-        else
-            Paint_DrawRectangle(1+(i*iWidth), 1, (i+1)*iWidth, 480, Yellow_4Color, DOT_PIXEL_1X1, DRAW_FILL_FULL);
-    }
-
-    printf("EPD_Display\r\n");
-    EPD_7IN3G_Display(BlackImage);
-    DEV_Delay_ms(3000);
-#endif
-
-#if 1   // Drawing on the image
-    //1.Select Image
-    printf("SelectImage:BlackImage\r\n");
-    Paint_SelectImage(BlackImage);
-    Paint_Clear(0x55);
-
-    int wNumber, lNumber;
-    wNumber = (EPD_7IN3G_WIDTH/80)==0 ? (EPD_7IN3G_WIDTH/80) : (EPD_7IN3G_WIDTH/80)+1;
-    lNumber = (EPD_7IN3G_HEIGHT/20)==0 ? (EPD_7IN3G_HEIGHT/20) : (EPD_7IN3G_HEIGHT/20)+1;
-    // 2.Drawing on the image
-    printf("Drawing:BlackImage\r\n");
-    for(int j=0; j<lNumber; j++) {
-        if(j%2 == 0) {
-            for(int i=0; i<wNumber; i++) {
-                Paint_DrawRectangle(1+i*80, 1+j*20, 20+i*80, 20+j*20, Red_4Color, DOT_PIXEL_1X1, DRAW_FILL_FULL);
-                Paint_DrawRectangle(21+i*80, 1+j*20, 40+i*80, 20+j*20, Yellow_4Color, DOT_PIXEL_1X1, DRAW_FILL_FULL);
-                Paint_DrawRectangle(41+i*80, 1+j*20, 60+i*80, 20+j*20, White_4Color, DOT_PIXEL_1X1, DRAW_FILL_FULL);
-                Paint_DrawRectangle(61+i*80, 1+j*20, 80+i*80, 20+j*20, Black_4Color, DOT_PIXEL_1X1, DRAW_FILL_FULL);
-            }
+	for(int i=0; i<hNumber; i++) {  // horizontal
+		Paint_DrawRectangle(1, 1+i*hWidth, EPD_7IN3G_WIDTH, hWidth*(1+i), EPD_7IN3G_BLACK + (i % 2), DOT_PIXEL_1X1, DRAW_FILL_FULL);
+	}
+	for(int i=0; i<vNumber; i++) {  // vertical
+        if(i%2) {
+            Paint_DrawRectangle(1+i*vWidth, 1, vWidth*(i+1), EPD_7IN3G_HEIGHT, EPD_7IN3G_YELLOW + (i/2%2), DOT_PIXEL_1X1, DRAW_FILL_FULL);
         }
-
-        else {
-            for(int i=0; i<wNumber; i++) {
-                Paint_DrawRectangle(1+i*80, 1+j*20, 20+i*80, 20+j*20, White_4Color, DOT_PIXEL_1X1, DRAW_FILL_FULL);
-                Paint_DrawRectangle(21+i*80, 1+j*20, 40+i*80, 20+j*20, Black_4Color, DOT_PIXEL_1X1, DRAW_FILL_FULL);
-                Paint_DrawRectangle(41+i*80, 1+j*20, 60+i*80, 20+j*20, Red_4Color, DOT_PIXEL_1X1, DRAW_FILL_FULL);
-                Paint_DrawRectangle(61+i*80, 1+j*20, 80+i*80, 20+j*20, Yellow_4Color, DOT_PIXEL_1X1, DRAW_FILL_FULL);
-            }
-        }
-
-    }
+	}
 
     printf("EPD_Display\r\n");
     EPD_7IN3G_Display(BlackImage);
