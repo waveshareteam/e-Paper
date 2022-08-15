@@ -4,8 +4,8 @@
 # * | Function    :   Hardware underlying interface
 # * | Info        :
 # *----------------
-# * | This version:   V1.0
-# * | Date        :   2019-06-21
+# * | This version:   V1.1
+# * | Date        :   2022-08-10
 # * | Info        :   
 # ******************************************************************************
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -29,6 +29,7 @@
 
 import os
 import logging
+from ossaudiodev import SOUND_MIXER_SPEAKER
 import sys
 import time
 
@@ -127,6 +128,10 @@ class JetsonNano:
     def spi_writebyte(self, data):
         self.SPI.SYSFS_software_spi_transfer(data[0])
 
+    def spi_writebyte2(self, data):
+        for i in range(len(data)):
+            self.SPI.SYSFS_software_spi_transfer(data[i])
+
     def module_init(self):
         self.GPIO.setmode(self.GPIO.BCM)
         self.GPIO.setwarnings(False)
@@ -147,9 +152,71 @@ class JetsonNano:
 
         self.GPIO.cleanup([self.RST_PIN, self.DC_PIN, self.CS_PIN, self.BUSY_PIN])
 
+class SunriseX3:
+    # Pin definition
+    RST_PIN         = 17
+    DC_PIN          = 25
+    CS_PIN          = 8
+    BUSY_PIN        = 24
+    Flag           = 0
+
+    def __init__(self):
+        import spidev
+        import Hobot.GPIO
+
+        self.GPIO = Hobot.GPIO
+        self.SPI = spidev.SpiDev()
+
+    def digital_write(self, pin, value):
+        self.GPIO.output(pin, value)
+
+    def digital_read(self, pin):
+        return self.GPIO.input(pin)
+
+    def delay_ms(self, delaytime):
+        time.sleep(delaytime / 1000.0)
+
+    def spi_writebyte(self, data):
+        self.SPI.writebytes(data)
+
+    def spi_writebyte2(self, data):
+        # for i in range(len(data)):
+        #     self.SPI.writebytes([data[i]])
+        self.SPI.xfer3(data)
+
+    def module_init(self):
+        if self.Flag == 0 :
+            self.Flag = 1
+            self.GPIO.setmode(self.GPIO.BCM)
+            self.GPIO.setwarnings(False)
+            self.GPIO.setup(self.RST_PIN, self.GPIO.OUT)
+            self.GPIO.setup(self.DC_PIN, self.GPIO.OUT)
+            self.GPIO.setup(self.CS_PIN, self.GPIO.OUT)
+            self.GPIO.setup(self.BUSY_PIN, self.GPIO.IN)
+
+            # SPI device, bus = 0, device = 0
+            self.SPI.open(2, 0)
+            self.SPI.max_speed_hz = 4000000
+            self.SPI.mode = 0b00
+            return 0
+        else :
+            return 0
+
+    def module_exit(self):
+        logger.debug("spi end")
+        self.SPI.close()
+
+        logger.debug("close 5V, Module enters 0 power consumption ...")
+        self.Flag = 0
+        self.GPIO.output(self.RST_PIN, 0)
+        self.GPIO.output(self.DC_PIN, 0)
+
+        self.GPIO.cleanup([self.RST_PIN, self.DC_PIN, self.CS_PIN, self.BUSY_PIN])
 
 if os.path.exists('/sys/bus/platform/drivers/gpiomem-bcm2835'):
     implementation = RaspberryPi()
+elif os.path.exists('/sys/bus/platform/drivers/gpio-x3'):
+    implementation = SunriseX3()
 else:
     implementation = JetsonNano()
 

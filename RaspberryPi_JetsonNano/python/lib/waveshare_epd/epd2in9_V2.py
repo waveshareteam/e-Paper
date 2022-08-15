@@ -4,8 +4,8 @@
 # * | Function    :   Electronic paper driver
 # * | Info        :
 # *----------------
-# * | This version:   V1.0
-# * | Date        :   2020-10-20
+# * | This version:   V1.1
+# * | Date        :   2022-08-9
 # # | Info        :   python demo
 # -----------------------------------------------------------------------------
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -108,6 +108,13 @@ class EPD:
         epdconfig.digital_write(self.dc_pin, 1)
         epdconfig.digital_write(self.cs_pin, 0)
         epdconfig.spi_writebyte([data])
+        epdconfig.digital_write(self.cs_pin, 1)
+
+    # send a lot of data   
+    def send_data2(self, data):
+        epdconfig.digital_write(self.dc_pin, 1)
+        epdconfig.digital_write(self.cs_pin, 0)
+        epdconfig.spi_writebyte2(data)
         epdconfig.digital_write(self.cs_pin, 1)
         
     def ReadBusy(self):
@@ -226,9 +233,7 @@ class EPD:
         if (image == None):
             return            
         self.send_command(0x24) # WRITE_RAM
-        for j in range(0, self.height):
-            for i in range(0, int(self.width / 8)):
-                self.send_data(image[i + j * int(self.width / 8)])   
+        self.send_data2(image)   
         self.TurnOnDisplay()
 
     def display_Base(self, image):
@@ -236,14 +241,10 @@ class EPD:
             return   
             
         self.send_command(0x24) # WRITE_RAM
-        for j in range(0, self.height):
-            for i in range(0, int(self.width / 8)):
-                self.send_data(image[i + j * int(self.width / 8)])
+        self.send_data2(image)
                 
         self.send_command(0x26) # WRITE_RAM
-        for j in range(0, self.height):
-            for i in range(0, int(self.width / 8)):
-                self.send_data(image[i + j * int(self.width / 8)])   
+        self.send_data2(image)   
                 
         self.TurnOnDisplay()
         
@@ -281,16 +282,17 @@ class EPD:
         self.SetCursor(0, 0)
         
         self.send_command(0x24) # WRITE_RAM
-        for j in range(0, self.height):
-            for i in range(0, int(self.width / 8)):
-                self.send_data(image[i + j * int(self.width / 8)])   
+        self.send_data2(image)   
         self.TurnOnDisplay_Partial()
 
     def Clear(self, color):
+        if self.width%8 == 0:
+            linewidth = int(self.width/8)
+        else:
+            linewidth = int(self.width/8) + 1
+
         self.send_command(0x24) # WRITE_RAM
-        for j in range(0, self.height):
-            for i in range(0, int(self.width / 8)):
-                self.send_data(color)   
+        self.send_data2([color] * int(self.height * linewidth)) 
         self.TurnOnDisplay()
 
     def sleep(self):

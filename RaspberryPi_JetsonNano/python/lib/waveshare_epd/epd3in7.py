@@ -4,8 +4,8 @@
 # * | Function    :   Electronic paper driver
 # * | Info        :
 # *----------------
-# * | This version:   V1.0
-# * | Date        :   2020-07-16
+# * | This version:   V1.1
+# * | Date        :   2022-08-10
 # # | Info        :   python demo
 # -----------------------------------------------------------------------------
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -133,6 +133,13 @@ class EPD:
         epdconfig.spi_writebyte([data])
         epdconfig.digital_write(self.cs_pin, 1)
 
+    # send a lot of data   
+    def send_data2(self, data):
+        epdconfig.digital_write(self.dc_pin, 1)
+        epdconfig.digital_write(self.cs_pin, 0)
+        epdconfig.spi_writebyte2(data)
+        epdconfig.digital_write(self.cs_pin, 1)
+
 
     def ReadBusy(self):
         logger.debug("e-Paper busy")
@@ -235,8 +242,7 @@ class EPD:
 
     def load_lut(self, lut):
         self.send_command(0x32)
-        for i in range(0, 105):
-            self.send_data(lut[i])
+        self.send_data2(lut)
 
 
     def getbuffer(self, image):
@@ -312,6 +318,13 @@ class EPD:
         self.send_data(0x00)
         self.send_data(0x00)
 
+        if self.width%8 == 0:
+            linewidth = int(self.width/8)
+        else:
+            linewidth = int(self.width/8) + 1
+
+        buf = [0x00] * self.height * linewidth
+
         self.send_command(0x24)
         for i in range(0, (int)(self.height*(self.width/8))):
             temp3=0
@@ -341,7 +354,8 @@ class EPD:
                     if(j!=1 or k!=1):
                         temp3 <<= 1
                     temp1 <<= 2
-            self.send_data(temp3)
+            buf[i] = temp3
+        self.send_data2(buf)
 
         self.send_command(0x4E)
         self.send_data(0x00)
@@ -379,7 +393,8 @@ class EPD:
                     if(j!=1 or k!=1):
                         temp3 <<= 1
                     temp1 <<= 2
-            self.send_data(temp3)
+            buf[i] = temp3
+        self.send_data2(buf)
 
         self.load_lut(self.lut_4Gray_GC)
         self.send_command(0x22)
@@ -400,9 +415,7 @@ class EPD:
         self.send_data(0x00)
 
         self.send_command(0x24)
-        for j in range(0, self.height):
-            for i in range(0, int(self.width / 8)):
-                self.send_data(image[i + j * int(self.width / 8)])   
+        self.send_data2(image)   
 
         self.load_lut(self.lut_1Gray_A2)
         self.send_command(0x20)
@@ -417,16 +430,18 @@ class EPD:
         self.send_data(0x00)
         self.send_data(0x00)
 
+        if self.width%8 == 0:
+            linewidth = int(self.width/8)
+        else:
+            linewidth = int(self.width/8) + 1
+
         self.send_command(0x24)
-        for j in range(0, self.height):
-            for i in range(0, int(self.width / 8)):
-                self.send_data(0xff)   
+        self.send_data2([0xff] * int(self.height * linewidth))
 
         if(mode == 0):              #4Gray
             self.send_command(0x26)
-            for j in range(0, self.height):
-                for i in range(0, int(self.width / 8)):
-                    self.send_data(0xff) 
+            self.send_data2([0xff] * int(self.height * linewidth))
+
             self.load_lut(self.lut_4Gray_GC)
             self.send_command(0x22)
             self.send_data(0xC7)

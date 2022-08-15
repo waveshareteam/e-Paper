@@ -199,7 +199,7 @@ class EPD:
         epdconfig.digital_write(self.reset_pin, 1)
         epdconfig.delay_ms(200) 
         epdconfig.digital_write(self.reset_pin, 0)
-        epdconfig.delay_ms(5)
+        epdconfig.delay_ms(2)
         epdconfig.digital_write(self.reset_pin, 1)
         epdconfig.delay_ms(200)   
 
@@ -214,6 +214,13 @@ class EPD:
         epdconfig.digital_write(self.cs_pin, 0)
         epdconfig.spi_writebyte([data])
         epdconfig.digital_write(self.cs_pin, 1)
+
+    # send a lot of data   
+    def send_data2(self, data):
+        epdconfig.digital_write(self.dc_pin, 1)
+        epdconfig.digital_write(self.cs_pin, 0)
+        epdconfig.spi_writebyte2(data)
+        epdconfig.digital_write(self.cs_pin, 1)
         
     def ReadBusy(self):
         logger.debug("e-Paper busy")
@@ -223,24 +230,19 @@ class EPD:
 
     def lut(self) :
         self.send_command(0x20)        # vcom
-        for count in range(0 ,42):
-            self.send_data(self.lut_vcom[count])
+        self.send_data2(self.lut_vcom[:42])
             
         self.send_command(0x21)        # ww --
-        for count in range(0 ,42):
-            self.send_data(self.lut_ww[count])
+        self.send_data2(self.lut_ww[:42])
             
         self.send_command(0x22)        # bw r
-        for count in range(0 ,42):
-            self.send_data(self.lut_bw[count])
+        self.send_data2(self.lut_bw[:42])
             
         self.send_command(0x23)        # wb w
-        for count in range(0 ,42):
-            self.send_data(self.lut_bb[count])
+        self.send_data2(self.lut_bb[:42])
             
         self.send_command(0x24)        # bb b
-        for count in range(0 ,42):
-            self.send_data(self.lut_wb[count])
+        self.send_data2(self.lut_wb[:42])
 
     def refresh(self):
         self.send_command(0x17)
@@ -251,70 +253,56 @@ class EPD:
     # LUT download
     def lut_GC(self):
         self.send_command(0x20);        # vcom
-        for count in range(0 ,56):
-            self.send_data(self.lut_R20_GC[count])
+        self.send_data2(self.lut_R20_GC[:56])
             
         self.send_command(0x21);        # red not use
-        for count in range(0 ,42):
-            self.send_data(self.lut_R21_GC[count])
+        self.send_data2(self.lut_R21_GC[:42])
             
         self.send_command(0x24);        # bb b
-        for count in range(0 ,42):
-            self.send_data(self.lut_R24_GC[count])
+        self.send_data2(self.lut_R24_GC[:42])
         
         if(self.Flag == 0) :
             self.send_command(0x22);    # bw r
-            for count in range(0 ,56):
-                self.send_data(self.lut_R22_GC[count])
+            self.send_data2(self.lut_R22_GC[:56])
                 
             self.send_command(0x23);    # wb w
-            for count in range(0 ,42):
-                self.send_data(self.lut_R23_GC[count])
+            self.send_data2(self.lut_R23_GC[:42])
             self.Flag = 1
 
         else :
             self.send_command(0x22);    # bw r
-            for count in range(0 ,56):
-                self.send_data(self.lut_R23_GC[count])
+            self.send_data2(self.lut_R23_GC[:56])
 
             self.send_command(0x23);    # wb w
-            for count in range(0 ,42):
-                self.send_data(self.lut_R22_GC[count])
+            self.send_data2(self.lut_R22_GC[:42])
             self.Flag = 0
 
     # LUT download        
     def lut_DU(self):
         self.send_command(0x20);      # vcom
-        for count in range(0 ,56):
-            self.send_data(self.lut_R20_DU[count])
+        self.send_data2(self.lut_R20_DU[:56])
             
         self.send_command(0x21);     # red not use
-        for count in range(0 ,42):
-            self.send_data(self.lut_R21_DU[count])
+        self.send_data2(self.lut_R21_DU[:42])
             
         self.send_command(0x24);    # bb b
-        for count in range(0 ,42):
-            self.send_data(self.lut_R24_DU[count])
+        self.send_data2(self.lut_R24_DU[:42])
         
         if(self.Flag == 0) :
             self.send_command(0x22);      # bw r
-            for count in range(0 ,56):
-                self.send_data(self.lut_R22_DU[count])
+            self.send_data2(self.lut_R22_DU[:56])
                 
             self.send_command(0x23);     # wb w
-            for count in range(0 ,42):
-                self.send_data(self.lut_R23_DU[count])
+            self.send_data2(self.lut_R23_DU[:42])
                 
             self.Flag = 1
             
         else :
             self.send_command(0x22);    # bw r
-            for count in range(0 ,56):
-                self.send_data(self.lut_R23_DU[count])
+            self.send_data2(self.lut_R23_DU[:56])
                 
             self.send_command(0x23);   # wb w
-            for count in range(0 ,42):
-                self.send_data(self.lut_R22_DU[count])
+            self.send_data2(self.lut_R22_DU[:42])
                 
             self.Flag = 0
         
@@ -391,15 +379,14 @@ class EPD:
         if (image == None):
             return            
         self.send_command(0x13);		     # Transfer new data
-        for i in range(0, self.width * self.height / 8) : 
-            self.send_data(image[i])
+        self.send_data2(image)
 
     def display_NUM(self, NUM):
         # pcnt = 0
 
         self.send_command(0x13);		     #Transfer new data
         for column in range(0, self.height):
-            for row in range(0, self.width/8):
+            for row in range(0, self.width//8):
                 if NUM == self.WHITE:
                     self.send_data(0xFF)
                         
@@ -458,8 +445,7 @@ class EPD:
         
     def Clear(self):
         self.send_command(0x13);		     # Transfer new data
-        for i in range(0, self.width * self.height / 8) : 
-            self.send_data(0xFF)
+        self.send_data2([0xFF] * int(self.width * self.height / 8))
         self.lut_GC()
         self.refresh()
 

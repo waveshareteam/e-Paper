@@ -4,8 +4,8 @@
 # * | Function    :   Electronic paper driver
 # * | Info        :
 # *----------------
-# * | This version:   V1.0
-# * | Date        :   2020-10-22
+# * | This version:   V1.1
+# * | Date        :   2022-08-10
 # # | Info        :   python demo
 # -----------------------------------------------------------------------------
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -67,6 +67,13 @@ class EPD:
         epdconfig.digital_write(self.dc_pin, 1)
         epdconfig.digital_write(self.cs_pin, 0)
         epdconfig.spi_writebyte([data])
+        epdconfig.digital_write(self.cs_pin, 1)
+
+    # send a lot of data   
+    def send_data2(self, data):
+        epdconfig.digital_write(self.dc_pin, 1)
+        epdconfig.digital_write(self.cs_pin, 0)
+        epdconfig.spi_writebyte2(data)
         epdconfig.digital_write(self.cs_pin, 1)
         
     # Read Busy
@@ -148,25 +155,25 @@ class EPD:
         Width = self.width / 8 
         Height = self.height 
 
-        self.send_command(0x24) 
+        buf = [0x00] * int(Width * Height)
         for i in range(0, int(Width * Height)):
-            self.send_data(imageblack[i]) 
+            buf[i] = ~imagered[i]
+
+        self.send_command(0x24) 
+        self.send_data2(imageblack) 
 
         self.send_command(0x26) 
-        for i in range(0, int(Width * Height)):
-            self.send_data(~imagered[i]) 
+        self.send_data2(buf) 
         
         self.TurnOnDisplay()
 
     # Clear the screen
     def Clear(self):
         self.send_command(0x24)
-        for i in range(0, int(self.width * self.height / 8)):
-            self.send_data(0xff)
+        self.send_data2([0xff] * int(self.width * self.height / 8))
 
         self.send_command(0x26)
-        for i in range(0, int(self.width * self.height / 8)):
-            self.send_data(0x00)
+        self.send_data2([0x00] * int(self.width * self.height / 8))
             
         self.TurnOnDisplay()
         

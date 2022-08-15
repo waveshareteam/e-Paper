@@ -4,8 +4,8 @@
 # * | Function    :   Electronic paper driver
 # * | Info        :
 # *----------------
-# * | This version:   V1.0
-# * | Date        :   2020-12-01
+# * | This version:   V1.1
+# * | Date        :   2022-08-9
 # # | Info        :   python demo
 # -----------------------------------------------------------------------------
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -66,6 +66,13 @@ class EPD:
         epdconfig.digital_write(self.dc_pin, 1)
         epdconfig.digital_write(self.cs_pin, 0)
         epdconfig.spi_writebyte([data])
+        epdconfig.digital_write(self.cs_pin, 1)
+
+    # send a lot of data   
+    def send_data2(self, data):
+        epdconfig.digital_write(self.dc_pin, 1)
+        epdconfig.digital_write(self.cs_pin, 0)
+        epdconfig.spi_writebyte2(data)
         epdconfig.digital_write(self.cs_pin, 1)
 
 
@@ -149,30 +156,30 @@ class EPD:
 
     def display(self, Blackimage, Redimage):
         if (Blackimage == None or Redimage == None):
-            return            
+            return   
+        Redimage_1 = [0x00] * len(Redimage)
+        for i in range(len(Redimage)) :
+            Redimage_1[i] = ~Redimage[i]    
         self.send_command(0x24)
-        for j in range(0, self.height):
-            for i in range(0, int(self.width / 8)):
-                self.send_data(Blackimage[i + j * int(self.width / 8)])   
+        self.send_data2(Blackimage) 
 
         self.send_command(0x26)
-        for j in range(0, self.height):
-            for i in range(0, int(self.width / 8)):
-                self.send_data(~Redimage[i + j * int(self.width / 8)]) 
+        self.send_data2(Redimage_1) 
                 
         self.turnon_display()
         
 
     def Clear(self):
+        if self.width%8 == 0:
+            linewidth = int(self.width/8)
+        else:
+            linewidth = int(self.width/8) + 1
+
         self.send_command(0x24)
-        for j in range(0, self.height):
-            for i in range(0, int(self.width / 8)):
-                self.send_data(0xff)   
+        self.send_data2([0xff] * int(self.height * linewidth)) 
 
         self.send_command(0x26)
-        for j in range(0, self.height):
-            for i in range(0, int(self.width / 8)):
-                self.send_data(0x00) 
+        self.send_data2([0x00] * int(self.height * linewidth))
 
         self.turnon_display()
 

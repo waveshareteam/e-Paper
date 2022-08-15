@@ -6,8 +6,8 @@
 # * | Function    :   Electronic paper driver
 # * | Info        :
 # *----------------
-# * | This version:   V1.0
-# * | Date        :   2020-11-06
+# * | This version:   V1.1
+# * | Date        :   2022-08-10
 # # | Info        :   python demo
 # -----------------------------------------------------------------------------
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -75,6 +75,13 @@ class EPD:
         epdconfig.digital_write(self.cs_pin, 0)
         epdconfig.spi_writebyte([data])
         epdconfig.digital_write(self.cs_pin, 1)
+
+    # send a lot of data   
+    def send_data2(self, data):
+        epdconfig.digital_write(self.dc_pin, 1)
+        epdconfig.digital_write(self.cs_pin, 0)
+        epdconfig.spi_writebyte2(data)
+        epdconfig.digital_write(self.cs_pin, 1)
         
     def ReadBusyHigh(self):
         logger.debug("e-Paper busy")
@@ -95,33 +102,33 @@ class EPD:
         self.reset()
         
         self.ReadBusyHigh()
-        self.send_command(0x00);
-        self.send_data(0x2f);
-        self.send_data(0x00);
-        self.send_command(0x01);
-        self.send_data(0x37);
-        self.send_data(0x00);
-        self.send_data(0x05);
-        self.send_data(0x05);
-        self.send_command(0x03);
-        self.send_data(0x00);
-        self.send_command(0x06);
-        self.send_data(0xC7);
-        self.send_data(0xC7);
-        self.send_data(0x1D);
-        self.send_command(0x41);
-        self.send_data(0x00);
-        self.send_command(0x50);
-        self.send_data(0x37);
-        self.send_command(0x60);
-        self.send_data(0x22);
-        self.send_command(0x61);
-        self.send_data(0x02);
-        self.send_data(0x80);
-        self.send_data(0x01);
-        self.send_data(0x90);
-        self.send_command(0xE3);
-        self.send_data(0xAA);
+        self.send_command(0x00)
+        self.send_data(0x2f)
+        self.send_data(0x00)
+        self.send_command(0x01)
+        self.send_data(0x37)
+        self.send_data(0x00)
+        self.send_data(0x05)
+        self.send_data(0x05)
+        self.send_command(0x03)
+        self.send_data(0x00)
+        self.send_command(0x06)
+        self.send_data(0xC7)
+        self.send_data(0xC7)
+        self.send_data(0x1D)
+        self.send_command(0x41)
+        self.send_data(0x00)
+        self.send_command(0x50)
+        self.send_data(0x37)
+        self.send_command(0x60)
+        self.send_data(0x22)
+        self.send_command(0x61)
+        self.send_data(0x02)
+        self.send_data(0x80)
+        self.send_data(0x01)
+        self.send_data(0x90)
+        self.send_command(0xE3)
+        self.send_data(0xAA)
         
         # EPD hardware init end
         return 0
@@ -189,9 +196,7 @@ class EPD:
         self.send_data(0x01)
         self.send_data(0x90)
         self.send_command(0x10)
-        for i in range(0, int(EPD_HEIGHT)):
-            for j in range(0, int(EPD_WIDTH/2)):
-                self.send_data((image[j+(int(EPD_WIDTH/2)*i)]))
+        self.send_data2(image)
         self.send_command(0x04)#0x04
         self.ReadBusyHigh()
         self.send_command(0x12)#0x12
@@ -207,9 +212,7 @@ class EPD:
         self.send_data(0x01)
         self.send_data(0x90)
         self.send_command(0x10)
-        for i in range(0, int(EPD_HEIGHT)):
-            for j in range(0, int(EPD_WIDTH/2)):
-                self.send_data(0x11)
+        self.send_data2([0x11] * int(EPD_HEIGHT) * int(EPD_WIDTH/2))
         #BLACK   0x00    /// 0000
         #WHITE   0x11    /// 0001
         #GREEN   0x22    /// 0010

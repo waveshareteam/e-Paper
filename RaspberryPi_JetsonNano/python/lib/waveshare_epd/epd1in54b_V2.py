@@ -4,8 +4,8 @@
 # * | Function    :   Electronic paper driver
 # * | Info        :
 # *----------------
-# * | This version:   V4.0
-# * | Date        :   2019-06-20
+# * | This version:   V4.1
+# * | Date        :   2022-08-10
 # # | Info        :   python demo
 # -----------------------------------------------------------------------------
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -65,6 +65,13 @@ class EPD:
         epdconfig.digital_write(self.dc_pin, 1)
         epdconfig.digital_write(self.cs_pin, 0)
         epdconfig.spi_writebyte([data])
+        epdconfig.digital_write(self.cs_pin, 1)
+
+    # send a lot of data   
+    def send_data2(self, data):
+        epdconfig.digital_write(self.dc_pin, 1)
+        epdconfig.digital_write(self.cs_pin, 0)
+        epdconfig.spi_writebyte2(data)
         epdconfig.digital_write(self.cs_pin, 1)
         
     def ReadBusy(self):
@@ -134,17 +141,25 @@ class EPD:
         return buf
 
     def display(self, blackimage, redimage):
+
+        if self.width%8 == 0:
+            linewidth = int(self.width/8)
+        else:
+            linewidth = int(self.width/8) + 1
+
+        buf = [0x00] * self.height * linewidth
+
         # send black data
         if (blackimage != None):
             self.send_command(0x24) # DATA_START_TRANSMISSION_1
-            for i in range(0, int(self.width * self.height / 8)):
-                self.send_data(blackimage[i])
+            self.send_data2(blackimage)
                 
         # send red data        
         if (redimage != None):
             self.send_command(0x26) # DATA_START_TRANSMISSION_2
             for i in range(0, int(self.width * self.height / 8)):
-                self.send_data(~redimage[i])  
+                buf[i] = ~redimage[i]
+            self.send_data2(buf)
 
         self.send_command(0x22) # DISPLAY_REFRESH
         self.send_data(0xF7)
@@ -152,13 +167,16 @@ class EPD:
         self.ReadBusy()
 
     def Clear(self):
+        if self.width%8 == 0:
+            linewidth = int(self.width/8)
+        else:
+            linewidth = int(self.width/8) + 1
+
         self.send_command(0x24) # DATA_START_TRANSMISSION_1
-        for i in range(0, int(self.width * self.height / 8)):
-            self.send_data(0xFF)
+        self.send_data2([0xff] * int(self.height * linewidth))
             
         self.send_command(0x26) # DATA_START_TRANSMISSION_2
-        for i in range(0, int(self.width * self.height / 8)):
-            self.send_data(0x00)
+        self.send_data2([0x00] * int(self.height * linewidth))
 
         self.send_command(0x22) # DISPLAY_REFRESH
         self.send_data(0xF7)

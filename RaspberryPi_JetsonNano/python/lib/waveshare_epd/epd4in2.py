@@ -4,8 +4,8 @@
 # * | Function    :   Electronic paper driver
 # * | Info        :
 # *----------------
-# * | This version:   V4.0
-# * | Date        :   2019-06-20
+# * | This version:   V4.1
+# * | Date        :   2022-08-9
 # # | Info        :   python demo
 # -----------------------------------------------------------------------------
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -241,6 +241,13 @@ class EPD:
         epdconfig.digital_write(self.cs_pin, 0)
         epdconfig.spi_writebyte([data])
         epdconfig.digital_write(self.cs_pin, 1)
+
+    # send a lot of data   
+    def send_data2(self, data):
+        epdconfig.digital_write(self.dc_pin, 1)
+        epdconfig.digital_write(self.cs_pin, 0)
+        epdconfig.spi_writebyte2(data)
+        epdconfig.digital_write(self.cs_pin, 1)
         
     def ReadBusy(self):
         self.send_command(0x71)
@@ -250,73 +257,57 @@ class EPD:
 
     def set_lut(self):
         self.send_command(0x20)               # vcom
-        for count in range(0, 36):
-            self.send_data(self.lut_vcom0[count])
+        self.send_data2(self.lut_vcom0)
             
         self.send_command(0x21)         # ww --
-        for count in range(0, 36):
-            self.send_data(self.lut_ww[count])
+        self.send_data2(self.lut_ww)
             
         self.send_command(0x22)         # bw r
-        for count in range(0, 36):
-            self.send_data(self.lut_bw[count])
+        self.send_data2(self.lut_bw)
             
         self.send_command(0x23)         # wb w
-        for count in range(0, 36):
-            self.send_data(self.lut_bb[count])
+        self.send_data2(self.lut_bb)
             
         self.send_command(0x24)         # bb b
-        for count in range(0, 36):
-            self.send_data(self.lut_wb[count])
+        self.send_data2(self.lut_wb)
 
 
     def Partial_SetLut(self):
-        self.send_command(0x20);
-        for count in range(0, 44):      
-            self.send_data(self.EPD_4IN2_Partial_lut_vcom1[count])
+        self.send_command(0x20)
+        self.send_data2(self.EPD_4IN2_Partial_lut_vcom1)
 
-        self.send_command(0x21);
-        for count in range(0, 42):      
-            self.send_data(self.EPD_4IN2_Partial_lut_ww1[count])
+        self.send_command(0x21)
+        self.send_data2(self.EPD_4IN2_Partial_lut_ww1)
         
-        self.send_command(0x22);
-        for count in range(0, 42):     
-            self.send_data(self.EPD_4IN2_Partial_lut_bw1[count])
+        self.send_command(0x22)
+        self.send_data2(self.EPD_4IN2_Partial_lut_bw1)
 
-        self.send_command(0x23);
-        for count in range(0, 42):      
-            self.send_data(self.EPD_4IN2_Partial_lut_wb1[count])
+        self.send_command(0x23)
+        self.send_data2(self.EPD_4IN2_Partial_lut_wb1)
 
-        self.send_command(0x24);
-        for count in range(0, 42):      
-            self.send_data(self.EPD_4IN2_Partial_lut_bb1[count])
+        self.send_command(0x24)
+        self.send_data2(self.EPD_4IN2_Partial_lut_bb1)
 
 
        
     def Gray_SetLut(self):
         self.send_command(0x20)      #vcom
-        for count in range(0, 42):
-            self.send_data(self.EPD_4IN2_4Gray_lut_vcom[count]) 
+        self.send_data2(self.EPD_4IN2_4Gray_lut_vcom) 
 
         self.send_command(0x21)      #red not use
-        for count in range(0, 42):
-            self.send_data(self.EPD_4IN2_4Gray_lut_ww[count]) 
+        self.send_data2(self.EPD_4IN2_4Gray_lut_ww) 
 
         self.send_command(0x22)       #bw r
-        for count in range(0, 42):
-            self.send_data(self.EPD_4IN2_4Gray_lut_bw[count]) 
+        self.send_data2(self.EPD_4IN2_4Gray_lut_bw) 
 
         self.send_command(0x23)       #wb w
-        for count in range(0, 42):
-            self.send_data(self.EPD_4IN2_4Gray_lut_wb[count]) 
+        self.send_data2(self.EPD_4IN2_4Gray_lut_wb) 
 
         self.send_command(0x24)                          #bb b
-        for count in range(0, 42):
-            self.send_data(self.EPD_4IN2_4Gray_lut_bb[count]) 
+        self.send_data2(self.EPD_4IN2_4Gray_lut_bb) 
 
         self.send_command(0x25)      #vcom
-        for count in range(0, 42):
-            self.send_data(self.EPD_4IN2_4Gray_lut_ww[count])
+        self.send_data2(self.EPD_4IN2_4Gray_lut_ww)
       
     
     def init(self):
@@ -504,15 +495,18 @@ class EPD:
         return buf
 
     def display(self, image):
+        if self.width%8 == 0:
+            linewidth = int(self.width/8)
+        else:
+            linewidth = int(self.width/8) + 1
+
         self.send_command(0x92); 
-        self.set_lut();
+        self.set_lut()
         self.send_command(0x10)
-        for i in range(0, int(self.width * self.height / 8)):
-            self.send_data(0xFF)
+        self.send_data2([0xFF] * int(self.width * linewidth))
             
         self.send_command(0x13)
-        for i in range(0, int(self.width * self.height / 8)):
-            self.send_data(image[i])
+        self.send_data2(image)
             
         self.send_command(0x12) 
         self.ReadBusy()
@@ -520,54 +514,72 @@ class EPD:
     def EPD_4IN2_PartialDisplay(self, X_start, Y_start, X_end, Y_end, Image):
         # EPD_WIDTH       = 400
         # EPD_HEIGHT      = 300
+
         if(EPD_WIDTH % 8 != 0):
-           Width = int(EPD_WIDTH / 8) + 1;
+           Width = int(EPD_WIDTH / 8) + 1
         else:
-            Width = int(EPD_WIDTH / 8);
-        Height = EPD_HEIGHT;
+            Width = int(EPD_WIDTH / 8)
+        Height = EPD_HEIGHT
         
         if(X_start % 8 != 0):
-            X_start = int(X_start/8)*8+8
+            X_start = int(X_start/8) + 1
+        else:
+            X_start = int(X_start/8)
         if(X_end % 8 != 0):
-            X_end = int(X_end/8)*8+8
+            X_end = int(X_end/8) + 1
+        else:
+            X_end = int(X_end/8)
         
-        
-        self.send_command(0x91);  #This command makes the display enter partial mode
-        self.send_command(0x90);  #resolution setting
-        self.send_data (int(X_start/256));
-        self.send_data (int(X_start%256));   #x-start    
-        
-        self.send_data (int(X_end /256));  
-        self.send_data (int(X_end %256)-1);  #x-end
+        buf = [0x00] * (Y_end - Y_start) * (X_end - X_start)
 
-        self.send_data (int(Y_start/256));
-        self.send_data (int(Y_start%256));   #y-start    
+        
+        self.send_command(0x91)  #This command makes the display enter partial mode
+        self.send_command(0x90)  #resolution setting
+        self.send_data (int(X_start*8/256))
+        self.send_data (int(X_start*8%256))   #x-start    
+        
+        self.send_data (int(X_end*8 /256))
+        self.send_data (int(X_end*8 %256)-1)  #x-end
+
+        self.send_data (int(Y_start/256))
+        self.send_data (int(Y_start%256))   #y-start    
         
 
-        self.send_data (int(Y_end/256));  
-        self.send_data (int(Y_end%256)-1);  #y-end
-        self.send_data (0x28); 
+        self.send_data (int(Y_end/256)) 
+        self.send_data (int(Y_end%256)-1)  #y-end
+        self.send_data (0x28)
+         
 
         self.send_command(0x10);        #writes Old data to SRAM for programming
-        for j in range(0, int(Y_end - Y_start)):
-            for i in range(0, int(X_end/8) - int(X_start/8)):
-                self.send_data(self.DATA[(Y_start + j)*Width + int(X_start/8) + i]);
+        for j in range(0, Y_end - Y_start):
+            for i in range(0, X_end - X_start):
+                buf[j * (X_end - X_start) + i] = self.DATA[(Y_start + j)*Width + X_start + i]
+        self.send_data2(buf)
             
         self.send_command(0x13);     #writes New data to SRAM.
-        for j in range(0, int(Y_end - Y_start)):
-            for i in range(0, int(X_end/8) - int(X_start/8)):
-                self.send_data(~Image[(Y_start + j)*Width + int(X_start/8) + i]);
-                self.DATA[(Y_start + j)*Width + int(X_start/8) + i] = ~Image[(Y_start + j)*Width + int(X_start/8) + i]
+        for j in range(0, Y_end - Y_start):
+            for i in range(0, X_end - X_start):
+                buf[j * (X_end - X_start) + i] = ~Image[(Y_start + j)*Width + X_start + i]
+                self.DATA[(Y_start + j)*Width + X_start + i] = ~Image[(Y_start + j)*Width + X_start/8 + i]
+        self.send_data2(buf)
             
-        self.send_command(0x12);   #DISPLAY REFRESH                
+        self.send_command(0x12)   #DISPLAY REFRESH                
         epdconfig.delay_ms(200)    #The delay here is necessary, 200uS at least!!!     
         self.ReadBusy()
 
 
     def display_4Gray(self, image):
         self.send_command(0x92); 
-        self.set_lut();
+        self.set_lut()
         self.send_command(0x10)
+
+        if self.width%8 == 0:
+            linewidth = int(self.width/8)
+        else:
+            linewidth = int(self.width/8) + 1
+
+        buf = [0x00] * self.height * linewidth
+
         for i in range(0, int(EPD_WIDTH * EPD_HEIGHT / 8)):                   # EPD_WIDTH * EPD_HEIGHT / 4
             temp3=0
             for j in range(0, 2):
@@ -597,7 +609,8 @@ class EPD:
                     if(j!=1 or k!=1):    
                         temp3 <<= 1
                     temp1 <<= 2
-            self.send_data(temp3)
+            buf[i] = temp3
+        self.send_data2(buf)
             
         self.send_command(0x13)     
                
@@ -626,11 +639,12 @@ class EPD:
                     elif(temp2 == 0x80):
                         temp3 |= 0x00 #gray1
                     else:    #0x40
-                            temp3 |= 0x01 #gray2
+                        temp3 |= 0x01 #gray2
                     if(j!=1 or k!=1):     
                         temp3 <<= 1
                     temp1 <<= 2
-            self.send_data(temp3)
+            buf[i] = temp3
+        self.send_data2(buf)
         
         self.Gray_SetLut()
         self.send_command(0x12)
@@ -639,13 +653,16 @@ class EPD:
         # pass
     
     def Clear(self):
+        if self.width%8 == 0:
+            linewidth = int(self.width/8)
+        else:
+            linewidth = int(self.width/8) + 1
+
         self.send_command(0x10)
-        for i in range(0, int(self.width * self.height / 8)):
-            self.send_data(0xFF)
+        self.send_data2([0xff] * int(self.height * linewidth)) 
             
         self.send_command(0x13)
-        for i in range(0, int(self.width * self.height / 8)):
-            self.send_data(0xFF)
+        self.send_data2([0xff] * int(self.height * linewidth)) 
             
         self.send_command(0x12) 
         self.ReadBusy()

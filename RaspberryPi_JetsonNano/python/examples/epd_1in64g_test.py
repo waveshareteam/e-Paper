@@ -30,29 +30,29 @@ try:
     font18 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 18)
     font30 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 40)
     
-    
-    # Drawing on the image
-    logging.info("1.Drawing on the image...")
-    Himage = Image.new('RGB', (epd.width, epd.height), 0xffffff)  
-    draw = ImageDraw.Draw(Himage)
-    draw.text((5, 0), 'hello world', font = font18, fill = epd.RED)
-    draw.text((5, 20), '1.64inch e-Paper', font = font18, fill = epd.YELLOW)
-    draw.text((5, 40), u'微雪电子', font = font30, fill = epd.BLACK)
+    # # The Sunrise X3 PI is a bit problematic to use
+    # # Drawing on the image
+    # logging.info("1.Drawing on the image...")
+    # Himage = Image.new('RGB', (epd.width, epd.height), 0xffffff)  
+    # draw = ImageDraw.Draw(Himage)
+    # draw.text((5, 0), 'hello world', font = font18, fill = epd.RED)
+    # draw.text((5, 20), '1.64inch e-Paper', font = font18, fill = epd.YELLOW)
+    # draw.text((5, 40), u'微雪电子', font = font30, fill = epd.BLACK)
 
-    draw.line((5, 90, 45, 160), fill = epd.RED)
-    draw.line((45, 90, 5, 160), fill = epd.YELLOW)
-    draw.rectangle((5, 90, 45, 160), outline = epd.BLACK)
-    draw.rectangle((55, 90, 95, 160), fill = epd.BLACK)
-    draw.arc((115, 90, 150, 125), 0, 360, fill = epd.BLACK)
-    draw.chord((115, 130, 150, 165), 0, 360, fill = epd.BLACK)
-    epd.display(epd.getbuffer(Himage))
-    time.sleep(3)
+    # draw.line((5, 90, 45, 160), fill = epd.RED)
+    # draw.line((45, 90, 5, 160), fill = epd.YELLOW)
+    # draw.rectangle((5, 90, 45, 160), outline = epd.BLACK)
+    # draw.rectangle((55, 90, 95, 160), fill = epd.BLACK)
+    # draw.arc((115, 90, 150, 125), 0, 360, fill = epd.BLACK)
+    # draw.chord((115, 130, 150, 165), 0, 360, fill = epd.BLACK)
+    # epd.display(epd.getbuffer(Himage))
+    # time.sleep(3)
     
-    # read bmp file 
-    logging.info("3.read bmp file")
-    Himage = Image.open(os.path.join(picdir, '1.64inch-1.bmp'))
-    epd.display(epd.getbuffer(Himage))
-    time.sleep(3)
+    # # read bmp file 
+    # logging.info("3.read bmp file")
+    # Himage = Image.open(os.path.join(picdir, '1.64inch-1.bmp'))
+    # epd.display(epd.getbuffer(Himage))
+    # time.sleep(3)
 
     logging.info("3.read bmp file")
     Himage = Image.open(os.path.join(picdir, '1.64inch-2.bmp'))

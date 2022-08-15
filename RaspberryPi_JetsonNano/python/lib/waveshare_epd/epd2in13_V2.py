@@ -104,6 +104,13 @@ class EPD:
         epdconfig.digital_write(self.cs_pin, 0)
         epdconfig.spi_writebyte([data])
         epdconfig.digital_write(self.cs_pin, 1)
+
+    # send a lot of data   
+    def send_data2(self, data):
+        epdconfig.digital_write(self.dc_pin, 1)
+        epdconfig.digital_write(self.cs_pin, 0)
+        epdconfig.spi_writebyte2(data)
+        epdconfig.digital_write(self.cs_pin, 1)
         
     def ReadBusy(self):
         while(epdconfig.digital_read(self.busy_pin) == 1):      # 0: idle, 1: busy
@@ -242,15 +249,8 @@ class EPD:
         
         
     def display(self, image):
-        if self.width%8 == 0:
-            linewidth = int(self.width/8)
-        else:
-            linewidth = int(self.width/8) + 1
-
         self.send_command(0x24)
-        for j in range(0, self.height):
-            for i in range(0, linewidth):
-                self.send_data(image[i + j * linewidth])   
+        self.send_data2(image)   
         self.TurnOnDisplay()
         
     def displayPartial(self, image):
@@ -259,34 +259,25 @@ class EPD:
         else:
             linewidth = int(self.width/8) + 1
 
-        self.send_command(0x24)
+        buf = [0x00] * self.height * linewidth
         for j in range(0, self.height):
             for i in range(0, linewidth):
-                self.send_data(image[i + j * linewidth])   
+                buf[i + j * linewidth] = ~image[i + j * linewidth]
+
+        self.send_command(0x24)
+        self.send_data2(image)   
                 
                 
         self.send_command(0x26)
-        for j in range(0, self.height):
-            for i in range(0, linewidth):
-                self.send_data(~image[i + j * linewidth])  
+        self.send_data2(buf)  
         self.TurnOnDisplayPart()
 
     def displayPartBaseImage(self, image):
-        if self.width%8 == 0:
-            linewidth = int(self.width/8)
-        else:
-            linewidth = int(self.width/8) + 1
-
         self.send_command(0x24)
-        for j in range(0, self.height):
-            for i in range(0, linewidth):
-                self.send_data(image[i + j * linewidth])   
-                
+        self.send_data2(image)   
                 
         self.send_command(0x26)
-        for j in range(0, self.height):
-            for i in range(0, linewidth):
-                self.send_data(image[i + j * linewidth])  
+        self.send_data2(image)  
         self.TurnOnDisplay()
     
     def Clear(self, color):
@@ -296,10 +287,13 @@ class EPD:
             linewidth = int(self.width/8) + 1
         # logger.debug(linewidth)
         
-        self.send_command(0x24)
+        buf = [0x00] * self.height * linewidth
         for j in range(0, self.height):
             for i in range(0, linewidth):
-                self.send_data(color)
+                buf[i + j * linewidth] = color
+
+        self.send_command(0x24)
+        self.send_data2(buf)
                 
         # self.send_command(0x26)
         # for j in range(0, self.height):
