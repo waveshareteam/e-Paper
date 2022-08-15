@@ -18,28 +18,23 @@ logging.basicConfig(level=logging.DEBUG)
 try:
     logging.info("epd7in3g Demo")
 
-    BLACK = 0x00
-    WHITE = 0x55
-    YELLOW = 0xAA
-    RED = 0xFF
     epd = epd7in3g.EPD()   
     logging.info("init and Clear")
     epd.init()
-    epd.Clear(WHITE)
+    epd.Clear()
     font24 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 24)
     font18 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 18)
-    font30 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 40)
-    
+    font40 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 40)
     
     # Drawing on the image
     logging.info("1.Drawing on the image...")
-    Himage = Image.new('RGB', (epd.width, epd.height), 0xffffff)  # 255: clear the frame
+    Himage = Image.new('RGB', (epd.width, epd.height), epd.WHITE)  # 255: clear the frame
     draw = ImageDraw.Draw(Himage)
     draw.text((5, 0), 'hello world', font = font18, fill = epd.RED)
     draw.text((5, 20), '7.3inch e-Paper', font = font24, fill = epd.YELLOW)
-    draw.text((5, 45), u'微雪电子', font = font30, fill = epd.BLACK)
-    draw.text((5, 85), u'微雪电子', font = font30, fill = epd.YELLOW)
-    draw.text((5, 125), u'微雪电子', font = font30, fill = epd.RED)
+    draw.text((5, 45), u'微雪电子', font = font40, fill = epd.BLACK)
+    draw.text((5, 85), u'微雪电子', font = font40, fill = epd.YELLOW)
+    draw.text((5, 125), u'微雪电子', font = font40, fill = epd.RED)
 
     draw.line((5, 170, 80, 245), fill = epd.RED)
     draw.line((80, 170, 5, 245), fill = epd.YELLOW)
@@ -67,7 +62,7 @@ try:
     time.sleep(3)
     
     logging.info("Clear...")
-    epd.Clear(WHITE)
+    epd.Clear()
     
     logging.info("Goto Sleep...")
     epd.sleep()

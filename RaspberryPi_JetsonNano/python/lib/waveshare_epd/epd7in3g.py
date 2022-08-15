@@ -54,8 +54,6 @@ class EPD:
         self.YELLOW = 0x00ffff   #   10
         self.RED    = 0x0000ff   #   11
         
-
-        
     # Hardware reset
     def reset(self):
         epdconfig.digital_write(self.reset_pin, 1)
@@ -102,9 +100,7 @@ class EPD:
         if (epdconfig.module_init() != 0):
             return -1
         # EPD hardware init start
-
         self.reset()
-
         self.ReadBusyH()
         epdconfig.delay_ms(30)
 
@@ -122,7 +118,6 @@ class EPD:
         self.send_command(0x00)
         self.send_data(0x4F)
         self.send_data(0x69)
-
 
         self.send_command(0x05)
         self.send_data(0x40)
@@ -158,9 +153,6 @@ class EPD:
         # Please notice that PLL must be set for version 2 IC
         self.send_command(0x30)
         self.send_data(0x08)
-
-
-
 
         self.send_command(0x50)
         self.send_data(0x3F)
@@ -202,7 +194,6 @@ class EPD:
         for i in range(0, len(buf_4color), 4):
             buf[idx] = (buf_4color[i] << 6) + (buf_4color[i+1] << 4) + (buf_4color[i+2] << 2) + buf_4color[i+3]
             idx += 1
-
         return buf
 
     def display(self, image):
@@ -212,9 +203,6 @@ class EPD:
             Width = self.width // 4 + 1
         Height = self.height
 
-        self.send_command(0x68)
-        self.send_data(0x01)
-
         self.send_command(0x04)
         self.ReadBusyH()
 
@@ -222,18 +210,14 @@ class EPD:
         for j in range(0, Height):
             for i in range(0, Width):
                     self.send_data(image[i + j * Width])
-
         self.TurnOnDisplay()
         
-    def Clear(self, color):
+    def Clear(self, color=0x55):
         if self.width % 4 == 0 :
             Width = self.width // 4
         else :
             Width = self.width // 4 + 1
         Height = self.height
-
-        self.send_command(0x68)
-        self.send_data(0x01)
 
         self.send_command(0x04)
         self.ReadBusyH()
@@ -241,12 +225,7 @@ class EPD:
         self.send_command(0x10)
         for j in range(0, Height):
             for i in range(0, Width):
-                for k in range(0, 4):
                     self.send_data(color)
-
-
-        self.send_command(0x68)
-        self.send_data(0x00)
 
         self.TurnOnDisplay()
 

@@ -54,8 +54,6 @@ class EPD:
         self.YELLOW = 0x00ffff   #   10
         self.RED    = 0x0000ff   #   11
         
-
-        
     # Hardware reset
     def reset(self):
         epdconfig.digital_write(self.reset_pin, 1)
@@ -117,7 +115,6 @@ class EPD:
 
         self.send_command(0xB0)
         self.send_data(0x03)
-
 
         self.send_command(0x00)
         self.send_data(0x4F)
@@ -202,9 +199,12 @@ class EPD:
             for i in range(0, Width):
                     self.send_data(image[i + j * Width])
 
+        self.send_command(0x68)
+        self.send_data(0x00)
+
         self.TurnOnDisplay()
         
-    def Clear(self, color):
+    def Clear(self, color=0x55):
         if self.width % 4 == 0 :
             Width = self.width // 4
         else :
@@ -220,9 +220,7 @@ class EPD:
         self.send_command(0x10)
         for j in range(0, Height):
             for i in range(0, Width):
-                for k in range(0, 4):
-                    self.send_data(color)
-
+                self.send_data(color)
 
         self.send_command(0x68)
         self.send_data(0x00)

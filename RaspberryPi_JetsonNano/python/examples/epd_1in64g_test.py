@@ -18,26 +18,22 @@ logging.basicConfig(level=logging.DEBUG)
 try:
     logging.info("epd1in64g Demo")
 
-    BLACK = 0x00
-    WHITE = 0x55
-    YELLOW = 0xAA
-    RED = 0xFF
     epd = epd1in64g.EPD()   
     logging.info("init and Clear")
     epd.init()
-    epd.Clear(WHITE)
+    epd.Clear()
     font24 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 24)
     font18 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 18)
-    font30 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 40)
+    font40 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 40)
     
     # # The Sunrise X3 PI is a bit problematic to use
     # # Drawing on the image
     # logging.info("1.Drawing on the image...")
-    # Himage = Image.new('RGB', (epd.width, epd.height), 0xffffff)  
+    # Himage = Image.new('RGB', (epd.width, epd.height), epd.WHITE)  
     # draw = ImageDraw.Draw(Himage)
     # draw.text((5, 0), 'hello world', font = font18, fill = epd.RED)
     # draw.text((5, 20), '1.64inch e-Paper', font = font18, fill = epd.YELLOW)
-    # draw.text((5, 40), u'微雪电子', font = font30, fill = epd.BLACK)
+    # draw.text((5, 40), u'微雪电子', font = font40, fill = epd.BLACK)
 
     # draw.line((5, 90, 45, 160), fill = epd.RED)
     # draw.line((45, 90, 5, 160), fill = epd.YELLOW)
@@ -60,7 +56,7 @@ try:
     time.sleep(3)
     
     logging.info("Clear...")
-    epd.Clear(WHITE)
+    epd.Clear()
     
     logging.info("Goto Sleep...")
     epd.sleep()
