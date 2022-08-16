@@ -18,11 +18,11 @@
 #define EPD_3IN0G_WIDTH       168
 #define EPD_3IN0G_HEIGHT      400
 
-//colour
-#define  EPD_3IN0G_BLACK   0x00 
-#define  EPD_3IN0G_WHITE   0x55
-#define  EPD_3IN0G_YELLOW  0xAA
-#define  EPD_3IN0G_RED     0xFF
+// Color
+#define  EPD_3IN0G_BLACK   0x0
+#define  EPD_3IN0G_WHITE   0x1
+#define  EPD_3IN0G_YELLOW  0x2
+#define  EPD_3IN0G_RED     0x3
 
 void EPD_3IN0G_Init(void);
 void EPD_3IN0G_Clear(UBYTE color);

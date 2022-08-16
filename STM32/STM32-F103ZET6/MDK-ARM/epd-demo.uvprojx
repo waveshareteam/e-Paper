@@ -16,7 +16,7 @@
         <TargetCommonOption>
           <Device>STM32F103ZE</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32F1xx_DFP.2.1.0</PackID>
+          <PackID>Keil.STM32F1xx_DFP.2.3.0</PackID>
           <PackURL>http://www.keil.com/pack/</PackURL>
           <Cpu>IRAM(0x20000000-0x2000FFFF) IROM(0x8000000-0x807FFFF) CLOCK(8000000) CPUTYPE("Cortex-M3")</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -184,7 +184,6 @@
             <hadXRAM>0</hadXRAM>
             <uocXRam>0</uocXRam>
             <RvdsVP>0</RvdsVP>
-            <RvdsMve>0</RvdsMve>
             <hadIRAM2>0</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
@@ -553,6 +552,11 @@
               <FilePath>..\User\Examples\EPD_2in66b_test.c</FilePath>
             </File>
             <File>
+              <FileName>EPD_3in52_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Examples\EPD_3in52_test.c</FilePath>
+            </File>
+            <File>
               <FileName>EPD_3in7_test.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\Examples\EPD_3in7_test.c</FilePath>
@@ -643,9 +647,9 @@
               <FilePath>..\User\Examples\EPD_3in0g_test.c</FilePath>
             </File>
             <File>
-              <FileName>EPD_3in52_test.c</FileName>
+              <FileName>EPD_4in37g_test.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\User\Examples\EPD_3in52_test.c</FilePath>
+              <FilePath>..\User\Examples\EPD_4in37g_test.c</FilePath>
             </File>
             <File>
               <FileName>EPD_7in3g_test.c</FileName>
@@ -773,6 +777,11 @@
               <FilePath>..\User\e-Paper\EPD_2in66b.c</FilePath>
             </File>
             <File>
+              <FileName>EPD_3in52.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\e-Paper\EPD_3in52.c</FilePath>
+            </File>
+            <File>
               <FileName>EPD_3in7.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\e-Paper\EPD_3in7.c</FilePath>
@@ -863,9 +872,9 @@
               <FilePath>..\User\e-Paper\EPD_3in0g.c</FilePath>
             </File>
             <File>
-              <FileName>EPD_3in52.c</FileName>
+              <FileName>EPD_4in37g.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\User\e-Paper\EPD_3in52.c</FilePath>
+              <FilePath>..\User\e-Paper\EPD_4in37g.c</FilePath>
             </File>
             <File>
               <FileName>EPD_7in3g.c</FileName>

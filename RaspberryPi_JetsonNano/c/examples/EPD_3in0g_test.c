@@ -41,7 +41,6 @@ int EPD_3in0g_test(void)
     printf("e-Paper Init and Clear...\r\n");
     EPD_3IN0G_Init();
 
-    printf("Black \r\n");
 	struct timespec start={0,0}, finish={0,0}; 
     clock_gettime(CLOCK_REALTIME, &start);
     EPD_3IN0G_Clear(EPD_3IN0G_WHITE); // White

@@ -1,13 +1,12 @@
 /*****************************************************************************
-* | File      	:   EPD_7in3g.h
+* | File      	:   EPD_4in37g.c
 * | Author      :   Waveshare team
-* | Function    :   7.3inchg e-paper (G)
+* | Function    :   4.37inch e-Paper (G)
 * | Info        :
 *----------------
 * |	This version:   V1.0
-* | Date        :   2022-07-22
+* | Date        :   2022-08-15
 * | Info        :
-
 * -----------------------------------------------------------------------------
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -29,25 +28,24 @@
 # THE SOFTWARE.
 #
 ******************************************************************************/
-#ifndef __EPD_7IN3G_H_
-#define __EPD_7IN3G_H_
+#ifndef __EPD_4IN37G_H_
+#define __EPD_4IN37G_H_
 
 #include "DEV_Config.h"
 
 // Display resolution
-#define EPD_7IN3G_WIDTH       800
-#define EPD_7IN3G_HEIGHT      480
+#define EPD_4IN37G_WIDTH		512
+#define EPD_4IN37G_HEIGHT		368
 
 // Color
-#define  EPD_7IN3G_BLACK   0x0
-#define  EPD_7IN3G_WHITE   0x1
-#define  EPD_7IN3G_YELLOW  0x2
-#define  EPD_7IN3G_RED     0x3
+#define EPD_4IN37G_BLACK		0x0
+#define EPD_4IN37G_WHITE		0x1
+#define EPD_4IN37G_YELLOW		0x2
+#define EPD_4IN37G_RED			0x3
 
-void EPD_7IN3G_Init(void);
-void EPD_7IN3G_Clear(UBYTE color);
-void EPD_7IN3G_Display(const UBYTE *Image);
-void EPD_7IN3G_Display_part(UBYTE *Image, UWORD xstart, UWORD ystart, UWORD image_width, UWORD image_height);
-void EPD_7IN3G_Sleep(void);
+void EPD_4IN37G_Init(void);
+void EPD_4IN37G_Clear(UBYTE color);
+void EPD_4IN37G_Display(UBYTE *Image);
+void EPD_4IN37G_Sleep(void);
 
 #endif

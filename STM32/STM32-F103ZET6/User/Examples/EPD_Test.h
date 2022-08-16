@@ -38,6 +38,7 @@
 
 int EPD_1in64g_test(void);
 int EPD_3in0g_test(void);
+int EPD_4in37g_test(void);
 int EPD_7in3g_test(void);
 
 int EPD_1in02d_test(void);

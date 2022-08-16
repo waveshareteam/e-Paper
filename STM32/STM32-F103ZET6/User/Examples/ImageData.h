@@ -32,15 +32,15 @@
 #ifndef _IMAGEDATA_H_
 #define _IMAGEDATA_H_
 
-// colour_4
-extern const unsigned char gImage_1in64g[];
-extern const unsigned char gImage_3in0g[];
-extern const unsigned char gImage_7in3g[];
-
 // ImageData2.c
+/* --------------------------------------- */
 extern const unsigned char gImage_2in13b_V4b[];
 extern const unsigned char gImage_2in13b_V4r[];
 
+extern const unsigned char gImage_1in64g[];
+extern const unsigned char gImage_3in0g[];
+extern const unsigned char Image4color[];
+extern const unsigned char gImage_7in3g[];
 /* --------------------------------------- */
 
 // ImageData.c

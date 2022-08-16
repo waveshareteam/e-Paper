@@ -39,7 +39,7 @@ int EPD_3in52_test(void)
     }
 
     printf("e-Paper Init and Clear...\r\n");
-		EPD_3IN52_Init();
+    EPD_3IN52_Init();
 
     EPD_3IN52_display_NUM(EPD_3IN52_WHITE);
     EPD_3IN52_lut_GC();

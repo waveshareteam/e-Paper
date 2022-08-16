@@ -132,7 +132,6 @@ void EPD_7IN3G_Init(void)
     EPD_7IN3G_SendData(0x4F);
     EPD_7IN3G_SendData(0x69);
 
-
     EPD_7IN3G_SendCommand(0x05);
     EPD_7IN3G_SendData(0x40);
     EPD_7IN3G_SendData(0x1F);
@@ -168,9 +167,6 @@ void EPD_7IN3G_Init(void)
     EPD_7IN3G_SendCommand(0x30);
     EPD_7IN3G_SendData(0x08);
 
-
-
-
     EPD_7IN3G_SendCommand(0x50);
     EPD_7IN3G_SendData(0x3F);
 
@@ -203,7 +199,7 @@ void EPD_7IN3G_Clear(UBYTE color)
     EPD_7IN3G_SendCommand(0x10);
     for (UWORD j = 0; j < Height; j++) {
         for (UWORD i = 0; i < Width; i++) {
-            EPD_7IN3G_SendData(color);
+            EPD_7IN3G_SendData((color << 6) | (color << 4) | (color << 2) | color);
         }
     }
 
@@ -214,7 +210,7 @@ void EPD_7IN3G_Clear(UBYTE color)
 function :	Sends the image buffer in RAM to e-Paper and displays
 parameter:
 ******************************************************************************/
-void EPD_7IN3G_Display(UBYTE *Image)
+void EPD_7IN3G_Display(const UBYTE *Image)
 {
     UWORD Width, Height;
     Width = (EPD_7IN3G_WIDTH % 4 == 0)? (EPD_7IN3G_WIDTH / 4 ): (EPD_7IN3G_WIDTH / 4 + 1);
@@ -232,7 +228,7 @@ void EPD_7IN3G_Display(UBYTE *Image)
     EPD_7IN3G_TurnOnDisplay();
 }
 
-void EPD_7IN3G_Display_part(UBYTE *Image, UWORD xstart, UWORD ystart, UWORD image_width, UWORD image_heigh)
+void EPD_7IN3G_Display_part(UBYTE *Image, UWORD xstart, UWORD ystart, UWORD image_width, UWORD image_height)
 {
     UWORD Width, Height;
     Width = (EPD_7IN3G_WIDTH % 4 == 0)? (EPD_7IN3G_WIDTH / 4 ): (EPD_7IN3G_WIDTH / 4 + 1);
@@ -244,7 +240,7 @@ void EPD_7IN3G_Display_part(UBYTE *Image, UWORD xstart, UWORD ystart, UWORD imag
     EPD_7IN3G_SendCommand(0x10);
     for (UWORD i = 0; i < Height; i++) {
         for (UWORD j = 0; j < Width; j++) {
-					if(i<image_heigh+ystart && i>=ystart && j<(image_width+xstart)/4 && j>=xstart/4) {
+					if(i<image_height+ystart && i>=ystart && j<(image_width+xstart)/4 && j>=xstart/4) {
 							EPD_7IN3G_SendData(Image[(j-xstart/4) + (image_width/4*(i-ystart))]);
 						}
 						else

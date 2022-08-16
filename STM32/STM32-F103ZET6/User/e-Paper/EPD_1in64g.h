@@ -18,11 +18,11 @@
 #define EPD_1IN64G_WIDTH       168
 #define EPD_1IN64G_HEIGHT      168
 
-//colour
-#define  EPD_1IN64G_BLACK   0x00 
-#define  EPD_1IN64G_WHITE   0x55
-#define  EPD_1IN64G_YELLOW  0xAA
-#define  EPD_1IN64G_RED     0xFF
+// Color
+#define  EPD_1IN64G_BLACK   0x0 
+#define  EPD_1IN64G_WHITE   0x1
+#define  EPD_1IN64G_YELLOW  0x2
+#define  EPD_1IN64G_RED     0x3
 
 void EPD_1IN64G_Init(void);
 void EPD_1IN64G_Clear(UBYTE color);
