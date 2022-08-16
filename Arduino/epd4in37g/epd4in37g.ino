@@ -1,9 +1,9 @@
 /**
- *  @filename   :   epd1in64g-demo.ino
- *  @brief      :   1.64inch e-paper (G) display demo
+ *  @filename   :   epd4in37g-demo.ino
+ *  @brief      :   4.37inch e-Paper (G) display demo
  *  @author     :   Waveshare
  *
- *  Copyright (C) Waveshare     2022/7/22
+ *  Copyright (C) Waveshare     2022/08/16
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documnetation files (the "Software"), to deal
@@ -25,7 +25,7 @@
  */
 
 #include <SPI.h>
-#include "epd1in64g.h"
+#include "epd4in37g.h"
 #include "imagedata.h"
 
 Epd epd;
@@ -39,16 +39,12 @@ void setup() {
       return;
   }
 
-  Serial.print("Image \r\n");
-  epd.Display(IMAGE_DATA);
-  delay(2000);
-
   Serial.print("White \r\n");
   epd.Clear(white);
   delay(2000);
 
   Serial.print("Small Image \r\n");
-  epd.Display_part(IMAGE_DATA, 0, 0, 168, 168);
+  epd.Display_part(Image4color, 172, 100, 168, 168);
   delay(2000);
 
   Serial.print("Clear...\r\n");

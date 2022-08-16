@@ -40,8 +40,7 @@ int EPD_4in37g_test(void)
 
     printf("e-Paper Init and Clear...\r\n");
     EPD_4IN37G_Init();
-
-    printf("Black \r\n");
+    
 	struct timespec start={0,0}, finish={0,0}; 
     clock_gettime(CLOCK_REALTIME, &start);
     EPD_4IN37G_Clear(EPD_4IN37G_WHITE); // WHITE

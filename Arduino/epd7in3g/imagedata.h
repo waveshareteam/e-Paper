@@ -23,7 +23,7 @@
  * THE SOFTWARE.
  */
 
-extern const unsigned char IMAGE_DATA[];
+extern const unsigned char Image4color[];
 
 /* FILE END */
 

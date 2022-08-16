@@ -177,7 +177,7 @@ void EPD_3IN0G_Clear(UBYTE color)
     EPD_3IN0G_SendCommand(0x10);
     for (UWORD j = 0; j < Height; j++) {
         for (UWORD i = 0; i < Width; i++) {
-            EPD_3IN0G_SendData(color);
+            EPD_3IN0G_SendData((color << 6) | (color << 4) | (color << 2) | color);
         }
     }
 

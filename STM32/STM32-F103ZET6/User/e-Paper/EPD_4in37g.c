@@ -1,11 +1,11 @@
 /*****************************************************************************
-* | File      	:   EPD_1in64_g.c
+* | File      	:   EPD_4in37g.h
 * | Author      :   Waveshare team
-* | Function    :   1.64inchg e-paper (G)
+* | Function    :   4.37inch e-Paper (G)
 * | Info        :
 *----------------
 * |	This version:   V1.0
-* | Date        :   2022-07-22
+* | Date        :   2022-08-15
 * | Info        :
 * -----------------------------------------------------------------------------
 #
@@ -28,19 +28,19 @@
 # THE SOFTWARE.
 #
 ******************************************************************************/
-#include "EPD_1in64g.h"
+#include "EPD_4in37g.h"
 #include "Debug.h"
 
 /******************************************************************************
 function :	Software reset
 parameter:
 ******************************************************************************/
-static void EPD_1IN64G_Reset(void)
+static void EPD_4IN37G_Reset(void)
 {
     DEV_Digital_Write(EPD_RST_PIN, 1);
     DEV_Delay_ms(20);
     DEV_Digital_Write(EPD_RST_PIN, 0);
-    DEV_Delay_ms(1);
+    DEV_Delay_ms(2);
     DEV_Digital_Write(EPD_RST_PIN, 1);
     DEV_Delay_ms(20);
 }
@@ -50,7 +50,7 @@ function :	send command
 parameter:
      Reg : Command register
 ******************************************************************************/
-static void EPD_1IN64G_SendCommand(UBYTE Reg)
+static void EPD_4IN37G_SendCommand(UBYTE Reg)
 {
     DEV_Digital_Write(EPD_DC_PIN, 0);
     DEV_Digital_Write(EPD_CS_PIN, 0);
@@ -63,7 +63,7 @@ function :	send data
 parameter:
     Data : Write data
 ******************************************************************************/
-static void EPD_1IN64G_SendData(UBYTE Data)
+static void EPD_4IN37G_SendData(UBYTE Data)
 {
     DEV_Digital_Write(EPD_DC_PIN, 1);
     DEV_Digital_Write(EPD_CS_PIN, 0);
@@ -75,15 +75,15 @@ static void EPD_1IN64G_SendData(UBYTE Data)
 function :	Wait until the busy_pin goes LOW
 parameter:
 ******************************************************************************/
-static void EPD_1IN64G_ReadBusyH(void)
+static void EPD_4IN37G_ReadBusyH(void)
 {
     Debug("e-Paper busy H\r\n");
-    while(!DEV_Digital_Read(EPD_BUSY_PIN)) {      //LOW: idle, HIGH: busy
+    while(!DEV_Digital_Read(EPD_BUSY_PIN)) {      //LOW: busy, HIGH: idle
         DEV_Delay_ms(5);
     }
     Debug("e-Paper busy H release\r\n");
 }
-static void EPD_1IN64G_ReadBusyL(void)
+static void EPD_4IN37G_ReadBusyL(void)
 {
     Debug("e-Paper busy L\r\n");
     while(DEV_Digital_Read(EPD_BUSY_PIN)) {      //LOW: idle, HIGH: busy
@@ -96,146 +96,145 @@ static void EPD_1IN64G_ReadBusyL(void)
 function :	Turn On Display
 parameter:
 ******************************************************************************/
-static void EPD_1IN64G_TurnOnDisplay(void)
+static void EPD_4IN37G_TurnOnDisplay(void)
 {
-    EPD_1IN64G_SendCommand(0x12); // DISPLAY_REFRESH
-    EPD_1IN64G_SendData(0x01);
-    EPD_1IN64G_ReadBusyH();
+    EPD_4IN37G_SendCommand(0x12); // DISPLAY_REFRESH
+    EPD_4IN37G_SendData(0x00);
+    EPD_4IN37G_ReadBusyH();
 
-    EPD_1IN64G_SendCommand(0x02); // POWER_OFF
-    EPD_1IN64G_SendData(0X00);
-    EPD_1IN64G_ReadBusyH();
+    EPD_4IN37G_SendCommand(0x02); // POWER_OFF
+    EPD_4IN37G_SendData(0X00);
+    EPD_4IN37G_ReadBusyH();
 }
 
 /******************************************************************************
 function :	Initialize the e-Paper register
 parameter:
 ******************************************************************************/
-void EPD_1IN64G_Init(void)
+void EPD_4IN37G_Init(void)
 {
-    EPD_1IN64G_Reset();
+    EPD_4IN37G_Reset();
 
-    EPD_1IN64G_SendCommand(0x66);
-    EPD_1IN64G_SendData(0x49);
-    EPD_1IN64G_SendData(0x55);
-    EPD_1IN64G_SendData(0x13);
-    EPD_1IN64G_SendData(0x5D);
+    EPD_4IN37G_SendCommand(0xAA);
+    EPD_4IN37G_SendData(0x49);
+    EPD_4IN37G_SendData(0x55);
+    EPD_4IN37G_SendData(0x20);
+	EPD_4IN37G_SendData(0x08);
+	EPD_4IN37G_SendData(0x09);
+    EPD_4IN37G_SendData(0x18);
 
-    EPD_1IN64G_SendCommand(0x66);
-    EPD_1IN64G_SendData(0x49);
-    EPD_1IN64G_SendData(0x55);
+    EPD_4IN37G_SendCommand(0x01);
+    EPD_4IN37G_SendData(0x3F);
 
-    EPD_1IN64G_SendCommand(0xB0);
-    EPD_1IN64G_SendData(0x03);//1 boost 20211113
+    EPD_4IN37G_SendCommand(0x00);
+    EPD_4IN37G_SendData(0x4F);
+    EPD_4IN37G_SendData(0x69);
 
+    EPD_4IN37G_SendCommand(0x05);
+    EPD_4IN37G_SendData(0x40);
+    EPD_4IN37G_SendData(0x1F);
+    EPD_4IN37G_SendData(0x1F);
+    EPD_4IN37G_SendData(0x2C);
 
-    EPD_1IN64G_SendCommand(0x00);
-    EPD_1IN64G_SendData(0x4F);
-    EPD_1IN64G_SendData(0x6B);
+    EPD_4IN37G_SendCommand(0x08);
+    EPD_4IN37G_SendData(0x6F);
+    EPD_4IN37G_SendData(0x1F);
+    EPD_4IN37G_SendData(0x1F);
+    EPD_4IN37G_SendData(0x22);
 
-    EPD_1IN64G_SendCommand(0x03);
-    EPD_1IN64G_SendData(0x00);
+	//===================
+	//20211212
+	//First setting
+    EPD_4IN37G_SendCommand(0x06);
+    EPD_4IN37G_SendData(0x6F);
+    EPD_4IN37G_SendData(0x1F);
+    EPD_4IN37G_SendData(0x17);
+    EPD_4IN37G_SendData(0x17);
+	//===================
+	
+    EPD_4IN37G_SendCommand(0x03);
+    EPD_4IN37G_SendData(0x00);
+    EPD_4IN37G_SendData(0x54);
+    EPD_4IN37G_SendData(0x00);
+    EPD_4IN37G_SendData(0x44); 
 
-    EPD_1IN64G_SendCommand(0xF0);
-    EPD_1IN64G_SendData(0xF6);
-    EPD_1IN64G_SendData(0x0D);
-    EPD_1IN64G_SendData(0x00);
-    EPD_1IN64G_SendData(0x00);
-    EPD_1IN64G_SendData(0x00);
+    EPD_4IN37G_SendCommand(0x50);
+    EPD_4IN37G_SendData(0x3F);
 
-    //20220303
-    EPD_1IN64G_SendCommand(0x06);
-    EPD_1IN64G_SendData(0xCF);
-    EPD_1IN64G_SendData(0xDF);
-    EPD_1IN64G_SendData(0x0F);
+    EPD_4IN37G_SendCommand(0x60);
+    EPD_4IN37G_SendData(0x02);
+    EPD_4IN37G_SendData(0x00);
 
-    EPD_1IN64G_SendCommand(0x41);
-    EPD_1IN64G_SendData(0x00);
+	//Please notice that PLL must be set for version 2 IC
+    EPD_4IN37G_SendCommand(0x30);
+    EPD_4IN37G_SendData(0x08);
+	
+    EPD_4IN37G_SendCommand(0x61);
+    EPD_4IN37G_SendData(0x02);
+    EPD_4IN37G_SendData(0x00);
+    EPD_4IN37G_SendData(0x01); 
+    EPD_4IN37G_SendData(0x70); 
 
-    EPD_1IN64G_SendCommand(0x50);
-    EPD_1IN64G_SendData(0x30);
+    EPD_4IN37G_SendCommand(0xE3);
+    EPD_4IN37G_SendData(0x2F);
 
-    EPD_1IN64G_SendCommand(0x60);
-    EPD_1IN64G_SendData(0x0C); 
-    EPD_1IN64G_SendData(0x05);
-
-    EPD_1IN64G_SendCommand(0x61);
-    EPD_1IN64G_SendData(0xA8);
-    EPD_1IN64G_SendData(0x00); 
-    EPD_1IN64G_SendData(0xA8); 
-
-    EPD_1IN64G_SendCommand(0x84);
-    EPD_1IN64G_SendData(0x01);
-
+    EPD_4IN37G_SendCommand(0x84);
+    EPD_4IN37G_SendData(0x01);
 }
 
 /******************************************************************************
 function :	Clear screen
 parameter:
 ******************************************************************************/
-void EPD_1IN64G_Clear(UBYTE color)
+void EPD_4IN37G_Clear(UBYTE color)
 {
     UWORD Width, Height;
-    Width = (EPD_1IN64G_WIDTH % 4 == 0)? (EPD_1IN64G_WIDTH / 4 ): (EPD_1IN64G_WIDTH / 4 + 1);
-    Height = EPD_1IN64G_HEIGHT;
-
-    EPD_1IN64G_SendCommand(0x68);
-    EPD_1IN64G_SendData(0x01);
+    Width = (EPD_4IN37G_WIDTH % 4 == 0)? (EPD_4IN37G_WIDTH / 4 ): (EPD_4IN37G_WIDTH / 4 + 1);
+    Height = EPD_4IN37G_HEIGHT;
     
-    EPD_1IN64G_SendCommand(0x04);
-    EPD_1IN64G_ReadBusyH();
+    EPD_4IN37G_SendCommand(0x04);
+    EPD_4IN37G_ReadBusyH();
 
-    EPD_1IN64G_SendCommand(0x10);
+    EPD_4IN37G_SendCommand(0x10);
     for (UWORD j = 0; j < Height; j++) {
         for (UWORD i = 0; i < Width; i++) {
-            EPD_1IN64G_SendData((color << 6) | (color << 4) | (color << 2) | color);
+            EPD_4IN37G_SendData((color << 6) | (color << 4) | (color << 2) | color);
         }
     }
-
-    EPD_1IN64G_SendCommand(0x68);
-    EPD_1IN64G_SendData(0x00);
-
-    EPD_1IN64G_TurnOnDisplay();
+    EPD_4IN37G_TurnOnDisplay();
 }
 
 /******************************************************************************
 function :	Sends the image buffer in RAM to e-Paper and displays
 parameter:
 ******************************************************************************/
-void EPD_1IN64G_Display(UBYTE *Image)
+void EPD_4IN37G_Display(UBYTE *Image)
 {
     UWORD Width, Height;
-    Width = (EPD_1IN64G_WIDTH % 4 == 0)? (EPD_1IN64G_WIDTH / 4 ): (EPD_1IN64G_WIDTH / 4 + 1);
-    Height = EPD_1IN64G_HEIGHT;
-
-    EPD_1IN64G_SendCommand(0x68);
-    EPD_1IN64G_SendData(0x01);
+    Width = (EPD_4IN37G_WIDTH % 4 == 0)? (EPD_4IN37G_WIDTH / 4 ): (EPD_4IN37G_WIDTH / 4 + 1);
+    Height = EPD_4IN37G_HEIGHT;
     
-    EPD_1IN64G_SendCommand(0x04);
-    EPD_1IN64G_ReadBusyH();
+    EPD_4IN37G_SendCommand(0x04);
+    EPD_4IN37G_ReadBusyH();
 
-    EPD_1IN64G_SendCommand(0x10);
+    EPD_4IN37G_SendCommand(0x10);
     for (UWORD j = 0; j < Height; j++) {
         for (UWORD i = 0; i < Width; i++) {
-            EPD_1IN64G_SendData(Image[i + j * Width]);
+            EPD_4IN37G_SendData(Image[i + j * Width]);
         }
     }
-
-    EPD_1IN64G_SendCommand(0x68);
-    EPD_1IN64G_SendData(0x00);
-
-    EPD_1IN64G_TurnOnDisplay();
+    EPD_4IN37G_TurnOnDisplay();
 }
 
 /******************************************************************************
 function :	Enter sleep mode
 parameter:
 ******************************************************************************/
-void EPD_1IN64G_Sleep(void)
+void EPD_4IN37G_Sleep(void)
 {
-    EPD_1IN64G_SendCommand(0x02); // POWER_OFF
-    EPD_1IN64G_SendData(0X00);
-    EPD_1IN64G_SendCommand(0x07); // DEEP_SLEEP
-    EPD_1IN64G_SendData(0XA5);
+    EPD_4IN37G_SendCommand(0x02); // POWER_OFF
+    EPD_4IN37G_SendData(0X00);
+    EPD_4IN37G_SendCommand(0x07); // DEEP_SLEEP
+    EPD_4IN37G_SendData(0XA5);
 }
 

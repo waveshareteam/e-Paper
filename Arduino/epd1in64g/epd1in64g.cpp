@@ -58,7 +58,6 @@ int Epd::Init() {
     SendCommand(0xB0);
     SendData(0x03);//1 boost 20211113
 
-
     SendCommand(0x00);
     SendData(0x4F);
     SendData(0x6B);
@@ -182,9 +181,7 @@ void Epd::Clear(UBYTE color)
     SendCommand(0x10);
     for (UWORD j = 0; j < Height; j++) {
         for (UWORD i = 0; i < Width; i++) {
-            for(UBYTE k = 0; k < 4; k++) {
-                SendData(color);
-            }
+            SendData((color << 6) | (color << 4) | (color << 2) | color);
         }
     }
 
@@ -216,12 +213,16 @@ void Epd::Display(UBYTE *Image)
             SendData(pgm_read_byte(&Image[i + j * Width]));
         }
     }
+     
+    SendCommand(0x68);
+    SendData(0x00);
+    
     TurnOnDisplay();
 }
 
-void Epd::Display_part(UBYTE *Image, UWORD xstart, UWORD ystart, UWORD image_width, UWORD image_heigh)
+void Epd::Display_part(UBYTE *Image, UWORD xstart, UWORD ystart, UWORD image_width, UWORD image_height)
 {
-    UWORD Width, Height;
+    UWORD Width, Height, i, j;
     Width = (WIDTH % 4 == 0)? (WIDTH / 4 ): (WIDTH / 4 + 1);
     Height = HEIGHT;
 
@@ -232,20 +233,20 @@ void Epd::Display_part(UBYTE *Image, UWORD xstart, UWORD ystart, UWORD image_wid
     ReadBusyH();
 
     SendCommand(0x10);
-    for (UWORD i = 0; i < Height; i++) {
-        for (UWORD j = 0; j < Width; j++) {
-            if((j >= xstart/4) && (j < (image_width + xstart)/4) && (i >= ystart) && (i <= (ystart + image_heigh)) )
-            {
-                SendData(Image[(i-ystart) * image_width/4 + j - xstart/4]);
-                // Serial.print(Image[(i-ystart) * image_width/8 + j - xstart], HEX);
-                // Serial.print(" ");
+    for(i=0; i<Height; i++) {
+        for(j=0; j< Width; j++) {
+            if(i<image_height+ystart && i>=ystart && j<(image_width+xstart)/4 && j>=xstart/4) {
+              SendData(pgm_read_byte(&Image[(j-xstart/4) + (image_width/4*(i-ystart))]));
             }
-            else
-            {
-                SendData(0x55);
-            }
-        }
+			else {
+				SendData(0x55);
+			}
+		}
     }
+
+    SendCommand(0x68);
+    SendData(0x00);
+
     TurnOnDisplay();
 }
 

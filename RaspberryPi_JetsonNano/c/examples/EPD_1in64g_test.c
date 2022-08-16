@@ -41,10 +41,9 @@ int EPD_1in64g_test(void)
     printf("e-Paper Init and Clear...\r\n");
     EPD_1IN64G_Init();
 
-    printf("Black \r\n");
 	struct timespec start={0,0}, finish={0,0}; 
     clock_gettime(CLOCK_REALTIME, &start);
-    EPD_1IN64G_Clear(EPD_1IN64G_WHITE); // While
+    EPD_1IN64G_Clear(EPD_1IN64G_WHITE);
     clock_gettime(CLOCK_REALTIME, &finish);
     printf("%ld S\r\n", finish.tv_sec-start.tv_sec);	
     DEV_Delay_ms(2000);

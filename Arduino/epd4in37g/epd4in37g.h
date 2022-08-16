@@ -1,9 +1,9 @@
 /**
- *  @filename   :   epd7in3g.h
- *  @brief      :   Header file for e-paper display library epd7in3g.cpp
+ *  @filename   :   epd4in37g.h
+ *  @brief      :   Header file for e-paper display library epd4in37g.cpp
  *  @author     :   Waveshare
  *  
- *  Copyright (C) Waveshare     2022/7/22
+ *  Copyright (C) Waveshare     2022/08/16
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documnetation files (the "Software"), to deal
@@ -24,14 +24,14 @@
  * THE SOFTWARE.
  */
 
-#ifndef EPD1IN64G_H
-#define EPD1IN64G_H
+#ifndef EPD4IN37G_H
+#define EPD4IN37G_H
 
 #include "epdif.h"
 
 // Display resolution
-#define EPD_WIDTH       800
-#define EPD_HEIGHT      480
+#define EPD_WIDTH       512
+#define EPD_HEIGHT      368
 
 // Color
 #define  black   0x0
@@ -69,6 +69,6 @@ private:
     unsigned int busy_pin;
 };
 
-#endif /* EPD1IN54_H */
+#endif /* EPD4IN37_H */
 
 /* END OF FILE */

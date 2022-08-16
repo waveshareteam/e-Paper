@@ -1,9 +1,9 @@
 /**
- *  @filename   :   epd3in0g.cpp
+ *  @filename   :   epd4in37g.cpp
  *  @brief      :   Implements for e-paper library
  *  @author     :   Waveshare
  *
- *  Copyright (C) Waveshare     2022/7/22
+ *  Copyright (C) Waveshare     2022/08/16
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documnetation files (the "Software"), to deal
@@ -25,7 +25,7 @@
  */
 
 #include <stdlib.h>
-#include "epd3in0g.h"
+#include "epd4in37g.h"
 
 Epd::~Epd() {
 };
@@ -45,48 +45,72 @@ int Epd::Init() {
         return -1;
     }
     Reset();
-    SendCommand(0x66);
+
+    SendCommand(0xAA);
     SendData(0x49);
     SendData(0x55);
-    SendData(0x13);
-    SendData(0x5D);
-    SendData(0x05);
-    SendData(0x10);
-
-    SendCommand(0xB0);
-    SendData(0x00);//1 boost
+    SendData(0x20);
+	SendData(0x08);
+	SendData(0x09);
+    SendData(0x18);
 
     SendCommand(0x01);
-    SendData(0x0F);
-    SendData(0x00);
+    SendData(0x3F);
 
     SendCommand(0x00);
     SendData(0x4F);
-    SendData(0x6B);
+    SendData(0x69);
 
+    SendCommand(0x05);
+    SendData(0x40);
+    SendData(0x1F);
+    SendData(0x1F);
+    SendData(0x2C);
+
+    SendCommand(0x08);
+    SendData(0x6F);
+    SendData(0x1F);
+    SendData(0x1F);
+    SendData(0x22);
+
+	//===================
+	//20211212
+	//First setting
     SendCommand(0x06);
-    SendData(0xD7);
-    SendData(0xDE);
-    SendData(0x12);
-
-    SendCommand(0x61);
+    SendData(0x6F);
+    SendData(0x1F);
+    SendData(0x17);
+    SendData(0x17);
+	//===================
+	
+    SendCommand(0x03);
     SendData(0x00);
-    SendData(0xA8);
-    SendData(0x01); 
-    SendData(0x90); 
+    SendData(0x54);
+    SendData(0x00);
+    SendData(0x44); 
 
     SendCommand(0x50);
-    SendData(0x37);
+    SendData(0x3F);
 
     SendCommand(0x60);
-    SendData(0x0C); 
-    SendData(0x05);
+    SendData(0x02);
+    SendData(0x00);
+
+	//Please notice that PLL must be set for version 2 IC
+    SendCommand(0x30);
+    SendData(0x08);
+	
+    SendCommand(0x61);
+    SendData(0x02);
+    SendData(0x00);
+    SendData(0x01); 
+    SendData(0x70); 
 
     SendCommand(0xE3);
-    SendData(0xFF);
+    SendData(0x2F);
 
     SendCommand(0x84);
-    SendData(0x00);
+    SendData(0x01);
     return 0;
 }
 
@@ -146,7 +170,7 @@ parameter:
 void Epd::TurnOnDisplay(void)
 {
     SendCommand(0x12); // DISPLAY_REFRESH
-    SendData(0x01);
+    SendData(0x00);
     ReadBusyH();
 
     SendCommand(0x02); // POWER_OFF
@@ -170,10 +194,9 @@ void Epd::Clear(UBYTE color)
     SendCommand(0x10);
     for (UWORD j = 0; j < Height; j++) {
         for (UWORD i = 0; i < Width; i++) {
-                SendData((color<<6) | (color<<4) | (color<<2) | color);
+            SendData((color<<6) | (color<<4) | (color<<2) | color);
         }
     }
-
     TurnOnDisplay();
 }
 
@@ -219,7 +242,6 @@ void Epd::Display_part(UBYTE *Image, UWORD xstart, UWORD ystart, UWORD image_wid
 			}
 		}
     }
-
     TurnOnDisplay();
 }
 
