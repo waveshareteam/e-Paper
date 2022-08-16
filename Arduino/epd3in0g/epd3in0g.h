@@ -33,11 +33,11 @@
 #define EPD_WIDTH       168
 #define EPD_HEIGHT      400
 
-//colour
-#define  black   0x00 
-#define  white   0x55
-#define  yellow  0xAA
-#define  red     0xFF
+// Color
+#define  black   0x0
+#define  white   0x1
+#define  yellow  0x2
+#define  red     0x3
 
 #define UWORD   unsigned int
 #define UBYTE   unsigned char
@@ -59,8 +59,8 @@ public:
     void TurnOnDisplay(void);
     void Clear(UBYTE color);
     void Display(UBYTE *Image);
+    void Display_part(UBYTE *Image, UWORD xstart, UWORD ystart, UWORD image_width, UWORD image_height);
     void Sleep(void);
-
 
 private:
     unsigned int reset_pin;

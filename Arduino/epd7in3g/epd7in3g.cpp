@@ -63,7 +63,6 @@ int Epd::Init() {
     SendData(0x4F);
     SendData(0x69);
 
-
     SendCommand(0x05);
     SendData(0x40);
     SendData(0x1F);
@@ -98,9 +97,6 @@ int Epd::Init() {
     //Please notice that PLL must be set for version 2 IC
     SendCommand(0x30);
     SendData(0x08);
-
-
-
 
     SendCommand(0x50);
     SendData(0x3F);
@@ -192,9 +188,6 @@ void Epd::Clear(UBYTE color)
     UWORD Width, Height;
     Width = (WIDTH % 4 == 0)? (WIDTH / 4 ): (WIDTH / 4 + 1);
     Height = HEIGHT;
-
-    SendCommand(0x68);
-    SendData(0x01);
     
     SendCommand(0x04);
     ReadBusyH();
@@ -202,14 +195,9 @@ void Epd::Clear(UBYTE color)
     SendCommand(0x10);
     for (UWORD j = 0; j < Height; j++) {
         for (UWORD i = 0; i < Width; i++) {
-            for(UBYTE k = 0; k < 4; k++) {
-                SendData(color);
-            }
+            SendData((color<<6) | (color<<4) | (color<<2) | color);
         }
     }
-
-    SendCommand(0x68);
-    SendData(0x00);
 
     TurnOnDisplay();
 }
@@ -223,9 +211,6 @@ void Epd::Display(UBYTE *Image)
     UWORD Width, Height;
     Width = (WIDTH % 4 == 0)? (WIDTH / 4 ): (WIDTH / 4 + 1);
     Height = HEIGHT;
-
-    SendCommand(0x68);
-    SendData(0x01);
     
     SendCommand(0x04);
     ReadBusyH();
@@ -236,35 +221,29 @@ void Epd::Display(UBYTE *Image)
             SendData(pgm_read_byte(&Image[i + j * Width]));
         }
     }
+
     TurnOnDisplay();
 }
 
-void Epd::Display_part(UBYTE *Image, UWORD xstart, UWORD ystart, UWORD image_width, UWORD image_heigh)
+void Epd::Display_part(UBYTE *Image, UWORD xstart, UWORD ystart, UWORD image_width, UWORD image_height)
 {
-    UWORD Width, Height;
+    UWORD Width, Height, i, j;
     Width = (WIDTH % 4 == 0)? (WIDTH / 4 ): (WIDTH / 4 + 1);
     Height = HEIGHT;
-
-    SendCommand(0x68);
-    SendData(0x01);
     
     SendCommand(0x04);
     ReadBusyH();
 
     SendCommand(0x10);
-    for (UWORD i = 0; i < Height; i++) {
-        for (UWORD j = 0; j < Width; j++) {
-            if((j >= xstart/4) && (j < (image_width + xstart)/4) && (i >= ystart) && (i <= (ystart + image_heigh)) )
-            {
-                SendData(pgm_read_byte(&Image[(i-ystart) * image_width/4 + j - xstart/4]));
-                // Serial.print(Image[(i-ystart) * image_width/8 + j - xstart], HEX);
-                // Serial.print(" ");
+    for(i=0; i<Height; i++) {
+        for(j=0; j< Width; j++) {
+            if(i<image_height+ystart && i>=ystart && j<(image_width+xstart)/4 && j>=xstart/4) {
+              SendData(pgm_read_byte(&Image[(j-xstart/4) + (image_width/4*(i-ystart))]));
             }
-            else
-            {
-                SendData(0x55);
-            }
-        }
+			else {
+				SendData(0x55);
+			}
+		}
     }
     TurnOnDisplay();
 }

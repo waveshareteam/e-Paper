@@ -1,9 +1,8 @@
 /**
- *  @filename   :   epd1in64g-demo.ino
- *  @brief      :   1.64inch e-paper (G) display demo
- *  @author     :   Waveshare
+ *  @filename   :   imagedata.h
+ *  @brief      :   head file for imagedata.cpp
  *
- *  Copyright (C) Waveshare     2022/7/22
+ *  Copyright (C) Waveshare     2022/08/16
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documnetation files (the "Software"), to deal
@@ -24,41 +23,8 @@
  * THE SOFTWARE.
  */
 
-#include <SPI.h>
-#include "epd1in64g.h"
-#include "imagedata.h"
+extern const unsigned char Image4color[];
 
-Epd epd;
+/* FILE END */
 
-void setup() {
-  // put your setup code here, to run once:
-  Serial.begin(115200);
-  Serial.print("e-Paper init ");
-  if (epd.Init() != 0) {
-      Serial.print("e-Paper init failed");
-      return;
-  }
 
-  Serial.print("Image \r\n");
-  epd.Display(IMAGE_DATA);
-  delay(2000);
-
-  Serial.print("White \r\n");
-  epd.Clear(white);
-  delay(2000);
-
-  Serial.print("Small Image \r\n");
-  epd.Display_part(IMAGE_DATA, 0, 0, 168, 168);
-  delay(2000);
-
-  Serial.print("Clear...\r\n");
-  epd.Clear(white);
-  delay(2000);
-
-  Serial.print("Goto Sleep...\r\n");
-  epd.Sleep();
-}
-
-void loop() {
-
-}

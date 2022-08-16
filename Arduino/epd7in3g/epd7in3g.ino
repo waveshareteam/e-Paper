@@ -39,11 +39,12 @@ void setup() {
       return;
   }
 
-  Serial.print("While \r\n");
-  epd.Clear(white); // While
+  Serial.print("White \r\n");
+  epd.Clear(white);
   delay(2000);
 
-  epd.Display_part(IMAGE_DATA, 312, 162, 168, 168);
+  Serial.print("Small Image \r\n");
+  epd.Display_part(Image4color, 312, 162, 168, 168);
   delay(2000);
 
   Serial.print("Clear...\r\n");
@@ -52,7 +53,6 @@ void setup() {
 
   Serial.print("Goto Sleep...\r\n");
   epd.Sleep();
-  
 }
 
 void loop() {

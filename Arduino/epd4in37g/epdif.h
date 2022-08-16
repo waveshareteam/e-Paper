@@ -1,9 +1,10 @@
 /**
- *  @filename   :   epd1in64g-demo.ino
- *  @brief      :   1.64inch e-paper (G) display demo
- *  @author     :   Waveshare
+ *  @filename   :   epdif.h
+ *  @brief      :   Header file of epdif.cpp providing EPD interface functions
+ *                  Users have to implement all the functions in epdif.cpp
+ *  @author     :   Yehui from Waveshare
  *
- *  Copyright (C) Waveshare     2022/7/22
+ *  Copyright (C) Waveshare     August 10 2017
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documnetation files (the "Software"), to deal
@@ -24,41 +25,27 @@
  * THE SOFTWARE.
  */
 
-#include <SPI.h>
-#include "epd1in64g.h"
-#include "imagedata.h"
+#ifndef EPDIF_H
+#define EPDIF_H
 
-Epd epd;
+#include <arduino.h>
 
-void setup() {
-  // put your setup code here, to run once:
-  Serial.begin(115200);
-  Serial.print("e-Paper init ");
-  if (epd.Init() != 0) {
-      Serial.print("e-Paper init failed");
-      return;
-  }
+// Pin definition
+#define RST_PIN         8
+#define DC_PIN          9
+#define CS_PIN          10
+#define BUSY_PIN        7
 
-  Serial.print("Image \r\n");
-  epd.Display(IMAGE_DATA);
-  delay(2000);
+class EpdIf {
+public:
+    EpdIf(void);
+    ~EpdIf(void);
 
-  Serial.print("White \r\n");
-  epd.Clear(white);
-  delay(2000);
+    static int  IfInit(void);
+    static void DigitalWrite(int pin, int value); 
+    static int  DigitalRead(int pin);
+    static void DelayMs(unsigned int delaytime);
+    static void SpiTransfer(unsigned char data);
+};
 
-  Serial.print("Small Image \r\n");
-  epd.Display_part(IMAGE_DATA, 0, 0, 168, 168);
-  delay(2000);
-
-  Serial.print("Clear...\r\n");
-  epd.Clear(white);
-  delay(2000);
-
-  Serial.print("Goto Sleep...\r\n");
-  epd.Sleep();
-}
-
-void loop() {
-
-}
+#endif

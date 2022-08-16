@@ -1,9 +1,10 @@
 /**
- *  @filename   :   epd1in64g-demo.ino
- *  @brief      :   1.64inch e-paper (G) display demo
- *  @author     :   Waveshare
+ *  @filename   :   epdif.cpp
+ *  @brief      :   Implements EPD interface functions
+ *                  Users have to implement all the functions in epdif.cpp
+ *  @author     :   Yehui from Waveshare
  *
- *  Copyright (C) Waveshare     2022/7/22
+ *  Copyright (C) Waveshare     August 10 2017
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documnetation files (the "Software"), to deal
@@ -24,41 +25,40 @@
  * THE SOFTWARE.
  */
 
-#include <SPI.h>
-#include "epd1in64g.h"
-#include "imagedata.h"
+#include "epdif.h"
+#include <spi.h>
 
-Epd epd;
+EpdIf::EpdIf() {
+};
 
-void setup() {
-  // put your setup code here, to run once:
-  Serial.begin(115200);
-  Serial.print("e-Paper init ");
-  if (epd.Init() != 0) {
-      Serial.print("e-Paper init failed");
-      return;
-  }
+EpdIf::~EpdIf() {
+};
 
-  Serial.print("Image \r\n");
-  epd.Display(IMAGE_DATA);
-  delay(2000);
-
-  Serial.print("White \r\n");
-  epd.Clear(white);
-  delay(2000);
-
-  Serial.print("Small Image \r\n");
-  epd.Display_part(IMAGE_DATA, 0, 0, 168, 168);
-  delay(2000);
-
-  Serial.print("Clear...\r\n");
-  epd.Clear(white);
-  delay(2000);
-
-  Serial.print("Goto Sleep...\r\n");
-  epd.Sleep();
+void EpdIf::DigitalWrite(int pin, int value) {
+    digitalWrite(pin, value);
 }
 
-void loop() {
+int EpdIf::DigitalRead(int pin) {
+    return digitalRead(pin);
+}
 
+void EpdIf::DelayMs(unsigned int delaytime) {
+    delay(delaytime);
+}
+
+void EpdIf::SpiTransfer(unsigned char data) {
+    digitalWrite(CS_PIN, LOW);
+    SPI.transfer(data);
+    digitalWrite(CS_PIN, HIGH);
+}
+
+int EpdIf::IfInit(void) {
+    pinMode(CS_PIN, OUTPUT);
+    pinMode(RST_PIN, OUTPUT);
+    pinMode(DC_PIN, OUTPUT);
+    pinMode(BUSY_PIN, INPUT); 
+
+    SPI.begin();
+    SPI.beginTransaction(SPISettings(2000000, MSBFIRST, SPI_MODE0));
+    return 0;
 }
