@@ -47,7 +47,7 @@ try:
 
     # Switch width and height for landscape display
     epd.init()
-    logging.info("1.Drawing on the image...")
+    logging.info("2.Drawing on the image...")
     Himage = Image.new('RGB', (epd.height, epd.width), epd.WHITE)      
     draw = ImageDraw.Draw(Himage)
     draw.text((5, 0), 'hello world', font = font18, fill = epd.RED)
@@ -72,13 +72,13 @@ try:
     time.sleep(3)
 
     epd.init()
-    logging.info("3.read bmp file")
+    logging.info("4.read bmp file")
     Himage = Image.open(os.path.join(picdir, '3inch-2.bmp'))
     epd.display(epd.getbuffer(Himage))
     time.sleep(3)
 
     epd.init()
-    logging.info("3.read bmp file")
+    logging.info("5.read bmp file")
     Himage = Image.open(os.path.join(picdir, '3inch-3.bmp'))
     epd.display(epd.getbuffer(Himage))
     time.sleep(3)

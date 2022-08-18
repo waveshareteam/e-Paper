@@ -3,11 +3,11 @@
 <title>Static Call Graph - [epd-demo\epd-demo.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image epd-demo\epd-demo.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Tue Aug 16 16:55:17 2022
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Wed Aug 17 17:17:30 2022
 <BR><P>
 <H3>Maximum Stack Usage =        760 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-main &rArr; EPD_4in37g_test &rArr; Paint_DrawNum &rArr; Paint_DrawString_EN &rArr; Paint_DrawChar &rArr; Paint_SetPixel &rArr; __2printf
+main &rArr; EPD_2in36g_test &rArr; Paint_DrawNum &rArr; Paint_DrawString_EN &rArr; Paint_DrawChar &rArr; Paint_SetPixel &rArr; __2printf
 <P>
 <H3>
 Mutually Recursive functions
@@ -365,14 +365,14 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[46]"></a>main</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, main.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 760<LI>Call Chain = main &rArr; EPD_4in37g_test &rArr; Paint_DrawNum &rArr; Paint_DrawString_EN &rArr; Paint_DrawChar &rArr; Paint_SetPixel &rArr; __2printf
+<BR><BR>[Stack]<UL><LI>Max Depth = 760<LI>Call Chain = main &rArr; EPD_2in36g_test &rArr; Paint_DrawNum &rArr; Paint_DrawString_EN &rArr; Paint_DrawChar &rArr; Paint_SetPixel &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_USART1_UART_Init
 <LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_SPI1_Init
 <LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_GPIO_Init
 <LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Init
 <LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
-<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4in37g_test
+<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in36g_test
 <LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> entry9a.o(.ARM.Collect$$$$0000000B)
@@ -493,11 +493,11 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Init
 </UL>
 
-<P><STRONG><a name="[74]"></a>EPD_4in37g_test</STRONG> (Thumb, 688 bytes, Stack size 56 bytes, epd_4in37g_test.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 760<LI>Call Chain = EPD_4in37g_test &rArr; Paint_DrawNum &rArr; Paint_DrawString_EN &rArr; Paint_DrawChar &rArr; Paint_SetPixel &rArr; __2printf
+<P><STRONG><a name="[74]"></a>EPD_2in36g_test</STRONG> (Thumb, 966 bytes, Stack size 56 bytes, epd_2in36g_test.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 760<LI>Call Chain = EPD_2in36g_test &rArr; Paint_DrawNum &rArr; Paint_DrawString_EN &rArr; Paint_DrawChar &rArr; Paint_SetPixel &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_SetScale
-<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawBitMap
+<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawBitMap
 <LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_SelectImage
 <LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_NewImage
 <LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawString_EN
@@ -507,14 +507,14 @@ Global Symbols
 <LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawNum
 <LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawLine
 <LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawCircle
-<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_Clear
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_Clear
 <LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DEV_Module_Init
 <LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DEV_Module_Exit
 <LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
-<LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_Sleep
-<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_Init
-<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_Display
-<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_Clear
+<LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_Sleep
+<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_Init
+<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_Display
+<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_Clear
 <LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
 <LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free
 <LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
@@ -522,46 +522,46 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[82]"></a>EPD_4IN37G_Init</STRONG> (Thumb, 344 bytes, Stack size 8 bytes, epd_4in37g.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = EPD_4IN37G_Init &rArr; EPD_4IN37G_SendData &rArr; DEV_SPI_WriteByte &rArr; HAL_SPI_Transmit &rArr; SPI_EndRxTxTransaction &rArr; SPI_WaitFlagStateUntilTimeout
+<P><STRONG><a name="[82]"></a>EPD_2IN36G_Init</STRONG> (Thumb, 284 bytes, Stack size 8 bytes, epd_2in36g.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = EPD_2IN36G_Init &rArr; EPD_2IN36G_SendData &rArr; DEV_SPI_WriteByte &rArr; HAL_SPI_Transmit &rArr; SPI_EndRxTxTransaction &rArr; SPI_WaitFlagStateUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 <LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
-<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_SendData
-<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_SendCommand
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_SendData
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_SendCommand
 </UL>
-<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4in37g_test
-</UL>
-
-<P><STRONG><a name="[83]"></a>EPD_4IN37G_Clear</STRONG> (Thumb, 74 bytes, Stack size 24 bytes, epd_4in37g.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = EPD_4IN37G_Clear &rArr; EPD_4IN37G_TurnOnDisplay &rArr; EPD_4IN37G_SendData &rArr; DEV_SPI_WriteByte &rArr; HAL_SPI_Transmit &rArr; SPI_EndRxTxTransaction &rArr; SPI_WaitFlagStateUntilTimeout
-</UL>
-<BR>[Calls]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_TurnOnDisplay
-<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_SendData
-<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_SendCommand
-<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_ReadBusyH
-</UL>
-<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4in37g_test
+<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in36g_test
 </UL>
 
-<P><STRONG><a name="[8a]"></a>EPD_4IN37G_Display</STRONG> (Thumb, 72 bytes, Stack size 32 bytes, epd_4in37g.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = EPD_4IN37G_Display &rArr; EPD_4IN37G_TurnOnDisplay &rArr; EPD_4IN37G_SendData &rArr; DEV_SPI_WriteByte &rArr; HAL_SPI_Transmit &rArr; SPI_EndRxTxTransaction &rArr; SPI_WaitFlagStateUntilTimeout
+<P><STRONG><a name="[83]"></a>EPD_2IN36G_Clear</STRONG> (Thumb, 98 bytes, Stack size 24 bytes, epd_2in36g.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = EPD_2IN36G_Clear &rArr; EPD_2IN36G_TurnOnDisplay &rArr; EPD_2IN36G_SendData &rArr; DEV_SPI_WriteByte &rArr; HAL_SPI_Transmit &rArr; SPI_EndRxTxTransaction &rArr; SPI_WaitFlagStateUntilTimeout
 </UL>
-<BR>[Calls]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_TurnOnDisplay
-<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_SendData
-<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_SendCommand
-<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_ReadBusyH
+<BR>[Calls]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_TurnOnDisplay
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_SendData
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_SendCommand
+<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_ReadBusyH
 </UL>
-<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4in37g_test
+<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in36g_test
 </UL>
 
-<P><STRONG><a name="[92]"></a>EPD_4IN37G_Sleep</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, epd_4in37g.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = EPD_4IN37G_Sleep &rArr; EPD_4IN37G_SendData &rArr; DEV_SPI_WriteByte &rArr; HAL_SPI_Transmit &rArr; SPI_EndRxTxTransaction &rArr; SPI_WaitFlagStateUntilTimeout
+<P><STRONG><a name="[89]"></a>EPD_2IN36G_Display</STRONG> (Thumb, 84 bytes, Stack size 32 bytes, epd_2in36g.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = EPD_2IN36G_Display &rArr; EPD_2IN36G_TurnOnDisplay &rArr; EPD_2IN36G_SendData &rArr; DEV_SPI_WriteByte &rArr; HAL_SPI_Transmit &rArr; SPI_EndRxTxTransaction &rArr; SPI_WaitFlagStateUntilTimeout
 </UL>
-<BR>[Calls]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_SendData
-<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_SendCommand
+<BR>[Calls]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_TurnOnDisplay
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_SendData
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_SendCommand
+<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_ReadBusyH
 </UL>
-<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4in37g_test
+<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in36g_test
+</UL>
+
+<P><STRONG><a name="[92]"></a>EPD_2IN36G_Sleep</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, epd_2in36g.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = EPD_2IN36G_Sleep &rArr; EPD_2IN36G_SendData &rArr; DEV_SPI_WriteByte &rArr; HAL_SPI_Transmit &rArr; SPI_EndRxTxTransaction &rArr; SPI_WaitFlagStateUntilTimeout
+</UL>
+<BR>[Calls]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_SendData
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_SendCommand
+</UL>
+<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in36g_test
 </UL>
 
 <P><STRONG><a name="[9a]"></a>DEV_SPI_WriteByte</STRONG> (Thumb, 18 bytes, Stack size 8 bytes, dev_config.o(.text))
@@ -569,8 +569,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SPI_Transmit
 </UL>
-<BR>[Called By]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_SendData
-<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_SendCommand
+<BR>[Called By]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_SendData
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_SendCommand
 </UL>
 
 <P><STRONG><a name="[81]"></a>DEV_Module_Init</STRONG> (Thumb, 38 bytes, Stack size 8 bytes, dev_config.o(.text))
@@ -578,7 +578,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 </UL>
-<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4in37g_test
+<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in36g_test
 </UL>
 
 <P><STRONG><a name="[94]"></a>DEV_Module_Exit</STRONG> (Thumb, 38 bytes, Stack size 8 bytes, dev_config.o(.text))
@@ -586,17 +586,17 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 </UL>
-<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4in37g_test
+<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in36g_test
 </UL>
 
 <P><STRONG><a name="[85]"></a>Paint_NewImage</STRONG> (Thumb, 56 bytes, Stack size 16 bytes, gui_paint.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = Paint_NewImage
 </UL>
-<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4in37g_test
+<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in36g_test
 </UL>
 
 <P><STRONG><a name="[87]"></a>Paint_SelectImage</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, gui_paint.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4in37g_test
+<BR><BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in36g_test
 </UL>
 
 <P><STRONG><a name="[9c]"></a>Paint_SetRotate</STRONG> (Thumb, 44 bytes, Stack size 8 bytes, gui_paint.o(.text), UNUSED)
@@ -608,7 +608,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4in37g_test
+<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in36g_test
 </UL>
 
 <P><STRONG><a name="[9d]"></a>Paint_SetMirroring</STRONG> (Thumb, 62 bytes, Stack size 8 bytes, gui_paint.o(.text), UNUSED)
@@ -627,10 +627,10 @@ Global Symbols
 <LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawChar
 </UL>
 
-<P><STRONG><a name="[88]"></a>Paint_Clear</STRONG> (Thumb, 156 bytes, Stack size 12 bytes, gui_paint.o(.text))
+<P><STRONG><a name="[8a]"></a>Paint_Clear</STRONG> (Thumb, 156 bytes, Stack size 12 bytes, gui_paint.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = Paint_Clear
 </UL>
-<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4in37g_test
+<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in36g_test
 </UL>
 
 <P><STRONG><a name="[9f]"></a>Paint_ClearWindows</STRONG> (Thumb, 52 bytes, Stack size 32 bytes, gui_paint.o(.text), UNUSED)
@@ -645,7 +645,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawLine
 <LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawCircle
-<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4in37g_test
+<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in36g_test
 </UL>
 
 <P><STRONG><a name="[8c]"></a>Paint_DrawLine</STRONG> (Thumb, 662 bytes, Stack size 48 bytes, gui_paint.o(.text))
@@ -655,7 +655,7 @@ Global Symbols
 <LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawRectangle
-<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4in37g_test
+<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in36g_test
 </UL>
 
 <P><STRONG><a name="[8d]"></a>Paint_DrawRectangle</STRONG> (Thumb, 170 bytes, Stack size 48 bytes, gui_paint.o(.text))
@@ -664,7 +664,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawLine
 <LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4in37g_test
+<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in36g_test
 </UL>
 
 <P><STRONG><a name="[8e]"></a>Paint_DrawCircle</STRONG> (Thumb, 528 bytes, Stack size 72 bytes, gui_paint.o(.text))
@@ -673,7 +673,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawPoint
 <LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4in37g_test
+<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in36g_test
 </UL>
 
 <P><STRONG><a name="[a0]"></a>Paint_DrawChar</STRONG> (Thumb, 172 bytes, Stack size 40 bytes, gui_paint.o(.text))
@@ -693,7 +693,7 @@ Global Symbols
 <LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawNum
-<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4in37g_test
+<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in36g_test
 </UL>
 
 <P><STRONG><a name="[90]"></a>Paint_DrawString_CN</STRONG> (Thumb, 518 bytes, Stack size 40 bytes, gui_paint.o(.text))
@@ -701,7 +701,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_SetPixel
 </UL>
-<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4in37g_test
+<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in36g_test
 </UL>
 
 <P><STRONG><a name="[91]"></a>Paint_DrawNum</STRONG> (Thumb, 140 bytes, Stack size 576 bytes, gui_paint.o(.text))
@@ -711,17 +711,17 @@ Global Symbols
 <LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 <LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
-<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4in37g_test
+<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in36g_test
 </UL>
 
 <P><STRONG><a name="[a1]"></a>Paint_DrawTime</STRONG> (Thumb, 282 bytes, Stack size 72 bytes, gui_paint.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawChar
 </UL>
 
-<P><STRONG><a name="[89]"></a>Paint_DrawBitMap</STRONG> (Thumb, 46 bytes, Stack size 16 bytes, gui_paint.o(.text))
+<P><STRONG><a name="[88]"></a>Paint_DrawBitMap</STRONG> (Thumb, 46 bytes, Stack size 16 bytes, gui_paint.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = Paint_DrawBitMap
 </UL>
-<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4in37g_test
+<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in36g_test
 </UL>
 
 <P><STRONG><a name="[a2]"></a>Paint_DrawBitMap_Paste</STRONG> (Thumb, 110 bytes, Stack size 56 bytes, gui_paint.o(.text), UNUSED)
@@ -935,10 +935,10 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
 </UL>
-<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4in37g_test
+<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in36g_test
 <LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_Init
-<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_ReadBusyH
+<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_Init
+<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_ReadBusyH
 </UL>
 
 <P><STRONG><a name="[10e]"></a>HAL_SuspendTick</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, stm32f1xx_hal.o(.text), UNUSED)
@@ -1055,16 +1055,16 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[96]"></a>HAL_GPIO_ReadPin</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, stm32f1xx_hal_gpio.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_ReadBusyH
+<BR><BR>[Called By]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_ReadBusyH
 </UL>
 
 <P><STRONG><a name="[76]"></a>HAL_GPIO_WritePin</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, stm32f1xx_hal_gpio.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DEV_Module_Init
 <LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DEV_Module_Exit
 <LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_GPIO_Init
-<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_Init
-<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_SendData
-<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_SendCommand
+<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_Init
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_SendData
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_SendCommand
 </UL>
 
 <P><STRONG><a name="[120]"></a>HAL_GPIO_TogglePin</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, stm32f1xx_hal_gpio.o(.text), UNUSED)
@@ -1387,13 +1387,13 @@ Global Symbols
 <LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawLine
 <LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawCircle
 <LI><a href="#[2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HardFault_Handler
-<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4in37g_test
+<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in36g_test
 <LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Error_Handler
 <LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_SetMirroring
 <LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_DrawChar
 <LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_SetPixel
 <LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Paint_SetRotate
-<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_ReadBusyH
+<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_ReadBusyH
 </UL>
 
 <P><STRONG><a name="[143]"></a>__scatterload_copy</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_copy), UNUSED)
@@ -1405,65 +1405,65 @@ Global Symbols
 <P><STRONG><a name="[93]"></a>free</STRONG> (Thumb, 76 bytes, Stack size 8 bytes, malloc.o(i.free))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = free
 </UL>
-<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4in37g_test
+<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in36g_test
 </UL>
 
 <P><STRONG><a name="[84]"></a>malloc</STRONG> (Thumb, 92 bytes, Stack size 20 bytes, malloc.o(i.malloc))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = malloc
 </UL>
-<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4in37g_test
+<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2in36g_test
 </UL>
 <P>
 <H3>
 Local Symbols
 </H3>
-<P><STRONG><a name="[95]"></a>EPD_4IN37G_ReadBusyH</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, epd_4in37g.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = EPD_4IN37G_ReadBusyH &rArr; __2printf
+<P><STRONG><a name="[95]"></a>EPD_2IN36G_ReadBusyH</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, epd_2in36g.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = EPD_2IN36G_ReadBusyH &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
 <LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_ReadPin
 <LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_Display
-<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_Clear
-<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_TurnOnDisplay
+<BR>[Called By]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_Display
+<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_Clear
+<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_TurnOnDisplay
 </UL>
 
-<P><STRONG><a name="[97]"></a>EPD_4IN37G_SendCommand</STRONG> (Thumb, 46 bytes, Stack size 16 bytes, epd_4in37g.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = EPD_4IN37G_SendCommand &rArr; DEV_SPI_WriteByte &rArr; HAL_SPI_Transmit &rArr; SPI_EndRxTxTransaction &rArr; SPI_WaitFlagStateUntilTimeout
+<P><STRONG><a name="[97]"></a>EPD_2IN36G_SendCommand</STRONG> (Thumb, 46 bytes, Stack size 16 bytes, epd_2in36g.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = EPD_2IN36G_SendCommand &rArr; DEV_SPI_WriteByte &rArr; HAL_SPI_Transmit &rArr; SPI_EndRxTxTransaction &rArr; SPI_WaitFlagStateUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 <LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DEV_SPI_WriteByte
 </UL>
-<BR>[Called By]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_Sleep
-<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_Init
-<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_Display
-<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_Clear
-<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_TurnOnDisplay
+<BR>[Called By]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_Sleep
+<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_Init
+<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_Display
+<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_Clear
+<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_TurnOnDisplay
 </UL>
 
-<P><STRONG><a name="[98]"></a>EPD_4IN37G_SendData</STRONG> (Thumb, 46 bytes, Stack size 16 bytes, epd_4in37g.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = EPD_4IN37G_SendData &rArr; DEV_SPI_WriteByte &rArr; HAL_SPI_Transmit &rArr; SPI_EndRxTxTransaction &rArr; SPI_WaitFlagStateUntilTimeout
+<P><STRONG><a name="[98]"></a>EPD_2IN36G_SendData</STRONG> (Thumb, 46 bytes, Stack size 16 bytes, epd_2in36g.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = EPD_2IN36G_SendData &rArr; DEV_SPI_WriteByte &rArr; HAL_SPI_Transmit &rArr; SPI_EndRxTxTransaction &rArr; SPI_WaitFlagStateUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 <LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DEV_SPI_WriteByte
 </UL>
-<BR>[Called By]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_Sleep
-<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_Init
-<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_Display
-<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_Clear
-<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_TurnOnDisplay
+<BR>[Called By]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_Sleep
+<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_Init
+<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_Display
+<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_Clear
+<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_TurnOnDisplay
 </UL>
 
-<P><STRONG><a name="[99]"></a>EPD_4IN37G_TurnOnDisplay</STRONG> (Thumb, 36 bytes, Stack size 8 bytes, epd_4in37g.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = EPD_4IN37G_TurnOnDisplay &rArr; EPD_4IN37G_SendData &rArr; DEV_SPI_WriteByte &rArr; HAL_SPI_Transmit &rArr; SPI_EndRxTxTransaction &rArr; SPI_WaitFlagStateUntilTimeout
+<P><STRONG><a name="[99]"></a>EPD_2IN36G_TurnOnDisplay</STRONG> (Thumb, 36 bytes, Stack size 8 bytes, epd_2in36g.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = EPD_2IN36G_TurnOnDisplay &rArr; EPD_2IN36G_SendData &rArr; DEV_SPI_WriteByte &rArr; HAL_SPI_Transmit &rArr; SPI_EndRxTxTransaction &rArr; SPI_WaitFlagStateUntilTimeout
 </UL>
-<BR>[Calls]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_SendData
-<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_SendCommand
-<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_ReadBusyH
+<BR>[Calls]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_SendData
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_SendCommand
+<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_ReadBusyH
 </UL>
-<BR>[Called By]<UL><LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_Display
-<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_4IN37G_Clear
+<BR>[Called By]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_Display
+<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_2IN36G_Clear
 </UL>
 
 <P><STRONG><a name="[a4]"></a>SPI_WaitFlagStateUntilTimeout</STRONG> (Thumb, 210 bytes, Stack size 32 bytes, stm32f1xx_hal_spi.o(.text))

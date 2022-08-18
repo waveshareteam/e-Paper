@@ -95,6 +95,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   // EPD_1in64g_test();
+	// EPD_2in36g_test();
   // EPD_3in0g_test();
   // EPD_4in37g_test();
   // EPD_7in3g_test();
