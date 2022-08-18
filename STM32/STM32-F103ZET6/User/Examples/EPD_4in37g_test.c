@@ -58,7 +58,7 @@ int EPD_4in37g_test(void)
     printf("show image for array\r\n");
     Paint_SelectImage(BlackImage);
     Paint_Clear(EPD_4IN37G_WHITE);
-    Paint_DrawBitMap(Image4color);
+    Paint_DrawBitMap(gImage_4in37g);
     EPD_4IN37G_Display(BlackImage);
     DEV_Delay_ms(2000);
 #endif

@@ -1,5 +1,5 @@
 /*****************************************************************************
-* | File      	:   EPD_4in37g.c
+* | File      	:   EPD_4in37g.h
 * | Author      :   Waveshare team
 * | Function    :   4.37inch e-Paper (G)
 * | Info        :
