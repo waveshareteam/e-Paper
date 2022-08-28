@@ -92,11 +92,6 @@ void setup() {
 
   delay(2000);
 
-  if (epd.Init() != 0) {
-      Serial.print("e-Paper init failed ");
-      return;
-  }
-
   /** 
    *  there are 2 memory areas embedded in the e-paper display
    *  and once the display is refreshed, the memory area will be auto-toggled,
