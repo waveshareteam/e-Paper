@@ -169,12 +169,14 @@ void Paint_SetScale(UBYTE scale)
     }else if(scale == 4){
         Paint.Scale = scale;
         Paint.WidthByte = (Paint.WidthMemory % 4 == 0)? (Paint.WidthMemory / 4 ): (Paint.WidthMemory / 4 + 1);
-    }else if(scale == 7){//Only applicable with 5in65 e-Paper
+    }else if(scale == 7 || scale == 16){
+        /* 7 colours are only applicable with 5in65 e-Paper */
+        /* 16 colours are used for dithering */
 		Paint.Scale = scale;
 		Paint.WidthByte = (Paint.WidthMemory % 2 == 0)? (Paint.WidthMemory / 2 ): (Paint.WidthMemory / 2 + 1);;
 	}else{
         Debug("Set Scale Input parameter error\r\n");
-        Debug("Scale Only support: 2 4 7\r\n");
+        Debug("Scale Only support: 2 4 7 16\r\n");
     }
 }
 /******************************************************************************
@@ -247,7 +249,7 @@ void Paint_SetPixel(UWORD Xpoint, UWORD Ypoint, UWORD Color)
         UBYTE Rdata = Paint.Image[Addr];
         Rdata = Rdata & (~(0xC0 >> ((X % 4)*2)));//Clear first, then set value
         Paint.Image[Addr] = Rdata | ((Color << 6) >> ((X % 4)*2));
-    }else if(Paint.Scale == 7){
+    }else if(Paint.Scale == 7 || Paint.Scale == 16){
 		UDOUBLE Addr = X / 2  + Y * Paint.WidthByte;
 		UBYTE Rdata = Paint.Image[Addr];
 		Rdata = Rdata & (~(0xF0 >> ((X % 2)*4)));//Clear first, then set value
@@ -277,7 +279,7 @@ void Paint_Clear(UWORD Color)
 				Paint.Image[Addr] = (Color<<6)|(Color<<4)|(Color<<2)|Color;
 			}
 		}		
-	}else if(Paint.Scale == 7) {
+	}else if(Paint.Scale == 7 || Paint.Scale == 16) {
 		for (UWORD Y = 0; Y < Paint.HeightByte; Y++) {
 			for (UWORD X = 0; X < Paint.WidthByte; X++ ) {
 				UDOUBLE Addr = X + Y*Paint.WidthByte;
