@@ -455,11 +455,8 @@ class EPD:
 
 
     def sleep(self):
-        self.send_command(0X50) # DEEP_SLEEP_MODE
-        self.send_data(0xf7)
-        self.send_command(0X02) #power off
-        self.send_command(0X07) #deep sleep
-        self.send_data(0xA5)
+        self.send_command(0X10) #deep sleep
+        self.send_data(0x03)
 
         epdconfig.delay_ms(2000)
         epdconfig.module_exit()
