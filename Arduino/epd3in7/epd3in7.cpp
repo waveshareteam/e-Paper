@@ -382,10 +382,7 @@ void Epd::Clear(UBYTE mode) {
  *          You can use EPD_Reset() to awaken
  */
 void Epd::Sleep(void) {
-    SendCommand(0X50);
-    SendData(0xf7);
-    SendCommand(0X02);   //power off
-    SendCommand(0X07);   //deep sleep
-    SendData(0xA5);
+    SendCommand(0X10);   //deep sleep
+    SendData(0x03);
 }
 /* END OF FILE */

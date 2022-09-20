@@ -577,9 +577,6 @@ parameter:
 ******************************************************************************/
 void EPD_3IN7_Sleep(void)
 {
-    EPD_3IN7_SendCommand(0X50);
-    EPD_3IN7_SendData(0xf7);
-    EPD_3IN7_SendCommand(0X02);  	//power off
-    EPD_3IN7_SendCommand(0X07);  	//deep sleep
-    EPD_3IN7_SendData(0xA5);
+    EPD_3IN7_SendCommand(0X10);  	//deep sleep
+    EPD_3IN7_SendData(0x03);
 }
