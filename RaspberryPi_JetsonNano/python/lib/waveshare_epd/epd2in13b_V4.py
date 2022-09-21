@@ -163,11 +163,6 @@ class EPD:
 
     # display image
     def display(self, imageblack, imagered):
-        if self.width%8 == 0:
-            linewidth = int(self.width/8)
-        else:
-            linewidth = int(self.width/8) + 1
-    
         self.send_command(0x24)
         self.send_data2(imageblack)
         
