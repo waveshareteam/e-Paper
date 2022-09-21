@@ -4,8 +4,8 @@
 * | Function    :   Help with use
 * | Info        :
 *----------------
-* |	This version:   V1.0
-* | Date        :   2019-07-31
+* |	This version:   V1.2
+* | Date        :   2022-09-20
 * | Info        :   Here is an English version of the documentation for your quick use.
 ******************************************************************************/
 This file is to help you use this routine.
@@ -31,30 +31,25 @@ BUSY   ->    24
 
 3. Basic use:
 Since this project is a comprehensive project, you may need to read the following for use:
-You can see the 19 functions that have been annotated in lines 19 through 43 of main.c.
-Please note which ink screen you purchased.
-Chestnut 1:
-     If you purchased 5.83inch e-paper, then you should remove the comment for the corresponding 39 lines of code, ie:
-         // EPD_5in83_test();
-     changed to:
-         EPD_5in83_test();
-Chestnut 2:
-     If you buy a 2.9inch e-paper (B), since the 2.9-inch Type B and Type C are common driver codes,
-     Then you should remove the comment for the corresponding 28 lines of code, ie:
-         // EPD_2in9bc_test();
-     changed to:
-         EPD_2in9bc_test();
-Note: For EPD_1in54_V2_test() and EPD_2in13_V2_test(), please note that the V2 logo is attached to the back of your screen.
+You can see many test functions and macro definition Settings in main.c.
+Specifying the macro definition for the EPD at compile time can directly compile the corresponding test program.
+Please pay attention to which type of ink screen you buy. For detailed correspondence, see our Wiki and list.txt file.
+Example 1:
+     If you buy 3.7inch e-paper (V1) then you should add EPD=_3in7 at compile time
+        sudo make clean
+        sudo make -j4 EPD=_3in7
+Example 2:
+    If you buy a 2.9-inch e-paper (B) (V1), you should add EPD= 2IN9bc at compile time since the 2.9-inch type B and Type C are common driver code
+        sudo make clean
+        sudo make -j4 EPD=_2in9bc
+Example 3:
+    If you buy a 7.5-inch e-paper (V2), you should add EPD=_7in5V2 at compile time
+        sudo make clean
+        sudo make -j4 EPD=_7in5V2
 
-Then you need to execute: 
-make
-compile the program, will generate the executable file: epd
-Run: 
-sudo ./epd
-If you modify the program, you need to execute: 
-make clear
-then:
-make
+An executable file is then generated: epd
+Run: sudo ./epd
+If you modify the program, you need to run: make clear, and then make again.
 
 4. Directory structure (selection):
 If you use our products frequently, we will be very familiar with our program directory structure. We have a copy of the specific function.
