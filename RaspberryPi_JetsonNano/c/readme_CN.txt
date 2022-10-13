@@ -4,8 +4,8 @@
 * | Function    :   Help with use
 * | Info        :
 *----------------
-* |	This version:   V1.2
-* | Date        :   2022-09-20
+* | This version:   V1.3
+* | Date        :   2022-10-13
 * | Info        :   在这里提供一个中文版本的使用文档，以便你的快速使用
 ******************************************************************************/
 这个文件是帮助您使用本例程。
@@ -32,17 +32,17 @@ BUSY   ->    24
 你可以在main.c中看到许多测试函数和宏定义设置，在编译时指定屏幕对应的宏定义可以直接编译对应的测试程序。
 请注意你购买的是哪一款的墨水屏。具体的对应关系可以查阅我们的Wiki和list.txt文件。
 栗子1：
-    如果你购买的3.7inch e-paper (V1)，那么你应该在编译时加上 EPD=_3in7
+    如果你购买的3.7inch e-paper (V1)，那么你应该在编译时加上 EPD=epd3in7
         sudo make clean
-        sudo make -j4 EPD=_3in7
+        sudo make EPD=epd3in7
 栗子2：
-    如果你购买的2.9inch e-paper (B) (V1)，由于2.9寸的B型和C型是公用的驱动代码，那么你应该在编译时加上 EPD=_2in9bc
+    如果你购买的2.9inch e-paper (B) (V1)，由于2.9寸的B型和C型是公用的驱动代码，那么你应该在编译时加上 EPD=epd2in9bc
         sudo make clean
-        sudo make -j4 EPD=_2in9bc
+        sudo make EPD=epd2in9bc
 栗子3：
-    如果你购买的是7.5inch e-Paper (V2)，那么你应该在编译时加上 EPD=_7in5V2
+    如果你购买的是7.5inch e-Paper (V2)，那么你应该在编译时加上 EPD=epd7in5V2
         sudo make clean
-        sudo make -j4 EPD=_7in5V2
+        sudo make EPD=epd7in5V2
 
 然后会生成可执行文件：epd
 运行：sudo ./epd
