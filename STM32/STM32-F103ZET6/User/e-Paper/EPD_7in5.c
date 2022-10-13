@@ -160,7 +160,7 @@ void EPD_7IN5_Init(void)
 {
     EPD_7IN5_Reset();
 
-		EPD_7IN5_SendCommand(0x01); // POWER_SETTING
+    EPD_7IN5_SendCommand(0x01); // POWER_SETTING
     EPD_7IN5_SendData(0x37);
     EPD_7IN5_SendData(0x00);
 

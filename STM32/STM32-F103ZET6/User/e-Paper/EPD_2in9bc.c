@@ -193,8 +193,8 @@ void EPD_2IN9BC_Clear(void)
         }
     }
 		
-		EPD_2IN9BC_SendCommand(0x12);
-		EPD_2IN9BC_ReadBusy();
+    EPD_2IN9BC_SendCommand(0x12);
+    EPD_2IN9BC_ReadBusy();
 }
 
 /******************************************************************************

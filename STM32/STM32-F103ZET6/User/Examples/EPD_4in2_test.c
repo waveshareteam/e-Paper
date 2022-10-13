@@ -31,7 +31,7 @@
 #include "EPD_4in2.h"
 #include <string.h>
 
-int EPD_4in2_test(void)
+int EPD_test(void)
 {
     printf("EPD_4IN2_test Demo\r\n");
     if(DEV_Module_Init()!=0){
@@ -86,8 +86,8 @@ int EPD_4in2_test(void)
     Paint_DrawString_EN(10, 20, "hello world", &Font12, WHITE, BLACK);
     Paint_DrawNum(10, 33, 123456789, &Font12, BLACK, WHITE);
     Paint_DrawNum(10, 50, 987654321, &Font16, WHITE, BLACK);
-    Paint_DrawString_CN(130, 0, " ï¿½ï¿½ï¿½abc", &Font12CN, BLACK, WHITE);
-    Paint_DrawString_CN(130, 20, "Î¢Ñ©ï¿½ï¿½ï¿½ï¿½", &Font24CN, WHITE, BLACK);
+    Paint_DrawString_CN(130, 0, "ÄãºÃabc", &Font12CN, BLACK, WHITE);
+    Paint_DrawString_CN(130, 20, "Î¢Ñ©µç×Ó", &Font24CN, WHITE, BLACK);
 
     printf("EPD_Display\r\n");
     EPD_4IN2_Display(BlackImage);
@@ -156,15 +156,15 @@ int EPD_4in2_test(void)
 	Paint_DrawString_EN(10, 20, "hello world", &Font12, WHITE, BLACK);
 	Paint_DrawNum(10, 33, 123456789, &Font12, BLACK, WHITE);
 	Paint_DrawNum(10, 50, 987654321, &Font16, WHITE, BLACK);
-	Paint_DrawString_CN(140, 0, "ï¿½ï¿½ï¿½abc", &Font12CN, GRAY1, GRAY4);
-	Paint_DrawString_CN(140, 40, "ï¿½ï¿½ï¿½abc", &Font12CN, GRAY2, GRAY3);
-	Paint_DrawString_CN(140, 80, "ï¿½ï¿½ï¿½abc", &Font12CN, GRAY3, GRAY2);
-	Paint_DrawString_CN(140, 120, "ï¿½ï¿½ï¿½abc", &Font12CN, GRAY4, GRAY1);
+	Paint_DrawString_CN(140, 0, "ÄãºÃabc", &Font12CN, GRAY1, GRAY4);
+	Paint_DrawString_CN(140, 40, "ÄãºÃabc", &Font12CN, GRAY2, GRAY3);
+	Paint_DrawString_CN(140, 80, "ÄãºÃabc", &Font12CN, GRAY3, GRAY2);
+	Paint_DrawString_CN(140, 120, "ÄãºÃabc", &Font12CN, GRAY4, GRAY1);
 
-	Paint_DrawString_CN(220, 0, "Î¢Ñ©ï¿½ï¿½ï¿½ï¿½", &Font24CN, GRAY1, GRAY4);
-	Paint_DrawString_CN(220, 40, "Î¢Ñ©ï¿½ï¿½ï¿½ï¿½", &Font24CN, GRAY2, GRAY3);
-	Paint_DrawString_CN(220, 80, "Î¢Ñ©ï¿½ï¿½ï¿½ï¿½", &Font24CN, GRAY3, GRAY2);
-	Paint_DrawString_CN(220, 120, "Î¢Ñ©ï¿½ï¿½ï¿½ï¿½", &Font24CN, GRAY4, GRAY1);
+	Paint_DrawString_CN(220, 0, "Î¢Ñ©µç×Ó", &Font24CN, GRAY1, GRAY4);
+	Paint_DrawString_CN(220, 40, "Î¢Ñ©µç×Ó", &Font24CN, GRAY2, GRAY3);
+	Paint_DrawString_CN(220, 80, "Î¢Ñ©µç×Ó", &Font24CN, GRAY3, GRAY2);
+	Paint_DrawString_CN(220, 120, "Î¢Ñ©µç×Ó", &Font24CN, GRAY4, GRAY1);
 
 	EPD_4IN2_4GrayDisplay(BlackImage);
 	DEV_Delay_ms(500);

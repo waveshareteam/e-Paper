@@ -31,7 +31,7 @@
 #include "EPD_5in83b_V2.h"
 #include "ImageData.h"
 
-int EPD_5in83b_V2_test(void)
+int EPD_test(void)
 {
     printf("EPD_5in83b_V2_test Demo\r\n");
     DEV_Module_Init();
