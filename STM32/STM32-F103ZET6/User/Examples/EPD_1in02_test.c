@@ -31,7 +31,7 @@
 #include "EPD_1in02d.h"
 #include <string.h>
 
-int EPD_1in02d_test(void)
+int EPD_test(void)
 {
     printf("EPD_1IN02_test Demo\r\n");
     if(DEV_Module_Init()!=0){

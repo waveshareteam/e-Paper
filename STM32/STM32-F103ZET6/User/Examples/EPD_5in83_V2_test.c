@@ -31,7 +31,7 @@
 #include "EPD_5in83_V2.h"
 #include "time.h"
 
-int EPD_5in83_V2_test(void)
+int EPD_test(void)
 {
     printf("EPD_5IN83_V2_test Demo\r\n");
     if(DEV_Module_Init()!=0){

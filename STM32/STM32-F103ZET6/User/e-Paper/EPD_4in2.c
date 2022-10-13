@@ -609,11 +609,10 @@ void EPD_4IN2_Display(UBYTE *Image)
 
 void EPD_4IN2_PartialDisplay(UWORD X_start,UWORD Y_start,UWORD X_end,UWORD Y_end, UBYTE *Image)
 {
-	UWORD Width, Height;
+	UWORD Width;
 	static UBYTE DATA[EPD_4IN2_WIDTH * EPD_4IN2_HEIGHT / 8] = {0x00};
 
 	Width = (EPD_4IN2_WIDTH % 8 == 0)? (EPD_4IN2_WIDTH / 8 ): (EPD_4IN2_WIDTH / 8 + 1);
-	Height = EPD_4IN2_HEIGHT;
 	
 	X_start = (X_start % 8 == 0)? (X_start): (X_start/8*8+8);
 	X_end = (X_end % 8 == 0)? (X_end): (X_end/8*8+8);

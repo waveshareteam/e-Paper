@@ -30,7 +30,7 @@
 #include "EPD_Test.h"
 #include "EPD_7in5_V2.h"
 
-int EPD_7in5_V2_test(void)
+int EPD_test(void)
 {
     printf("EPD_7IN5_V2_test Demo\r\n");
     if(DEV_Module_Init()!=0){
@@ -58,11 +58,11 @@ int EPD_7in5_V2_test(void)
     Paint_SelectImage(BlackImage);
     Paint_Clear(WHITE);
     Paint_DrawBitMap(gImage_7in5_V2);
-		EPD_7IN5_V2_WritePicture(BlackImage, 0);
-		//The entire image size is EPD_7IN5_V2_WIDTH*EPD_7IN5_V2_HEIGHT/8 
-		//Since the memory problem is transmitted halfway, now the other half is transmitted, so the offset address is required.
-		Paint_DrawBitMap(gImage_7in5_V2 + EPD_7IN5_V2_WIDTH*EPD_7IN5_V2_HEIGHT/8/2);
-		EPD_7IN5_V2_WritePicture(BlackImage, 1);
+    EPD_7IN5_V2_WritePicture(BlackImage, 0);
+    //The entire image size is EPD_7IN5_V2_WIDTH*EPD_7IN5_V2_HEIGHT/8 
+    //Since the memory problem is transmitted halfway, now the other half is transmitted, so the offset address is required.
+    Paint_DrawBitMap(gImage_7in5_V2 + EPD_7IN5_V2_WIDTH*EPD_7IN5_V2_HEIGHT/8/2);
+    EPD_7IN5_V2_WritePicture(BlackImage, 1);
     DEV_Delay_ms(2000);
 #endif
 
@@ -91,9 +91,9 @@ int EPD_7in5_V2_test(void)
     Paint_DrawNum(10, 50, 987654321, &Font16, WHITE, BLACK);
     Paint_DrawString_CN(130, 0, " ÄãºÃabc", &Font12CN, BLACK, WHITE);
     Paint_DrawString_CN(130, 20, "Î¢Ñ©µç×Ó", &Font24CN, WHITE, BLACK);
-		EPD_7IN5_V2_WritePicture(BlackImage, 0);
-		Paint_Clear(WHITE);
-		EPD_7IN5_V2_WritePicture(BlackImage, 1);
+    EPD_7IN5_V2_WritePicture(BlackImage, 0);
+    Paint_Clear(WHITE);
+    EPD_7IN5_V2_WritePicture(BlackImage, 1);
     printf("EPD_Display\r\n");
     DEV_Delay_ms(2000);
 #endif

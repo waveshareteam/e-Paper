@@ -31,7 +31,7 @@
 #include "EPD_7in5b_HD.h"
 #include "ImageData.h"
 
-int EPD_7in5b_HD_test(void)
+int EPD_test(void)
 {
     printf("EPD_7IN5B_HD_test Demo\r\n");
     if(DEV_Module_Init()!=0){
@@ -81,8 +81,8 @@ int EPD_7in5b_HD_test(void)
     Paint_DrawString_CN(130, 20, "Î¢Ñ©µç×Ó", &Font24CN, WHITE, BLACK);
     Paint_DrawNum(10, 50, 987654321, &Font16, WHITE, BLACK);
     EPD_7IN5B_HD_DisplayPicture(BlackImage,0);
-		Paint_Clear(WHITE);
-		EPD_7IN5B_HD_DisplayPicture(BlackImage,1);
+    Paint_Clear(WHITE);
+    EPD_7IN5B_HD_DisplayPicture(BlackImage,1);
     //2.Draw red image
     Paint_Clear(WHITE);
     Paint_DrawCircle(160, 95, 20, BLACK, DOT_PIXEL_1X1, DRAW_FILL_EMPTY);
@@ -93,9 +93,9 @@ int EPD_7in5b_HD_test(void)
     Paint_DrawString_EN(10, 20, "hello world", &Font12, WHITE, BLACK);
     Paint_DrawNum(10, 33, 123456789, &Font12, BLACK, WHITE);
     EPD_7IN5B_HD_DisplayPicture(BlackImage,2);
-		Paint_Clear(WHITE);
-		printf("EPD_Display\r\n");
-		EPD_7IN5B_HD_DisplayPicture(BlackImage,3);
+    Paint_Clear(WHITE);
+    printf("EPD_Display\r\n");
+    EPD_7IN5B_HD_DisplayPicture(BlackImage,3);
     DEV_Delay_ms(5000);
 #endif
 

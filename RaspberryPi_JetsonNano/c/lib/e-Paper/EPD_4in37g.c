@@ -83,14 +83,6 @@ static void EPD_4IN37G_ReadBusyH(void)
     }
     Debug("e-Paper busy H release\r\n");
 }
-static void EPD_4IN37G_ReadBusyL(void)
-{
-    Debug("e-Paper busy L\r\n");
-    while(DEV_Digital_Read(EPD_BUSY_PIN)) {      //LOW: idle, HIGH: busy
-        DEV_Delay_ms(5);
-    }
-    Debug("e-Paper busy L release\r\n");
-}
 
 /******************************************************************************
 function :	Turn On Display

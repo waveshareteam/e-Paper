@@ -30,7 +30,7 @@
 #include "EPD_Test.h"
 #include "EPD_1in54.h"
 
-int EPD_1in54_test(void)
+int EPD_test(void)
 {
     printf("EPD_1IN54_test Demo\r\n");
     DEV_Module_Init();

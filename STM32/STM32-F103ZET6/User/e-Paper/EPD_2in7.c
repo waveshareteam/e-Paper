@@ -287,28 +287,28 @@ void EPD_2in7_gray_SetLut(void)
 {
 	unsigned int count;	 
     EPD_2in7_SendCommand(0x20);							//vcom
-		for(count=0;count<44;count++)
-			{EPD_2in7_SendData(EPD_2in7_gray_lut_vcom[count]);}
+    for(count=0;count<44;count++)
+        {EPD_2in7_SendData(EPD_2in7_gray_lut_vcom[count]);}
 		
 	EPD_2in7_SendCommand(0x21);							//red not use
 	for(count=0;count<42;count++)
-		{EPD_2in7_SendData(EPD_2in7_gray_lut_ww[count]);}
+        {EPD_2in7_SendData(EPD_2in7_gray_lut_ww[count]);}
 
-		EPD_2in7_SendCommand(0x22);							//bw r
-		for(count=0;count<42;count++)
-			{EPD_2in7_SendData(EPD_2in7_gray_lut_bw[count]);}
+    EPD_2in7_SendCommand(0x22);							//bw r
+    for(count=0;count<42;count++)
+        {EPD_2in7_SendData(EPD_2in7_gray_lut_bw[count]);}
 
-		EPD_2in7_SendCommand(0x23);							//wb w
-		for(count=0;count<42;count++)
-			{EPD_2in7_SendData(EPD_2in7_gray_lut_wb[count]);}
+    EPD_2in7_SendCommand(0x23);							//wb w
+    for(count=0;count<42;count++)
+        {EPD_2in7_SendData(EPD_2in7_gray_lut_wb[count]);}
 
-		EPD_2in7_SendCommand(0x24);							//bb b
-		for(count=0;count<42;count++)
-			{EPD_2in7_SendData(EPD_2in7_gray_lut_bb[count]);}
+    EPD_2in7_SendCommand(0x24);							//bb b
+    for(count=0;count<42;count++)
+        {EPD_2in7_SendData(EPD_2in7_gray_lut_bb[count]);}
 
-		EPD_2in7_SendCommand(0x25);							//vcom
-		for(count=0;count<42;count++)
-			{EPD_2in7_SendData(EPD_2in7_gray_lut_ww[count]);}
+    EPD_2in7_SendCommand(0x25);							//vcom
+    for(count=0;count<42;count++)
+        {EPD_2in7_SendData(EPD_2in7_gray_lut_ww[count]);}
          
 }
 

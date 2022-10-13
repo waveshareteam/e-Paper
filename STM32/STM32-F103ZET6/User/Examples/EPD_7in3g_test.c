@@ -31,7 +31,7 @@
 #include "EPD_7in3g.h"
 #include "time.h"
 
-int EPD_7in3g_test(void)
+int EPD_test(void)
 {
     printf("EPD_7IN3G_test Demo\r\n");
     if(DEV_Module_Init()!=0){

@@ -30,7 +30,7 @@
 #include "EPD_5in65f.h"
 #include "EPD_Test.h"
 
-int EPD_5in65f_test(void)
+int EPD_test(void)
 {
 	printf("EPD_5in65F_test Demo\r\n");
     if(DEV_Module_Init()!=0){

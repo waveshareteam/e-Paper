@@ -31,7 +31,7 @@
 #include "EPD_3in52.h"
 #include <time.h> 
 
-int EPD_3in52_test(void)
+int EPD_test(void)
 {
     printf("EPD_3IN52_test Demo\r\n");
     if(DEV_Module_Init()!=0){
@@ -66,7 +66,7 @@ int EPD_3in52_test(void)
 #if 1   // GC waveform refresh 
     Paint_SelectImage(BlackImage);
     Paint_Clear(WHITE);
-		Paint_DrawBitMap(gImage_3in52);
+	Paint_DrawBitMap(gImage_3in52);
 		
     EPD_3IN52_display(BlackImage);
     EPD_3IN52_lut_GC();
@@ -80,7 +80,7 @@ int EPD_3in52_test(void)
     printf("Quick refresh is supported, but the refresh effect is not good, but it is not recommended\r\n");
     Paint_SelectImage(BlackImage);
     Paint_Clear(WHITE);
-		Paint_DrawBitMap(gImage_3in52);
+    Paint_DrawBitMap(gImage_3in52);
 		
     EPD_3IN52_display(BlackImage);
     EPD_3IN52_lut_DU();

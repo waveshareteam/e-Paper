@@ -280,31 +280,30 @@ void EPD_7IN5B_HD_DisplayPicture(const UBYTE *blackimage,UBYTE Block)
 		EPD_7IN5B_HD_SendData(0xAF);
 		EPD_7IN5B_HD_SendData(0x02);
 		EPD_7IN5B_HD_SendCommand(0x24);
-    for (UDOUBLE j = 0; j < Height/2; j++) {
-        for (UDOUBLE i = 0; i < Width; i++) {
-            EPD_7IN5B_HD_SendData(blackimage[i + j * Width]);
-        }
-    }
-		
+        for (UDOUBLE j = 0; j < Height/2; j++) {
+            for (UDOUBLE i = 0; i < Width; i++) {
+                EPD_7IN5B_HD_SendData(blackimage[i + j * Width]);
+            }
+        }   	
 	}else if(Block == 1){
 		for (UDOUBLE j = 0; j < Height/2; j++) {
-        for (UDOUBLE i = 0; i < Width; i++) {
-            EPD_7IN5B_HD_SendData(blackimage[i + j * Width]);
+            for (UDOUBLE i = 0; i < Width; i++) {
+                EPD_7IN5B_HD_SendData(blackimage[i + j * Width]);
+            }
         }
-    }
 	}else if(Block == 2){
 		EPD_7IN5B_HD_SendCommand(0x26);
-    for (UDOUBLE j = 0; j < Height/2; j++) {
-        for (UDOUBLE i = 0; i < Width; i++) {
-            EPD_7IN5B_HD_SendData(~blackimage[i + j * Width]);
+        for (UDOUBLE j = 0; j < Height/2; j++) {
+            for (UDOUBLE i = 0; i < Width; i++) {
+                EPD_7IN5B_HD_SendData(~blackimage[i + j * Width]);
+            }
         }
-    }
 	}else if(Block == 3){
 		for (UDOUBLE j = 0; j < Height/2; j++) {
-        for (UDOUBLE i = 0; i < Width; i++) {
-            EPD_7IN5B_HD_SendData(~blackimage[i + j * Width]);
+            for (UDOUBLE i = 0; i < Width; i++) {
+                EPD_7IN5B_HD_SendData(~blackimage[i + j * Width]);
+            }
         }
-    }
 		EPD_7IN5B_HD_TurnOnDisplay();
 	}
 }
@@ -327,12 +326,11 @@ void EPD_7IN5B_HD_DisplayImage(const UBYTE *blackimage, const UBYTE *ryimage,UDO
     EPD_7IN5B_HD_SendCommand(0x24);
     for (UDOUBLE j = 0; j < Height; j++) {
         for (UDOUBLE i = 0; i < Width; i++) {
-						if((i>=start_X/8) && (i<(start_X+image_width)/8) && (j>=start_Y) && (j<(start_Y+image_high))){
-							EPD_7IN5B_HD_SendData(blackimage[i-start_X/8 + (j - start_Y) * image_width/8]);
-						}else{
-							EPD_7IN5B_HD_SendData(0xff);
-						}
-						
+            if((i>=start_X/8) && (i<(start_X+image_width)/8) && (j>=start_Y) && (j<(start_Y+image_high))){
+                EPD_7IN5B_HD_SendData(blackimage[i-start_X/8 + (j - start_Y) * image_width/8]);
+            }else{
+                EPD_7IN5B_HD_SendData(0xff);
+            }
         }
     }
  
@@ -341,12 +339,11 @@ void EPD_7IN5B_HD_DisplayImage(const UBYTE *blackimage, const UBYTE *ryimage,UDO
     EPD_7IN5B_HD_SendCommand(0x26);
     for (UDOUBLE j = 0; j < Height; j++) {
         for (UDOUBLE i = 0; i < Width; i++) {
-						if((i>=start_X/8) && (i<(start_X+image_width)/8) && (j>=start_Y) && (j<(start_Y+image_high))){
-							EPD_7IN5B_HD_SendData(~ryimage[i-start_X/8 + (j - start_Y) * image_width/8]);
-						}else{
-							EPD_7IN5B_HD_SendData(0x00);
-						}
-						
+            if((i>=start_X/8) && (i<(start_X+image_width)/8) && (j>=start_Y) && (j<(start_Y+image_high))){
+                EPD_7IN5B_HD_SendData(~ryimage[i-start_X/8 + (j - start_Y) * image_width/8]);
+            }else{
+                EPD_7IN5B_HD_SendData(0x00);
+            }		
         }
     }
     EPD_7IN5B_HD_TurnOnDisplay();

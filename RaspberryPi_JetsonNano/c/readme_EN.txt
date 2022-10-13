@@ -4,8 +4,8 @@
 * | Function    :   Help with use
 * | Info        :
 *----------------
-* |	This version:   V1.2
-* | Date        :   2022-09-20
+* |	This version:   V1.3
+* | Date        :   2022-10-13
 * | Info        :   Here is an English version of the documentation for your quick use.
 ******************************************************************************/
 This file is to help you use this routine.
@@ -35,17 +35,17 @@ You can see many test functions and macro definition Settings in main.c.
 Specifying the macro definition for the EPD at compile time can directly compile the corresponding test program.
 Please pay attention to which type of ink screen you buy. For detailed correspondence, see our Wiki and list.txt file.
 Example 1:
-     If you buy 3.7inch e-paper (V1) then you should add EPD=_3in7 at compile time
+     If you buy 3.7inch e-paper (V1) then you should add EPD=epd3in7 at compile time
         sudo make clean
-        sudo make -j4 EPD=_3in7
+        sudo make EPD=epd3in7
 Example 2:
-    If you buy a 2.9-inch e-paper (B) (V1), you should add EPD= 2IN9bc at compile time since the 2.9-inch type B and Type C are common driver code
+    If you buy a 2.9-inch e-paper (B) (V1), you should add EPD=epd2IN9bc at compile time since the 2.9-inch type B and Type C are common driver code
         sudo make clean
-        sudo make -j4 EPD=_2in9bc
+        sudo make EPD=epd2in9bc
 Example 3:
-    If you buy a 7.5-inch e-paper (V2), you should add EPD=_7in5V2 at compile time
+    If you buy a 7.5-inch e-paper (V2), you should add EPD=epd7in5V2 at compile time
         sudo make clean
-        sudo make -j4 EPD=_7in5V2
+        sudo make EPD=epd7in5V2
 
 An executable file is then generated: epd
 Run: sudo ./epd
