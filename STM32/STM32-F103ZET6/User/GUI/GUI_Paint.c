@@ -718,11 +718,72 @@ void Paint_DrawNum(UWORD Xpoint, UWORD Ypoint, int32_t Nummber,
     }
 
     //Converts a number to a string
-    while (Nummber) {
+    do {
         Num_Array[Num_Bit] = Nummber % 10 + '0';
         Num_Bit++;
         Nummber /= 10;
+    } while(Nummber);
+    
+
+    //The string is inverted
+    while (Num_Bit > 0) {
+        Str_Array[Str_Bit] = Num_Array[Num_Bit - 1];
+        Str_Bit ++;
+        Num_Bit --;
     }
+
+    //show
+    Paint_DrawString_EN(Xpoint, Ypoint, (const char*)pStr, Font, Color_Background, Color_Foreground);
+}
+
+/******************************************************************************
+function:	Display nummber (Able to display decimals)
+parameter:
+    Xstart           ：X coordinate
+    Ystart           : Y coordinate
+    Nummber          : The number displayed
+    Font             ：A structure pointer that displays a character size
+    Digit            : Fractional width
+    Color_Foreground : Select the foreground color
+    Color_Background : Select the background color
+******************************************************************************/
+void Paint_DrawNumDecimals(UWORD Xpoint, UWORD Ypoint, double Nummber,
+                    sFONT* Font, UWORD Digit, UWORD Color_Foreground, UWORD Color_Background)
+{
+    int16_t Num_Bit = 0, Str_Bit = 0;
+    uint8_t Str_Array[ARRAY_LEN] = {0}, Num_Array[ARRAY_LEN] = {0};
+    uint8_t *pStr = Str_Array;
+	int temp = Nummber;
+	float decimals;
+	uint8_t i;
+    if (Xpoint > Paint.Width || Ypoint > Paint.Height) {
+        Debug("Paint_DisNum Input exceeds the normal display range\r\n");
+        return;
+    }
+
+	if(Digit > 0) {		
+		decimals = Nummber - temp;
+		for(i=Digit; i > 0; i--) {
+			decimals*=10;
+		}
+		temp = decimals;
+		//Converts a number to a string
+		for(i=Digit; i>0; i--) {
+			Num_Array[Num_Bit] = temp % 10 + '0';
+			Num_Bit++;
+			temp /= 10;						
+		}	
+		Num_Array[Num_Bit] = '.';
+		Num_Bit++;
+	}
+
+	temp = Nummber;
+    //Converts a number to a string
+    do {
+        Num_Array[Num_Bit] = temp % 10 + '0';
+        Num_Bit++;
+        temp /= 10;
+    } while(temp);
 
     //The string is inverted
     while (Num_Bit > 0) {
