@@ -29,7 +29,6 @@
 
 import os
 import logging
-from ossaudiodev import SOUND_MIXER_SPEAKER
 import sys
 import time
 

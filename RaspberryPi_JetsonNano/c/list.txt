@@ -15,7 +15,8 @@ EPD model                   EPD define (EPD=)
 2.9inch e-Paper (B)/(C)     epd2in9bc
 2.9inch e-Paper (B) (V3)    epd2in9bV3
 2.9inch e-Paper (D)         epd2in9d
-2.9inch e-Paper (V3)        epd2in13V3
+2.13inch e-Paper (V2)       epd2in13V2
+2.13inch e-Paper (V3)       epd2in13V3
 2.13inch e-Paper (B)/(C)    epd2in13bc
 2.13inch e-Paper (B) (V3)   epd2in13bV3
 2.13inch e-Paper (B) (V4)   epd2in13bV4
