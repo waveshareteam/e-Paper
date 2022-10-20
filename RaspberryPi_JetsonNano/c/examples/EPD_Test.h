@@ -98,6 +98,8 @@ int EPD_5in83b_V2_test(void);
 
 int EPD_5in84_test(void);
 
+int EPD_7in3f_test(void);
+
 int EPD_7in5_test(void);
 int EPD_7in5_HD_test(void);
 int EPD_7in5_V2_test(void);

@@ -154,6 +154,9 @@ int main(void)
 #elif epd5in84
     EPD_5in84_test();
     
+#elif epd7in3f
+    EPD_7in3f_test();
+
 #elif epd7in5
     EPD_7in5_test();
     
