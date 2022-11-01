@@ -4,8 +4,8 @@
 # * | Function    :   Hardware underlying interface
 # * | Info        :
 # *----------------
-# * | This version:   V1.1
-# * | Date        :   2022-08-10
+# * | This version:   V1.2
+# * | Date        :   2022-10-29
 # * | Info        :   
 # ******************************************************************************
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -37,10 +37,10 @@ logger = logging.getLogger(__name__)
 
 class RaspberryPi:
     # Pin definition
-    RST_PIN         = 17
-    DC_PIN          = 25
-    CS_PIN          = 8
-    BUSY_PIN        = 24
+    RST_PIN  = 17
+    DC_PIN   = 25
+    CS_PIN   = 8
+    BUSY_PIN = 24
 
     def __init__(self):
         import spidev
@@ -91,10 +91,10 @@ class RaspberryPi:
 
 class JetsonNano:
     # Pin definition
-    RST_PIN         = 17
-    DC_PIN          = 25
-    CS_PIN          = 8
-    BUSY_PIN        = 24
+    RST_PIN  = 17
+    DC_PIN   = 25
+    CS_PIN   = 8
+    BUSY_PIN = 24
 
     def __init__(self):
         import ctypes
@@ -151,13 +151,14 @@ class JetsonNano:
 
         self.GPIO.cleanup([self.RST_PIN, self.DC_PIN, self.CS_PIN, self.BUSY_PIN])
 
+
 class SunriseX3:
     # Pin definition
-    RST_PIN         = 17
-    DC_PIN          = 25
-    CS_PIN          = 8
-    BUSY_PIN        = 24
-    Flag           = 0
+    RST_PIN  = 17
+    DC_PIN   = 25
+    CS_PIN   = 8
+    BUSY_PIN = 24
+    Flag     = 0
 
     def __init__(self):
         import spidev
@@ -184,7 +185,7 @@ class SunriseX3:
         self.SPI.xfer3(data)
 
     def module_init(self):
-        if self.Flag == 0 :
+        if self.Flag == 0:
             self.Flag = 1
             self.GPIO.setmode(self.GPIO.BCM)
             self.GPIO.setwarnings(False)
@@ -198,7 +199,7 @@ class SunriseX3:
             self.SPI.max_speed_hz = 4000000
             self.SPI.mode = 0b00
             return 0
-        else :
+        else:
             return 0
 
     def module_exit(self):
@@ -212,6 +213,7 @@ class SunriseX3:
 
         self.GPIO.cleanup([self.RST_PIN, self.DC_PIN, self.CS_PIN, self.BUSY_PIN])
 
+
 if os.path.exists('/sys/bus/platform/drivers/gpiomem-bcm2835'):
     implementation = RaspberryPi()
 elif os.path.exists('/sys/bus/platform/drivers/gpio-x3'):
@@ -221,6 +223,5 @@ else:
 
 for func in [x for x in dir(implementation) if not x.startswith('_')]:
     setattr(sys.modules[__name__], func, getattr(implementation, func))
-
 
 ### END OF FILE ###
