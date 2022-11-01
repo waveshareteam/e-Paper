@@ -51,10 +51,13 @@ int EPD_3in7_test(void)
 
     //Create a new image cache
     UBYTE *BlackImage;
-    /* you have to edit the startup_stm32fxxx.s file and set a big enough heap size */
-    UWORD Imagesize = ((EPD_3IN7_WIDTH % 4 == 0)? (EPD_3IN7_WIDTH / 4 ): (EPD_3IN7_WIDTH / 4 + 1)) * EPD_3IN7_HEIGHT;
+
+    // Allocate enough for for 4 bits for each pixel (16 gray)
+    // If you don't use the dithering, this will only need to be 2 bits per pixel
+    // you may have to edit the startup_stm32fxxx.s file and set a big enough heap size
+    int Imagesize = (EPD_3IN7_WIDTH + 1) / 2 * EPD_3IN7_HEIGHT;
     if((BlackImage = (UBYTE *)malloc(Imagesize)) == NULL) {
-        printf("Failed to apply for black memory...\r\n");
+        printf("Failed to apply for memory...\r\n");
         return -1;
     }
 
@@ -153,6 +156,27 @@ int EPD_3in7_test(void)
         EPD_3IN7_1Gray_Display_Part(BlackImage, 40, 30, 90, 150); // Xstart must be a multiple of 8
         DEV_Delay_ms(500);
     }
+
+#if 1   // show dithered bmp
+    EPD_3IN7_4Gray_Init(); // Clear
+    EPD_3IN7_4Gray_Clear();
+
+    EPD_3IN7_1Gray_Init();       //init 1 Gray mode
+    EPD_3IN7_1Gray_Clear();
+
+    Paint_NewImage(BlackImage, 280, 480, 0, WHITE);
+    Paint_SetScale(16);
+    Paint_Clear(WHITE);
+
+    printf("show dithered BMP with Sierra-Lite\r\n");
+    GUI_ReadBmp_16Gray("./pic/3in7_4bit1.bmp", 0, 0);
+    EPD_3IN7_1Gray_Display_Dithered(BlackImage, 0);
+    DEV_Delay_ms(4000);
+
+    printf("show dithered BMP with Floyd-Steinberg\r\n");
+    EPD_3IN7_1Gray_Display_Dithered(BlackImage, 1);
+    DEV_Delay_ms(4000);
+#endif
 
 #endif
     EPD_3IN7_4Gray_Init();

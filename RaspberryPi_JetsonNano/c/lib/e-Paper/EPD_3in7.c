@@ -537,6 +537,58 @@ void EPD_3IN7_1Gray_Display(const UBYTE *Image)
 }
 
 /******************************************************************************
+function :  Sends a 16-colour image to the display and dithers it to
+            black and white
+parameter:
+    Ditherer:
+        Set to 0 to use Sierra-Lite dithering
+        Set to 1 to use Floyd-Steinberg dithering
+******************************************************************************/
+void EPD_3IN7_1Gray_Display_Dithered(const UBYTE *Image, int Ditherer)
+{
+    int i;
+    int IMAGE_COUNTER = EPD_3IN7_WIDTH * EPD_3IN7_HEIGHT / 2; /* 4-bit */
+
+    int ditherdat = 0;
+    if (Ditherer == 0) /* Sierra-Lite */
+        ditherdat = 0x80;
+    else if (Ditherer == 1) /* Floyd-Steinberg */
+        ditherdat = 0x83;
+    else {
+        Debug("Ditherer can only be 0 or 1");
+        return;
+    }
+
+    EPD_3IN7_SendCommand(0x4E);
+    EPD_3IN7_SendData(0x00);
+    EPD_3IN7_SendData(0x00);
+    EPD_3IN7_SendCommand(0x4F);
+    EPD_3IN7_SendData(0x00);
+    EPD_3IN7_SendData(0x00);
+
+    EPD_3IN7_SendCommand(0x4D); /* Dithering engine start/stop */
+    EPD_3IN7_SendData(ditherdat);
+    EPD_3IN7_SendData(0x00);
+    EPD_3IN7_SendData(0x78);
+    EPD_3IN7_SendData(0x00);
+
+    EPD_3IN7_SendCommand(0x25); /* Write dithering RAM */
+    for (i = 0; i < IMAGE_COUNTER; i++)
+        EPD_3IN7_SendData(Image[i]);
+
+    EPD_3IN7_SendCommand(0x4D); /* Dithering engine start/stop */
+    EPD_3IN7_SendData(0x00);
+    EPD_3IN7_SendData(0x00);
+    EPD_3IN7_SendData(0x78);
+    EPD_3IN7_SendData(0x00);
+
+    EPD_3IN7_Load_LUT(1); /* Do a full refresh of the display */
+
+    EPD_3IN7_SendCommand(0x20);
+    EPD_3IN7_ReadBusy_HIGH();
+}
+
+/******************************************************************************
 function :  Sends part the image buffer in RAM to e-Paper and displays
 notes:
     Xstart must be a multiple of 8
