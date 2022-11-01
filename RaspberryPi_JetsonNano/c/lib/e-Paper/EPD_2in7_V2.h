@@ -5,7 +5,7 @@
 * | Info        :
 *----------------
 * |	This version:   V1.0
-* | Date        :   2021-04-22
+* | Date        :   2022-08-18
 * | Info        :
 * -----------------------------------------------------------------------------
 #
@@ -38,11 +38,15 @@
 #define EPD_2IN7_V2_HEIGHT      264
 
 void EPD_2IN7_V2_Init(void);
+void EPD_2IN7_V2_Init_Fast(void);
+void EPD_2IN7_V2_Init_4GRAY(void);
 void EPD_2IN7_V2_Clear(void);
 void EPD_2IN7_V2_Display(UBYTE *Image);
-void EPD_2IN7_V2_Sleep(void);
-
+void EPD_2IN7_V2_Display_Fast(UBYTE *Image);
 void EPD_2IN7_V2_Display_Base(UBYTE *Image);
-void EPD_2IN7_V2_Display_Partial(UBYTE *Image);
+void EPD_2IN7_V2_Display_Base_color(UBYTE color);
+void EPD_2IN7_V2_Display_Partial(const UBYTE *Image, UWORD Xstart, UWORD Ystart, UWORD Xend, UWORD Yende);
+void EPD_2IN7_V2_4GrayDisplay(UBYTE *Image);
+void EPD_2IN7_V2_Sleep(void);
 
 #endif
