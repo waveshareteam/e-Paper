@@ -32,8 +32,8 @@ from multiprocessing.reduction import recv_handle
 from . import epdconfig
 
 # Display resolution
-EPD_width       = 240
-EPD_height      = 360
+EPD_WIDTH       = 240
+EPD_HEIGHT      = 360
 
 logger = logging.getLogger(__name__)
 
@@ -43,8 +43,8 @@ class EPD:
         self.dc_pin = epdconfig.DC_PIN
         self.busy_pin = epdconfig.BUSY_PIN
         self.cs_pin = epdconfig.CS_PIN
-        self.width = EPD_width
-        self.height = EPD_height
+        self.width = EPD_WIDTH
+        self.height = EPD_HEIGHT
         self.Flag = 0
         self.WHITE = 0xFF
         self.BLACK = 0x00
