@@ -361,7 +361,7 @@ class EPD:
     function : Clear screen
     parameter:
     '''
-    def Clear(self, color):
+    def Clear(self, color=0xFF):
         if self.width%8 == 0:
             linewidth = int(self.width/8)
         else:
