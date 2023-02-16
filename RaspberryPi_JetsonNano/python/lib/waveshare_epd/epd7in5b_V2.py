@@ -89,46 +89,46 @@ class EPD:
             
         self.reset()
         
-        # self.send_command(0x06)     # btst
+        # self.send_command(0x06)   # btst
         # self.send_data(0x17)
         # self.send_data(0x17)
-        # self.send_data(0x38)        # If an exception is displayed, try using 0x38
+        # self.send_data(0x38)      # If an exception is displayed, try using 0x38
         # self.send_data(0x17)
 
-        self.send_command(0x01);			#POWER SETTING
-        self.send_data(0x07);
-        self.send_data(0x07);    #VGH=20V,VGL=-20V
-        self.send_data(0x3f);		#VDH=15V
-        self.send_data(0x3f);		#VDL=-15V
+        self.send_command(0x01)     # POWER SETTING
+        self.send_data(0x07)
+        self.send_data(0x07)        # VGH=20V,VGL=-20V
+        self.send_data(0x3f)        # VDH=15V
+        self.send_data(0x3f)        # VDL=-15V
 
-        self.send_command(0x04); #POWER ON
-        epdconfig.delay_ms(100);
-        self.ReadBusy();
+        self.send_command(0x04)     # POWER ON
+        epdconfig.delay_ms(100)
+        self.ReadBusy()
 
-        self.send_command(0X00);			#PANNEL SETTING
-        self.send_data(0x0F);   #KW-3f   KWR-2F	BWROTP 0f	BWOTP 1f
+        self.send_command(0X00)     # PANNEL SETTING
+        self.send_data(0x0F)        # KW-3f KWR-2F BWROTP-0f BWOTP-1f
 
-        self.send_command(0x61);        	#tres
-        self.send_data(0x03);		#source 800
-        self.send_data(0x20);
-        self.send_data(0x01);		#gate 480
-        self.send_data(0xE0);
+        self.send_command(0x61)     # tres
+        self.send_data(0x03)        # source 800
+        self.send_data(0x20)
+        self.send_data(0x01)        # gate 480
+        self.send_data(0xE0)
 
-        self.send_command(0X15);
-        self.send_data(0x00);
+        self.send_command(0X15)
+        self.send_data(0x00)
 
-        self.send_command(0X50);			#VCOM AND DATA INTERVAL SETTING
-        self.send_data(0x11);
-        self.send_data(0x07);
+        self.send_command(0X50)     # VCOM AND DATA INTERVAL SETTING
+        self.send_data(0x11)
+        self.send_data(0x07)
 
-        self.send_command(0X60);			#TCON SETTING
-        self.send_data(0x22);
+        self.send_command(0X60)     # TCON SETTING
+        self.send_data(0x22)
 
-        self.send_command(0x65);
-        self.send_data(0x00);
-        self.send_data(0x00);
-        self.send_data(0x00);
-        self.send_data(0x00);
+        self.send_command(0x65)
+        self.send_data(0x00)
+        self.send_data(0x00)
+        self.send_data(0x00)
+        self.send_data(0x00)
     
         return 0
 
