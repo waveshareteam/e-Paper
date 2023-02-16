@@ -260,7 +260,7 @@ class EPD:
                         buf[int((newx + newy*self.width) / 8)] &= ~(0x80 >> (y % 8))
         return buf
 
-    def Display(self, image):
+    def display(self, image):
         if (image == None):
             return
         # Width = (self.width % 8 == 0)? (self.width / 8 ): (self.width / 8 + 1)

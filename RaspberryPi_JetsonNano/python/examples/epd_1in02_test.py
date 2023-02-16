@@ -43,13 +43,13 @@ try:
     draw.chord((24, 4, 96, 76), 0, 360, fill = 255)
     draw.line((20, 0, 100, 80), fill = 0)
     draw.line((20, 80, 100, 0), fill = 0)
-    epd.Display(epd.getbuffer(image))
+    epd.display(epd.getbuffer(image))
     time.sleep(2)
 
     # read bmp file 
     logging.info("2.read bmp file...")
     image = Image.open(os.path.join(picdir, '1in02.bmp'))
-    epd.Display(epd.getbuffer(image))
+    epd.display(epd.getbuffer(image))
     time.sleep(2)
     
     # read bmp file on window
@@ -57,7 +57,7 @@ try:
     image1 = Image.new('1', (epd.width, epd.height), 255)  # 255: clear the frame
     bmp = Image.open(os.path.join(picdir, '100x100.bmp'))
     image1.paste(bmp, (0,0))    
-    epd.Display(epd.getbuffer(image1))
+    epd.display(epd.getbuffer(image1))
     time.sleep(2)
     
     # # partial update
