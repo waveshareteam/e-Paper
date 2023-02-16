@@ -44,6 +44,9 @@ class Epd : EpdIf {
 public:
     unsigned long width;
     unsigned long height;
+    int bufwidth;
+    int bufheight;
+    int count;
 
     Epd();
     ~Epd();
@@ -57,6 +60,7 @@ public:
     void Reset(void);
     void Clear(void);
     void Display(const unsigned char* frame_buffer);
+    void Display1(const unsigned char* frame_buffer);
     void DisplayPartBaseImage(const unsigned char* frame_buffer);
     void DisplayPart(const unsigned char* frame_buffer);
     void ClearPart(void);
