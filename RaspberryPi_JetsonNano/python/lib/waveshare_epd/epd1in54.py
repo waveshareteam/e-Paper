@@ -236,7 +236,7 @@ class EPD:
                 self.send_data(image[i + j * int(self.width / 8)])   
         self.TurnOnDisplay()
         
-    def Clear(self, color):
+    def Clear(self, color=0xFF):
         # self.SetWindow(0, 0, self.width - 1, self.height - 1)
         # send the color data
         self.SetWindow(0, 0, self.width, self.height)

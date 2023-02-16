@@ -324,7 +324,7 @@ class EPD:
                         buf[int((newx + (newy * self.width))/4)] = ((pixels[x, y-3]&0xc0) | (pixels[x, y-2]&0xc0)>>2 | (pixels[x, y-1]&0xc0)>>4 | (pixels[x, y]&0xc0)>>6) 
         return buf
     
-    def clear(self):
+    def Clear(self):
         if(self.width % 8 == 0):
             Width = self.width // 8
         else:
