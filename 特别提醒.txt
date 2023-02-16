@@ -1,0 +1,3 @@
+本程序包中的 Arduino 程序，仅支持 Arduino 系列的开发板，不支持 ESP32、ESP8266 等使用 Arduino IDE 进行开发的其他开发板
+ESP32开发板使用 ：https://www.waveshare.net/wiki/E-Paper_ESP32_Driver_Board
+ESP8266开发板使用 ：https://www.waveshare.net/wiki/E-Paper_ESP8266_Driver_Board

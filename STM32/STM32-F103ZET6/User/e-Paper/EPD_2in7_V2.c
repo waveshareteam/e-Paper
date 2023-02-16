@@ -164,24 +164,24 @@ parameter:
 ******************************************************************************/
 void EPD_2IN7_V2_Init(void)
 {
-  EPD_2IN7_V2_Reset();
-	EPD_2IN7_V2_ReadBusy();
-	
-	EPD_2IN7_V2_SendCommand(0x12); //SWRESET
-	EPD_2IN7_V2_ReadBusy();
+    EPD_2IN7_V2_Reset();
+    EPD_2IN7_V2_ReadBusy();
 
-  EPD_2IN7_V2_SendCommand(0x45); //set Ram-Y address start/end position          
-	EPD_2IN7_V2_SendData(0x00);
-	EPD_2IN7_V2_SendData(0x00);
-	EPD_2IN7_V2_SendData(0x07); //0x0107-->(263+1)=264
-	EPD_2IN7_V2_SendData(0x01);
+    EPD_2IN7_V2_SendCommand(0x12); //SWRESET
+    EPD_2IN7_V2_ReadBusy();
 
-  EPD_2IN7_V2_SendCommand(0x4F);   // set RAM y address count to 0;    
-	EPD_2IN7_V2_SendData(0x00);
-	EPD_2IN7_V2_SendData(0x00);
+    EPD_2IN7_V2_SendCommand(0x45); //set Ram-Y address start/end position          
+    EPD_2IN7_V2_SendData(0x00);
+    EPD_2IN7_V2_SendData(0x00);
+    EPD_2IN7_V2_SendData(0x07); //0x0107-->(263+1)=264
+    EPD_2IN7_V2_SendData(0x01);
 
-	EPD_2IN7_V2_SendCommand(0x11);   // data entry mode
-	EPD_2IN7_V2_SendData(0x03);
+    EPD_2IN7_V2_SendCommand(0x4F);   // set RAM y address count to 0;    
+    EPD_2IN7_V2_SendData(0x00);
+    EPD_2IN7_V2_SendData(0x00);
+
+    EPD_2IN7_V2_SendCommand(0x11);   // data entry mode
+    EPD_2IN7_V2_SendData(0x03);
 
 }
 void EPD_2IN7_V2_Init_Fast(void)

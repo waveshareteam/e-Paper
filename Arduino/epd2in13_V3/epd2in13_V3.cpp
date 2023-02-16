@@ -90,6 +90,8 @@ Epd::Epd()
     busy_pin = BUSY_PIN;
     width = EPD_WIDTH;
     height = EPD_HEIGHT;
+    bufwidth = 128/8;  //16
+    bufheight = 63;
 };
 
 /******************************************************************************
@@ -281,6 +283,7 @@ void Epd::Reset(void)
     DelayMs(2);
     DigitalWrite(reset_pin, HIGH);
     DelayMs(20);
+    this->count = 0; 
 }
 
 /******************************************************************************
@@ -330,6 +333,27 @@ void Epd::Display(const unsigned char* frame_buffer)
     SendData(0xC7);
     SendCommand(0x20);
     WaitUntilIdle();
+}
+
+
+
+void Epd::Display1(const unsigned char* frame_buffer) {
+    if(this->count == 0){
+        SendCommand(0x24);
+        this->count++;
+    }else if(this->count > 0 && this->count < 4 ){
+        this->count++;
+    }
+    for(int i = 0; i < this->bufwidth * this->bufheight; i++){
+            SendData(frame_buffer[i]);
+    }
+    if(this->count == 4){
+        SendCommand(0x22);
+        SendData(0xC7);
+        SendCommand(0x20);
+        WaitUntilIdle();
+        this->count = 0;
+    }
 }
 
 /******************************************************************************
