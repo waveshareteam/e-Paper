@@ -170,59 +170,59 @@ class EPD:
         # self.send_data(0x28)        # If an exception is displayed, try using 0x38
         # self.send_data(0x17)
         
-        # self.send_command(0x01)			#POWER SETTING
+        # self.send_command(0x01)   #POWER SETTING
         # self.send_data(0x07)
-        # self.send_data(0x07)    #VGH=20V,VGL=-20V
+        # self.send_data(0x07)      #VGH=20V,VGL=-20V
         # self.send_data(0x3f)		#VDH=15V
         # self.send_data(0x3f)		#VDL=-15V
 
-        self.send_command(0x01);  # power setting
-        self.send_data(0x17);  # 1-0=11: internal power
-        self.send_data(self.Voltage_Frame_7IN5_V2[6]);  # VGH&VGL
-        self.send_data(self.Voltage_Frame_7IN5_V2[1]);  # VSH
-        self.send_data(self.Voltage_Frame_7IN5_V2[2]);  #  VSL
-        self.send_data(self.Voltage_Frame_7IN5_V2[3]);  #  VSHR
+        self.send_command(0x01)     # power setting
+        self.send_data(0x17)        # 1-0=11: internal power
+        self.send_data(self.Voltage_Frame_7IN5_V2[6])   # VGH&VGL
+        self.send_data(self.Voltage_Frame_7IN5_V2[1])   # VSH
+        self.send_data(self.Voltage_Frame_7IN5_V2[2])   # VSL
+        self.send_data(self.Voltage_Frame_7IN5_V2[3])   # VSHR
         
-        self.send_command(0x82); # VCOM DC Setting
-        self.send_data(self.Voltage_Frame_7IN5_V2[4]);  # VCOM
+        self.send_command(0x82)     # VCOM DC Setting
+        self.send_data(self.Voltage_Frame_7IN5_V2[4])   # VCOM
 
-        self.send_command(0x06);  # Booster Setting
-        self.send_data(0x27);
-        self.send_data(0x27);
-        self.send_data(0x2F);
-        self.send_data(0x17);
+        self.send_command(0x06)     # Booster Setting
+        self.send_data(0x27)
+        self.send_data(0x27)
+        self.send_data(0x2F)
+        self.send_data(0x17)
         
-        self.send_command(0x30);   # OSC Setting
-        self.send_data(self.Voltage_Frame_7IN5_V2[0]);  # 2-0=100: N=4  ; 5-3=111: M=7  ;  3C=50Hz     3A=100HZ
+        self.send_command(0x30)     # OSC Setting
+        self.send_data(self.Voltage_Frame_7IN5_V2[0])   # 3C=50Hz, 3A=100HZ
 
-        self.send_command(0x04) #POWER ON
+        self.send_command(0x04)     # POWER ON
         epdconfig.delay_ms(100)
         self.ReadBusy()
 
-        self.send_command(0X00)			#PANNEL SETTING
-        self.send_data(0x3F)   #KW-3f   KWR-2F	BWROTP 0f	BWOTP 1f
+        self.send_command(0X00)     # PANNEL SETTING
+        self.send_data(0x3F)        # KW-3f KWR-2F BWROTP-0f BWOTP-1f
 
-        self.send_command(0x61)        	#tres
-        self.send_data(0x03)		#source 800
+        self.send_command(0x61)     # tres
+        self.send_data(0x03)        # source 800
         self.send_data(0x20)
-        self.send_data(0x01)		#gate 480
+        self.send_data(0x01)        # gate 480
         self.send_data(0xE0)
 
         self.send_command(0X15)
         self.send_data(0x00)
 
-        self.send_command(0X50)			#VCOM AND DATA INTERVAL SETTING
+        self.send_command(0X50)     # VCOM AND DATA INTERVAL SETTING
         self.send_data(0x10)
         self.send_data(0x07)
 
-        self.send_command(0X60)			#TCON SETTING
+        self.send_command(0X60)     # TCON SETTING
         self.send_data(0x22)
 
-        self.send_command(0x65);  # Resolution setting
-        self.send_data(0x00);
-        self.send_data(0x00); # 800*480
-        self.send_data(0x00);
-        self.send_data(0x00);
+        self.send_command(0x65)     # Resolution setting
+        self.send_data(0x00)
+        self.send_data(0x00)        # 800*480
+        self.send_data(0x00)
+        self.send_data(0x00)
 
         self.SetLut(self.LUT_VCOM_7IN5_V2, self.LUT_WW_7IN5_V2, self.LUT_BW_7IN5_V2, self.LUT_WB_7IN5_V2, self.LUT_BB_7IN5_V2)
         # EPD hardware init end

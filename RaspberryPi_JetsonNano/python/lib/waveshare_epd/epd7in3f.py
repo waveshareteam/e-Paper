@@ -146,8 +146,8 @@ class EPD:
         self.send_command(0x06)
         self.send_data(0x6F)
         self.send_data(0x1F)
-        self.send_data(0x16)
-        self.send_data(0x25)
+        self.send_data(0x1F)
+        self.send_data(0x22)
 
         self.send_command(0x08)
         self.send_data(0x6F)
@@ -160,7 +160,7 @@ class EPD:
         self.send_data(0x04)
 
         self.send_command(0x30)
-        self.send_data(0x02)
+        self.send_data(0x3C)
 
         self.send_command(0x41)     # TSE
         self.send_data(0x00)

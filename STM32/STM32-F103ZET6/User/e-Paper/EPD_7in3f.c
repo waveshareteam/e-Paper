@@ -147,8 +147,8 @@ void EPD_7IN3F_Init(void)
 	EPD_7IN3F_SendCommand(0x06);
 	EPD_7IN3F_SendData(0x6F);
 	EPD_7IN3F_SendData(0x1F);
-	EPD_7IN3F_SendData(0x16);
-	EPD_7IN3F_SendData(0x25);
+	EPD_7IN3F_SendData(0x1F);
+	EPD_7IN3F_SendData(0x22);
 
 	EPD_7IN3F_SendCommand(0x08);
 	EPD_7IN3F_SendData(0x6F);
@@ -161,7 +161,7 @@ void EPD_7IN3F_Init(void)
 	EPD_7IN3F_SendData(0x04);
 
 	EPD_7IN3F_SendCommand(0x30);
-	EPD_7IN3F_SendData(0x02);
+	EPD_7IN3F_SendData(0x3C);
 
 	EPD_7IN3F_SendCommand(0x41);     // TSE
 	EPD_7IN3F_SendData(0x00);
