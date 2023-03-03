@@ -52,7 +52,7 @@ void DEV_Digital_Write(UWORD Pin, UBYTE Value)
 #endif
 #endif
 
-#ifdef JETSON
+#if defined(JETSON) || defined(LIBRETECH_CC)
 #ifdef USE_DEV_LIB
 	SYSFS_GPIO_Write(Pin, Value);
 #elif USE_HARDWARE_LIB
@@ -74,7 +74,7 @@ UBYTE DEV_Digital_Read(UWORD Pin)
 #endif
 #endif
 
-#ifdef JETSON
+#if defined(JETSON) || defined(LIBRETECH_CC)
 #ifdef USE_DEV_LIB
 	Read_value = SYSFS_GPIO_Read(Pin);
 #elif USE_HARDWARE_LIB
@@ -99,7 +99,7 @@ void DEV_SPI_WriteByte(uint8_t Value)
 #endif
 #endif
 
-#ifdef JETSON
+#if defined(JETSON) || defined(LIBRETECH_CC)
 #ifdef USE_DEV_LIB
 	SYSFS_software_spi_transfer(Value);
 #elif USE_HARDWARE_LIB
@@ -121,7 +121,7 @@ void DEV_SPI_Write_nByte(uint8_t *pData, uint32_t Len)
 #endif
 #endif
 
-#ifdef JETSON
+#if defined(JETSON) || defined(LIBRETECH_CC)
 #ifdef USE_DEV_LIB
 	//JETSON nano waits for hardware SPI
 	Debug("not support");
@@ -163,7 +163,7 @@ void DEV_GPIO_Mode(UWORD Pin, UWORD Mode)
 #endif
 #endif
 
-#ifdef JETSON
+#if defined(JETSON) || defined(LIBRETECH_CC)
 #ifdef USE_DEV_LIB
 	SYSFS_GPIO_Export(Pin);
 	SYSFS_GPIO_Direction(Pin, Mode);
@@ -191,7 +191,7 @@ void DEV_Delay_ms(UDOUBLE xms)
 #endif
 #endif
 
-#ifdef JETSON
+#if defined(JETSON) || defined(LIBRETECH_CC)
 	UDOUBLE i;
 	for(i=0; i < xms; i++) {
 		usleep(1000);
@@ -233,7 +233,7 @@ static int DEV_Equipment_Testing(void)
 		return -1;
 	}
 #endif
-#ifdef JETSON
+#if defined(JETSON) || defined(LIBRETECH_CC)
 	char system[] = {"Ubuntu"};
 	if (strstr(issue_str, system) != NULL) {
 		printf("%s\n", system);
@@ -261,6 +261,11 @@ void DEV_GPIO_Init(void)
 	EPD_DC_PIN      = GPIO25;
 	EPD_CS_PIN      = SPI0_CS0;
 	EPD_BUSY_PIN    = GPIO24;
+#elif LIBRETECH_CC
+	EPD_RST_PIN     = 620; // 523 + 97 GPIOX_18
+	EPD_DC_PIN      = 619; // 523 + 96 GPIOX_17
+	EPD_CS_PIN      = 612; // 523 + 89 GPIOX_10
+	EPD_BUSY_PIN    = 617; // 523 + 94 GPIOX_15
 #endif
 
 	DEV_GPIO_Mode(EPD_RST_PIN, 1);
@@ -320,7 +325,7 @@ UBYTE DEV_Module_Init(void)
     DEV_HARDWARE_SPI_setSpeed(10000000);
 #endif
 
-#elif JETSON
+#elif defined(JETSON) || defined(LIBRETECH_CC)
 #ifdef USE_DEV_LIB
 	DEV_GPIO_Init();
 	printf("Software spi\r\n");
@@ -365,7 +370,7 @@ void DEV_Module_Exit(void)
 	DEV_Digital_Write(EPD_RST_PIN, 0);
 #endif
 
-#elif JETSON
+#elif defined(JETSON) || defined(LIBRETECH_CC)
 #ifdef USE_DEV_LIB
 	SYSFS_GPIO_Unexport(EPD_CS_PIN);
 	SYSFS_GPIO_Unexport(EPD_DC_PIN);

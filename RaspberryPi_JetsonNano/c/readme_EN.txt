@@ -29,6 +29,17 @@ DC     ->    25
 RST    ->    17
 BUSY   ->    24
 
+For Libretech-cc (AML S905X) board:
+
+VCC    ->    PIN2
+GND    ->    PIN6
+DIN    ->    PIN19 (GPIOX_8)
+CLK    ->    PIN23 (GPIOX_11)
+CS     ->    PIN24 (GPIOX_10)
+DC     ->    PIN29 (GPIOX_17)
+RST    ->    PIN31 (GPIOX_18)
+BUSY   ->    PIN18 (GPIOX_15)
+
 3. Basic use:
 Since this project is a comprehensive project, you may need to read the following for use:
 You can see many test functions and macro definition Settings in main.c.

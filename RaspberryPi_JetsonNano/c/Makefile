@@ -179,7 +179,7 @@ endif
 OBJ_C = $(wildcard ${OBJ_C_EPD} ${DIR_GUI}/*.c ${OBJ_C_Examples} ${DIR_Examples}/main.c ${DIR_Examples}/ImageData2.c ${DIR_Examples}/ImageData.c ${DIR_FONTS}/*.c )
 OBJ_O = $(patsubst %.c,${DIR_BIN}/%.o,$(notdir ${OBJ_C}))
 RPI_DEV_C = $(wildcard $(DIR_BIN)/dev_hardware_SPI.o $(DIR_BIN)/RPI_sysfs_gpio.o $(DIR_BIN)/DEV_Config.o )
-JETSON_DEV_C = $(wildcard $(DIR_BIN)/sysfs_software_spi.o $(DIR_BIN)/sysfs_gpio.o $(DIR_BIN)/DEV_Config.o )
+JETSON_LIBRETECH_DEV_C = $(wildcard $(DIR_BIN)/sysfs_software_spi.o $(DIR_BIN)/sysfs_gpio.o $(DIR_BIN)/DEV_Config.o )
 
 
 DEBUG = -D DEBUG
@@ -207,10 +207,14 @@ else ifeq ($(USELIB_JETSONI), USE_HARDWARE_LIB)
 endif
 DEBUG_JETSONI = -D $(USELIB_JETSONI) -D JETSON
 
+LIB_LIBRETECH = -lm
+DEBUG_LIBRETECH = -D USE_DEV_LIB -D LIBRETECH_CC
+
 .PHONY : RPI JETSON clean
 
 RPI:RPI_DEV RPI_epd 
 JETSON: JETSON_DEV JETSON_epd
+LIBRETECH: LIBRETECH_DEV LIBRETECH_epd
 
 TARGET = epd
 CC = gcc
@@ -223,7 +227,11 @@ RPI_epd:${OBJ_O}
 	
 JETSON_epd:${OBJ_O}
 	echo $(@)
-	$(CC) $(CFLAGS) $(OBJ_O) $(JETSON_DEV_C) -o $(TARGET) $(LIB_JETSONI) $(DEBUG)
+	$(CC) $(CFLAGS) $(OBJ_O) $(JETSON_LIBRETECH_DEV_C) -o $(TARGET) $(LIB_JETSONI) $(DEBUG)
+
+LIBRETECH_epd:${OBJ_O}
+	echo $(@)
+	$(CC) $(CFLAGS) $(OBJ_O) $(JETSON_LIBRETECH_DEV_C) -o $(TARGET) $(LIB_LIBRETECH) $(DEBUG)
 
 $(shell mkdir -p $(DIR_BIN))
 
@@ -248,6 +256,11 @@ JETSON_DEV:
 	$(CC) $(CFLAGS) $(DEBUG_JETSONI) -c	 $(DIR_Config)/sysfs_software_spi.c -o $(DIR_BIN)/sysfs_software_spi.o $(LIB_JETSONI) $(DEBUG)
 	$(CC) $(CFLAGS) $(DEBUG_JETSONI) -c	 $(DIR_Config)/sysfs_gpio.c -o $(DIR_BIN)/sysfs_gpio.o $(LIB_JETSONI) $(DEBUG)
 	$(CC) $(CFLAGS) $(DEBUG_JETSONI) -c	 $(DIR_Config)/DEV_Config.c -o $(DIR_BIN)/DEV_Config.o $(LIB_JETSONI)  $(DEBUG)
+
+LIBRETECH_DEV:
+	$(CC) $(CFLAGS) $(DEBUG_LIBRETECH) -c	 $(DIR_Config)/sysfs_software_spi.c -o $(DIR_BIN)/sysfs_software_spi.o $(LIB_LIBRETECH) $(DEBUG)
+	$(CC) $(CFLAGS) $(DEBUG_LIBRETECH) -c	 $(DIR_Config)/sysfs_gpio.c -o $(DIR_BIN)/sysfs_gpio.o $(LIB_LIBRETECH) $(DEBUG)
+	$(CC) $(CFLAGS) $(DEBUG_LIBRETECH) -c	 $(DIR_Config)/DEV_Config.c -o $(DIR_BIN)/DEV_Config.o $(LIB_LIBRETECH) $(DEBUG)
 
 clean :
 	rm $(DIR_BIN)/*.* 
