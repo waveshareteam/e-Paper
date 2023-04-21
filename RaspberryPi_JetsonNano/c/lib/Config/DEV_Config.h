@@ -92,6 +92,7 @@ extern int EPD_RST_PIN;
 extern int EPD_DC_PIN;
 extern int EPD_CS_PIN;
 extern int EPD_BUSY_PIN;
+extern int EPD_PWR_PIN;
 
 /*------------------------------------------------------------------------------------------------------*/
 void DEV_Digital_Write(UWORD Pin, UBYTE Value);
