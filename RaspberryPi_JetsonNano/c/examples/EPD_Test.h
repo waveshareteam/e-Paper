@@ -75,6 +75,7 @@ int EPD_2in13bc_test(void);
 int EPD_2in13b_V3_test(void);
 int EPD_2in13b_V4_test(void);
 int EPD_2in13d_test(void);
+int EPD_2in13g_test(void);
 
 int EPD_3in52_test(void);
 

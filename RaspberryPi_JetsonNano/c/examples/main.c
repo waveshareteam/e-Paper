@@ -111,6 +111,9 @@ int main(void)
     
 #elif epd2in13d
     EPD_2in13d_test();
+
+#elif epd2in13g
+    EPD_2in13g_test();
     
 #elif epd3in52
     EPD_3in52_test();

@@ -34,3 +34,4 @@
 2022-08-17: Added new programs 2.36inch e-Paper (G) routine.
 2022-10-22: Added new programs 7.3inch e-Paper (F) routine.
 2022-10-27: Added new programs 2.7inch V2 e-Paper routine.
+2023-05-29: Added new programs 2.13inch e-Paper (G) routine.
