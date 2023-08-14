@@ -90,6 +90,9 @@ else ifeq ($(EPD), epd2in13V2)
 else ifeq ($(EPD), epd2in13V3)
 	OBJ_C_EPD = ${DIR_EPD}/EPD_2in13_V3.c
 	OBJ_C_Examples = ${DIR_Examples}/EPD_2in13_V3_test.c
+else ifeq ($(EPD), epd2in13V4)
+	OBJ_C_EPD = ${DIR_EPD}/EPD_2in13_V4.c
+	OBJ_C_Examples = ${DIR_Examples}/EPD_2in13_V4_test.c
 else ifeq ($(EPD), epd2in13bc)
 	OBJ_C_EPD = ${DIR_EPD}/EPD_2in13bc.c
 	OBJ_C_Examples = ${DIR_Examples}/EPD_2in13bc_test.c
@@ -102,9 +105,6 @@ else ifeq ($(EPD), epd2in13bV4)
 else ifeq ($(EPD), epd2in13d)
 	OBJ_C_EPD = ${DIR_EPD}/EPD_2in13d.c
 	OBJ_C_Examples = ${DIR_Examples}/EPD_2in13d_test.c
-else ifeq ($(EPD), epd2in13g)
-	OBJ_C_EPD = ${DIR_EPD}/EPD_2in13g.c
-	OBJ_C_Examples = ${DIR_Examples}/EPD_2in13g_test.c
 else ifeq ($(EPD), epd3in52)
 	OBJ_C_EPD = ${DIR_EPD}/EPD_3in52.c
 	OBJ_C_Examples = ${DIR_Examples}/EPD_3in52_test.c

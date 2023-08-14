@@ -59,11 +59,10 @@ int EpdIf::IfInit(void) {
     pinMode(BUSY_PIN, INPUT); 
 
     pinMode(PWR_PIN, OUTPUT);
-    DigitalWrite(PWR_PIN, 1);
+    DigitalWrite(PWR_PIN, 0);
 
     SPI.begin();
     SPI.beginTransaction(SPISettings(2000000, MSBFIRST, SPI_MODE0));
     
     return 0;
 }
-

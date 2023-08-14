@@ -232,10 +232,10 @@ void EPD_7IN3G_Display_part(UBYTE *Image, UWORD xstart, UWORD ystart, UWORD imag
     EPD_7IN3G_SendCommand(0x10);
     for (UWORD i = 0; i < Height; i++) {
         for (UWORD j = 0; j < Width; j++) {
-					if(i<image_height+ystart && i>=ystart && j<(image_width+xstart)/4 && j>=xstart/4) {
-							EPD_7IN3G_SendData(Image[(j-xstart/4) + (image_width/4*(i-ystart))]);
-						}
-						else
+            if(i<image_height+ystart && i>=ystart && j<(image_width+xstart)/4 && j>=xstart/4) {
+                    EPD_7IN3G_SendData(Image[(j-xstart/4) + (image_width/4*(i-ystart))]);
+                }
+                else
             EPD_7IN3G_SendData(0x55);
         }
     }

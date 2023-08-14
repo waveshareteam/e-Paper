@@ -99,6 +99,9 @@ int main(void)
     
 #elif epd2in13V3
     EPD_2in13_V3_test();
+
+#elif epd2in13V4
+    EPD_2in13_V4_test();
     
 #elif epd2in13bc
     EPD_2in13bc_test();
@@ -111,9 +114,6 @@ int main(void)
     
 #elif epd2in13d
     EPD_2in13d_test();
-
-#elif epd2in13g
-    EPD_2in13g_test();
     
 #elif epd3in52
     EPD_3in52_test();

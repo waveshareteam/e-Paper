@@ -84,7 +84,7 @@ int EPD_test(void)
     Paint_DrawLine(105, 75, 105, 115, EPD_7IN3G_YELLOW, DOT_PIXEL_1X1, LINE_STYLE_DOTTED);
     Paint_DrawString_EN(10, 0, "Red, yellow, white and black", &Font16, EPD_7IN3G_WHITE, EPD_7IN3G_YELLOW);
     Paint_DrawString_EN(10, 35, "Four color e-Paper", &Font12, EPD_7IN3G_YELLOW, EPD_7IN3G_BLACK);
-    Paint_DrawString_CN(10, 125, "ÂæÆÈõ™ÁîµÂ≠ê", &Font24CN, EPD_7IN3G_RED, EPD_7IN3G_WHITE);
+    Paint_DrawString_CN(10, 125, "Œ¢—©µÁ◊”", &Font24CN, EPD_7IN3G_RED, EPD_7IN3G_WHITE);
     Paint_DrawNum(10, 50, 123456, &Font12, EPD_7IN3G_RED, EPD_7IN3G_WHITE);
 
     printf("EPD_Display\r\n");
