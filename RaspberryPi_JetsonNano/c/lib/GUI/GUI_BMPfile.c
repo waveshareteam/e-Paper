@@ -422,6 +422,16 @@ UBYTE GUI_ReadBmp_RGB_4Color(const char *path, UWORD Xstart, UWORD Ystart)
 				Image[x+(y* bmpInfoHeader.biWidth )] =  3;//Red
 			}
         }
+        if(bmpInfoHeader.biWidth % 4 != 0)
+        {
+            for (UWORD i = 0; i < (bmpInfoHeader.biWidth % 4); i++)
+            {
+                if(fread((char *)Rdata, 1, 1, fp) != 1) {
+                perror("get bmpdata:\r\n");
+                break;
+                }
+            }
+        }
     }
     fclose(fp);
    
