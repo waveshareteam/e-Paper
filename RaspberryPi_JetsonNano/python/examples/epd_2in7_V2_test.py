@@ -145,6 +145,7 @@ try:
     time.sleep(2)
 
     logging.info("Clear...")
+    epd.init()   
     epd.Clear()
     logging.info("Goto Sleep...")
     epd.sleep()

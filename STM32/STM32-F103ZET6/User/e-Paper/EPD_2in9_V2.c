@@ -4,8 +4,8 @@
 * | Function    :   2.9inch e-paper V2
 * | Info        :
 *----------------
-* |	This version:   V1.0
-* | Date        :   2020-12-09
+* |	This version:   V1.1
+* | Date        :   2023-08-30
 * | Info        :
 * -----------------------------------------------------------------------------
 #
@@ -77,6 +77,29 @@ UBYTE WS_20_30[159] =
 0x22,	0x17,	0x41,	0x0,	0x32,	0x36
 };	
 
+unsigned char Gray4[159] =			
+{											
+0x00,	0x60,	0x00,	0x00,	0x00,	0x00,	0x00,	0x00,	0x00,	0x00,	0x00,	0x00,	//VS L0	 //2.28s			
+0x20,	0x60,	0x10,	0x00,	0x00,	0x00,	0x00,	0x00,	0x00,	0x00,	0x00,	0x00,	//VS L1				
+0x28,	0x60,	0x14,	0x00,	0x00,	0x00,	0x00,	0x00,	0x00,	0x00,	0x00,	0x00,	//VS L2				
+0x2A,	0x60,	0x15,	0x00,	0x00,	0x00,	0x00,	0x00,	0x00,	0x00,	0x00,	0x00,	//VS L3 				
+0x00,	0x90,	0x00,	0x00,	0x00,	0x00,	0x00,	0x00,	0x00,	0x00,	0x00,	0x00,	//VS L4 				
+0x00,	0x02,	0x00,	0x05,	0x14,	0x00,	0x00,						//TP, SR, RP of Group0				
+0x1E,	0x1E,	0x00,	0x00,	0x00,	0x00,	0x01,						//TP, SR, RP of Group1				
+0x00,	0x02,	0x00,	0x05,	0x14,	0x00,	0x00,						//TP, SR, RP of Group2				
+0x00,	0x00,	0x00,	0x00,	0x00,	0x00,	0x00,						//TP, SR, RP of Group3				
+0x00,	0x00,	0x00,	0x00,	0x00,	0x00,	0x00,						//TP, SR, RP of Group4				
+0x00,	0x00,	0x00,	0x00,	0x00,	0x00,	0x00,						//TP, SR, RP of Group5				
+0x00,	0x00,	0x00,	0x00,	0x00,	0x00,	0x00,						//TP, SR, RP of Group6				
+0x00,	0x00,	0x00,	0x00,	0x00,	0x00,	0x00,						//TP, SR, RP of Group7				
+0x00,	0x00,	0x00,	0x00,	0x00,	0x00,	0x00,						//TP, SR, RP of Group8				
+0x00,	0x00,	0x00,	0x00,	0x00,	0x00,	0x00,						//TP, SR, RP of Group9				
+0x00,	0x00,	0x00,	0x00,	0x00,	0x00,	0x00,						//TP, SR, RP of Group10				
+0x00,	0x00,	0x00,	0x00,	0x00,	0x00,	0x00,						//TP, SR, RP of Group11				
+0x24,	0x22,	0x22,	0x22,	0x23,	0x32,	0x00,	0x00,	0x00,				//FR, XON				
+0x22,	0x17,	0x41,	0xAE,	0x32,	0x28,							//EOPT VGH VSH1 VSH2 VSL VCOM				
+};	
+
 /******************************************************************************
 function :	Software reset
 parameter:
@@ -84,11 +107,11 @@ parameter:
 static void EPD_2IN9_V2_Reset(void)
 {
     DEV_Digital_Write(EPD_RST_PIN, 1);
-    DEV_Delay_ms(100);
+    DEV_Delay_ms(10);
     DEV_Digital_Write(EPD_RST_PIN, 0);
     DEV_Delay_ms(2);
     DEV_Digital_Write(EPD_RST_PIN, 1);
-    DEV_Delay_ms(100);
+    DEV_Delay_ms(10);
 }
 
 /******************************************************************************
@@ -135,7 +158,7 @@ void EPD_2IN9_V2_ReadBusy(void)
 }
 
 static void EPD_2IN9_V2_LUT(UBYTE *lut)
-{       
+{
 	UBYTE count;
 	EPD_2IN9_V2_SendCommand(0x32);
 	for(count=0; count<153; count++) 
@@ -220,33 +243,55 @@ void EPD_2IN9_V2_Init(void)
 	DEV_Delay_ms(100);
 
 	EPD_2IN9_V2_ReadBusy();   
-	EPD_2IN9_V2_SendCommand(0x12);  //SWRESET
-	EPD_2IN9_V2_ReadBusy();   
-
+	EPD_2IN9_V2_SendCommand(0x12); // soft reset
+	EPD_2IN9_V2_ReadBusy();
+	
 	EPD_2IN9_V2_SendCommand(0x01); //Driver output control      
 	EPD_2IN9_V2_SendData(0x27);
 	EPD_2IN9_V2_SendData(0x01);
 	EPD_2IN9_V2_SendData(0x00);
-
+	
 	EPD_2IN9_V2_SendCommand(0x11); //data entry mode       
 	EPD_2IN9_V2_SendData(0x03);
-
+	
 	EPD_2IN9_V2_SetWindows(0, 0, EPD_2IN9_V2_WIDTH-1, EPD_2IN9_V2_HEIGHT-1);
-
-	// EPD_2IN9_V2_SendCommand(0x3C); //BorderWavefrom
-	// EPD_2IN9_V2_SendData(0x05);	
-
+	
 	EPD_2IN9_V2_SendCommand(0x21); //  Display update control
 	EPD_2IN9_V2_SendData(0x00);
 	EPD_2IN9_V2_SendData(0x80);	
-
-	// EPD_2IN9_V2_SendCommand(0x18); //Read built-in temperature sensor
-	// EPD_2IN9_V2_SendData(0x80);	
-
+	
 	EPD_2IN9_V2_SetCursor(0, 0);
-	EPD_2IN9_V2_ReadBusy();
-
+	EPD_2IN9_V2_ReadBusy();	
+	
 	EPD_2IN9_V2_LUT_by_host(WS_20_30);
+}
+
+void EPD_2IN9_V2_Gray4_Init(void)
+{
+	EPD_2IN9_V2_Reset();
+	DEV_Delay_ms(100);
+
+	EPD_2IN9_V2_ReadBusy();   
+	EPD_2IN9_V2_SendCommand(0x12); // soft reset
+	EPD_2IN9_V2_ReadBusy();
+	
+	EPD_2IN9_V2_SendCommand(0x01); //Driver output control      
+	EPD_2IN9_V2_SendData(0x27);
+	EPD_2IN9_V2_SendData(0x01);
+	EPD_2IN9_V2_SendData(0x00);
+	
+	EPD_2IN9_V2_SendCommand(0x11); //data entry mode       
+	EPD_2IN9_V2_SendData(0x03);
+	
+	EPD_2IN9_V2_SetWindows(8, 0, EPD_2IN9_V2_WIDTH, EPD_2IN9_V2_HEIGHT-1);
+
+	EPD_2IN9_V2_SendCommand(0x3C);       
+	EPD_2IN9_V2_SendData(0x04);
+	
+	EPD_2IN9_V2_SetCursor(1, 0);
+	EPD_2IN9_V2_ReadBusy();	
+
+	EPD_2IN9_V2_LUT_by_host(Gray4);
 }
 
 /******************************************************************************
@@ -256,7 +301,14 @@ parameter:
 void EPD_2IN9_V2_Clear(void)
 {
 	UWORD i;
+	
 	EPD_2IN9_V2_SendCommand(0x24);   //write RAM for black(0)/white (1)
+	for(i=0;i<4736;i++)
+	{
+		EPD_2IN9_V2_SendData(0xff);
+	}
+
+	EPD_2IN9_V2_SendCommand(0x26);   //write RAM for black(0)/white (1)
 	for(i=0;i<4736;i++)
 	{
 		EPD_2IN9_V2_SendData(0xff);
@@ -296,13 +348,96 @@ void EPD_2IN9_V2_Display_Base(UBYTE *Image)
 	EPD_2IN9_V2_TurnOnDisplay();	
 }
 
+void EPD_2IN9_V2_4GrayDisplay(UBYTE *Image)
+{
+    UDOUBLE i,j,k;
+    UBYTE temp1,temp2,temp3;
+
+    // old  data
+    EPD_2IN9_V2_SendCommand(0x24);
+    for(i=0; i<4736; i++) { 
+        temp3=0;
+        for(j=0; j<2; j++) {
+            temp1 = Image[i*2+j];
+            for(k=0; k<2; k++) {
+                temp2 = temp1&0xC0;
+                if(temp2 == 0xC0)
+                    temp3 |= 0x00;
+                else if(temp2 == 0x00)
+                    temp3 |= 0x01; 
+                else if(temp2 == 0x80)
+                    temp3 |= 0x01; 
+                else //0x40
+                    temp3 |= 0x00; 
+                temp3 <<= 1;
+
+                temp1 <<= 2;
+                temp2 = temp1&0xC0 ;
+                if(temp2 == 0xC0) 
+                    temp3 |= 0x00;
+                else if(temp2 == 0x00) 
+                    temp3 |= 0x01;
+                else if(temp2 == 0x80)
+                    temp3 |= 0x01; 
+                else    //0x40
+                    temp3 |= 0x00;	
+                if(j!=1 || k!=1)
+                    temp3 <<= 1;
+
+                temp1 <<= 2;
+            }
+        }
+        EPD_2IN9_V2_SendData(temp3);
+        // printf("%x ",temp3);
+    }
+
+    EPD_2IN9_V2_SendCommand(0x26);   //write RAM for black(0)/white (1)
+    for(i=0; i<4736; i++) {            
+        temp3=0;
+        for(j=0; j<2; j++) {
+            temp1 = Image[i*2+j];
+            for(k=0; k<2; k++) {
+                temp2 = temp1&0xC0 ;
+                if(temp2 == 0xC0)
+                    temp3 |= 0x00;//white
+                else if(temp2 == 0x00)
+                    temp3 |= 0x01;  //black
+                else if(temp2 == 0x80)
+                    temp3 |= 0x00;  //gray1
+                else //0x40
+                    temp3 |= 0x01; //gray2
+                temp3 <<= 1;
+
+                temp1 <<= 2;
+                temp2 = temp1&0xC0 ;
+                if(temp2 == 0xC0)  //white
+                    temp3 |= 0x00;
+                else if(temp2 == 0x00) //black
+                    temp3 |= 0x01;
+                else if(temp2 == 0x80)
+                    temp3 |= 0x00; //gray1
+                else    //0x40
+                    temp3 |= 0x01;	//gray2
+                if(j!=1 || k!=1)
+                    temp3 <<= 1;
+
+                temp1 <<= 2;
+            }
+        }
+        EPD_2IN9_V2_SendData(temp3);
+        // printf("%x ",temp3);
+    }
+
+    EPD_2IN9_V2_TurnOnDisplay();
+}
+
 void EPD_2IN9_V2_Display_Partial(UBYTE *Image)
 {
 	UWORD i;
 
 //Reset
     DEV_Digital_Write(EPD_RST_PIN, 0);
-    DEV_Delay_ms(2);
+    DEV_Delay_ms(1);
     DEV_Digital_Write(EPD_RST_PIN, 1);
     DEV_Delay_ms(2);
 
@@ -312,7 +447,7 @@ void EPD_2IN9_V2_Display_Partial(UBYTE *Image)
 	EPD_2IN9_V2_SendData(0x00);  
 	EPD_2IN9_V2_SendData(0x00);  
 	EPD_2IN9_V2_SendData(0x00); 
-	EPD_2IN9_V2_SendData(0x00);  	
+	EPD_2IN9_V2_SendData(0x00);  
 	EPD_2IN9_V2_SendData(0x40);  
 	EPD_2IN9_V2_SendData(0x00);  
 	EPD_2IN9_V2_SendData(0x00);   

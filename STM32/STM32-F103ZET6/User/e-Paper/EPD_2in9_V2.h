@@ -4,8 +4,8 @@
 * | Function    :   2.9inch e-paper V2
 * | Info        :
 *----------------
-* |	This version:   V1.0
-* | Date        :   2020-12-09
+* |	This version:   V1.1
+* | Date        :   2023-08-30
 * | Info        :
 * -----------------------------------------------------------------------------
 #
@@ -38,10 +38,11 @@
 #define EPD_2IN9_V2_HEIGHT      296
 
 void EPD_2IN9_V2_Init(void);
+void EPD_2IN9_V2_Gray4_Init(void);
 void EPD_2IN9_V2_Clear(void);
 void EPD_2IN9_V2_Display(UBYTE *Image);
 void EPD_2IN9_V2_Display_Base(UBYTE *Image);
+void EPD_2IN9_V2_4GrayDisplay(UBYTE *Image);
 void EPD_2IN9_V2_Display_Partial(UBYTE *Image);
 void EPD_2IN9_V2_Sleep(void);
-
 #endif

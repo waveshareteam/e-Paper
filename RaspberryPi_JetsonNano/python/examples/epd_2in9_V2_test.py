@@ -25,6 +25,7 @@ try:
     
     font24 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 24)
     font18 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 18)
+    font35 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 35)
     
     # Drawing on the Horizontal image
     logging.info("1.Drawing on the Horizontal image...")
@@ -74,7 +75,6 @@ try:
     Himage2.paste(bmp, (50,10))
     epd.display(epd.getbuffer(Himage2))
     time.sleep(2)
-    
 
     # partial update
     logging.info("5.show time")
@@ -92,6 +92,33 @@ try:
         num = num + 1
         if(num == 10):
             break
+
+    '''4Gray display'''
+    logging.info("4Gray display--------------------------------")
+    epd.Init_4Gray()
+    
+    Limage = Image.new('L', (epd.height, epd.width), 0)  # 255: clear the frame
+    draw = ImageDraw.Draw(Limage)
+    draw.text((0, 0), u'微雪电子', font = font35, fill = epd.GRAY1)
+    draw.text((0, 35), u'微雪电子', font = font35, fill = epd.GRAY2)
+    draw.text((0, 70), u'微雪电子', font = font35, fill = epd.GRAY3)
+    draw.text((20, 105), 'hello world', font = font18, fill = epd.GRAY1)
+    draw.line((160, 10, 210, 60), fill = epd.GRAY1)
+    draw.line((160, 60, 210, 10), fill = epd.GRAY1)
+    draw.rectangle((160, 10, 210, 60), outline = epd.GRAY1)
+    draw.line((160, 95, 210, 95), fill = epd.GRAY1)
+    draw.line((185, 70, 185, 120), fill = epd.GRAY1)
+    draw.arc((160, 70, 210, 120), 0, 360, fill = epd.GRAY1)
+    draw.rectangle((220, 10, 270, 60), fill = epd.GRAY1)
+    draw.chord((220, 70, 270, 120), 0, 360, fill = epd.GRAY1)
+
+    epd.display_4Gray(epd.getbuffer_4Gray(Limage))
+    time.sleep(2)
+    
+    #display 4Gra bmp
+    Himage = Image.open(os.path.join(picdir, '2in9_Scale.bmp'))
+    epd.display_4Gray(epd.getbuffer_4Gray(Himage))
+    time.sleep(2)
             
     logging.info("Clear...")
     epd.init()
