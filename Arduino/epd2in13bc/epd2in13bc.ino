@@ -88,7 +88,7 @@ void setup() {
 
   /* This displays an image */
   epd.DisplayFrame(IMAGE_BLACK, IMAGE_RED);
-
+  epd.ClearFrame();
   /* Deep sleep */
   epd.Sleep();
 }

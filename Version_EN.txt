@@ -37,3 +37,5 @@
 2023-05-29: Added new programs 2.13inch e-Paper (G) routine.
 2023-06-25: Added new program 2.13inch V4 e-Paper routine.
 2023-08-31: Update the routines of the 2.9inch V2 e-Paper to add a four-grayscale display
+2023-09-12: Added new program 4.2inch V2 e-Paper routine.
+2023-09-25: Added new programs 13.3inch e-Paper (K) routine.

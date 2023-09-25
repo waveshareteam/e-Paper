@@ -26,7 +26,7 @@
  */
 
 #include "epdif.h"
-#include <spi.h>
+#include <SPI.h>
 
 EpdIf::EpdIf() {
 };
@@ -57,7 +57,7 @@ int EpdIf::IfInit(void) {
     pinMode(RST_PIN, OUTPUT);
     pinMode(DC_PIN, OUTPUT);
     pinMode(BUSY_PIN, INPUT); 
-    
+
     pinMode(PWR_PIN, OUTPUT);
     DigitalWrite(PWR_PIN, 1);
 

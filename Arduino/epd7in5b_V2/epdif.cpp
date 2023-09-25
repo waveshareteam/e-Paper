@@ -56,8 +56,8 @@ int EpdIf::IfInit(void) {
     pinMode(CS_PIN, OUTPUT);
     pinMode(RST_PIN, OUTPUT);
     pinMode(DC_PIN, OUTPUT);
-    pinMode(BUSY_PIN, INPUT);
-    
+    pinMode(BUSY_PIN, INPUT); 
+
     pinMode(PWR_PIN, OUTPUT);
     DigitalWrite(PWR_PIN, 1);
 

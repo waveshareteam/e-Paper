@@ -174,9 +174,9 @@ else ifeq ($(EPD), epd7in5bHD)
 else ifeq ($(EPD), epd10in2b)
 	OBJ_C_EPD = ${DIR_EPD}/EPD_10in2b.c
 	OBJ_C_Examples = ${DIR_Examples}/EPD_10in2b_test.c
-else ifeq ($(EPD), epd13in3)
-	OBJ_C_EPD = ${DIR_EPD}/EPD_13in3.c
-	OBJ_C_Examples = ${DIR_Examples}/EPD_13in3_test.c
+else ifeq ($(EPD), epd13in3k)
+	OBJ_C_EPD = ${DIR_EPD}/EPD_13in3k.c
+	OBJ_C_Examples = ${DIR_Examples}/EPD_13in3k_test.c
 else 
     OBJ_C_EPD = NULL
     OBJ_C_Examples = NULL

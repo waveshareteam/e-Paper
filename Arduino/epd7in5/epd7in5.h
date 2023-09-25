@@ -83,6 +83,7 @@ public:
     void DisplayFrame(const unsigned char* frame_buffer);
     void SendCommand(unsigned char command);
     void SendData(unsigned char data);
+    void Clean(void);
     void Sleep(void);
 private:
     unsigned int reset_pin;

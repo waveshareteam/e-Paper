@@ -41,7 +41,6 @@ public:
     Epd();
     ~Epd();
     int  Init();
-    int Init_4Gray(void);
     void SendCommand(unsigned char command);
     void SendData(unsigned char data);
     void WaitUntilIdle(void);
@@ -64,8 +63,7 @@ public:
     void SetFrameMemory_Base(const unsigned char* image_buffer);
     void ClearFrameMemory(unsigned char color);
     void DisplayFrame(void);
-	  void DisplayFrame_Partial(void);
-    void Display4Gray(const unsigned char *Image);
+	void DisplayFrame_Partial(void);
     void Sleep(void);
 
 private:

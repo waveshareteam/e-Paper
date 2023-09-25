@@ -38,6 +38,8 @@ void setup() {
     }
     epd.Displaypart(IMAGE_DATA,250, 100,240,103, 0);
     epd.Displaypart(IMAGE_DATA,250, 300,240,103, 1);
+
+    epd.Sleep();
 }
 
 void loop() {

@@ -37,6 +37,11 @@ void setup() {
         return;
     }
     epd.DisplayFrame(IMAGE_DATA);
+
+    delay(1000);
+    epd.Clean();
+    epd.Sleep();
+
 }
 
 void loop() {

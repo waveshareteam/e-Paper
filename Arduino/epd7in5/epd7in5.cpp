@@ -152,6 +152,18 @@ void Epd::DisplayFrame(const unsigned char* frame_buffer) {
     WaitUntilIdle();
 }
 
+void Epd::Clean(void) {
+    SendCommand(DATA_START_TRANSMISSION_1);
+    for (long i = 0; i < EPD_WIDTH / 8 * EPD_HEIGHT; i++) { 
+        for(unsigned char J = 0; J < 4; J++) { 
+        SendData(0x33); 
+        }
+    }
+    SendCommand(DISPLAY_REFRESH);
+    DelayMs(100);
+    WaitUntilIdle();
+}
+
 /**
  *  @brief: After this command is transmitted, the chip would enter the 
  *          deep-sleep mode to save power. 

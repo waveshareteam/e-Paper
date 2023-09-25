@@ -111,5 +111,5 @@ int EPD_7in5b_HD_test(void);
 
 int EPD_10in2b_test(void);
 
-int EPD_13in3_test(void);
+int EPD_13in3k_test(void);
 #endif

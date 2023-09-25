@@ -1,11 +1,11 @@
 /*****************************************************************************
-* | File      	:   EPD_4in2_V2_V2_test.c
+* | File      	:   EPD_4in2_V2_test.c
 * | Author      :   Waveshare team
 * | Function    :   4.2inch e-paper V2 test demo
 * | Info        :
 *----------------
 * |	This version:   V1.0
-* | Date        :   2021-02-23
+* | Date        :   2023-09-11
 * | Info        :
 * -----------------------------------------------------------------------------
 #
@@ -63,23 +63,27 @@ int EPD_4in2_V2_test(void)
     EPD_4IN2_V2_Display(BlackImage);
     DEV_Delay_ms(2000);
 
-    printf("show bmp------------------------\r\n");
-    Paint_SelectImage(BlackImage);
-    GUI_ReadBmp("./pic/4in2.bmp", 0, 0);
-    EPD_4IN2_V2_Display(BlackImage);
-    DEV_Delay_ms(2000);
+    // EPD_4IN2_V2_Init_Fast(Seconds_1_5S);
+    // printf("show bmp------------------------\r\n");
+    // Paint_SelectImage(BlackImage);
+    // GUI_ReadBmp("./pic/4in2.bmp", 0, 0);
+    // EPD_4IN2_V2_Display_Fast(BlackImage);
+    // DEV_Delay_ms(2000);
 #endif        
 
-#if 0   // show image for array   
+#if 1  // show image for array   
+    EPD_4IN2_V2_Init_Fast(Seconds_1_5S);
     printf("show image for array\r\n");
     Paint_SelectImage(BlackImage);
     Paint_Clear(WHITE);
     Paint_DrawBitMap(gImage_4in2);
-    EPD_4IN2_V2_Display(BlackImage);
+    EPD_4IN2_V2_Display_Fast(BlackImage);
     DEV_Delay_ms(2000);
 #endif
 
 #if 1   // Drawing on the image
+
+    EPD_4IN2_V2_Init();
     //1.Select Image
     printf("SelectImage:BlackImage\r\n");
     Paint_SelectImage(BlackImage);
@@ -102,12 +106,12 @@ int EPD_4in2_V2_test(void)
     Paint_DrawString_EN(10, 20, "hello world", &Font12, WHITE, BLACK);
     Paint_DrawNum(10, 33, 123456789, &Font12, BLACK, WHITE);
     Paint_DrawNum(10, 50, 987654321, &Font16, WHITE, BLACK);
-    Paint_DrawString_CN(130, 0, " 你好abc", &Font12CN, BLACK, WHITE);
+    Paint_DrawString_CN(130, 0, "你好abc", &Font12CN, BLACK, WHITE);
     Paint_DrawString_CN(130, 20, "微雪电子", &Font24CN, WHITE, BLACK);
 
     printf("EPD_Display\r\n");
     // EPD_4IN2_V2_Display(BlackImage);
-	EPD_4IN2_V2_Display_Base(BlackImage);
+	EPD_4IN2_V2_Display(BlackImage);
 	DEV_Delay_ms(2000);
 #endif
 
@@ -143,6 +147,66 @@ int EPD_4in2_V2_test(void)
 			break;
 		}
     }
+#endif
+
+
+#if 1
+    // EPD_4IN2_V2_Init();
+	// EPD_4IN2_V2_Clear();
+	EPD_4IN2_V2_Init_4Gray();
+	printf("show Gray------------------------\r\n");
+	free(BlackImage);
+	BlackImage = NULL;
+	Imagesize = ((EPD_4IN2_V2_WIDTH % 8 == 0)? (EPD_4IN2_V2_WIDTH / 4 ): (EPD_4IN2_V2_WIDTH / 4 + 1)) * EPD_4IN2_V2_HEIGHT;
+    if((BlackImage = (UBYTE *)malloc(Imagesize)) == NULL) {
+        printf("Failed to apply for black memory...\r\n");
+        return -1;
+    }
+	Paint_NewImage(BlackImage, EPD_4IN2_V2_WIDTH, EPD_4IN2_V2_HEIGHT, 0, WHITE);
+	Paint_SetScale(4);
+	Paint_Clear(WHITE);
+
+	Paint_DrawPoint(10, 80, BLACK, DOT_PIXEL_1X1, DOT_STYLE_DFT);
+    Paint_DrawPoint(10, 90, BLACK, DOT_PIXEL_2X2, DOT_STYLE_DFT);
+    Paint_DrawPoint(10, 100, BLACK, DOT_PIXEL_3X3, DOT_STYLE_DFT);
+    Paint_DrawLine(20, 70, 70, 120, BLACK, DOT_PIXEL_1X1, LINE_STYLE_SOLID);
+    Paint_DrawLine(70, 70, 20, 120, BLACK, DOT_PIXEL_1X1, LINE_STYLE_SOLID);
+    Paint_DrawRectangle(20, 70, 70, 120, BLACK, DOT_PIXEL_1X1, DRAW_FILL_EMPTY);
+    Paint_DrawRectangle(80, 70, 130, 120, BLACK, DOT_PIXEL_1X1, DRAW_FILL_FULL);
+    Paint_DrawCircle(45, 95, 20, BLACK, DOT_PIXEL_1X1, DRAW_FILL_EMPTY);
+    Paint_DrawCircle(105, 95, 20, WHITE, DOT_PIXEL_1X1, DRAW_FILL_FULL);
+    Paint_DrawLine(85, 95, 125, 95, BLACK, DOT_PIXEL_1X1, LINE_STYLE_DOTTED);
+    Paint_DrawLine(105, 75, 105, 115, BLACK, DOT_PIXEL_1X1, LINE_STYLE_DOTTED);
+    Paint_DrawString_EN(10, 0, "waveshare", &Font16, BLACK, WHITE);
+    Paint_DrawString_EN(10, 20, "hello world", &Font12, WHITE, BLACK);
+    Paint_DrawNum(10, 33, 123456789, &Font12, BLACK, WHITE);
+    Paint_DrawNum(10, 50, 987654321, &Font16, WHITE, BLACK);
+    Paint_DrawString_CN(140, 0, "你好abc", &Font12CN, GRAY1, GRAY4);
+    Paint_DrawString_CN(140, 40, "你好abc", &Font12CN, GRAY2, GRAY3);
+    Paint_DrawString_CN(140, 80, "你好abc", &Font12CN, GRAY3, GRAY2);
+    Paint_DrawString_CN(140, 120, "你好abc", &Font12CN, GRAY4, GRAY1);
+	
+    Paint_DrawString_CN(220, 0, "微雪电子", &Font24CN, GRAY1, GRAY4);
+    Paint_DrawString_CN(220, 40, "微雪电子", &Font24CN, GRAY2, GRAY3);
+    Paint_DrawString_CN(220, 80, "微雪电子", &Font24CN, GRAY3, GRAY2);
+    Paint_DrawString_CN(220, 120, "微雪电子", &Font24CN, GRAY4, GRAY1);
+	
+	EPD_4IN2_V2_Display_4Gray(BlackImage);
+	DEV_Delay_ms(2000);
+
+	Paint_Clear(WHITE);
+    EPD_4IN2_V2_Display_4Gray(gImage_4in2_4Gray1);
+	DEV_Delay_ms(2000);
+
+	GUI_ReadBmp_4Gray("./pic/4in2_Scale.bmp",0 , 0);
+	EPD_4IN2_V2_Display_4Gray(BlackImage);
+	DEV_Delay_ms(2000);
+	
+	Paint_Clear(WHITE);
+    GUI_ReadBmp("./pic/100x100.bmp", 20, 20);
+    EPD_4IN2_V2_Display_4Gray(BlackImage);
+	DEV_Delay_ms(2000);
+
 #endif
 
     EPD_4IN2_V2_Init();

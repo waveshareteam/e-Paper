@@ -88,7 +88,7 @@ void Epd::WaitUntilIdle(void) {
   Serial.print("e-Paper busy \r\n ");
   do
   {
- //   SendCommand(0x71);
+    SendCommand(0x71);
     busy = DigitalRead(busy_pin);
     busy =!(busy & 0x01);        
   }
@@ -106,7 +106,7 @@ void Epd::Reset(void) {
     DigitalWrite(reset_pin, HIGH);
     DelayMs(200);   
     DigitalWrite(reset_pin, LOW);                //module reset    
-    DelayMs(2);
+    DelayMs(5);
     DigitalWrite(reset_pin, HIGH);
     DelayMs(200);    
 }

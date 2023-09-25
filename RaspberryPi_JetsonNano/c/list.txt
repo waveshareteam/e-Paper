@@ -27,7 +27,7 @@ EPD model                   EPD define (EPD=)
 3.7inch e-Paper             epd3in7
 4.01inch e-Paper (F)        epd4in01f
 4.2inch e-Paper             epd4in2
-4.2inch e-Paper (V2)         epd4in2V2
+4.2inch e-Paper (V2)        epd4in2V2
 4.2inch e-Paper (B)/(C)     epd4in2bc
 4.2inch e-Paper (B) (V2)    epd4in2bV2
 5.65inch e-Paper (F)        epd5in65f
@@ -37,6 +37,7 @@ EPD model                   EPD define (EPD=)
 7.5inch e-Paper (V2)        epd7in5V2
 7.5inch e-Paper (B)/(C)     epd7in5bc
 7.5inch e-Paper (B) (V2)    epd7in5bV2
+13.3inch e-Paper (K)    epd13in3k
 
 Add EPD define at compile time, for example:
     # modle is 7.5inch e-Paper (B) (V2)

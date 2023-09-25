@@ -94,8 +94,11 @@ void setup() {
   epd.Init_4Gray();
   epd.ClearFrame();
   epd.Set_4GrayDisplay(gImage_4in2_4Gray1, 100, 100,  200,150);
+  delay(2000);
 
   /* Deep sleep */
+  epd.ClearFrame();
+  epd.DisplayFrame();
   epd.Sleep();
 }
 

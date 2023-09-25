@@ -47,6 +47,8 @@ void setup() {
   epd.DisplayPicture(IMAGE_DATA, 3);
 
   delay(2000);
+  epd.Clear();
+  epd.Sleep();
 }
 
 void loop() {

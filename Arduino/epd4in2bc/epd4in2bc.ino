@@ -85,11 +85,13 @@ void setup() {
 
   /* This displays the data from the SRAM in e-Paper module */
   epd.DisplayFrame();
-
+  delay(1000);
   /* This displays an image */
  // epd.DisplayFrame(IMAGE_BLACK, IMAGE_RED);
 
   /* Deep sleep */
+  epd.ClearFrame();
+  epd.DisplayFrame();
   epd.Sleep();
 }
 

@@ -38,6 +38,10 @@ void setup() {
     }
     //epd.Clean();
     epd.DisplayOneQuarterFrame(IMAGE_DATA);
+
+  delay(1000);
+  epd.Clean();
+  epd.Sleep();
 }
 
 void loop() {

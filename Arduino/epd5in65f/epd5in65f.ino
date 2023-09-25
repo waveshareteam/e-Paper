@@ -44,6 +44,10 @@ void setup() {
   epd.EPD_5IN65F_Display_part(gImage_5in65f, 204, 153, 192, 143);
 
   delay(2000);
+
+  epd.Clear(EPD_5IN65F_WHITE);
+
+  epd.Sleep();
 }
 
 void loop() {

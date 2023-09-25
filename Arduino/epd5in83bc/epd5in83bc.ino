@@ -38,6 +38,10 @@ void setup() {
   }
 //  epd.Clean();
   epd.DisplayOneQuarterFrame(gImage_black_300X224, gImage_red_300X224);
+  delay(1000);
+
+  epd.Clean();
+  epd.Sleep();
 }
 
 void loop() {
