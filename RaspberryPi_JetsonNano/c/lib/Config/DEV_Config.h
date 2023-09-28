@@ -68,7 +68,7 @@
     #endif
 #endif
 
-#ifdef JETSON
+#if defined(JETSON) || defined(LIBRETECH_CC)
     #ifdef USE_DEV_LIB
         #include "sysfs_gpio.h"    
         #include "sysfs_software_spi.h"
