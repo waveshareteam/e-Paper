@@ -6,7 +6,7 @@
 # *----------------
 # * | This version:   V1.2
 # * | Date        :   2022-10-29
-# * | Info        :   
+# * | Info        :
 # ******************************************************************************
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documnetation files (the "Software"), to deal
@@ -73,7 +73,7 @@ class RaspberryPi:
         self.GPIO.setup(self.CS_PIN, self.GPIO.OUT)
         self.GPIO.setup(self.PWR_PIN, self.GPIO.OUT)
         self.GPIO.setup(self.BUSY_PIN, self.GPIO.IN)
-        
+
         self.GPIO.output(self.PWR_PIN, 1)
 
         # SPI device, bus = 0, device = 0
@@ -145,9 +145,9 @@ class JetsonNano:
         self.GPIO.setup(self.CS_PIN, self.GPIO.OUT)
         self.GPIO.setup(self.PWR_PIN, self.GPIO.OUT)
         self.GPIO.setup(self.BUSY_PIN, self.GPIO.IN)
-        
+
         self.GPIO.output(self.PWR_PIN, 1)
-        
+
         self.SPI.SYSFS_software_spi_begin()
         return 0
 
@@ -208,7 +208,7 @@ class SunriseX3:
             self.GPIO.setup(self.BUSY_PIN, self.GPIO.IN)
 
             self.GPIO.output(self.PWR_PIN, 1)
-        
+
             # SPI device, bus = 0, device = 0
             self.SPI.open(2, 0)
             self.SPI.max_speed_hz = 4000000
@@ -230,7 +230,7 @@ class SunriseX3:
         self.GPIO.cleanup([self.RST_PIN, self.DC_PIN, self.CS_PIN, self.BUSY_PIN], self.PWR_PIN)
 
 
-if os.path.exists('/sys/bus/platform/drivers/gpiomem-bcm2835'):
+if True: #os.path.exists('/sys/bus/platform/drivers/gpiomem-bcm2835'):
     implementation = RaspberryPi()
 elif os.path.exists('/sys/bus/platform/drivers/gpio-x3'):
     implementation = SunriseX3()
