@@ -235,6 +235,7 @@ class SunriseX3:
 
 
 def is_raspberry_pi():
+    # https://raspberrypi.stackexchange.com/a/139704/540
     CPUINFO_PATH = Path("/proc/cpuinfo")
 
     if not CPUINFO_PATH.exists():
