@@ -31,6 +31,8 @@ import os
 import logging
 import sys
 import time
+from pathlib import Path
+import re
 
 logger = logging.getLogger(__name__)
 
@@ -230,7 +232,19 @@ class SunriseX3:
         self.GPIO.cleanup([self.RST_PIN, self.DC_PIN, self.CS_PIN, self.BUSY_PIN], self.PWR_PIN)
 
 
-if os.path.exists('/etc/rpi-issue'):
+
+
+def is_raspberry_pi():
+    CPUINFO_PATH = Path("/proc/cpuinfo")
+
+    if not CPUINFO_PATH.exists():
+        return False
+    with open(CPUINFO_PATH) as f:
+        cpuinfo = f.read()
+    return re.search(r"^Model\s*:\s*Raspberry Pi", cpuinfo, flags=re.M) is not None
+
+
+if is_raspberry_pi():
     implementation = RaspberryPi()
 elif os.path.exists('/sys/bus/platform/drivers/gpio-x3'):
     implementation = SunriseX3()
