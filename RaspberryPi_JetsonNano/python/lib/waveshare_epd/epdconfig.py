@@ -230,7 +230,7 @@ class SunriseX3:
         self.GPIO.cleanup([self.RST_PIN, self.DC_PIN, self.CS_PIN, self.BUSY_PIN], self.PWR_PIN)
 
 
-if os.path.exists('/sys/bus/platform/drivers/gpiomem-bcm2835'):
+if os.path.exists('/etc/rpi-issue'):
     implementation = RaspberryPi()
 elif os.path.exists('/sys/bus/platform/drivers/gpio-x3'):
     implementation = SunriseX3()
