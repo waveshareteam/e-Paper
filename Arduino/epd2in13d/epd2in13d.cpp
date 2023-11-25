@@ -28,7 +28,7 @@
 #
 ******************************************************************************/
 #include "epd2in13d.h"
-#include <arduino.h>
+#include <Arduino.h>
 /**
  * full screen update LUT
 **/
