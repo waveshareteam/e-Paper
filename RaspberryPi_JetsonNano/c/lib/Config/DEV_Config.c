@@ -28,7 +28,7 @@
 #
 ******************************************************************************/
 #include "DEV_Config.h"
-
+#include "RPI_gpiod.h"
 /**
  * GPIO
 **/
@@ -49,7 +49,7 @@ void DEV_Digital_Write(UWORD Pin, UBYTE Value)
 #elif USE_WIRINGPI_LIB
 	digitalWrite(Pin, Value);
 #elif USE_DEV_LIB
-	SYSFS_GPIO_Write(Pin, Value);
+	GPIOD_Write(Pin, Value);
 #endif
 #endif
 
@@ -71,7 +71,7 @@ UBYTE DEV_Digital_Read(UWORD Pin)
 #elif USE_WIRINGPI_LIB
 	Read_value = digitalRead(Pin);
 #elif USE_DEV_LIB
-	Read_value = SYSFS_GPIO_Read(Pin);
+	Read_value = GPIOD_Read(Pin);
 #endif
 #endif
 
@@ -153,14 +153,13 @@ void DEV_GPIO_Mode(UWORD Pin, UWORD Mode)
 		// Debug (" %d OUT \r\n",Pin);
 	}
 #elif USE_DEV_LIB
-	SYSFS_GPIO_Export(Pin);
-	if(Mode == 0 || Mode == SYSFS_GPIO_IN) {
-		SYSFS_GPIO_Direction(Pin, SYSFS_GPIO_IN);
-		// Debug("IN Pin = %d\r\n",Pin);
-	} else {
-		SYSFS_GPIO_Direction(Pin, SYSFS_GPIO_OUT);
-		// Debug("OUT Pin = %d\r\n",Pin);
-	}
+    if(Mode == 0 || Mode == GPIOD_IN) {
+        GPIOD_Direction(Pin, GPIOD_IN);
+        // Debug("IN Pin = %d\r\n",Pin);
+    } else {
+        GPIOD_Direction(Pin, GPIOD_OUT);
+        // Debug("OUT Pin = %d\r\n",Pin);
+    }
 #endif
 #endif
 
@@ -266,14 +265,15 @@ void DEV_GPIO_Init(void)
 	EPD_BUSY_PIN    = GPIO24;
 #endif
 
+    DEV_GPIO_Mode(EPD_BUSY_PIN, 0);
 	DEV_GPIO_Mode(EPD_RST_PIN, 1);
 	DEV_GPIO_Mode(EPD_DC_PIN, 1);
 	DEV_GPIO_Mode(EPD_CS_PIN, 1);
     DEV_GPIO_Mode(EPD_PWR_PIN, 1);
-	DEV_GPIO_Mode(EPD_BUSY_PIN, 0);
 
 	DEV_Digital_Write(EPD_CS_PIN, 1);
     DEV_Digital_Write(EPD_PWR_PIN, 1);
+    
 }
 /******************************************************************************
 function:	Module Initialize, the library and initialize the pins, SPI protocol
@@ -320,6 +320,7 @@ UBYTE DEV_Module_Init(void)
 	// wiringPiSPISetupMode(0, 32000000, 0);
 #elif USE_DEV_LIB
 	printf("Write and read /dev/spidev0.0 \r\n");
+    GPIOD_Export();
 	DEV_GPIO_Init();
 	DEV_HARDWARE_SPI_begin("/dev/spidev0.0");
     DEV_HARDWARE_SPI_setSpeed(10000000);
@@ -371,6 +372,11 @@ void DEV_Module_Exit(void)
     DEV_Digital_Write(EPD_PWR_PIN, 0);
 	DEV_Digital_Write(EPD_DC_PIN, 0);
 	DEV_Digital_Write(EPD_RST_PIN, 0);
+    GPIOD_Unexport(EPD_PWR_PIN);
+    GPIOD_Unexport(EPD_DC_PIN);
+    GPIOD_Unexport(EPD_RST_PIN);
+    GPIOD_Unexport(EPD_BUSY_PIN);
+    GPIOD_Unexport_GPIO();
 #endif
 
 #elif JETSON

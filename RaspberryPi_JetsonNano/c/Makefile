@@ -184,15 +184,15 @@ endif
 
 OBJ_C = $(wildcard ${OBJ_C_EPD} ${DIR_GUI}/*.c ${OBJ_C_Examples} ${DIR_Examples}/main.c ${DIR_Examples}/ImageData2.c ${DIR_Examples}/ImageData.c ${DIR_FONTS}/*.c )
 OBJ_O = $(patsubst %.c,${DIR_BIN}/%.o,$(notdir ${OBJ_C}))
-RPI_DEV_C = $(wildcard $(DIR_BIN)/dev_hardware_SPI.o $(DIR_BIN)/RPI_sysfs_gpio.o $(DIR_BIN)/DEV_Config.o )
+RPI_DEV_C = $(wildcard $(DIR_BIN)/dev_hardware_SPI.o $(DIR_BIN)/RPI_gpiod.o $(DIR_BIN)/DEV_Config.o )
 JETSON_DEV_C = $(wildcard $(DIR_BIN)/sysfs_software_spi.o $(DIR_BIN)/sysfs_gpio.o $(DIR_BIN)/DEV_Config.o )
 
 
 DEBUG = -D DEBUG
 
-USELIB_RPI = USE_BCM2835_LIB
+# USELIB_RPI = USE_BCM2835_LIB
 # USELIB_RPI = USE_WIRINGPI_LIB
-# USELIB_RPI = USE_DEV_LIB
+USELIB_RPI = USE_DEV_LIB
 
 LIB_RPI=-Wl,--gc-sections
 ifeq ($(USELIB_RPI), USE_BCM2835_LIB)
@@ -200,7 +200,7 @@ ifeq ($(USELIB_RPI), USE_BCM2835_LIB)
 else ifeq ($(USELIB_RPI), USE_WIRINGPI_LIB)
 	LIB_RPI += -lwiringPi -lm 
 else ifeq ($(USELIB_RPI), USE_DEV_LIB)
-	LIB_RPI += -lm 
+	LIB_RPI += -lgpiod -lm 
 endif
 DEBUG_RPI = -D $(USELIB_RPI) -D RPI
 
@@ -247,7 +247,7 @@ ${DIR_BIN}/%.o:$(DIR_GUI)/%.c
 
 RPI_DEV:
 	$(CC) $(CFLAGS) $(DEBUG_RPI) -c	 $(DIR_Config)/dev_hardware_SPI.c -o $(DIR_BIN)/dev_hardware_SPI.o $(LIB_RPI) $(DEBUG)
-	$(CC) $(CFLAGS) $(DEBUG_RPI) -c	 $(DIR_Config)/RPI_sysfs_gpio.c -o $(DIR_BIN)/RPI_sysfs_gpio.o $(LIB_RPI) $(DEBUG)
+	$(CC) $(CFLAGS) $(DEBUG_RPI) -c	 $(DIR_Config)/RPI_gpiod.c -o $(DIR_BIN)/RPI_gpiod.o $(LIB_RPI) $(DEBUG)
 	$(CC) $(CFLAGS) $(DEBUG_RPI) -c	 $(DIR_Config)/DEV_Config.c -o $(DIR_BIN)/DEV_Config.o $(LIB_RPI) $(DEBUG)
 	
 JETSON_DEV:
