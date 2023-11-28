@@ -63,7 +63,7 @@
         #include <wiringPi.h>
         #include <wiringPiSPI.h>
     #elif USE_DEV_LIB
-        #include "RPI_sysfs_gpio.h"
+        #include "RPI_gpiod.h"
         #include "dev_hardware_SPI.h"
     #endif
 #endif

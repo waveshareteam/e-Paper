@@ -72,20 +72,24 @@ void DEV_HARDWARE_SPI_begin(char *SPI_device)
     int ret = 0; 
     if((hardware_SPI.fd = open(SPI_device, O_RDWR )) < 0)  {
         perror("Failed to open SPI device.\n");  
+        printf("Failed to open SPI device\r\n");
         DEV_HARDWARE_SPI_Debug("Failed to open SPI device\r\n");
         exit(1); 
     } else {
+        printf("open : %s\r\n", SPI_device);
         DEV_HARDWARE_SPI_Debug("open : %s\r\n", SPI_device);
     }
     hardware_SPI.mode = 0;
     
     ret = ioctl(hardware_SPI.fd, SPI_IOC_WR_BITS_PER_WORD, &bits);
     if (ret == -1) {
+        printf("can't set bits per word\r\n");
         DEV_HARDWARE_SPI_Debug("can't set bits per word\r\n"); 
     }
  
     ret = ioctl(hardware_SPI.fd, SPI_IOC_RD_BITS_PER_WORD, &bits);
     if (ret == -1) {
+        printf("can't get bits per word\r\n");
         DEV_HARDWARE_SPI_Debug("can't get bits per word\r\n"); 
     }
     tr.bits_per_word = bits;
@@ -94,7 +98,7 @@ void DEV_HARDWARE_SPI_begin(char *SPI_device)
     DEV_HARDWARE_SPI_ChipSelect(SPI_CS_Mode_LOW);
     DEV_HARDWARE_SPI_SetBitOrder(SPI_BIT_ORDER_LSBFIRST);
     DEV_HARDWARE_SPI_setSpeed(20000000);
-    DEV_HARDWARE_SPI_SetDataInterval(0);
+    DEV_HARDWARE_SPI_SetDataInterval(5);
 }
 
 void DEV_HARDWARE_SPI_beginSet(char *SPI_device, SPIMode mode, uint32_t speed)
