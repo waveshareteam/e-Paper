@@ -262,6 +262,7 @@ class SunriseX3:
         self.GPIO.cleanup([self.RST_PIN, self.DC_PIN, self.CS_PIN, self.BUSY_PIN], self.PWR_PIN)
 
 
+
 if sys.version_info[0] == 2:
     process = subprocess.Popen("cat /proc/cpuinfo | grep Raspberry", shell=True, stdout=subprocess.PIPE)
 else:
