@@ -306,12 +306,12 @@ class EPD:
                 
         self.TurnOnDisplayPart()
         
-    def sleep(self):
+    def sleep(self, cleanup=False):
         self.send_command(0x10) # DEEP_SLEEP_MODE
         self.send_data(0x01)
         
         epdconfig.delay_ms(2000)
-        epdconfig.module_exit()
+        epdconfig.module_exit(cleanup)
 
 ### END OF FILE ###
 

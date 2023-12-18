@@ -666,13 +666,13 @@ class EPD:
         self.send_command(0x12)
         self.ReadBusy()
 
-    def sleep(self):
+    def sleep(self, cleanup=False):
         self.send_command(0x02)  # POWER_OFF
         self.ReadBusy()
         self.send_command(0x07)  # DEEP_SLEEP
         self.send_data(0XA5)
 
         epdconfig.delay_ms(2000)
-        epdconfig.module_exit()
+        epdconfig.module_exit(cleanup)
 
 ### END OF FILE ###

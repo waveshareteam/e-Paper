@@ -172,11 +172,11 @@ class EPD:
         epdconfig.delay_ms(10);
         self.ReadBusy();
 
-    def sleep(self):
+    def sleep(self, cleanup=False):
         self.send_command(0x10);
         self.send_data(0x01);
         
         epdconfig.delay_ms(2000)
-        epdconfig.module_exit()
+        epdconfig.module_exit(cleanup)
 ### END OF FILE ###
 

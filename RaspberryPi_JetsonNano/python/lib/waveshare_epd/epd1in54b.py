@@ -201,7 +201,7 @@ class EPD:
         self.send_command(0x12) # DISPLAY_REFRESH
         self.ReadBusy()
 
-    def sleep(self):
+    def sleep(self, cleanup=False):
         self.send_command(0x50) # VCOM_AND_DATA_INTERVAL_SETTING
         self.send_data(0x17)
         self.send_command(0x82) # to solve Vcom drop 
@@ -216,7 +216,7 @@ class EPD:
         self.send_command(0x02) # power off
         
         epdconfig.delay_ms(2000)
-        epdconfig.module_exit()
+        epdconfig.module_exit(cleanup)
 
 ### END OF FILE ###
 

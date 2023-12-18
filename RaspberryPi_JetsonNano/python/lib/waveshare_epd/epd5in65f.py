@@ -207,11 +207,11 @@ class EPD:
         self.ReadBusyLow()
         epdconfig.delay_ms(500)
 
-    def sleep(self):
+    def sleep(self, cleanup=False):
         epdconfig.delay_ms(500)
         self.send_command(0x07) # DEEP_SLEEP
         self.send_data(0XA5)
         epdconfig.digital_write(self.reset_pin, 0)
 
         epdconfig.delay_ms(2000)
-        epdconfig.module_exit()
+        epdconfig.module_exit(cleanup)

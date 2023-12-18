@@ -147,7 +147,7 @@ class EPD:
         epdconfig.delay_ms(100)
         self.ReadBusy()
 
-    def sleep(self):
+    def sleep(self, cleanup=False):
         self.send_command(0X50) 
         self.send_data(0xf7)
         self.send_command(0X02) 
@@ -156,6 +156,6 @@ class EPD:
         self.send_data(0xA5) # check code
         
         epdconfig.delay_ms(2000)
-        epdconfig.module_exit()
+        epdconfig.module_exit(cleanup)
 ### END OF FILE ###
 

@@ -449,11 +449,11 @@ class EPD:
         self.lut_GC()
         self.refresh()
 
-    def sleep(self):
+    def sleep(self, cleanup=False):
         self.send_command(0X07) # DEEP_SLEEP_MODE
         self.send_data(0xA5)
         
         epdconfig.delay_ms(2000)
-        epdconfig.module_exit()
+        epdconfig.module_exit(cleanup)
 ### END OF FILE ###
 

@@ -215,13 +215,13 @@ class EPD:
                 self.send_data(color)   
         self.TurnOnDisplay()
 
-    def sleep(self):
+    def sleep(self, cleanup=False):
         self.send_command(0x10) #enter deep sleep
         self.send_data(0x01)
         epdconfig.delay_ms(100)
          
         epdconfig.delay_ms(2000)
-        epdconfig.module_exit()
+        epdconfig.module_exit(cleanup)
         
 ### END OF FILE ###
 
