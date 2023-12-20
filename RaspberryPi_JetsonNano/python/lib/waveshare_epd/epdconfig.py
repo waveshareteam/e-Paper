@@ -108,7 +108,15 @@ class RaspberryPi:
         return 0
 
     def module_exit(self, cleanup=False):
-        ''''''
+        '''close SPI handles and optionally cleanup the GPIO pins
+
+        NOTE: Using `cleanup=True` will render the pins unusable until
+        the program restarts.
+
+        Args:
+            cleanup(bool): When True, close all GPIO pins and shutdown interface
+        
+        '''
         logger.debug("spi end")
         self.SPI.close()
 
@@ -124,7 +132,7 @@ class RaspberryPi:
             # self.GPIO_CS_PIN.close()
             self.GPIO_PWR_PIN.close()
             self.GPIO_BUSY_PIN.close()
-    
+
 
 # -
 
@@ -188,6 +196,16 @@ class JetsonNano:
         return 0
 
     def module_exit(self, cleanup=False):
+        '''close SPI handles and optionally cleanup the GPIO pins
+
+        NOTE: Using `cleanup=True` will render the pins unusable until
+        the program restarts.
+
+        Args:
+            cleanup(bool): When True, close all GPIO pins and shutdown interface
+        
+        '''
+        
         logger.debug("spi end")
         self.SPI.SYSFS_software_spi_end()
 
@@ -256,6 +274,15 @@ class SunriseX3:
             return 0
 
     def module_exit(self, cleanup=False):
+        '''close SPI handles and optionally cleanup the GPIO pins
+
+        NOTE: Using `cleanup=True` will render the pins unusable until
+        the program restarts.
+
+        Args:
+            cleanup(bool): When True, close all GPIO pins and shutdown interface
+        
+        '''
         logger.debug("spi end")
         self.SPI.close()
 
@@ -289,4 +316,4 @@ else:
 for func in [x for x in dir(implementation) if not x.startswith('_')]:
     setattr(sys.modules[__name__], func, getattr(implementation, func))
 
-### END OF FILE ###
+# ## END OF FILE ###
