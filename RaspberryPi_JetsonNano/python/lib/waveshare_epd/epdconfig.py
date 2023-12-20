@@ -121,12 +121,11 @@ class RaspberryPi:
         self.SPI.close()
 
         logger.debug("close 5V, Module enters 0 power consumption ...")
+        self.GPIO_RST_PIN.off()
+        self.GPIO_DC_PIN.off()
+        self.GPIO_PWR_PIN.off()
         if cleanup:
             logger.debug('closing all GPIO pins')
-            self.GPIO_RST_PIN.off()
-            self.GPIO_DC_PIN.off()
-            self.GPIO_PWR_PIN.off()
-    
             self.GPIO_RST_PIN.close()
             self.GPIO_DC_PIN.close()
             # self.GPIO_CS_PIN.close()
@@ -210,12 +209,12 @@ class JetsonNano:
         self.SPI.SYSFS_software_spi_end()
 
         logger.debug("close 5V, Module enters 0 power consumption ...")
+
+        self.GPIO.output(self.RST_PIN, 0)
+        self.GPIO.output(self.DC_PIN, 0)
+        self.GPIO.output(self.PWR_PIN, 0)
         if cleanup:
-            logger.debug('closing all GPIO pins')
-            self.GPIO.output(self.RST_PIN, 0)
-            self.GPIO.output(self.DC_PIN, 0)
-            self.GPIO.output(self.PWR_PIN, 0)
-    
+            logger.debug('closing all GPIO pins')    
             self.GPIO.cleanup([self.RST_PIN, self.DC_PIN, self.CS_PIN, self.BUSY_PIN, self.PWR_PIN])
 
 
@@ -288,12 +287,12 @@ class SunriseX3:
 
         logger.debug("close 5V, Module enters 0 power consumption ...")
         self.Flag = 0
+        self.GPIO.output(self.RST_PIN, 0)
+        self.GPIO.output(self.DC_PIN, 0)
+        self.GPIO.output(self.PWR_PIN, 0)
+        
         if cleanup:
-            logger.debug('closing all GPIO pins')
-            self.GPIO.output(self.RST_PIN, 0)
-            self.GPIO.output(self.DC_PIN, 0)
-            self.GPIO.output(self.PWR_PIN, 0)
-    
+            logger.debug('closing all GPIO pins')    
             self.GPIO.cleanup([self.RST_PIN, self.DC_PIN, self.CS_PIN, self.BUSY_PIN], self.PWR_PIN)
 
 
