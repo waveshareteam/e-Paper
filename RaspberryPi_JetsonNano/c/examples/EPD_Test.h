@@ -57,6 +57,8 @@ int EPD_1in54c_test(void);
 
 int EPD_2in66_test(void);
 int	EPD_2in66b_test(void); 
+int EPD_2in66g_test(void);
+
 int EPD_2in7_test(void);
 int EPD_2in7_V2_test(void);
 int EPD_2in7b_test(void);
@@ -66,6 +68,7 @@ int EPD_2in9_test(void);
 int EPD_2in9_V2_test(void);
 int EPD_2in9bc_test(void);
 int EPD_2in9b_V3_test(void);
+int EPD_2in9b_V4_test(void);
 int EPD_2in9d_test(void);
 
 int EPD_2in13_test(void);
@@ -89,6 +92,8 @@ int EPD_4in2_V2_test(void);
 int EPD_4in2bc_test(void);
 int EPD_4in2b_V2_test(void);
 
+int EPD_4in26_test(void);
+
 int EPD_4in37b_test(void);
 
 int EPD_5in65f_test(void);
@@ -105,6 +110,7 @@ int EPD_7in3f_test(void);
 int EPD_7in5_test(void);
 int EPD_7in5_HD_test(void);
 int EPD_7in5_V2_test(void);
+int EPD_7in5_V2_test_old(void);
 int EPD_7in5bc_test(void);
 int EPD_7in5b_V2_test(void);
 int EPD_7in5b_HD_test(void);

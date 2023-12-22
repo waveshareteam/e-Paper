@@ -64,6 +64,9 @@ int main(void)
 #elif epd2in66b
     EPD_2in66b_test();
     
+#elif epd2in66g
+    EPD_2in66g_test();
+
 #elif epd2in7
     EPD_2in7_test();
     
@@ -87,6 +90,9 @@ int main(void)
     
 #elif epd2in9bV3
     EPD_2in9b_V3_test();
+
+#elif epd2in9bV4
+    EPD_2in9b_V4_test();
     
 #elif epd2in9d
     EPD_2in9d_test();
@@ -138,6 +144,9 @@ int main(void)
     
 #elif epd4in2bV2
     EPD_4in2b_V2_test();
+
+#elif epd4in26
+    EPD_4in26_test();
     
 #elif epd4in37b
     EPD_4in37b_test();
@@ -168,6 +177,8 @@ int main(void)
     
 #elif epd7in5V2
     EPD_7in5_V2_test();
+#elif epd7in5V2_old
+    EPD_7in5_V2_test_old();
     
 #elif epd7in5bc
     EPD_7in5bc_test();

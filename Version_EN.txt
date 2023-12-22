@@ -39,3 +39,7 @@
 2023-08-31: Update the routines of the 2.9inch V2 e-Paper to add a four-grayscale display
 2023-09-12: Added new program 4.2inch V2 e-Paper routine.
 2023-09-25: Added new programs 13.3inch e-Paper (K) routine.
+2023-12-21: New program 4.26inch e-Paper routine added.
+2023-12-21: New program 2.66inch e-Paper (G) routine added.
+2023-12-21: Add new program 2.9inch e-Paper V4 (B) routine.
+2023-12-21: Add 2.9V2 fast brush code, 7.5 fast brush code, local brush code (except Arduino)

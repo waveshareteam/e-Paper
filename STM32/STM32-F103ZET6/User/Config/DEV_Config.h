@@ -82,6 +82,7 @@
 #define DEV_Delay_ms(__xms) HAL_Delay(__xms);
 
 void DEV_SPI_WriteByte(UBYTE value);
+void DEV_SPI_Write_nByte(UBYTE *value, UDOUBLE len);
 
 int DEV_Module_Init(void);
 void DEV_Module_Exit(void);
