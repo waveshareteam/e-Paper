@@ -47,10 +47,10 @@ or
 Since this project is a comprehensive project, you may need to read the following for use:
 You can view the test program in the examples\ directory.
 Please note which ink screen you purchased.
-Chestnut 1:
+Example 1:
      If you purchased 5.83inch e-paper, then you should execute the command:
      Sudo python epd_5in83_test.py
-Chestnut 2:
+Example 2:
      If you buy a 2.9inch e-paper (B), since the 2.9-inch Type B and Type C are common driver codes,
      Then you should execute the command:
      Sudo python epd_2in9bc_test.py

@@ -4,8 +4,8 @@
 * | Function    :   Electronic paper driver
 * | Info        :
 *----------------
-* |	This version:   V2.0
-* | Date        :   2018-11-09
+* |	This version:   V3.0
+* | Date        :   2023-12-18
 * | Info        :   
 * 1.Remove:ImageBuff[EPD_HEIGHT * EPD_WIDTH / 8]
 * 2.Change:EPD_Display(UBYTE *Image)
@@ -41,9 +41,12 @@
 #define EPD_7IN5_V2_HEIGHT      480
 
 UBYTE EPD_7IN5_V2_Init(void);
+UBYTE EPD_7IN5_V2_Init_Fast(void);
+UBYTE EPD_7IN5_V2_Init_Part(void);
 void EPD_7IN5_V2_Clear(void);
 void EPD_7IN5_V2_ClearBlack(void);
-void EPD_7IN5_V2_Display(const UBYTE *blackimage);
+void EPD_7IN5_V2_Display(UBYTE *blackimage);
+void EPD_7IN5_V2_Display_Part(UBYTE *blackimage,UDOUBLE x_start, UDOUBLE y_start, UDOUBLE x_end, UDOUBLE y_end);
 void EPD_7IN5_V2_Sleep(void);
 
 #endif

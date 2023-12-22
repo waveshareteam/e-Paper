@@ -107,7 +107,7 @@ class RaspberryPi:
         self.SPI.mode = 0b00
         return 0
 
-    def module_exit(self):
+    def module_exit(self, cleanup=False):
         logger.debug("spi end")
         self.SPI.close()
 
@@ -115,14 +115,16 @@ class RaspberryPi:
         self.GPIO_RST_PIN.off()
         self.GPIO_DC_PIN.off()
         self.GPIO_PWR_PIN.off()
-
-        self.GPIO_RST_PIN.close()
-        self.GPIO_DC_PIN.close()
-        # self.GPIO_CS_PIN.close()
-        self.GPIO_PWR_PIN.close()
-        self.GPIO_BUSY_PIN.close()
-
         logger.debug("close 5V, Module enters 0 power consumption ...")
+        
+        if cleanup:
+            self.GPIO_RST_PIN.close()
+            self.GPIO_DC_PIN.close()
+            # self.GPIO_CS_PIN.close()
+            self.GPIO_PWR_PIN.close()
+            self.GPIO_BUSY_PIN.close()
+
+        
 
 
 
@@ -260,7 +262,6 @@ class SunriseX3:
         self.GPIO.output(self.PWR_PIN, 0)
 
         self.GPIO.cleanup([self.RST_PIN, self.DC_PIN, self.CS_PIN, self.BUSY_PIN], self.PWR_PIN)
-
 
 
 if sys.version_info[0] == 2:

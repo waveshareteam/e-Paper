@@ -4,8 +4,8 @@
 * | Function    :   Electronic paper driver
 * | Info        :
 *----------------
-* |	This version:   V2.0
-* | Date        :   2018-11-09
+* |	This version:   V3.0
+* | Date        :   2023-12-18
 * | Info        :
 *****************************************************************************
 #
@@ -30,61 +30,6 @@
 ******************************************************************************/
 #include "EPD_7in5_V2.h"
 #include "Debug.h"
-
-
-UBYTE Voltage_Frame_7IN5_V2[]={
-	0x6, 0x3F, 0x3F, 0x11, 0x24, 0x7, 0x17,
-};
-
-UBYTE LUT_VCOM_7IN5_V2[]={	
-	0x0,	0xF,	0xF,	0x0,	0x0,	0x1,	
-	0x0,	0xF,	0x1,	0xF,	0x1,	0x2,	
-	0x0,	0xF,	0xF,	0x0,	0x0,	0x1,	
-	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	
-	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	
-	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	
-	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	
-};						
-
-UBYTE LUT_WW_7IN5_V2[]={	
-	0x10,	0xF,	0xF,	0x0,	0x0,	0x1,	
-	0x84,	0xF,	0x1,	0xF,	0x1,	0x2,	
-	0x20,	0xF,	0xF,	0x0,	0x0,	0x1,	
-	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	
-	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	
-	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	
-	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	
-};
-
-UBYTE LUT_BW_7IN5_V2[]={	
-	0x10,	0xF,	0xF,	0x0,	0x0,	0x1,	
-	0x84,	0xF,	0x1,	0xF,	0x1,	0x2,	
-	0x20,	0xF,	0xF,	0x0,	0x0,	0x1,	
-	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	
-	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	
-	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	
-	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	
-};
-
-UBYTE LUT_WB_7IN5_V2[]={	
-	0x80,	0xF,	0xF,	0x0,	0x0,	0x1,	
-	0x84,	0xF,	0x1,	0xF,	0x1,	0x2,	
-	0x40,	0xF,	0xF,	0x0,	0x0,	0x1,	
-	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	
-	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	
-	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	
-	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	
-};
-
-UBYTE LUT_BB_7IN5_V2[]={	
-	0x80,	0xF,	0xF,	0x0,	0x0,	0x1,	
-	0x84,	0xF,	0x1,	0xF,	0x1,	0x2,	
-	0x40,	0xF,	0xF,	0x0,	0x0,	0x1,	
-	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	
-	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	
-	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	
-	0x0,	0x0,	0x0,	0x0,	0x0,	0x0,	
-};
 
 /******************************************************************************
 function :	Software reset
@@ -126,6 +71,14 @@ static void EPD_SendData(UBYTE Data)
     DEV_Digital_Write(EPD_CS_PIN, 1);
 }
 
+static void EPD_SendData2(UBYTE *pData, UDOUBLE len)
+{
+    DEV_Digital_Write(EPD_DC_PIN, 1);
+    DEV_Digital_Write(EPD_CS_PIN, 0);
+    DEV_SPI_Write_nByte(pData, len);
+    DEV_Digital_Write(EPD_CS_PIN, 1);
+}
+
 /******************************************************************************
 function :	Wait until the busy_pin goes LOW
 parameter:
@@ -139,32 +92,6 @@ static void EPD_WaitUntilIdle(void)
 	DEV_Delay_ms(5);      
     Debug("e-Paper busy release\r\n");
 }
-
-static void EPD_7IN5_V2_LUT(UBYTE* lut_vcom,  UBYTE* lut_ww, UBYTE* lut_bw, UBYTE* lut_wb, UBYTE* lut_bb)
-{
-	UBYTE count;
-
-	EPD_SendCommand(0x20); //VCOM	
-	for(count=0; count<42; count++)
-		EPD_SendData(lut_vcom[count]);
-
-	EPD_SendCommand(0x21); //LUTBW
-	for(count=0; count<42; count++)
-		EPD_SendData(lut_ww[count]);
-
-	EPD_SendCommand(0x22); //LUTBW
-	for(count=0; count<42; count++)
-		EPD_SendData(lut_bw[count]);
-
-	EPD_SendCommand(0x23); //LUTWB
-	for(count=0; count<42; count++)
-		EPD_SendData(lut_wb[count]);
-
-	EPD_SendCommand(0x24); //LUTBB
-	for(count=0; count<42; count++)
-		EPD_SendData(lut_bb[count]);
-}
-
 /******************************************************************************
 function :	Turn On Display
 parameter:
@@ -183,62 +110,89 @@ parameter:
 UBYTE EPD_7IN5_V2_Init(void)
 {
     EPD_Reset();
+    EPD_SendCommand(0x01);			//POWER SETTING
+	EPD_SendData(0x07);
+	EPD_SendData(0x07);    //VGH=20V,VGL=-20V
+	EPD_SendData(0x3f);		//VDH=15V
+	EPD_SendData(0x3f);		//VDL=-15V
 
-    // EPD_SendCommand(0x01);			//POWER SETTING
-    // EPD_SendData(0x07);
-    // EPD_SendData(0x07);		//VGH=20V,VGL=-20V
-    // EPD_SendData(0x3f);		//VDH=15V
-    // EPD_SendData(0x3f);		//VDL=-15V
-
-	EPD_SendCommand(0x01);  // power setting
-	EPD_SendData(0x17);  // 1-0=11: internal power
-	EPD_SendData(*(Voltage_Frame_7IN5_V2+6));  // VGH&VGL
-	EPD_SendData(*(Voltage_Frame_7IN5_V2+1));  // VSH
-	EPD_SendData(*(Voltage_Frame_7IN5_V2+2));  //  VSL
-	EPD_SendData(*(Voltage_Frame_7IN5_V2+3));  //  VSHR
-	
-	EPD_SendCommand(0x82);  // VCOM DC Setting
-	EPD_SendData(*(Voltage_Frame_7IN5_V2+4));  // VCOM
-
-	EPD_SendCommand(0x06);  // Booster Setting
-	EPD_SendData(0x27);
-	EPD_SendData(0x27);
-	EPD_SendData(0x2F);
+	//Enhanced display drive(Add 0x06 command)
+	EPD_SendCommand(0x06);			//Booster Soft Start 
 	EPD_SendData(0x17);
+	EPD_SendData(0x17);   
+	EPD_SendData(0x28);		
+	EPD_SendData(0x17);	
+
+	EPD_SendCommand(0x04); //POWER ON
+	DEV_Delay_ms(100); 
+	EPD_WaitUntilIdle();        //waiting for the electronic paper IC to release the idle signal
+
+	EPD_SendCommand(0X00);			//PANNEL SETTING
+	EPD_SendData(0x1F);   //KW-3f   KWR-2F	BWROTP 0f	BWOTP 1f
+
+	EPD_SendCommand(0x61);        	//tres			
+	EPD_SendData(0x03);		//source 800
+	EPD_SendData(0x20);
+	EPD_SendData(0x01);		//gate 480
+	EPD_SendData(0xE0);  
+
+	EPD_SendCommand(0X15);		
+	EPD_SendData(0x00);		
+
+	EPD_SendCommand(0X50);			//VCOM AND DATA INTERVAL SETTING
+	EPD_SendData(0x10);
+	EPD_SendData(0x07);
+
+	EPD_SendCommand(0X60);			//TCON SETTING
+	EPD_SendData(0x22);
 	
-	EPD_SendCommand(0x30);   // OSC Setting
-	EPD_SendData(*(Voltage_Frame_7IN5_V2+0));  // 2-0=100: N=4  ; 5-3=111: M=7  ;  3C=50Hz     3A=100HZ
+    return 0;
+}
 
-    EPD_SendCommand(0x04); //POWER ON
-    DEV_Delay_ms(100);
-    EPD_WaitUntilIdle();
-
+UBYTE EPD_7IN5_V2_Init_Fast(void)
+{
+    EPD_Reset();
     EPD_SendCommand(0X00);			//PANNEL SETTING
-    EPD_SendData(0x3F);   //KW-3f   KWR-2F	BWROTP 0f	BWOTP 1f
-
-    EPD_SendCommand(0x61);        	//tres
-    EPD_SendData(0x03);		//source 800
-    EPD_SendData(0x20);
-    EPD_SendData(0x01);		//gate 480
-    EPD_SendData(0xE0);
-
-    EPD_SendCommand(0X15);
-    EPD_SendData(0x00);
+    EPD_SendData(0x1F);   //KW-3f   KWR-2F	BWROTP 0f	BWOTP 1f
 
     EPD_SendCommand(0X50);			//VCOM AND DATA INTERVAL SETTING
     EPD_SendData(0x10);
-    EPD_SendData(0x00);
+    EPD_SendData(0x07);
 
-    EPD_SendCommand(0X60);			//TCON SETTING
-    EPD_SendData(0x22);
+    EPD_SendCommand(0x04); //POWER ON
+    DEV_Delay_ms(100); 
+	EPD_WaitUntilIdle();        //waiting for the electronic paper IC to release the idle signal
 
-    EPD_SendCommand(0x65);  // Resolution setting
-    EPD_SendData(0x00);
-    EPD_SendData(0x00);//800*480
-    EPD_SendData(0x00);
-    EPD_SendData(0x00);
+    //Enhanced display drive(Add 0x06 command)
+    EPD_SendCommand(0x06);			//Booster Soft Start 
+    EPD_SendData (0x27);
+    EPD_SendData (0x27);   
+    EPD_SendData (0x18);		
+    EPD_SendData (0x17);		
+
+    EPD_SendCommand(0xE0);
+    EPD_SendData(0x02);
+    EPD_SendCommand(0xE5);
+    EPD_SendData(0x5A);
 	
-	EPD_7IN5_V2_LUT(LUT_VCOM_7IN5_V2, LUT_WW_7IN5_V2, LUT_BW_7IN5_V2, LUT_WB_7IN5_V2, LUT_BB_7IN5_V2);
+    return 0;
+}
+
+UBYTE EPD_7IN5_V2_Init_Part(void)
+{
+    EPD_Reset();
+
+	EPD_SendCommand(0X00);			//PANNEL SETTING
+	EPD_SendData(0x1F);   //KW-3f   KWR-2F	BWROTP 0f	BWOTP 1f
+	
+	EPD_SendCommand(0x04); //POWER ON
+	DEV_Delay_ms(100); 
+	EPD_WaitUntilIdle();        //waiting for the electronic paper IC to release the idle signal
+	
+	EPD_SendCommand(0xE0);
+	EPD_SendData(0x02);
+	EPD_SendCommand(0xE5);
+	EPD_SendData(0x6E);
 	
     return 0;
 }
@@ -252,16 +206,27 @@ void EPD_7IN5_V2_Clear(void)
     UWORD Width, Height;
     Width =(EPD_7IN5_V2_WIDTH % 8 == 0)?(EPD_7IN5_V2_WIDTH / 8 ):(EPD_7IN5_V2_WIDTH / 8 + 1);
     Height = EPD_7IN5_V2_HEIGHT;
+    UBYTE image[EPD_7IN5_V2_WIDTH / 8] = {0x00};
 
     UWORD i;
     EPD_SendCommand(0x10);
-    for(i=0; i<Height*Width; i++) {
-        EPD_SendData(0xFF);
+    for(i=0; i<Width; i++) {
+        image[i] = 0xFF;
     }
+    for(i=0; i<Height; i++)
+    {
+        EPD_SendData2(image, Width);
+    }
+
     EPD_SendCommand(0x13);
-    for(i=0; i<Height*Width; i++)	{
-        EPD_SendData(0x00);
+    for(i=0; i<Width; i++) {
+        image[i] = 0x00;
     }
+    for(i=0; i<Height; i++)
+    {
+        EPD_SendData2(image, Width);
+    }
+    
     EPD_7IN5_V2_TurnOnDisplay();
 }
 
@@ -270,16 +235,27 @@ void EPD_7IN5_V2_ClearBlack(void)
     UWORD Width, Height;
     Width =(EPD_7IN5_V2_WIDTH % 8 == 0)?(EPD_7IN5_V2_WIDTH / 8 ):(EPD_7IN5_V2_WIDTH / 8 + 1);
     Height = EPD_7IN5_V2_HEIGHT;
+    UBYTE image[EPD_7IN5_V2_WIDTH / 8] = {0x00};
 
     UWORD i;
     EPD_SendCommand(0x10);
-    for(i=0; i<Height*Width; i++) {
-        EPD_SendData(0x00);
+    for(i=0; i<Width; i++) {
+        image[i] = 0x00;
     }
+    for(i=0; i<Height; i++)
+    {
+        EPD_SendData2(image, Width);
+    }
+
     EPD_SendCommand(0x13);
-    for(i=0; i<Height*Width; i++) {
-        EPD_SendData(0xFF);
+    for(i=0; i<Width; i++) {
+        image[i] = 0xFF;
     }
+    for(i=0; i<Height; i++)
+    {
+        EPD_SendData2(image, Width);
+    }
+    
     EPD_7IN5_V2_TurnOnDisplay();
 }
 
@@ -287,23 +263,57 @@ void EPD_7IN5_V2_ClearBlack(void)
 function :	Sends the image buffer in RAM to e-Paper and displays
 parameter:
 ******************************************************************************/
-void EPD_7IN5_V2_Display(const UBYTE *blackimage)
+void EPD_7IN5_V2_Display(UBYTE *blackimage)
 {
     UDOUBLE Width, Height;
     Width =(EPD_7IN5_V2_WIDTH % 8 == 0)?(EPD_7IN5_V2_WIDTH / 8 ):(EPD_7IN5_V2_WIDTH / 8 + 1);
     Height = EPD_7IN5_V2_HEIGHT;
 	
-    // EPD_SendCommand(0x10);
-    // for (UDOUBLE j = 0; j < Height; j++) {
-    //     for (UDOUBLE i = 0; i < Width; i++) {
-    //         EPD_SendData(blackimage[i + j * Width]);
-    //     }
-    // }
+    EPD_SendCommand(0x10);
+    for (UDOUBLE j = 0; j < Height; j++) {
+        EPD_SendData2((UBYTE *)(blackimage+j*Width), Width);
+    }
+
     EPD_SendCommand(0x13);
     for (UDOUBLE j = 0; j < Height; j++) {
         for (UDOUBLE i = 0; i < Width; i++) {
-            EPD_SendData(~blackimage[i + j * Width]);
+            blackimage[i + j * Width] = ~blackimage[i + j * Width];
         }
+    }
+    for (UDOUBLE j = 0; j < Height; j++) {
+        EPD_SendData2((UBYTE *)(blackimage+j*Width), Width);
+    }
+    EPD_7IN5_V2_TurnOnDisplay();
+}
+
+void EPD_7IN5_V2_Display_Part(UBYTE *blackimage,UDOUBLE x_start, UDOUBLE y_start, UDOUBLE x_end, UDOUBLE y_end)
+{
+    UDOUBLE Width, Height;
+    Width =((x_end - x_start) % 8 == 0)?((x_end - x_start) / 8 ):((x_end - x_start) / 8 + 1);
+    Height = y_end - y_start;
+
+    EPD_SendCommand(0x50);
+	EPD_SendData(0xA9);
+	EPD_SendData(0x07);
+
+	EPD_SendCommand(0x91);		//This command makes the display enter partial mode
+	EPD_SendCommand(0x90);		//resolution setting
+	EPD_SendData (x_start/256);
+	EPD_SendData (x_start%256);   //x-start    
+
+	EPD_SendData (x_end/256);		
+	EPD_SendData (x_end%256-1);  //x-end	
+
+	EPD_SendData (y_start/256);  //
+	EPD_SendData (y_start%256);   //y-start    
+
+	EPD_SendData (y_end/256);		
+	EPD_SendData (y_end%256-1);  //y-end
+	EPD_SendData (0x01);
+    
+    EPD_SendCommand(0x13);
+    for (UDOUBLE j = 0; j < Height; j++) {
+        EPD_SendData2((UBYTE *)(blackimage+j*Width), Width);
     }
     EPD_7IN5_V2_TurnOnDisplay();
 }

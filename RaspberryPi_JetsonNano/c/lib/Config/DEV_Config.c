@@ -29,6 +29,12 @@
 ******************************************************************************/
 #include "DEV_Config.h"
 #include "RPI_gpiod.h"
+
+#if USE_LGPIO_LIB
+int GPIO_Handle;
+int SPI_Handle;
+#endif
+
 /**
  * GPIO
 **/
@@ -48,6 +54,8 @@ void DEV_Digital_Write(UWORD Pin, UBYTE Value)
 	bcm2835_gpio_write(Pin, Value);
 #elif USE_WIRINGPI_LIB
 	digitalWrite(Pin, Value);
+#elif  USE_LGPIO_LIB  
+    lgGpioWrite(GPIO_Handle, Pin, Value);
 #elif USE_DEV_LIB
 	GPIOD_Write(Pin, Value);
 #endif
@@ -70,6 +78,8 @@ UBYTE DEV_Digital_Read(UWORD Pin)
 	Read_value = bcm2835_gpio_lev(Pin);
 #elif USE_WIRINGPI_LIB
 	Read_value = digitalRead(Pin);
+#elif  USE_LGPIO_LIB  
+    Read_value = lgGpioRead(GPIO_Handle,Pin);
 #elif USE_DEV_LIB
 	Read_value = GPIOD_Read(Pin);
 #endif
@@ -95,6 +105,8 @@ void DEV_SPI_WriteByte(uint8_t Value)
 	bcm2835_spi_transfer(Value);
 #elif USE_WIRINGPI_LIB
 	wiringPiSPIDataRW(0,&Value,1);
+#elif  USE_LGPIO_LIB 
+    lgSpiWrite(SPI_Handle,(char*)&Value, 1);
 #elif USE_DEV_LIB
 	DEV_HARDWARE_SPI_TransferByte(Value);
 #endif
@@ -117,6 +129,8 @@ void DEV_SPI_Write_nByte(uint8_t *pData, uint32_t Len)
 	bcm2835_spi_transfernb((char *)pData,rData,Len);
 #elif USE_WIRINGPI_LIB
 	wiringPiSPIDataRW(0, pData, Len);
+#elif  USE_LGPIO_LIB 
+    lgSpiWrite(SPI_Handle,(char*)pData, Len);
 #elif USE_DEV_LIB
 	DEV_HARDWARE_SPI_Transfer(pData, Len);
 #endif
@@ -125,7 +139,10 @@ void DEV_SPI_Write_nByte(uint8_t *pData, uint32_t Len)
 #ifdef JETSON
 #ifdef USE_DEV_LIB
 	//JETSON nano waits for hardware SPI
-	Debug("not support");
+	// Debug("not support");
+    uint32_t i;
+    for(i = 0; i<Len; i++)
+        SYSFS_software_spi_transfer(pData[i]);
 #elif USE_HARDWARE_LIB
 	Debug("not support");
 #endif
@@ -152,6 +169,14 @@ void DEV_GPIO_Mode(UWORD Pin, UWORD Mode)
 		pinMode(Pin, OUTPUT);
 		// Debug (" %d OUT \r\n",Pin);
 	}
+#elif  USE_LGPIO_LIB  
+    if(Mode == 0 || Mode == LG_SET_INPUT){
+        lgGpioClaimInput(GPIO_Handle,LFLAGS,Pin);
+        // printf("IN Pin = %d\r\n",Pin);
+    }else{
+        lgGpioClaimOutput(GPIO_Handle, LFLAGS, Pin, LG_LOW);
+        // printf("OUT Pin = %d\r\n",Pin);
+    }
 #elif USE_DEV_LIB
     if(Mode == 0 || Mode == GPIOD_IN) {
         GPIOD_Direction(Pin, GPIOD_IN);
@@ -183,6 +208,8 @@ void DEV_Delay_ms(UDOUBLE xms)
 	bcm2835_delay(xms);
 #elif USE_WIRINGPI_LIB
 	delay(xms);
+#elif  USE_LGPIO_LIB  
+    lguSleep(xms/1000.0);
 #elif USE_DEV_LIB
 	UDOUBLE i;
 	for(i=0; i < xms; i++) {
@@ -318,6 +345,36 @@ UBYTE DEV_Module_Init(void)
 	DEV_GPIO_Init();
 	wiringPiSPISetup(0,10000000);
 	// wiringPiSPISetupMode(0, 32000000, 0);
+#elif  USE_LGPIO_LIB
+    char buffer[NUM_MAXBUF];
+    FILE *fp;
+
+    fp = popen("cat /proc/cpuinfo | grep 'Raspberry Pi 5'", "r");
+    if (fp == NULL) {
+        Debug("It is not possible to determine the model of the Raspberry PI\n");
+        return -1;
+    }
+
+    if(fgets(buffer, sizeof(buffer), fp) != NULL)
+    {
+        GPIO_Handle = lgGpiochipOpen(4);
+        if (GPIO_Handle < 0)
+        {
+            Debug( "gpiochip4 Export Failed\n");
+            return -1;
+        }
+    }
+    else
+    {
+        GPIO_Handle = lgGpiochipOpen(0);
+        if (GPIO_Handle < 0)
+        {
+            Debug( "gpiochip0 Export Failed\n");
+            return -1;
+        }
+    }
+    SPI_Handle = lgSpiOpen(0, 0, 10000000, 0);
+    DEV_GPIO_Init();
 #elif USE_DEV_LIB
 	printf("Write and read /dev/spidev0.0 \r\n");
     GPIOD_Export();
@@ -366,6 +423,13 @@ void DEV_Module_Exit(void)
     DEV_Digital_Write(EPD_PWR_PIN, 0);
 	DEV_Digital_Write(EPD_DC_PIN, 0);
 	DEV_Digital_Write(EPD_RST_PIN, 0);
+#elif USE_DEV_LIB 
+    DEV_Digital_Write(EPD_CS_PIN, 0);
+    DEV_Digital_Write(EPD_PWR_PIN, 0);
+	DEV_Digital_Write(EPD_DC_PIN, 0);
+	DEV_Digital_Write(EPD_RST_PIN, 0);
+    lgSpiClose(SPI_Handle);
+    lgGpiochipClose(GPIO_Handle);
 #elif USE_DEV_LIB
 	DEV_HARDWARE_SPI_end();
 	DEV_Digital_Write(EPD_CS_PIN, 0);

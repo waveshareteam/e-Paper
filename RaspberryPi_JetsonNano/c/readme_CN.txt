@@ -31,15 +31,15 @@ BUSY   ->    24
 由于本工程是一个综合工程，对于使用而言，你可能需要阅读以下内容：
 你可以在main.c中看到许多测试函数和宏定义设置，在编译时指定屏幕对应的宏定义可以直接编译对应的测试程序。
 请注意你购买的是哪一款的墨水屏。具体的对应关系可以查阅我们的Wiki和list.txt文件。
-栗子1：
+例子1：
     如果你购买的3.7inch e-paper (V1)，那么你应该在编译时加上 EPD=epd3in7
         sudo make clean
         sudo make EPD=epd3in7
-栗子2：
+例子2：
     如果你购买的2.9inch e-paper (B) (V1)，由于2.9寸的B型和C型是公用的驱动代码，那么你应该在编译时加上 EPD=epd2in9bc
         sudo make clean
         sudo make EPD=epd2in9bc
-栗子3：
+例子3：
     如果你购买的是7.5inch e-Paper (V2)，那么你应该在编译时加上 EPD=epd7in5V2
         sudo make clean
         sudo make EPD=epd7in5V2

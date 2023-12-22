@@ -38,6 +38,7 @@
 #define EPD_2IN9_V2_HEIGHT      296
 
 void EPD_2IN9_V2_Init(void);
+void EPD_2IN9_V2_Init_Fast(void);
 void EPD_2IN9_V2_Gray4_Init(void);
 void EPD_2IN9_V2_Clear(void);
 void EPD_2IN9_V2_Display(UBYTE *Image);

@@ -65,6 +65,7 @@ int EPD_test(void)
 #endif
 
 #if 1  // Drawing on the image
+    EPD_2IN9_V2_Init_Fast();
 	Paint_NewImage(BlackImage, EPD_2IN9_V2_WIDTH, EPD_2IN9_V2_HEIGHT, 90, WHITE);  	
     printf("Drawing\r\n");
     //1.Select Image

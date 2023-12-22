@@ -38,6 +38,11 @@ void DEV_SPI_WriteByte(UBYTE value)
     HAL_SPI_Transmit(&hspi1, &value, 1, 1000);
 }
 
+void DEV_SPI_Write_nByte(UBYTE *value, UDOUBLE len)
+{
+    HAL_SPI_Transmit(&hspi1, value, len, 1000);
+}
+
 int DEV_Module_Init(void)
 {
     DEV_Digital_Write(EPD_DC_PIN, 0);

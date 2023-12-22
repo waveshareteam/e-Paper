@@ -46,10 +46,10 @@ BUSY   ->    24
 由于本工程是一个综合工程，对于使用而言，你可能需要阅读以下内容：
 你可以在examples\目录中查看测试程序
 请注意你购买的是哪一款的墨水屏。
-栗子1：
+例子1：
     如果你购买的5.83inch e-paper，那么你应该执行命令：
     sudo python epd_5in83_test.py
-栗子2：
+例子2：
     如果你购买的2.9inch e-paper (B)，由于2.9寸的B型和C型是公用的驱动代码，
     那么你应该执行命令：
     sudo python epd_2in9bc_test.py

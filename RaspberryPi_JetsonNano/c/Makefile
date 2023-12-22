@@ -54,6 +54,9 @@ else ifeq ($(EPD), epd2in66)
 else ifeq ($(EPD), epd2in66b)
 	OBJ_C_EPD = ${DIR_EPD}/EPD_2in66b.c
 	OBJ_C_Examples = ${DIR_Examples}/EPD_2in66b_test.c
+else ifeq ($(EPD), epd2in66g)
+	OBJ_C_EPD = ${DIR_EPD}/EPD_2in66g.c
+	OBJ_C_Examples = ${DIR_Examples}/EPD_2in66g_test.c
 else ifeq ($(EPD), epd2in7)
 	OBJ_C_EPD = ${DIR_EPD}/EPD_2in7.c
 	OBJ_C_Examples = ${DIR_Examples}/EPD_2in7_test.c
@@ -78,6 +81,9 @@ else ifeq ($(EPD), epd2in9bc)
 else ifeq ($(EPD), epd2in9bV3)
 	OBJ_C_EPD = ${DIR_EPD}/EPD_2in9b_V3.c
 	OBJ_C_Examples = ${DIR_Examples}/EPD_2in9b_V3_test.c
+else ifeq ($(EPD), epd2in9bV4)
+	OBJ_C_EPD = ${DIR_EPD}/EPD_2in9b_V4.c
+	OBJ_C_Examples = ${DIR_Examples}/EPD_2in9b_V4_test.c
 else ifeq ($(EPD), epd2in9d)
 	OBJ_C_EPD = ${DIR_EPD}/EPD_2in9d.c
 	OBJ_C_Examples = ${DIR_Examples}/EPD_2in9d_test.c
@@ -129,6 +135,9 @@ else ifeq ($(EPD), epd4in2bc)
 else ifeq ($(EPD), epd4in2bV2)
 	OBJ_C_EPD = ${DIR_EPD}/EPD_4in2b_V2.c
 	OBJ_C_Examples = ${DIR_Examples}/EPD_4in2b_V2_test.c
+else ifeq ($(EPD), epd4in26)
+	OBJ_C_EPD = ${DIR_EPD}/EPD_4in26.c
+	OBJ_C_Examples = ${DIR_Examples}/EPD_4in26_test.c
 else ifeq ($(EPD), epd4in37b)
 	OBJ_C_EPD = ${DIR_EPD}/EPD_4in37b.c
 	OBJ_C_Examples = ${DIR_Examples}/EPD_4in37b_test.c
@@ -159,6 +168,9 @@ else ifeq ($(EPD), epd7in5)
 else ifeq ($(EPD), epd7in5V2)
 	OBJ_C_EPD = ${DIR_EPD}/EPD_7in5_V2.c
 	OBJ_C_Examples = ${DIR_Examples}/EPD_7in5_V2_test.c
+else ifeq ($(EPD), epd7in5V2_old)
+	OBJ_C_EPD = ${DIR_EPD}/EPD_7in5_V2_old.c
+	OBJ_C_Examples = ${DIR_Examples}/EPD_7in5_V2_test_old.c
 else ifeq ($(EPD), epd7in5bc)
 	OBJ_C_EPD = ${DIR_EPD}/EPD_7in5bc.c
 	OBJ_C_Examples = ${DIR_Examples}/EPD_7in5bc_test.c
@@ -192,13 +204,16 @@ DEBUG = -D DEBUG
 
 # USELIB_RPI = USE_BCM2835_LIB
 # USELIB_RPI = USE_WIRINGPI_LIB
-USELIB_RPI = USE_DEV_LIB
+USELIB_RPI = USE_LGPIO_LIB
+# USELIB_RPI = USE_DEV_LIB
 
 LIB_RPI=-Wl,--gc-sections
 ifeq ($(USELIB_RPI), USE_BCM2835_LIB)
 	LIB_RPI += -lbcm2835 -lm 
 else ifeq ($(USELIB_RPI), USE_WIRINGPI_LIB)
 	LIB_RPI += -lwiringPi -lm 
+else ifeq ($(USELIB_RPI), USE_LGPIO_LIB)
+	LIB_RPI += -llgpio -lm 
 else ifeq ($(USELIB_RPI), USE_DEV_LIB)
 	LIB_RPI += -lgpiod -lm 
 endif
