@@ -69,7 +69,8 @@ try:
     epd.display(epd.getbuffer(Himage))
     time.sleep(2)
     
-    logging.info("4.read bmp file on window")
+    logging.info("4.read bmp file on window,Quick brush demo")
+    epd.init_Fast()
     Himage2 = Image.new('1', (epd.height, epd.width), 255)  # 255: clear the frame
     bmp = Image.open(os.path.join(picdir, '100x100.bmp'))
     Himage2.paste(bmp, (50,10))
@@ -132,5 +133,5 @@ except IOError as e:
     
 except KeyboardInterrupt:    
     logging.info("ctrl + c:")
-    epd2in9_V2.epdconfig.module_exit()
+    epd2in9_V2.epdconfig.module_exit(cleanup=True)
     exit()

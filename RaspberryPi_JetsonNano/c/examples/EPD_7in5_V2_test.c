@@ -4,8 +4,8 @@
 * | Function    :   7.5inch e-paper test demo
 * | Info        :
 *----------------
-* |	This version:   V1.0
-* | Date        :   2019-06-13
+* |	This version:   V3.0
+* | Date        :   2023-12-18
 * | Info        :
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -76,6 +76,7 @@ int EPD_7in5_V2_test(void)
 #endif        
 
 #if 1   // show image for array   
+    EPD_7IN5_V2_Init_Fast();
     printf("show image for array\r\n");
     Paint_SelectImage(BlackImage);
     Paint_Clear(WHITE);
@@ -86,6 +87,7 @@ int EPD_7in5_V2_test(void)
 
 #if 1   // Drawing on the image
     //1.Select Image
+    // EPD_7IN5_V2_Init();
     printf("SelectImage:BlackImage\r\n");
     Paint_SelectImage(BlackImage);
     Paint_Clear(WHITE);
@@ -115,13 +117,53 @@ int EPD_7in5_V2_test(void)
     DEV_Delay_ms(2000);
 #endif
 
+#if 1   //Partial refresh, example shows time
+    EPD_7IN5_V2_Init_Part();
+	Paint_NewImage(BlackImage, Font20.Width * 7, Font20.Height, 0, WHITE);
+    Debug("Partial refresh\r\n");
+    Paint_SelectImage(BlackImage);
+    Paint_Clear(WHITE);
+	
+    PAINT_TIME sPaint_time;
+    sPaint_time.Hour = 12;
+    sPaint_time.Min = 34;
+    sPaint_time.Sec = 56;
+    UBYTE num = 10;
+    for (;;) {
+        sPaint_time.Sec = sPaint_time.Sec + 1;
+        if (sPaint_time.Sec == 60) {
+            sPaint_time.Min = sPaint_time.Min + 1;
+            sPaint_time.Sec = 0;
+            if (sPaint_time.Min == 60) {
+                sPaint_time.Hour =  sPaint_time.Hour + 1;
+                sPaint_time.Min = 0;
+                if (sPaint_time.Hour == 24) {
+                    sPaint_time.Hour = 0;
+                    sPaint_time.Min = 0;
+                    sPaint_time.Sec = 0;
+                }
+            }
+        }
+        Paint_ClearWindows(0, 0, Font20.Width * 7, Font20.Height, WHITE);
+        Paint_DrawTime(0, 0, &sPaint_time, &Font20, WHITE, BLACK);
+
+        num = num - 1;
+        if(num == 0) {
+            break;
+        }
+		EPD_7IN5_V2_Display_Part(BlackImage, 150, 80, 150 + Font20.Width * 7, 80 + Font20.Height);
+        DEV_Delay_ms(500);//Analog clock 1s
+    }
+#endif
+
     printf("Clear...\r\n");
+    EPD_7IN5_V2_Init();
     EPD_7IN5_V2_Clear();
 
     printf("Goto Sleep...\r\n");
     EPD_7IN5_V2_Sleep();
-    free(BlackImage);
-    BlackImage = NULL;
+    // free(BlackImage);
+    // BlackImage = NULL;
     DEV_Delay_ms(2000);//important, at least 2s
     // close 5V
     printf("close 5V, Module enters 0 power consumption ...\r\n");

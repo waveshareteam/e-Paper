@@ -1,4 +1,4 @@
-/**
+  /**
  *  @filename   :   epd2in9_V2-demo.ino
  *  @brief      :   2.9inch e-paper V2 display demo
  *  @author     :   Yehui from Waveshare
@@ -43,6 +43,7 @@ Paint paint(image, 0, 0);    // width should be the multiple of 8
 Epd epd;
 unsigned long time_start_ms;
 unsigned long time_now_s;
+char time_string[] = {'0', '0', ':', '0', '0', '\0'};
 
 void setup() {
   // put your setup code here, to run once:
@@ -51,7 +52,8 @@ void setup() {
       Serial.print("e-Paper init failed");
       return;
   }
-  
+
+#if 1
   epd.ClearFrameMemory(0xFF);   // bit set = white, bit reset = black
   epd.DisplayFrame();
   
@@ -91,7 +93,9 @@ void setup() {
   epd.DisplayFrame();
 
   delay(2000);
+#endif
 
+#if 1
   if (epd.Init() != 0) {
       Serial.print("e-Paper init failed ");
       return;
@@ -105,27 +109,72 @@ void setup() {
    */
   epd.SetFrameMemory_Base(IMAGE_DATA);
   epd.DisplayFrame();
+#endif
 
+#if 0
+  // Quick brush demo
+  if (epd.Init_Fast() != 0) {
+      Serial.print("e-Paper init failed ");
+      return;
+  }
+
+  /** 
+   *  there are 2 memory areas embedded in the e-paper display
+   *  and once the display is refreshed, the memory area will be auto-toggled,
+   *  i.e. the next action of SetFrameMemory will set the other memory area
+   *  therefore you have to set the frame memory and refresh the display twice.
+   */
+  epd.SetFrameMemory_Base(IMAGE_DATA);
+  epd.DisplayFrame();
+#endif
+
+#if 0
+  Serial.print("show 4-gray image\r\n");
+  if (epd.Init_4Gray() != 0) {
+      Serial.print("e-Paper init failed ");
+      return;
+  }
+  epd.Display4Gray(IMAGE_DATA_4Gray);
+#endif
+
+#if 0
+  if (epd.Init() != 0) {
+      Serial.print("e-Paper init failed");
+      return;
+  }
+
+  epd.ClearFrameMemory(0xFF);   // bit set = white, bit reset = black
+  epd.DisplayFrame();
+  
   time_start_ms = millis();
+  
+  // put your main code here, to run repeatedly:
+
+  for(;;){
+    time_now_s = (millis() - time_start_ms) / 1000;
+    time_string[0] = time_now_s / 60 / 10 + '0';
+    time_string[1] = time_now_s / 60 % 10 + '0';
+    time_string[3] = time_now_s % 60 / 10 + '0';
+    time_string[4] = time_now_s % 60 % 10 + '0';
+
+    paint.SetWidth(32);
+    paint.SetHeight(96);
+    paint.SetRotate(ROTATE_90);
+  
+    paint.Clear(UNCOLORED);
+    paint.DrawStringAt(0, 4, time_string, &Font24, COLORED);
+    epd.SetFrameMemory_Partial(paint.GetImage(), 80, 72, paint.GetWidth(), paint.GetHeight());
+    epd.DisplayFrame_Partial();
+  }
+#endif
+
+  /* Deep sleep */
+  Serial.print("sleep...");
+  epd.Sleep();
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  time_now_s = (millis() - time_start_ms) / 1000;
-  char time_string[] = {'0', '0', ':', '0', '0', '\0'};
-  time_string[0] = time_now_s / 60 / 10 + '0';
-  time_string[1] = time_now_s / 60 % 10 + '0';
-  time_string[3] = time_now_s % 60 / 10 + '0';
-  time_string[4] = time_now_s % 60 % 10 + '0';
 
-  paint.SetWidth(32);
-  paint.SetHeight(96);
-  paint.SetRotate(ROTATE_90);
-
-  paint.Clear(UNCOLORED);
-  paint.DrawStringAt(0, 4, time_string, &Font24, COLORED);
-  epd.SetFrameMemory_Partial(paint.GetImage(), 80, 72, paint.GetWidth(), paint.GetHeight());
-  epd.DisplayFrame_Partial();
 
   // delay(300);
 }

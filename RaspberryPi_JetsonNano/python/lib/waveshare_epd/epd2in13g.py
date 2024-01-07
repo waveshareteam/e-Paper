@@ -91,9 +91,9 @@ class EPD:
     def SetWindow(self):
         self.send_command(0x61) # SET_RAM_X_ADDRESS_START_END_POSITION
         # x point must be the multiple of 8 or the last 3 bits will be ignored
-        self.send_data(self.Source_BITS/256)
+        self.send_data(int(self.Source_BITS/256))
         self.send_data(self.Source_BITS%256)
-        self.send_data(self.Gate_BITS/256)
+        self.send_data(int(self.Gate_BITS/256))
         self.send_data(self.Gate_BITS%256)
 
     def TurnOnDisplay(self):

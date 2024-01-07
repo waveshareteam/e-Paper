@@ -4,8 +4,8 @@
 * | Function    :   2.9inch e-paper V2 test demo
 * | Info        :
 *----------------
-* |	This version:   V1.1
-* | Date        :   2023-08-30
+* |	This version:   V1.2
+* | Date        :   2023-12-21
 * | Info        :
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -85,6 +85,7 @@ int EPD_2in9_V2_test(void)
 #endif
 
 #if 1  // Drawing on the image
+    EPD_2IN9_V2_Init_Fast();
 	Paint_NewImage(BlackImage, EPD_2IN9_V2_WIDTH, EPD_2IN9_V2_HEIGHT, 90, WHITE);  	
     printf("Drawing\r\n");
     //1.Select Image
@@ -118,7 +119,7 @@ int EPD_2in9_V2_test(void)
     Paint_DrawString_CN(130, 0,"ÄãºÃabc", &Font12CN, BLACK, WHITE);
     Paint_DrawString_CN(130, 20, "Î¢Ñ©µç×Ó", &Font24CN, WHITE, BLACK);
 
-    EPD_2IN9_V2_Display_Base(BlackImage);
+    EPD_2IN9_V2_Display(BlackImage);
     DEV_Delay_ms(3000);
 #endif
 

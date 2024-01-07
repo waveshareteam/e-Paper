@@ -98,5 +98,5 @@ except IOError as e:
     
 except KeyboardInterrupt:    
     logging.info("ctrl + c:")
-    epd7in5bc.epdconfig.module_exit()
+    epd7in5bc.epdconfig.module_exit(cleanup=True)
     exit()
