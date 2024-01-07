@@ -31,7 +31,7 @@
 import logging
 from . import epdconfig
 from PIL import Image
-import RPi.GPIO as GPIO
+
 
 # Display resolution
 EPD_WIDTH       = 104
@@ -368,5 +368,5 @@ class EPD:
         epdconfig.delay_ms(2000)
         epdconfig.module_exit()
 
-### END OF FILE ###
+# ## END OF FILE ###
 
