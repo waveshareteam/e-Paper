@@ -422,8 +422,6 @@ void Epd::Sleep()
     SendCommand(0x10); //enter deep sleep
     SendData(0x01);
     DelayMs(200);
-
-    DigitalWrite(reset_pin, LOW);
 }
 
 /* END OF FILE */
