@@ -109,10 +109,10 @@ class EPD:
         self.send_data(0x0F)        # KW-3f KWR-2F BWROTP-0f BWOTP-1f
 
         self.send_command(0x61)     # tres
-        self.send_data(0x03)        # source 800
-        self.send_data(0x20)
-        self.send_data(0x01)        # gate 480
-        self.send_data(0xE0)
+        self.send_data(self.width%256)        # source 800
+        self.send_data(self.width//256)
+        self.send_data(self.height%256)        # gate 480
+        self.send_data(self.height//256)
 
         self.send_command(0X15)
         self.send_data(0x00)
