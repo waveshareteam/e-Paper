@@ -13,6 +13,8 @@ Also suitable for WeAct e-paper
     
 # Official website:   
 https://www.waveshare.com
+# Official wiki:
+https://www.waveshare.com/wiki/
 
 
 
