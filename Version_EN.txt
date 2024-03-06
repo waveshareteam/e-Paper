@@ -43,3 +43,4 @@
 2023-12-21: New program 2.66inch e-Paper (G) routine added.
 2023-12-21: Add new program 2.9inch e-Paper V4 (B) routine.
 2023-12-21: Add 2.9V2 fast brush code, 7.5 fast brush code, local brush code (except Arduino)
+2023-12-21: New program 5.79inch e-Paper、5.79inch e-Paper (B) routine added.

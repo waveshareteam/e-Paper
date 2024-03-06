@@ -48,6 +48,10 @@ extern const unsigned char gImage_7in3g[];
 extern const unsigned char gImage_13in3k[];
 
 extern const unsigned char gImage_2in66g[];
+
+extern const unsigned char gImage_5in79[];
+extern const unsigned char gImage_5in79b_b[];
+extern const unsigned char gImage_5in79b_r[];
 /* --------------------------------------- */
 
 // ImageData.c
