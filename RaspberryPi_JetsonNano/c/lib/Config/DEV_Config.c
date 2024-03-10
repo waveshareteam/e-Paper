@@ -423,7 +423,7 @@ void DEV_Module_Exit(void)
     DEV_Digital_Write(EPD_PWR_PIN, 0);
 	DEV_Digital_Write(EPD_DC_PIN, 0);
 	DEV_Digital_Write(EPD_RST_PIN, 0);
-#elif USE_DEV_LIB 
+#elif USE_LGPIO_LIB
     DEV_Digital_Write(EPD_CS_PIN, 0);
     DEV_Digital_Write(EPD_PWR_PIN, 0);
 	DEV_Digital_Write(EPD_DC_PIN, 0);
