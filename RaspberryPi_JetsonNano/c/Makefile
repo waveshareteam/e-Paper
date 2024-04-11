@@ -192,6 +192,9 @@ else ifeq ($(EPD), epd7in5bHD)
 else ifeq ($(EPD), epd10in2b)
 	OBJ_C_EPD = ${DIR_EPD}/EPD_10in2b.c
 	OBJ_C_Examples = ${DIR_Examples}/EPD_10in2b_test.c
+else ifeq ($(EPD), epd13in3b)
+	OBJ_C_EPD = ${DIR_EPD}/EPD_13in3b.c
+	OBJ_C_Examples = ${DIR_Examples}/EPD_13in3b_test.c
 else ifeq ($(EPD), epd13in3k)
 	OBJ_C_EPD = ${DIR_EPD}/EPD_13in3k.c
 	OBJ_C_Examples = ${DIR_Examples}/EPD_13in3k_test.c
@@ -219,7 +222,7 @@ ifeq ($(USELIB_RPI), USE_BCM2835_LIB)
 else ifeq ($(USELIB_RPI), USE_WIRINGPI_LIB)
 	LIB_RPI += -lwiringPi -lm 
 else ifeq ($(USELIB_RPI), USE_LGPIO_LIB)
-	LIB_RPI += -llgpio -lm 
+	LIB_RPI += -llgpio -lm
 else ifeq ($(USELIB_RPI), USE_DEV_LIB)
 	LIB_RPI += -lgpiod -lm 
 endif
@@ -267,9 +270,14 @@ ${DIR_BIN}/%.o:$(DIR_GUI)/%.c
 	$(CC) $(CFLAGS) -c	$< -o $@ -I $(DIR_Config) $(DEBUG)
 
 RPI_DEV:
+ifeq ($(USELIB_RPI), USE_DEV_LIB)
 	$(CC) $(CFLAGS) $(DEBUG_RPI) -c	 $(DIR_Config)/dev_hardware_SPI.c -o $(DIR_BIN)/dev_hardware_SPI.o $(LIB_RPI) $(DEBUG)
-	$(CC) $(CFLAGS) $(DEBUG_RPI) -c	 $(DIR_Config)/RPI_gpiod.c -o $(DIR_BIN)/RPI_gpiod.o $(LIB_RPI) $(DEBUG)
 	$(CC) $(CFLAGS) $(DEBUG_RPI) -c	 $(DIR_Config)/DEV_Config.c -o $(DIR_BIN)/DEV_Config.o $(LIB_RPI) $(DEBUG)
+	$(CC) $(CFLAGS) $(DEBUG_RPI) -c	 $(DIR_Config)/RPI_gpiod.c -o $(DIR_BIN)/RPI_gpiod.o $(LIB_RPI) $(DEBUG)
+else
+	$(CC) $(CFLAGS) $(DEBUG_RPI) -c	 $(DIR_Config)/dev_hardware_SPI.c -o $(DIR_BIN)/dev_hardware_SPI.o $(LIB_RPI) $(DEBUG)
+	$(CC) $(CFLAGS) $(DEBUG_RPI) -c	 $(DIR_Config)/DEV_Config.c -o $(DIR_BIN)/DEV_Config.o $(LIB_RPI) $(DEBUG)
+endif
 	
 JETSON_DEV:
 	$(CC) $(CFLAGS) $(DEBUG_JETSONI) -c	 $(DIR_Config)/sysfs_software_spi.c -o $(DIR_BIN)/sysfs_software_spi.o $(LIB_JETSONI) $(DEBUG)

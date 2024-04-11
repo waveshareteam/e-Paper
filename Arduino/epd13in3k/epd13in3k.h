@@ -38,15 +38,21 @@ public:
     Epd();
     ~Epd();
     int  Init(void);
+    int Init_Part(void);
+    int Init_4GRAY(void);
     void ReadBusy(void);
     void Reset(void);
     void TurnOnDisplay(void);
+    void TurnOnDisplay_Part(void);
+    void TurnOnDisplay_4GRAY(void);
     void DisplayFrame(const unsigned char* frame_buffer);
     void SendCommand(unsigned char command);
     void SendData(unsigned char data);
     void Sleep(void);
     void Clear(void);
-    void Epd::Displaypart(const unsigned char* pbuffer, unsigned long Start_X, unsigned long Start_Y,unsigned long END_X,unsigned long END_Y);
+    void Displaypart(const unsigned char* pbuffer, unsigned long Start_X, unsigned long Start_Y,unsigned long END_X,unsigned long END_Y);
+    void Display_Base(const unsigned char* frame_buffer);
+    void Display_Part(unsigned char *Image, unsigned long x, unsigned long y, unsigned long w, unsigned long l);
  
 private:
     unsigned int reset_pin;

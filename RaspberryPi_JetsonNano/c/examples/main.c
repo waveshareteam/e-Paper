@@ -201,6 +201,9 @@ int main(void)
 #elif epd10in2b
     EPD_10in2b_test();
     
+#elif epd13in3b
+    EPD_13in3b_test();
+
 #elif epd13in3k
     EPD_13in3k_test();
 #else

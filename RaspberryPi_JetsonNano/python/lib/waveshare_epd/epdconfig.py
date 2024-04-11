@@ -108,21 +108,20 @@ class RaspberryPi:
         return 0
 
     def module_exit(self, cleanup=False):
-        logger.debug("spi end")
-        self.SPI.close()
-
-        
-        self.GPIO_RST_PIN.off()
-        self.GPIO_DC_PIN.off()
-        self.GPIO_PWR_PIN.off()
         logger.debug("close 5V, Module enters 0 power consumption ...")
-        
-        if cleanup:
-            self.GPIO_RST_PIN.close()
-            self.GPIO_DC_PIN.close()
-            # self.GPIO_CS_PIN.close()
-            self.GPIO_PWR_PIN.close()
-            self.GPIO_BUSY_PIN.close()
+
+        # logger.debug("spi end")
+        # self.SPI.close()
+        # self.GPIO_RST_PIN.off()
+        # self.GPIO_DC_PIN.off()
+        # self.GPIO_PWR_PIN.off()
+
+        # if cleanup:
+        #     self.GPIO_RST_PIN.close()
+        #     self.GPIO_DC_PIN.close()
+        #     # self.GPIO_CS_PIN.close()
+        #     self.GPIO_PWR_PIN.close()
+        #     self.GPIO_BUSY_PIN.close()
 
         
 
