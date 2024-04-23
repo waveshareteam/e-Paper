@@ -31,6 +31,8 @@
 #include <Arduino.h>
 
 // Pin definition
+#define MOSI_PIN        11
+#define SCLK_PIN        13
 #define RST_PIN         8
 #define DC_PIN          9
 #define CS_PIN          10
@@ -43,6 +45,11 @@ public:
     ~EpdIf(void);
 
     static int  IfInit(void);
+    static void EPD_GPIO_Init();
+    static void EPD_SPI_Init();
+    static void EPD_Mode(int pin, char mode);
+    static void EPD_SendData(unsigned char data);
+    static unsigned char EPD_ReadData();
     static void DigitalWrite(int pin, int value); 
     static int  DigitalRead(int pin);
     static void DelayMs(unsigned int delaytime);

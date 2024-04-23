@@ -68,6 +68,10 @@ void Error_Handler(void);
 #define SPI_CS_GPIO_Port GPIOA
 #define PWR_Pin GPIO_PIN_6
 #define PWR_GPIO_Port GPIOA
+#define DIN_Pin GPIO_PIN_7
+#define DIN_GPIO_Port GPIOA
+#define SCK_Pin GPIO_PIN_5
+#define SCK_GPIO_Port GPIOA
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

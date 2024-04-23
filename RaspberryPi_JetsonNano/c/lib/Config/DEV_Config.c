@@ -28,7 +28,6 @@
 #
 ******************************************************************************/
 #include "DEV_Config.h"
-#include "RPI_gpiod.h"
 
 #if USE_LGPIO_LIB
 int GPIO_Handle;
@@ -43,6 +42,8 @@ int EPD_DC_PIN;
 int EPD_CS_PIN;
 int EPD_BUSY_PIN;
 int EPD_PWR_PIN;
+int EPD_MOSI_PIN;
+int EPD_SCLK_PIN;
 
 /**
  * GPIO read and write
@@ -284,12 +285,16 @@ void DEV_GPIO_Init(void)
 	EPD_CS_PIN      = 8;
     EPD_PWR_PIN     = 18;
 	EPD_BUSY_PIN    = 24;
+    EPD_MOSI_PIN    = 10;
+	EPD_SCLK_PIN    = 11;
 #elif JETSON
 	EPD_RST_PIN     = GPIO17;
 	EPD_DC_PIN      = GPIO25;
 	EPD_CS_PIN      = SPI0_CS0;
     EPD_PWR_PIN     = GPIO18;
 	EPD_BUSY_PIN    = GPIO24;
+    EPD_MOSI_PIN    = SPI0_MOSI;
+	EPD_SCLK_PIN    = SPI0_SCLK;
 #endif
 
     DEV_GPIO_Mode(EPD_BUSY_PIN, 0);
@@ -297,11 +302,72 @@ void DEV_GPIO_Init(void)
 	DEV_GPIO_Mode(EPD_DC_PIN, 1);
 	DEV_GPIO_Mode(EPD_CS_PIN, 1);
     DEV_GPIO_Mode(EPD_PWR_PIN, 1);
+    // DEV_GPIO_Mode(EPD_MOSI_PIN, 0);
+	// DEV_GPIO_Mode(EPD_SCLK_PIN, 1);
 
 	DEV_Digital_Write(EPD_CS_PIN, 1);
     DEV_Digital_Write(EPD_PWR_PIN, 1);
     
 }
+
+void DEV_SPI_SendnData(UBYTE *Reg)
+{
+    UDOUBLE size;
+    size = sizeof(Reg);
+    for(UDOUBLE i=0 ; i<size ; i++)
+    {
+        DEV_SPI_SendData(Reg[i]);
+    }
+}
+
+void DEV_SPI_SendData(UBYTE Reg)
+{
+	UBYTE i,j=Reg;
+	DEV_GPIO_Mode(EPD_MOSI_PIN, 1);
+	DEV_Digital_Write(EPD_CS_PIN, 0);
+	for(i = 0; i<8; i++)
+    {
+        DEV_Digital_Write(EPD_SCLK_PIN, 0);     
+        if (j & 0x80)
+        {
+            DEV_Digital_Write(EPD_MOSI_PIN, 1);
+        }
+        else
+        {
+            DEV_Digital_Write(EPD_MOSI_PIN, 0);
+        }
+        
+        DEV_Digital_Write(EPD_SCLK_PIN, 1);
+        j = j << 1;
+    }
+	DEV_Digital_Write(EPD_SCLK_PIN, 0);
+	DEV_Digital_Write(EPD_CS_PIN, 1);
+}
+
+UBYTE DEV_SPI_ReadData()
+{
+	UBYTE i,j=0xff;
+	DEV_GPIO_Mode(EPD_MOSI_PIN, 0);
+	DEV_Digital_Write(EPD_CS_PIN, 0);
+	for(i = 0; i<8; i++)
+	{
+		DEV_Digital_Write(EPD_SCLK_PIN, 0);
+		j = j << 1;
+		if (DEV_Digital_Read(EPD_MOSI_PIN))
+		{
+				j = j | 0x01;
+		}
+		else
+		{
+				j= j & 0xfe;
+		}
+		DEV_Digital_Write(EPD_SCLK_PIN, 1);
+	}
+	DEV_Digital_Write(EPD_SCLK_PIN, 0);
+	DEV_Digital_Write(EPD_CS_PIN, 1);
+	return j;
+}
+
 /******************************************************************************
 function:	Module Initialize, the library and initialize the pins, SPI protocol
 parameter:
@@ -348,7 +414,6 @@ UBYTE DEV_Module_Init(void)
 #elif  USE_LGPIO_LIB
     char buffer[NUM_MAXBUF];
     FILE *fp;
-
     fp = popen("cat /proc/cpuinfo | grep 'Raspberry Pi 5'", "r");
     if (fp == NULL) {
         Debug("It is not possible to determine the model of the Raspberry PI\n");
