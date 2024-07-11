@@ -47,3 +47,6 @@
 2024-03-06：添加新程序5.79inch e-Paper、5.79inch e-Paper (B)例程
 2024-04-10：添加新程序13.3inch e-Paper (B)例程，添加 13.3inch e-Paper (K) 的局刷显示及四灰度显示，修复部分程序问题
 2024-04-22：更新 4.2inch e-Paper (B) V2的例程
+2024-07-11：添加新程序 5.79inch e-Paper (G) 的例程
+2024-07-11：添加新程序 7.3inch e-Paper (E) 的例程
+2024-07-11：添加Aruduino R4 主板的例程

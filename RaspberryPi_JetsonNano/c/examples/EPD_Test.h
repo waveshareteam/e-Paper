@@ -100,6 +100,7 @@ int EPD_5in65f_test(void);
 
 int EPD_5in79_test(void);
 int EPD_5in79b_test(void);
+int EPD_5in79g_test(void);
 
 int EPD_5in83_test(void);
 int EPD_5in83_V2_test(void);
@@ -108,6 +109,7 @@ int EPD_5in83b_V2_test(void);
 
 int EPD_5in84_test(void);
 
+int EPD_7in3e_test(void);
 int EPD_7in3f_test(void);
 
 int EPD_7in5_test(void);

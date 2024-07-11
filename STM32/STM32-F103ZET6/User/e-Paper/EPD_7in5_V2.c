@@ -85,12 +85,11 @@ parameter:
 ******************************************************************************/
 static void EPD_WaitUntilIdle(void)
 {
-    Debug("e-Paper busy\r\n");
-	do{
-		DEV_Delay_ms(5);  
-	}while(!(DEV_Digital_Read(EPD_BUSY_PIN)));   
-	DEV_Delay_ms(5);      
-    Debug("e-Paper busy release\r\n");
+    while (1)
+    {
+        if(DEV_Digital_Read(EPD_BUSY_PIN) == 1)
+            break;
+    }
 }
 /******************************************************************************
 function :	Turn On Display
@@ -324,8 +323,10 @@ parameter:
 ******************************************************************************/
 void EPD_7IN5_V2_Sleep(void)
 {
-    EPD_SendCommand(0X02);  	//power off
-    EPD_WaitUntilIdle();
+    EPD_SendCommand(0x50);  	
+    EPD_SendData(0XF7);
+    //EPD_SendCommand(0X02);  	//power off
+    //EPD_WaitUntilIdle();
     EPD_SendCommand(0X07);  	//deep sleep
     EPD_SendData(0xA5);
 }

@@ -447,4 +447,83 @@ UBYTE GUI_ReadBmp_RGB_4Color(const char *path, UWORD Xstart, UWORD Ystart)
     return 0;
 }
 
+UBYTE GUI_ReadBmp_RGB_6Color(const char *path, UWORD Xstart, UWORD Ystart)
+{
+    FILE *fp;                     //Define a file pointer
+    BMPFILEHEADER bmpFileHeader;  //Define a bmp file header structure
+    BMPINFOHEADER bmpInfoHeader;  //Define a bmp info header structure
+    
+    // Binary file open
+    if((fp = fopen(path, "rb")) == NULL) {
+        Debug("Cann't open the file!\n");
+        exit(0);
+    }
+
+    // Set the file pointer from the beginning
+    fseek(fp, 0, SEEK_SET);
+    fread(&bmpFileHeader, sizeof(BMPFILEHEADER), 1, fp);    //sizeof(BMPFILEHEADER) must be 14
+    fread(&bmpInfoHeader, sizeof(BMPINFOHEADER), 1, fp);    //sizeof(BMPFILEHEADER) must be 50
+    printf("pixel = %d * %d\r\n", bmpInfoHeader.biWidth, bmpInfoHeader.biHeight);
+	
+    UDOUBLE Image_Byte = bmpInfoHeader.biWidth * bmpInfoHeader.biHeight * 3;
+    UBYTE Image[Image_Byte];
+    memset(Image, 0xFF, Image_Byte);
+
+    // Determine if it is a monochrome bitmap
+    int readbyte = bmpInfoHeader.biBitCount;
+    if(readbyte != 24){
+        Debug("Bmp image is not 24 bitmap!\n");
+        exit(0);
+    }
+    // Read image data into the cache
+    UWORD x, y;
+    UBYTE Rdata[3];
+    fseek(fp, bmpFileHeader.bOffset, SEEK_SET);
+    
+    for(y = 0; y < bmpInfoHeader.biHeight; y++) {//Total display column
+        for(x = 0; x < bmpInfoHeader.biWidth ; x++) {//Show a line in the line
+            if(fread((char *)Rdata, 1, 1, fp) != 1) {
+                perror("get bmpdata:\r\n");
+                break;
+            }
+			if(fread((char *)Rdata+1, 1, 1, fp) != 1) {
+                perror("get bmpdata:\r\n");
+                break;
+            }
+			if(fread((char *)Rdata+2, 1, 1, fp) != 1) {
+                perror("get bmpdata:\r\n");
+                break;
+            }
+
+			if(Rdata[0] == 0 && Rdata[1] == 0 && Rdata[2] == 0){
+				Image[x+(y* bmpInfoHeader.biWidth )] =  0;//Black
+			}else if(Rdata[0] == 255 && Rdata[1] == 255 && Rdata[2] == 255){
+				Image[x+(y* bmpInfoHeader.biWidth )] =  1;//White
+			}else if(Rdata[0] == 0 && Rdata[1] == 255 && Rdata[2] == 255){
+				Image[x+(y* bmpInfoHeader.biWidth )] =  2;//Yellow
+			}else if(Rdata[0] == 0 && Rdata[1] == 0 && Rdata[2] == 255){
+				Image[x+(y* bmpInfoHeader.biWidth )] =  3;//Red
+			// }else if(Rdata[0] == 0 && Rdata[1] == 128 && Rdata[2] == 255){
+			// 	Image[x+(y* bmpInfoHeader.biWidth )] =  4;//Orange
+			}else if(Rdata[0] == 255 && Rdata[1] == 0 && Rdata[2] == 0){
+				Image[x+(y* bmpInfoHeader.biWidth )] =  5;//Blue
+			}else if(Rdata[0] == 0 && Rdata[1] == 255 && Rdata[2] == 0){
+				Image[x+(y* bmpInfoHeader.biWidth )] =  6;//Green
+			}
+            
+        }
+    }
+    fclose(fp);
+   
+    // Refresh the image to the display buffer based on the displayed orientation
+    for(y = 0; y < bmpInfoHeader.biHeight; y++) {
+        for(x = 0; x < bmpInfoHeader.biWidth; x++) {
+            if(x > Paint.Width || y > Paint.Height) {
+                break;
+            }
+            Paint_SetPixel(Xstart + x, Ystart + y, Image[bmpInfoHeader.biHeight *  bmpInfoHeader.biWidth - 1 -(bmpInfoHeader.biWidth-x-1+(y* bmpInfoHeader.biWidth))]);
+		}
+    }
+    return 0;
+}
 

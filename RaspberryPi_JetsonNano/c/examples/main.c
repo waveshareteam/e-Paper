@@ -159,6 +159,9 @@ int main(void)
 
 #elif epd5in79b
     EPD_5in79b_test();
+
+#elif epd5in79g
+    EPD_5in79g_test();
     
 #elif epd5in83
     EPD_5in83_test();
@@ -174,7 +177,10 @@ int main(void)
     
 #elif epd5in84
     EPD_5in84_test();
-    
+
+#elif epd7in3e
+    EPD_7in3e_test();
+
 #elif epd7in3f
     EPD_7in3f_test();
 
@@ -183,6 +189,7 @@ int main(void)
     
 #elif epd7in5V2
     EPD_7in5_V2_test();
+
 #elif epd7in5V2_old
     EPD_7in5_V2_test_old();
     
