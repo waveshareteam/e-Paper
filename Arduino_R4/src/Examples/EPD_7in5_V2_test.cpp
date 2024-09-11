@@ -47,12 +47,12 @@ int EPD_7in5_V2_test(void)
     UBYTE *BlackImage;
     /* you have to edit the startup_stm32fxxx.s file and set a big enough heap size */
     UWORD Imagesize = ((EPD_7IN5_V2_WIDTH % 8 == 0)? (EPD_7IN5_V2_WIDTH / 8 ): (EPD_7IN5_V2_WIDTH / 8 + 1)) * EPD_7IN5_V2_HEIGHT;
-    if((BlackImage = (UBYTE *)malloc(Imagesize/2)) == NULL) {
+    if((BlackImage = (UBYTE *)malloc(Imagesize/4)) == NULL) {
         Debug("Failed to apply for black memory...\r\n");
         return -1;
     }
     Debug("Paint_NewImage\r\n");
-    Paint_NewImage(BlackImage, EPD_7IN5_V2_WIDTH, EPD_7IN5_V2_HEIGHT/2, 0, WHITE);       
+    Paint_NewImage(BlackImage, EPD_7IN5_V2_WIDTH/2, EPD_7IN5_V2_HEIGHT/2, 0, WHITE);       
 
 #if 1   // show image for array   
     EPD_7IN5_V2_Init_Fast();
@@ -89,7 +89,7 @@ int EPD_7in5_V2_test(void)
     Paint_DrawString_CN(130, 20, "微雪电子", &Font24CN, WHITE, BLACK);
 
     Debug("EPD_Display\r\n");
-    EPD_7IN5_V2_SendHalfImage(BlackImage);
+    EPD_7IN5_V2_WritePicture(BlackImage);
     DEV_Delay_ms(2000);
 #endif
 

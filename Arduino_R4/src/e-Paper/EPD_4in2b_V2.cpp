@@ -230,7 +230,7 @@ void EPD_4IN2B_V2_Clear_old(void)
     EPD_4IN2B_V2_SendCommand(0x13);
     for (UWORD j = 0; j < Height; j++) {
         for (UWORD i = 0; i < Width; i++) {
-            EPD_4IN2B_V2_SendData(0xFF);
+            EPD_4IN2B_V2_SendData(0x00);
         }
     }
 

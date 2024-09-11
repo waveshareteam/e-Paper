@@ -151,6 +151,59 @@ UBYTE EPD_7IN5B_V2_Init(void)
     return 0;
 }
 
+
+UBYTE EPD_7IN5B_V2_Init_Fast(void)
+{
+    EPD_7IN5B_V2_Reset();
+
+    EPD_7IN5B_V2_SendCommand(0X00);			//PANNEL SETTING
+    EPD_7IN5B_V2_SendData(0x0F);   //KW-3f   KWR-2F	BWROTP 0f	BWOTP 1f
+
+    EPD_7IN5B_V2_SendCommand(0x04); //POWER ON
+    DEV_Delay_ms(100);
+    EPD_7IN5B_V2_WaitUntilIdle();
+
+	//Enhanced display drive(Add 0x06 command)
+	EPD_7IN5B_V2_SendCommand(0x06);			//Booster Soft Start 
+	EPD_7IN5B_V2_SendData(0x27);
+	EPD_7IN5B_V2_SendData(0x27);
+	EPD_7IN5B_V2_SendData(0x18);
+	EPD_7IN5B_V2_SendData(0x17);
+
+	EPD_7IN5B_V2_SendCommand(0xE0);
+	EPD_7IN5B_V2_SendData(0x02);
+	EPD_7IN5B_V2_SendCommand(0xE5);
+	EPD_7IN5B_V2_SendData(0x5A);
+	
+	EPD_7IN5B_V2_SendCommand(0X50);			//VCOM AND DATA INTERVAL SETTING
+	EPD_7IN5B_V2_SendData(0x11);
+	EPD_7IN5B_V2_SendData(0x07);
+    return 0;
+}
+
+UBYTE EPD_7IN5B_V2_Init_Part(void)
+{
+    EPD_7IN5B_V2_Reset();
+
+    EPD_7IN5B_V2_SendCommand(0X00);			//PANNEL SETTING
+    EPD_7IN5B_V2_SendData(0x1F);   //KW-3f   KWR-2F	BWROTP 0f	BWOTP 1f
+
+    EPD_7IN5B_V2_SendCommand(0x04); //POWER ON
+    DEV_Delay_ms(100);
+    EPD_7IN5B_V2_WaitUntilIdle();
+
+	EPD_7IN5B_V2_SendCommand(0xE0);
+	EPD_7IN5B_V2_SendData(0x02);
+	EPD_7IN5B_V2_SendCommand(0xE5);
+	EPD_7IN5B_V2_SendData(0x6E);
+	
+	EPD_7IN5B_V2_SendCommand(0X50);			//VCOM AND DATA INTERVAL SETTING
+	EPD_7IN5B_V2_SendData(0xA9);
+	EPD_7IN5B_V2_SendData(0x07);
+    return 0;
+}
+
+
 /******************************************************************************
 function :	Clear screen
 parameter:
@@ -258,11 +311,11 @@ void EPD_7IN5B_V2_WritePicture(const UBYTE *blackimage, UBYTE Block)
 	}
 	for (UDOUBLE j = 0; j < Height/2; j++) {
         for (UDOUBLE i = 0; i < Width; i++) {
-						if(Block>=2){
-							EPD_7IN5B_V2_SendData(~blackimage[i + j * Width]);
-						}else{
-							EPD_7IN5B_V2_SendData(blackimage[i + j * Width]);
-						}
+            if(Block>=2){
+                EPD_7IN5B_V2_SendData(~blackimage[i + j * Width]);
+            }else{
+                EPD_7IN5B_V2_SendData(blackimage[i + j * Width]);
+            }
         }
 	}
 	if(Block == 3){
@@ -270,6 +323,71 @@ void EPD_7IN5B_V2_WritePicture(const UBYTE *blackimage, UBYTE Block)
 	}
 }
 
+
+void EPD_7IN5B_V2_Display_Base_color(UBYTE color)
+{
+    UWORD Width, Height;
+    Width =(EPD_7IN5B_V2_WIDTH % 8 == 0)?(EPD_7IN5B_V2_WIDTH / 8 ):(EPD_7IN5B_V2_WIDTH / 8 + 1);
+    Height = EPD_7IN5B_V2_HEIGHT;
+
+	EPD_7IN5B_V2_SendCommand(0x10);   //Write Black and White image to RAM
+    for (UWORD j = 0; j < Height; j++) {
+        for (UWORD i = 0; i < Width; i++) {
+            EPD_7IN5B_V2_SendData(~color);
+        }
+    }
+	EPD_7IN5B_V2_SendCommand(0x13);   //Write Black and White image to RAM
+    for (UWORD j = 0; j < Height; j++) {
+        for (UWORD i = 0; i < Width; i++) {
+            EPD_7IN5B_V2_SendData(color);
+        }
+    }
+	// EPD_7IN5B_V2_TurnOnDisplay();	
+}
+
+void EPD_7IN5B_V2_Display_Partial(const UBYTE *Image, UWORD Xstart, UWORD Ystart, UWORD Xend, UWORD Yend)
+{
+    UDOUBLE Width, Height;
+    Width =((Xend - Xstart) % 8 == 0)?((Xend - Xstart) / 8 ):((Xend - Xstart) / 8 + 1);
+    Height = Yend - Ystart;
+    //Reset
+    // EPD_7IN5B_V2_Reset();
+
+    // EPD_7IN5B_V2_SendCommand(0X50);			//VCOM AND DATA INTERVAL SETTING
+	// EPD_7IN5B_V2_SendData(0xA9);
+	// EPD_7IN5B_V2_SendData(0x07);
+
+    EPD_7IN5B_V2_SendCommand(0x91); //BorderWavefrom
+    EPD_7IN5B_V2_SendCommand(0x90);
+    EPD_7IN5B_V2_SendData(Xstart/256);
+	EPD_7IN5B_V2_SendData(Xstart%256);   //x-start    
+
+	EPD_7IN5B_V2_SendData(Xend/256);		
+	EPD_7IN5B_V2_SendData(Xend%256-1);  //x-end	
+
+	EPD_7IN5B_V2_SendData(Ystart/256);  //
+	EPD_7IN5B_V2_SendData(Ystart%256);   //y-start    
+
+	EPD_7IN5B_V2_SendData(Yend/256);		
+	EPD_7IN5B_V2_SendData(Yend%256-1);  //y-end
+	EPD_7IN5B_V2_SendData(0x01);		
+
+    EPD_7IN5B_V2_SendCommand(0x10);   //Write Black and White image to RAM
+    for (UDOUBLE j = 0; j < Height; j++) {
+        for (UDOUBLE i = 0; i < Width; i++) {
+            EPD_7IN5B_V2_SendData(0xff);
+        }
+    }
+
+    EPD_7IN5B_V2_SendCommand(0x13);   //Write Black and White image to RAM
+    for (UDOUBLE j = 0; j < Height; j++) {
+        for (UDOUBLE i = 0; i < Width; i++) {
+            EPD_7IN5B_V2_SendData(Image[i + j * Width]);
+        }
+    }
+	EPD_7IN5B_V2_TurnOnDisplay();
+    EPD_7IN5B_V2_SendCommand(0x92);
+}
 
 /******************************************************************************
 function :	Enter sleep mode

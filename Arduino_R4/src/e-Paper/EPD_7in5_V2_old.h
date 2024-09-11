@@ -48,6 +48,7 @@ void EPD_7IN5_V2_Clear_old(void);
 void EPD_7IN5_V2_ClearBlack_old(void);
 void EPD_7IN5_V2_Display_old(const UBYTE *blackimage);
 void EPD_7IN5_V2_SendHalfImage_old(const UBYTE *Image); 
+void EPD_7IN5_V2_WritePicture_old(const UBYTE *Image);
 void EPD_7IN5_V2_DisplayPart_old(const UBYTE *Image, UWORD xstart, UWORD ystart, UWORD image_width, UWORD image_heigh);
 void EPD_7IN5_V2_Display_Partial_old(UBYTE *blackimage,UDOUBLE x_start, UDOUBLE y_start, UDOUBLE x_end, UDOUBLE y_end);
 void EPD_7IN5_V2_Sleep_old(void);

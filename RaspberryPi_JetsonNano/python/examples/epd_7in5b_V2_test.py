@@ -26,14 +26,14 @@ try:
     font24 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 24)
     font18 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 18)
 
-    # Drawing on the Horizontal image
+    # # Drawing on the Horizontal image
     logging.info("1.Drawing on the Horizontal image...")
     Himage = Image.new('1', (epd.width, epd.height), 255)  # 255: clear the frame
     Other = Image.new('1', (epd.width, epd.height), 255)  # 255: clear the frame
     draw_Himage = ImageDraw.Draw(Himage)
     draw_other = ImageDraw.Draw(Other)
     draw_Himage.text((10, 0), 'hello world', font = font24, fill = 0)
-    draw_Himage.text((10, 20), '7.5inch e-Paper', font = font24, fill = 0)
+    draw_Himage.text((10, 20), '7.5inch e-Paper B', font = font24, fill = 0)
     draw_Himage.text((150, 0), u'微雪电子', font = font24, fill = 0)    
     draw_other.line((20, 50, 70, 100), fill = 0)
     draw_other.line((70, 50, 20, 100), fill = 0)
@@ -46,6 +46,7 @@ try:
     epd.display(epd.getbuffer(Himage),epd.getbuffer(Other))
     time.sleep(2)
 
+    
     # Drawing on the Vertical image
     logging.info("2.Drawing on the Vertical image...")
     Limage = Image.new('1', (epd.height, epd.width), 255)  # 255: clear the frame
@@ -67,19 +68,28 @@ try:
     time.sleep(2)
 
     logging.info("3.read bmp file")
+    epd.init_Fast()
     Himage = Image.open(os.path.join(picdir, '7in5_V2_b.bmp'))
     Himage_Other = Image.open(os.path.join(picdir, '7in5_V2_r.bmp'))
     epd.display(epd.getbuffer(Himage),epd.getbuffer(Himage_Other))
     time.sleep(2)
 
-    logging.info("4.read bmp file on window")
-    Himage2 = Image.new('1', (epd.height, epd.width), 255)  # 255: clear the frame
-    Himage2_Other = Image.new('1', (epd.height, epd.width), 255)  # 255: clear the frame
-    bmp = Image.open(os.path.join(picdir, '2in9.bmp'))
-    Himage2.paste(bmp, (50,10))
-    Himage2_Other.paste(bmp, (50,300))
-    epd.display(epd.getbuffer(Himage2), epd.getbuffer(Himage2_Other))
-    time.sleep(2)
+    # # partial update
+    # logging.info("4.show time")
+    # epd.init()
+    # epd.display_Base_color(0xFF)
+    # epd.init_part()
+    # Himage = Image.new('1', (epd.width, epd.height), 0)
+    # draw_Himage = ImageDraw.Draw(Himage)
+    # num = 0
+    # while (True):
+    #     draw_Himage.rectangle((10, 120, 130, 170), fill = 0)
+    #     draw_Himage.text((10, 120), time.strftime('%H:%M:%S'), font = font24, fill = 255)
+    #     epd.display_Partial(epd.getbuffer(Himage),0, 0, epd.width, epd.height)
+    #     num = num + 1
+    #     if(num == 10):
+    #         break
+
 
     logging.info("Clear...")
     epd.init()

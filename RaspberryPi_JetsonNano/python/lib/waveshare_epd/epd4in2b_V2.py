@@ -205,7 +205,7 @@ class EPD:
             self.send_command(0x13)
             for j in range(0, high):
                 for i in range(0, wide):
-                    self.send_data(imagered[i + j * wide]) 
+                    self.send_data(~imagered[i + j * wide]) 
 
         self.TurnOnDisplay()
         
@@ -236,7 +236,7 @@ class EPD:
             self.send_command(0x13)
             for j in range(0, high):
                 for i in range(0, wide):
-                    self.send_data(0xff) 
+                    self.send_data(0x00) 
 
         self.TurnOnDisplay()
 

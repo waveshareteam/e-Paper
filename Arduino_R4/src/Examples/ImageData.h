@@ -34,6 +34,10 @@
 
 // ImageData2.c
 /* --------------------------------------- */
+extern const unsigned char gImage_2in15g[];
+extern const unsigned char gImage_2in15b_R[];
+extern const unsigned char gImage_2in15b_B[];
+
 extern const unsigned char gImage_2in13g[];
 extern const unsigned char gImage_2in13b_V4b[];
 extern const unsigned char gImage_2in13b_V4r[];

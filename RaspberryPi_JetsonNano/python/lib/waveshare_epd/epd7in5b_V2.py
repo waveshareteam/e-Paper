@@ -45,6 +45,7 @@ class EPD:
         self.cs_pin = epdconfig.CS_PIN
         self.width = EPD_WIDTH
         self.height = EPD_HEIGHT
+        self.partFlag=1
 
     # Hardware reset
     def reset(self):
@@ -86,50 +87,101 @@ class EPD:
     def init(self):
         if (epdconfig.module_init() != 0):
             return -1
-            
-        self.reset()
         
-        # self.send_command(0x06)   # btst
-        # self.send_data(0x17)
-        # self.send_data(0x17)
-        # self.send_data(0x38)      # If an exception is displayed, try using 0x38
-        # self.send_data(0x17)
+        # EPD hardware init start
+        self.reset()
 
-        self.send_command(0x01)     # POWER SETTING
+        self.send_command(0x01)
         self.send_data(0x07)
-        self.send_data(0x07)        # VGH=20V,VGL=-20V
-        self.send_data(0x3f)        # VDH=15V
-        self.send_data(0x3f)        # VDL=-15V
+        self.send_data(0x07)
+        self.send_data(0x3f)
+        self.send_data(0x3f)
 
-        self.send_command(0x04)     # POWER ON
+        self.send_command(0x06)
+        self.send_data(0x17)
+        self.send_data(0x17) 
+        self.send_data(0x28)	
+        self.send_data(0x17)
+
+        self.send_command(0x04)
         epdconfig.delay_ms(100)
         self.ReadBusy()
 
-        self.send_command(0X00)     # PANNEL SETTING
-        self.send_data(0x0F)        # KW-3f KWR-2F BWROTP-0f BWOTP-1f
+        self.send_command(0X00)
+        self.send_data(0x0F)
 
-        self.send_command(0x61)     # tres
-        self.send_data(0x03)        # source 800
+        self.send_command(0x61)		
+        self.send_data(0x03)
         self.send_data(0x20)
-        self.send_data(0x01)        # gate 480
+        self.send_data(0x01)
         self.send_data(0xE0)
 
         self.send_command(0X15)
         self.send_data(0x00)
 
-        self.send_command(0X50)     # VCOM AND DATA INTERVAL SETTING
+        self.send_command(0X50)
         self.send_data(0x11)
         self.send_data(0x07)
 
-        self.send_command(0X60)     # TCON SETTING
+        self.send_command(0X60)
         self.send_data(0x22)
-
-        self.send_command(0x65)
-        self.send_data(0x00)
-        self.send_data(0x00)
-        self.send_data(0x00)
-        self.send_data(0x00)
+            
+        return 0
     
+    def init_Fast(self):
+        if (epdconfig.module_init() != 0):
+            return -1
+        
+        # EPD hardware init start
+        self.reset()
+
+        self.send_command(0X00)
+        self.send_data(0x0F)
+
+        self.send_command(0x04)
+        epdconfig.delay_ms(100)
+        self.ReadBusy()
+
+        self.send_command(0x06)
+        self.send_data(0x27)
+        self.send_data(0x27) 
+        self.send_data(0x18)		
+        self.send_data(0x17)		
+
+        self.send_command(0xE0)
+        self.send_data(0x02)
+        self.send_command(0xE5)
+        self.send_data(0x5A)
+
+        self.send_command(0X50)
+        self.send_data(0x11)
+        self.send_data(0x07)
+        
+        return 0
+    
+    def init_part(self):
+        if (epdconfig.module_init() != 0):
+            return -1
+        # EPD hardware init start
+        self.reset()
+
+        self.send_command(0X00)
+        self.send_data(0x1F)
+
+        self.send_command(0x04)
+        epdconfig.delay_ms(100)
+        self.ReadBusy()
+
+        self.send_command(0xE0)
+        self.send_data(0x02)
+        self.send_command(0xE5)
+        self.send_data(0x6E)
+
+        self.send_command(0X50)
+        self.send_data(0xA9)
+        self.send_data(0x07)
+
+        # EPD hardware init end
         return 0
 
     def getbuffer(self, image):
@@ -162,6 +214,73 @@ class EPD:
         self.send_command(0x13)
         self.send_data2(imagered)
         
+        self.send_command(0x12)
+        epdconfig.delay_ms(100)
+        self.ReadBusy()
+
+    def display_Base_color(self, color):
+        if(self.width % 8 == 0):
+            Width = self.width // 8
+        else:
+            Width = self.width // 8 +1
+        Height = self.height
+        self.send_command(0x10)   #Write Black and White image to RAM
+        for j in range(Height):
+            for i in range(Width):
+                self.send_data(color)
+                
+        self.send_command(0x13)  #Write Black and White image to RAM
+        for j in range(Height):
+            for i in range(Width):
+                self.send_data(~color)
+
+        self.send_command(0x12)
+        epdconfig.delay_ms(100)
+        self.ReadBusy()
+
+    def display_Partial(self, Image, Xstart, Ystart, Xend, Yend):
+        if((Xstart % 8 + Xend % 8 == 8 & Xstart % 8 > Xend % 8) | Xstart % 8 + Xend % 8 == 0 | (Xend - Xstart)%8 == 0):
+            Xstart = Xstart // 8 * 8
+            Xend = Xend // 8 * 8
+        else:
+            Xstart = Xstart // 8 * 8
+            if Xend % 8 == 0:
+                Xend = Xend // 8 * 8
+            else:
+                Xend = Xend // 8 * 8 + 1
+                
+        Width = (Xend - Xstart) // 8
+        Height = Yend - Ystart
+	
+        # self.send_command(0x50)
+        # self.send_data(0xA9)
+        # self.send_data(0x07)
+
+        self.send_command(0x91)		#This command makes the display enter partial mode
+        self.send_command(0x90)		#resolution setting
+        self.send_data (Xstart//256)
+        self.send_data (Xstart%256)   #x-start    
+
+        self.send_data ((Xend-1)//256)		
+        self.send_data ((Xend-1)%256)  #x-end	
+
+        self.send_data (Ystart//256)  #
+        self.send_data (Ystart%256)   #y-start    
+
+        self.send_data ((Yend-1)//256)		
+        self.send_data ((Yend-1)%256)  #y-end
+        self.send_data (0x01)
+
+        if self.partFlag == 1:
+            self.partFlag = 0
+            self.send_command(0x10)
+            for j in range(Height):
+                    for i in range(Width):
+                        self.send_data(0xff)
+
+        self.send_command(0x13)   #Write Black and White image to RAM
+        self.send_data2(Image)
+
         self.send_command(0x12)
         epdconfig.delay_ms(100)
         self.ReadBusy()

@@ -319,6 +319,46 @@ void EPD_7IN5_V2_SendHalfImage(const UBYTE *Image)
     EPD_7IN5_V2_TurnOnDisplay();
 }
 
+void EPD_7IN5_V2_WritePicture(const UBYTE *Image)
+{
+
+	UDOUBLE Width, Height;
+	Width =(EPD_7IN5_V2_WIDTH % 8 == 0)?(EPD_7IN5_V2_WIDTH / 8 ):(EPD_7IN5_V2_WIDTH / 8 + 1);
+	Height = EPD_7IN5_V2_HEIGHT;
+	
+    EPD_SendCommand(0x10);
+    for (UDOUBLE j = 0; j < Height / 2; j++) {
+        for (UDOUBLE i = 0; i < Width/2; i++) {
+            EPD_SendData(Image[i + j * Width/2]);
+        }
+        for (UDOUBLE i = 0; i < Width/2; i++) {
+            EPD_SendData(0xff);
+        }
+    }
+    for (UDOUBLE j = 0; j < Height / 2; j++) {
+        for (UDOUBLE i = 0; i < Width; i++) {
+            EPD_SendData(0xFF);
+        }
+    }
+
+    EPD_SendCommand(0x13);
+    for (UDOUBLE j = 0; j < Height / 2; j++) {
+        for (UDOUBLE i = 0; i < Width/2; i++) {
+            EPD_SendData(~Image[i + j * Width/2]);
+        }
+        for (UDOUBLE i = 0; i < Width/2; i++) {
+            EPD_SendData(0x00);
+        }
+    }
+    for (UDOUBLE j = 0; j < Height / 2; j++) {
+        for (UDOUBLE i = 0; i < Width; i++) {
+            EPD_SendData(0x00);
+        }
+    }
+
+    EPD_7IN5_V2_TurnOnDisplay();
+}
+
 void EPD_7IN5_V2_DisplayPart(const UBYTE *Image, UWORD xstart, UWORD ystart, UWORD image_width, UWORD image_heigh)
 {
 	unsigned long i, j;

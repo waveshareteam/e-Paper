@@ -43,12 +43,12 @@ int EPD_7in5b_V2_test(void)
     //Create a new image cache named IMAGE_BW and fill it with white
     UBYTE *Image;
     UWORD Imagesize = ((EPD_7IN5B_V2_WIDTH % 8 == 0)? (EPD_7IN5B_V2_WIDTH / 8 ): (EPD_7IN5B_V2_WIDTH / 8 + 1)) * EPD_7IN5B_V2_HEIGHT;
-    if((Image = (UBYTE *)malloc(Imagesize / 2)) == NULL) {
+    if((Image = (UBYTE *)malloc(Imagesize / 4)) == NULL) {
         Debug("Failed to apply for black memory...\r\n");
         return -1;
     }
     Debug("NewImage:Image\r\n");
-    Paint_NewImage(Image, EPD_7IN5B_V2_WIDTH, EPD_7IN5B_V2_HEIGHT / 2, 0, WHITE);
+    Paint_NewImage(Image, EPD_7IN5B_V2_WIDTH/2, EPD_7IN5B_V2_HEIGHT / 2, 0, WHITE);
     
     //Select Image
     Paint_SelectImage(Image);
@@ -56,18 +56,15 @@ int EPD_7in5b_V2_test(void)
 
 #if 1   // show image for array    
     Debug("show image for array\r\n");
-		//The entire image size is Imagesize 
-		//Since the memory problem is transmitted halfway, now the other half is transmitted, so the offset address is required.
-    EPD_7IN5B_V2_WritePicture(gImage_7in5_V2_b, 0);
-    EPD_7IN5B_V2_WritePicture(gImage_7in5_V2_b + Imagesize/2, 1);
-    EPD_7IN5B_V2_WritePicture(gImage_7in5_V2_ry, 2);
-    EPD_7IN5B_V2_WritePicture(gImage_7in5_V2_ry + Imagesize/2, 3);
+    EPD_7IN5B_V2_Init_Fast();
+	EPD_7IN5B_V2_Display(gImage_7in5_V2_b, gImage_7in5_V2_ry);
     DEV_Delay_ms(2000);
 #endif
 
 #if 1   // Drawing on the image
     /*Horizontal screen*/
     //1.Draw black image
+    EPD_7IN5B_V2_Init();
     Paint_SelectImage(Image);
     Paint_Clear(WHITE);
     Paint_DrawPoint(10, 80, BLACK, DOT_PIXEL_1X1, DOT_STYLE_DFT);
@@ -100,7 +97,47 @@ int EPD_7in5b_V2_test(void)
     DEV_Delay_ms(2000);
 #endif
 
+#if 1   //Partial refresh, example shows time
+    EPD_7IN5B_V2_Init_Part();
+    EPD_7IN5B_V2_Display_Base_color(WHITE);
+	Paint_NewImage(Image, Font20.Width * 7, Font20.Height, 0, WHITE);
+    Debug("Partial refresh\r\n");
+    Paint_SelectImage(Image);
+    Paint_Clear(WHITE);
+	
+    PAINT_TIME sPaint_time;
+    sPaint_time.Hour = 12;
+    sPaint_time.Min = 34;
+    sPaint_time.Sec = 56;
+    UBYTE num = 10;
+    for (;;) {
+        sPaint_time.Sec = sPaint_time.Sec + 1;
+        if (sPaint_time.Sec == 60) {
+            sPaint_time.Min = sPaint_time.Min + 1;
+            sPaint_time.Sec = 0;
+            if (sPaint_time.Min == 60) {
+                sPaint_time.Hour =  sPaint_time.Hour + 1;
+                sPaint_time.Min = 0;
+                if (sPaint_time.Hour == 24) {
+                    sPaint_time.Hour = 0;
+                    sPaint_time.Min = 0;
+                    sPaint_time.Sec = 0;
+                }
+            }
+        }
+        Paint_ClearWindows(0, 0, Font20.Width * 7, Font20.Height, WHITE);
+        Paint_DrawTime(0, 0, &sPaint_time, &Font20, WHITE, BLACK);
+
+        num = num - 1;
+        if(num == 0) {
+            break;
+        }
+		EPD_7IN5B_V2_Display_Partial(Image, 10, 130, 10 + Font20.Width * 7, 130 + Font20.Height);
+        DEV_Delay_ms(500);//Analog clock 1s
+    }
+#endif
     Debug("Clear...\r\n");
+    EPD_7IN5B_V2_Init();
     EPD_7IN5B_V2_Clear();
 
     Debug("Goto Sleep...\r\n");

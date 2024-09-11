@@ -98,8 +98,8 @@ class EPD:
         self.send_command(0x01)			#POWER SETTING
         self.send_data(0x07)
         self.send_data(0x07)    #VGH=20V,VGL=-20V
-        self.send_data(0x3f)		#VDH=15V
-        self.send_data(0x3f)		#VDL=-15V
+        self.send_data(0x28)		#VDH=15V
+        self.send_data(0x17)		#VDL=-15V
 
         self.send_command(0x04) #POWER ON
         epdconfig.delay_ms(100)
