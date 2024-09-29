@@ -5,7 +5,7 @@ void setup() {
     // EPD_1in02d_test();
 
     // EPD_1in54_test();
-    // EPD_1in54_V2_test();
+    EPD_1in54_V2_test();
     // EPD_1in54b_test();
     // EPD_1in54b_V2_test();
     // EPD_1in54c_test();
@@ -70,13 +70,13 @@ void setup() {
     // EPD_5in83_V2_test();
     // EPD_5in83b_V2_test();
 
-    EPD_7in3e_test();
+    // EPD_7in3e_test();
     // EPD_7in3g_test();
     // EPD_7in3f_test();
 
     // EPD_7in5_V2_test();
     // EPD_7in5_V2_test_old();
-    // EPD_7in5b_V2_test();
+    // EPD_7in5b_V2_test(); 
     // EPD_7in5b_V2_test_old();
 
     // EPD_13in3b_test();

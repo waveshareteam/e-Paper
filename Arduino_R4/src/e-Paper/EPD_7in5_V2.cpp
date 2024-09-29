@@ -139,7 +139,10 @@ UBYTE EPD_7IN5_V2_Init(void)
 
 	EPD_SendCommand(0X50);			//VCOM AND DATA INTERVAL SETTING
 	EPD_SendData(0x10);
-	EPD_SendData(0x07);
+	EPD_SendData(0x17);
+
+    EPD_SendCommand(0X52);			
+	EPD_SendData(0x03);
 
 	EPD_SendCommand(0X60);			//TCON SETTING
 	EPD_SendData(0x22);
@@ -154,8 +157,11 @@ UBYTE EPD_7IN5_V2_Init_Fast(void)
     EPD_SendData(0x1F);   //KW-3f   KWR-2F	BWROTP 0f	BWOTP 1f
 
     EPD_SendCommand(0X50);			//VCOM AND DATA INTERVAL SETTING
-    EPD_SendData(0x10);
-    EPD_SendData(0x07);
+	EPD_SendData(0x10);
+	EPD_SendData(0x17);
+
+    EPD_SendCommand(0X52);			
+	EPD_SendData(0x03);
 
     EPD_SendCommand(0x04); //POWER ON
     DEV_Delay_ms(100); 

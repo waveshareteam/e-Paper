@@ -119,7 +119,10 @@ class EPD:
 
         self.send_command(0X50)			#VCOM AND DATA INTERVAL SETTING
         self.send_data(0x10)
-        self.send_data(0x07)
+        self.send_data(0x17)
+
+        self.send_command(0X52)		
+        self.send_data(0x03)
 
         self.send_command(0X60)			#TCON SETTING
         self.send_data(0x22)
@@ -138,7 +141,10 @@ class EPD:
 
         self.send_command(0X50)			#VCOM AND DATA INTERVAL SETTING
         self.send_data(0x10)
-        self.send_data(0x07)
+        self.send_data(0x17)
+
+        self.send_command(0X52)		
+        self.send_data(0x03)
 
         self.send_command(0x04) #POWER ON
         epdconfig.delay_ms(100) 
