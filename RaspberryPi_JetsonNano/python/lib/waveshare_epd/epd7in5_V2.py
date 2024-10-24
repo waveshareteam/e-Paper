@@ -35,6 +35,11 @@ from . import epdconfig
 EPD_WIDTH       = 800
 EPD_HEIGHT      = 480
 
+GRAY1  = 0xff #white
+GRAY2  = 0xC0
+GRAY3  = 0x80 #gray
+GRAY4  = 0x00 #Blackest
+
 logger = logging.getLogger(__name__)
 
 class EPD:
@@ -45,6 +50,10 @@ class EPD:
         self.cs_pin = epdconfig.CS_PIN
         self.width = EPD_WIDTH
         self.height = EPD_HEIGHT
+        self.GRAY1  = GRAY1 #white
+        self.GRAY2  = GRAY2
+        self.GRAY3  = GRAY3 #gray
+        self.GRAY4  = GRAY4 #Blackest
     
     # Hardware reset
     def reset(self):
@@ -117,12 +126,15 @@ class EPD:
         self.send_command(0X15)
         self.send_data(0x00)
 
-        self.send_command(0X50)			#VCOM AND DATA INTERVAL SETTING
+        # If the screen appears gray, use the annotated initialization command
+        self.send_command(0X50)
         self.send_data(0x10)
-        self.send_data(0x17)
-
-        self.send_command(0X52)		
-        self.send_data(0x03)
+        self.send_data(0x07)
+        # self.send_command(0X50)
+        # self.send_data(0x10)
+        # self.send_data(0x17)
+        # self.send_command(0X52)		
+        # self.send_data(0x03)
 
         self.send_command(0X60)			#TCON SETTING
         self.send_data(0x22)
@@ -139,12 +151,15 @@ class EPD:
         self.send_command(0X00)			#PANNEL SETTING
         self.send_data(0x1F)   #KW-3f   KWR-2F	BWROTP 0f	BWOTP 1f
 
-        self.send_command(0X50)			#VCOM AND DATA INTERVAL SETTING
+        # If the screen appears gray, use the annotated initialization command
+        self.send_command(0X50)
         self.send_data(0x10)
-        self.send_data(0x17)
-
-        self.send_command(0X52)		
-        self.send_data(0x03)
+        self.send_data(0x07)
+        # self.send_command(0X50)
+        # self.send_data(0x10)
+        # self.send_data(0x17)
+        # self.send_command(0X52)		
+        # self.send_data(0x03)
 
         self.send_command(0x04) #POWER ON
         epdconfig.delay_ms(100) 
@@ -185,6 +200,39 @@ class EPD:
 
         # EPD hardware init end
         return 0
+    
+    # The feature will only be available on screens sold after 24/10/23
+    def init_4Gray(self):
+        if (epdconfig.module_init() != 0):
+            return -1
+        # EPD hardware init start
+        self.reset()
+
+        self.send_command(0X00)			#PANNEL SETTING
+        self.send_data(0x1F)   #KW-3f   KWR-2F	BWROTP 0f	BWOTP 1f
+        
+        self.send_command(0X50)
+        self.send_data(0x10)
+        self.send_data(0x07)
+
+        self.send_command(0x04) #POWER ON
+        epdconfig.delay_ms(100) 
+        self.ReadBusy()        #waiting for the electronic paper IC to release the idle signal
+
+        #Enhanced display drive(Add 0x06 command)
+        self.send_command(0x06)			#Booster Soft Start 
+        self.send_data (0x27)
+        self.send_data (0x27)   
+        self.send_data (0x18)		
+        self.send_data (0x17)	
+
+        self.send_command(0xE0)
+        self.send_data(0x02)
+        self.send_command(0xE5)
+        self.send_data(0x5F)
+
+        # EPD hardware init end
+        return 0
 
     def getbuffer(self, image):
         img = image
@@ -204,6 +252,42 @@ class EPD:
         # in the e-paper world 0=white and 1=black.
         for i in range(len(buf)):
             buf[i] ^= 0xFF
+        return buf
+    
+    def getbuffer_4Gray(self, image):
+        # logger.debug("bufsiz = ",int(self.width/8) * self.height)
+        buf = [0xFF] * (int(self.width / 4) * self.height)
+        image_monocolor = image.convert('L')
+        imwidth, imheight = image_monocolor.size
+        pixels = image_monocolor.load()
+        i=0
+        # logger.debug("imwidth = %d, imheight = %d",imwidth,imheight)
+        if(imwidth == self.width and imheight == self.height):
+            logger.debug("Vertical")
+            for y in range(imheight):
+                for x in range(imwidth):
+                    # Set the bits for the column of pixels at the current position.
+                    if(pixels[x, y] == 0xC0):
+                        pixels[x, y] = 0x80
+                    elif (pixels[x, y] == 0x80):
+                        pixels[x, y] = 0x40
+                    i= i+1
+                    if(i%4 == 0):
+                        buf[int((x + (y * self.width))/4)] = ((pixels[x-3, y]&0xc0) | (pixels[x-2, y]&0xc0)>>2 | (pixels[x-1, y]&0xc0)>>4 | (pixels[x, y]&0xc0)>>6)
+                        
+        elif(imwidth == self.height and imheight == self.width):
+            logger.debug("Horizontal")
+            for x in range(imwidth):
+                for y in range(imheight):
+                    newx = y
+                    newy = self.height - x - 1
+                    if(pixels[x, y] == 0xC0):
+                        pixels[x, y] = 0x80
+                    elif (pixels[x, y] == 0x80):
+                        pixels[x, y] = 0x40
+                    i= i+1
+                    if(i%4 == 0):
+                        buf[int((newx + (newy * self.width))/4)] = ((pixels[x, y-3]&0xc0) | (pixels[x, y-2]&0xc0)>>2 | (pixels[x, y-1]&0xc0)>>4 | (pixels[x, y]&0xc0)>>6) 
         return buf
 
     def display(self, image):
@@ -281,7 +365,79 @@ class EPD:
         epdconfig.delay_ms(100)
         self.ReadBusy()
 
+    def display_4Gray(self, image):
+        self.send_command(0x10)
+        for i in range(0, 48000):     
+            temp3=0
+            for j in range(0, 2):
+                temp1 = image[i*2+j]
+                for k in range(0, 2):
+                    temp2 = temp1&0xC0 
+                    if(temp2 == 0xC0):
+                        temp3 |= 0x00
+                    elif(temp2 == 0x00):
+                        temp3 |= 0x01  
+                    elif(temp2 == 0x80): 
+                        temp3 |= 0x01 
+                    else: #0x40
+                        temp3 |= 0x00 
+                    temp3 <<= 1	
+                    
+                    temp1 <<= 2
+                    temp2 = temp1&0xC0 
+                    if(temp2 == 0xC0): 
+                        temp3 |= 0x00
+                    elif(temp2 == 0x00): 
+                        temp3 |= 0x01
+                    elif(temp2 == 0x80):
+                        temp3 |= 0x01
+                    else :   #0x40
+                        temp3 |= 0x00	
+                    if(j!=1 or k!=1):				
+                        temp3 <<= 1
+                    temp1 <<= 2
+            self.send_data(temp3)
+            
+        self.send_command(0x13)	       
+        for i in range(0, 48000):       
+            temp3=0
+            for j in range(0, 2):
+                temp1 = image[i*2+j]
+                for k in range(0, 2):
+                    temp2 = temp1&0xC0 
+                    if(temp2 == 0xC0):
+                        temp3 |= 0x00
+                    elif(temp2 == 0x00):
+                        temp3 |= 0x01
+                    elif(temp2 == 0x80):
+                        temp3 |= 0x00
+                    else: #0x40
+                        temp3 |= 0x01 
+                    temp3 <<= 1	
+                    
+                    temp1 <<= 2
+                    temp2 = temp1&0xC0 
+                    if(temp2 == 0xC0): 
+                        temp3 |= 0x00
+                    elif(temp2 == 0x00): 
+                        temp3 |= 0x01
+                    elif(temp2 == 0x80):
+                        temp3 |= 0x00 
+                    else:    #0x40
+                            temp3 |= 0x01	
+                    if(j!=1 or k!=1):					
+                        temp3 <<= 1
+                    temp1 <<= 2
+            self.send_data(temp3)
+        
+        self.send_command(0x12)
+        epdconfig.delay_ms(100)
+        self.ReadBusy()
+
     def sleep(self):
+        self.send_command(0x50)
+        self.send_data(0XF7)
+        
         self.send_command(0x02) # POWER_OFF
         self.ReadBusy()
         

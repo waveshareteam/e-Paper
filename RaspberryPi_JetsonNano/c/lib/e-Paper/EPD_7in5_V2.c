@@ -139,12 +139,17 @@ UBYTE EPD_7IN5_V2_Init(void)
 	EPD_SendCommand(0X15);		
 	EPD_SendData(0x00);		
 
-	EPD_SendCommand(0X50);			//VCOM AND DATA INTERVAL SETTING
+    /*
+        If the screen appears gray, use the annotated initialization command
+    */
+    EPD_SendCommand(0X50);			
 	EPD_SendData(0x10);
-	EPD_SendData(0x17);
-
-    EPD_SendCommand(0X52);			
-	EPD_SendData(0x03);
+	EPD_SendData(0x07);
+	// EPD_SendCommand(0X50);			
+	// EPD_SendData(0x10);
+	// EPD_SendData(0x17);
+    // EPD_SendCommand(0X52);			
+	// EPD_SendData(0x03);
 
 	EPD_SendCommand(0X60);			//TCON SETTING
 	EPD_SendData(0x22);
@@ -158,12 +163,17 @@ UBYTE EPD_7IN5_V2_Init_Fast(void)
     EPD_SendCommand(0X00);			//PANNEL SETTING
     EPD_SendData(0x1F);   //KW-3f   KWR-2F	BWROTP 0f	BWOTP 1f
 
-    EPD_SendCommand(0X50);			//VCOM AND DATA INTERVAL SETTING
+    /*
+        If the screen appears gray, use the annotated initialization command
+    */
+    EPD_SendCommand(0X50);			
 	EPD_SendData(0x10);
-	EPD_SendData(0x17);
-
-    EPD_SendCommand(0X52);		
-	EPD_SendData(0x03);
+	EPD_SendData(0x07);
+    // EPD_SendCommand(0X50);		
+	// EPD_SendData(0x10);
+	// EPD_SendData(0x17);
+    // EPD_SendCommand(0X52);		
+	// EPD_SendData(0x03);
 
     EPD_SendCommand(0x04); //POWER ON
     DEV_Delay_ms(100); 
@@ -199,6 +209,38 @@ UBYTE EPD_7IN5_V2_Init_Part(void)
 	EPD_SendData(0x02);
 	EPD_SendCommand(0xE5);
 	EPD_SendData(0x6E);
+	
+    return 0;
+}
+
+/*
+    The feature will only be available on screens sold after 24/10/23
+*/
+UBYTE EPD_7IN5_V2_Init_4Gray(void)
+{
+    EPD_Reset();
+
+	EPD_SendCommand(0X00);			//PANNEL SETTING
+	EPD_SendData(0x1F);   //KW-3f   KWR-2F	BWROTP 0f	BWOTP 1f
+
+    EPD_SendCommand(0X50);			
+	EPD_SendData(0x10);
+	EPD_SendData(0x07);
+	
+	EPD_SendCommand(0x04); //POWER ON
+	DEV_Delay_ms(100); 
+	EPD_WaitUntilIdle();        //waiting for the electronic paper IC to release the idle signal
+	
+    EPD_SendCommand(0x06);			//Booster Soft Start 
+    EPD_SendData (0x27);
+    EPD_SendData (0x27);   
+    EPD_SendData (0x18);		
+    EPD_SendData (0x17);		
+
+	EPD_SendCommand(0xE0);
+	EPD_SendData(0x02);
+	EPD_SendCommand(0xE5);
+	EPD_SendData(0x5F);
 	
     return 0;
 }
@@ -324,12 +366,99 @@ void EPD_7IN5_V2_Display_Part(UBYTE *blackimage,UDOUBLE x_start, UDOUBLE y_start
     EPD_7IN5_V2_TurnOnDisplay();
 }
 
+void EPD_7IN5_V2_Display_4Gray(const UBYTE *Image)
+{
+    UDOUBLE i,j,k;
+    UBYTE temp1,temp2,temp3;
+
+    // old  data
+    EPD_SendCommand(0x10);
+    for(i=0; i<48000; i++) {
+        temp3=0;
+        for(j=0; j<2; j++) {
+            temp1 = Image[i*2+j];
+            for(k=0; k<2; k++) {
+                temp2 = temp1&0xC0;
+                if(temp2 == 0xC0)
+                    temp3 |= 0x00;
+                else if(temp2 == 0x00)
+                    temp3 |= 0x01; 
+                else if(temp2 == 0x80)
+                    temp3 |= 0x01; 
+                else //0x40
+                    temp3 |= 0x00; 
+                temp3 <<= 1;
+
+                temp1 <<= 2;
+                temp2 = temp1&0xC0 ;
+                if(temp2 == 0xC0) 
+                    temp3 |= 0x00;
+                else if(temp2 == 0x00) 
+                    temp3 |= 0x01;
+                else if(temp2 == 0x80)
+                    temp3 |= 0x01; 
+                else    //0x40
+                    temp3 |= 0x00;	
+                if(j!=1 || k!=1)
+                    temp3 <<= 1;
+
+                temp1 <<= 2;
+            }
+
+        }
+        EPD_SendData(temp3);
+        // printf("%x",temp3);
+    }
+
+    EPD_SendCommand(0x13);   //write RAM for black(0)/white (1)
+    for(i=0; i<48000; i++) {             //5808*4  46464
+        temp3=0;
+        for(j=0; j<2; j++) {
+            temp1 = Image[i*2+j];
+            for(k=0; k<2; k++) {
+                temp2 = temp1&0xC0 ;
+                if(temp2 == 0xC0)
+                    temp3 |= 0x00;//white
+                else if(temp2 == 0x00)
+                    temp3 |= 0x01;  //black
+                else if(temp2 == 0x80)
+                    temp3 |= 0x00;  //gray1
+                else //0x40
+                    temp3 |= 0x01; //gray2
+                temp3 <<= 1;
+
+                temp1 <<= 2;
+                temp2 = temp1&0xC0 ;
+                if(temp2 == 0xC0)  //white
+                    temp3 |= 0x00;
+                else if(temp2 == 0x00) //black
+                    temp3 |= 0x01;
+                else if(temp2 == 0x80)
+                    temp3 |= 0x00; //gray1
+                else    //0x40
+                    temp3 |= 0x01;	//gray2
+                if(j!=1 || k!=1)
+                    temp3 <<= 1;
+
+                temp1 <<= 2;
+            }
+        }
+        EPD_SendData(temp3);
+        // printf("%x",temp3);
+    }
+
+    EPD_7IN5_V2_TurnOnDisplay();
+}
+
+
 /******************************************************************************
 function :	Enter sleep mode
 parameter:
 ******************************************************************************/
 void EPD_7IN5_V2_Sleep(void)
 {
+    EPD_SendCommand(0x50);  	
+    EPD_SendData(0XF7);
     EPD_SendCommand(0X02);  	//power off
     EPD_WaitUntilIdle();
     EPD_SendCommand(0X07);  	//deep sleep

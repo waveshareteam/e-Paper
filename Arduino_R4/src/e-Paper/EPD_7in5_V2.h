@@ -44,6 +44,7 @@
 UBYTE EPD_7IN5_V2_Init(void);
 UBYTE EPD_7IN5_V2_Init_Fast(void);
 UBYTE EPD_7IN5_V2_Init_Part(void);
+UBYTE EPD_7IN5_V2_Init_4Gray(void);
 void EPD_7IN5_V2_Clear(void);
 void EPD_7IN5_V2_ClearBlack(void);
 void EPD_7IN5_V2_Display(const UBYTE *blackimage);
@@ -51,6 +52,8 @@ void EPD_7IN5_V2_SendHalfImage(const UBYTE *Image);
 void EPD_7IN5_V2_WritePicture(const UBYTE *Image);
 void EPD_7IN5_V2_DisplayPart(const UBYTE *Image, UWORD xstart, UWORD ystart, UWORD image_width, UWORD image_heigh);
 void EPD_7IN5_V2_Display_Part(UBYTE *blackimage,UDOUBLE x_start, UDOUBLE y_start, UDOUBLE x_end, UDOUBLE y_end);
+void EPD_7IN5_V2_Display_4Gray(const UBYTE *Image);
+void EPD_7IN5_V2_WritePicture_4Gray(const UBYTE *Image);
 void EPD_7IN5_V2_Sleep(void);
 
 #endif

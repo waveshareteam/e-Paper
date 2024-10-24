@@ -88,7 +88,7 @@ int EPD_7in3g_test(void)
     Paint_DrawNum(10, 50, 123456, &Font12, EPD_7IN3G_RED, EPD_7IN3G_WHITE);
 
     Debug("EPD_Display\r\n");
-    EPD_7IN3G_Display_part(BlackImage, 200, 120, 400, 240);
+    EPD_7IN3G_Display_part(BlackImage, 200, 120, 400, 160);
     DEV_Delay_ms(3000);
 #endif
 

@@ -46,7 +46,7 @@ int EPD_7in5_V2_test(void)
     //Create a new image cache
     UBYTE *BlackImage;
     /* you have to edit the startup_stm32fxxx.s file and set a big enough heap size */
-    UWORD Imagesize = ((EPD_7IN5_V2_WIDTH % 8 == 0)? (EPD_7IN5_V2_WIDTH / 8 ): (EPD_7IN5_V2_WIDTH / 8 + 1)) * EPD_7IN5_V2_HEIGHT;
+    UDOUBLE Imagesize = ((EPD_7IN5_V2_WIDTH % 8 == 0)? (EPD_7IN5_V2_WIDTH / 8 ): (EPD_7IN5_V2_WIDTH / 8 + 1)) * EPD_7IN5_V2_HEIGHT;
     if((BlackImage = (UBYTE *)malloc(Imagesize/4)) == NULL) {
         Debug("Failed to apply for black memory...\r\n");
         return -1;
@@ -130,6 +130,48 @@ int EPD_7in5_V2_test(void)
 		EPD_7IN5_V2_Display_Part(BlackImage, 150, 80, 150 + Font20.Width * 7, 80 + Font20.Height);
         DEV_Delay_ms(500);//Analog clock 1s
     }
+#endif
+
+/*
+    The feature will only be available on screens sold after 24/10/23
+*/
+#if 0 // show image for array
+    // free(BlackImage);
+    // printf("show Gray------------------------\r\n");
+    // Imagesize = ((EPD_7IN5_V2_WIDTH % 4 == 0)? (EPD_7IN5_V2_WIDTH / 4 ): (EPD_7IN5_V2_WIDTH / 4 + 1)) * EPD_7IN5_V2_HEIGHT;
+    // if((BlackImage = (UBYTE *)malloc(Imagesize/8)) == NULL) {
+    //     printf("Failed to apply for black memory...\r\n");
+    //     return -1;
+    // }
+    EPD_7IN5_V2_Init_4Gray();
+    printf("4 grayscale display\r\n");
+    Paint_NewImage(BlackImage, EPD_7IN5_V2_WIDTH/4, EPD_7IN5_V2_HEIGHT/2, 0, WHITE);
+    Paint_SetScale(4);
+    Paint_Clear(0xff);
+    
+    Paint_DrawPoint(10, 80, GRAY4, DOT_PIXEL_1X1, DOT_STYLE_DFT);
+    Paint_DrawPoint(10, 90, GRAY4, DOT_PIXEL_2X2, DOT_STYLE_DFT);
+    Paint_DrawPoint(10, 100, GRAY4, DOT_PIXEL_3X3, DOT_STYLE_DFT);
+    Paint_DrawLine(20, 70, 70, 120, GRAY4, DOT_PIXEL_1X1, LINE_STYLE_SOLID);
+    Paint_DrawLine(70, 70, 20, 120, GRAY4, DOT_PIXEL_1X1, LINE_STYLE_SOLID);
+    Paint_DrawRectangle(20, 70, 70, 120, GRAY4, DOT_PIXEL_1X1, DRAW_FILL_EMPTY);
+    Paint_DrawRectangle(80, 70, 130, 120, GRAY4, DOT_PIXEL_1X1, DRAW_FILL_FULL);
+    Paint_DrawCircle(45, 95, 20, GRAY4, DOT_PIXEL_1X1, DRAW_FILL_EMPTY);
+    Paint_DrawCircle(105, 95, 20, GRAY2, DOT_PIXEL_1X1, DRAW_FILL_FULL);
+    Paint_DrawLine(85, 95, 125, 95, GRAY4, DOT_PIXEL_1X1, LINE_STYLE_DOTTED);
+    Paint_DrawLine(105, 75, 105, 115, GRAY4, DOT_PIXEL_1X1, LINE_STYLE_DOTTED);
+    Paint_DrawString_EN(10, 0, "waveshare", &Font16, GRAY4, GRAY1);
+    Paint_DrawString_EN(10, 20, "hello world", &Font12, GRAY3, GRAY1);
+    Paint_DrawNum(10, 33, 123456789, &Font12, GRAY4, GRAY2);
+    Paint_DrawNum(10, 50, 987654321, &Font16, GRAY1, GRAY4);
+    Paint_DrawString_CN(130, 0,"你好abc", &Font12CN, GRAY4, GRAY1);
+    Paint_DrawString_CN(130, 20,"你好abc", &Font12CN, GRAY3, GRAY2);
+    Paint_DrawString_CN(130, 40,"你好abc", &Font12CN, GRAY2, GRAY3);
+    Paint_DrawString_CN(130, 60,"你好abc", &Font12CN, GRAY1, GRAY4);
+    Paint_DrawString_CN(10, 130, "微雪电子", &Font24CN, GRAY1, GRAY4);
+    EPD_7IN5_V2_WritePicture_4Gray(BlackImage);
+    DEV_Delay_ms(3000);
+
 #endif
 
     Debug("Clear...\r\n");

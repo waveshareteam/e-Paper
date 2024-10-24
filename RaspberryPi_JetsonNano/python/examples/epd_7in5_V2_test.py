@@ -25,6 +25,7 @@ try:
 
     font24 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 24)
     font18 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 18)
+    font35 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 35)
 
     logging.info("read bmp file")
     Himage = Image.open(os.path.join(picdir, '7in5_V2.bmp'))
@@ -92,6 +93,28 @@ try:
     # epd.display(epd.getbuffer(Limage))
     # time.sleep(2)
 
+
+    # '''4Gray display'''
+    # # The feature will only be available on screens sold after 24/10/23
+    # logging.info("4Gray display--------------------------------")
+    # epd.init_4Gray()
+    
+    # Limage = Image.new('L', (epd.width, epd.height), 0)  # 255: clear the frame
+    # draw = ImageDraw.Draw(Limage)
+    # draw.text((20, 0), u'微雪电子', font = font35, fill = epd.GRAY1)
+    # draw.text((20, 35), u'微雪电子', font = font35, fill = epd.GRAY2)
+    # draw.text((20, 70), u'微雪电子', font = font35, fill = epd.GRAY3)
+    # draw.text((40, 110), 'hello world', font = font18, fill = epd.GRAY1)
+    # draw.line((10, 140, 60, 190), fill = epd.GRAY1)
+    # draw.line((60, 140, 10, 190), fill = epd.GRAY1)
+    # draw.rectangle((10, 140, 60, 190), outline = epd.GRAY1)
+    # draw.line((95, 140, 95, 190), fill = epd.GRAY1)
+    # draw.line((70, 165, 120, 165), fill = epd.GRAY1)
+    # draw.arc((70, 140, 120, 190), 0, 360, fill = epd.GRAY1)
+    # draw.rectangle((10, 200, 60, 250), fill = epd.GRAY1)
+    # draw.chord((70, 200, 120, 250), 0, 360, fill = epd.GRAY1)
+    # epd.display_4Gray(epd.getbuffer_4Gray(Limage))
+    # time.sleep(2)
     
 
     logging.info("Clear...")

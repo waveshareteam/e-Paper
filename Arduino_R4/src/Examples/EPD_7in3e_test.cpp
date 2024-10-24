@@ -46,12 +46,12 @@ int EPD_7in3e_test(void)
     //Create a new image cache
     UBYTE *BlackImage;
     UDOUBLE Imagesize = ((EPD_7IN3E_WIDTH % 2 == 0)? (EPD_7IN3E_WIDTH / 2 ): (EPD_7IN3E_WIDTH / 2 + 1)) * EPD_7IN3E_HEIGHT;
-    if((BlackImage = (UBYTE *)malloc(Imagesize/8)) == NULL) {
+    if((BlackImage = (UBYTE *)malloc(Imagesize/12)) == NULL) {
         Debug("Failed to apply for black memory...\r\n");
         return -1;
     }
 #if 1   // Drawing on the image
-    Paint_NewImage(BlackImage, EPD_7IN3E_WIDTH/4, EPD_7IN3E_HEIGHT/2, 0, EPD_7IN3E_WHITE);
+    Paint_NewImage(BlackImage, EPD_7IN3E_WIDTH/4, EPD_7IN3E_HEIGHT/3, 0, EPD_7IN3E_WHITE);
     Paint_SetScale(6);
     // 1.Select Image
     Debug("SelectImage:BlackImage\r\n");
@@ -60,30 +60,30 @@ int EPD_7in3e_test(void)
 
     // 2.Drawing on the image
     Debug("Drawing:BlackImage\r\n");
-    Paint_DrawPoint(10, 80, EPD_7IN3E_RED, DOT_PIXEL_1X1, DOT_STYLE_DFT);
-    Paint_DrawPoint(10, 90, EPD_7IN3E_BLUE, DOT_PIXEL_2X2, DOT_STYLE_DFT);
-    Paint_DrawPoint(10, 100, EPD_7IN3E_GREEN, DOT_PIXEL_3X3, DOT_STYLE_DFT);
-    Paint_DrawLine(20, 70, 70, 120, EPD_7IN3E_YELLOW, DOT_PIXEL_1X1, LINE_STYLE_SOLID);
-    Paint_DrawLine(70, 70, 20, 120, EPD_7IN3E_YELLOW, DOT_PIXEL_1X1, LINE_STYLE_SOLID);
-    Paint_DrawRectangle(20, 70, 70, 120, EPD_7IN3E_BLACK, DOT_PIXEL_1X1, DRAW_FILL_EMPTY);
-    Paint_DrawRectangle(80, 70, 130, 120, EPD_7IN3E_BLACK, DOT_PIXEL_1X1, DRAW_FILL_FULL);
-    Paint_DrawCircle(45, 95, 20, EPD_7IN3E_BLACK, DOT_PIXEL_1X1, DRAW_FILL_EMPTY);
-    Paint_DrawCircle(105, 95, 20, EPD_7IN3E_WHITE, DOT_PIXEL_1X1, DRAW_FILL_FULL);
-    Paint_DrawLine(85, 95, 125, 95, EPD_7IN3E_YELLOW, DOT_PIXEL_1X1, LINE_STYLE_DOTTED);
-    Paint_DrawLine(105, 75, 105, 115, EPD_7IN3E_YELLOW, DOT_PIXEL_1X1, LINE_STYLE_DOTTED);
-    Paint_DrawString_CN(10, 160, "你好abc", &Font12CN, EPD_7IN3E_BLACK, EPD_7IN3E_WHITE);
-    Paint_DrawString_CN(10, 180, "微雪电子", &Font24CN, EPD_7IN3E_WHITE, EPD_7IN3E_BLACK);
-    Paint_DrawNum(10, 33, 123456789, &Font12, EPD_7IN3E_BLACK, EPD_7IN3E_WHITE);
-    Paint_DrawNum(10, 50, 987654321, &Font16, EPD_7IN3E_WHITE, EPD_7IN3E_BLACK);
+    Paint_DrawPoint(10, 50, EPD_7IN3E_RED, DOT_PIXEL_1X1, DOT_STYLE_DFT);
+    Paint_DrawPoint(10, 60, EPD_7IN3E_BLUE, DOT_PIXEL_2X2, DOT_STYLE_DFT);
+    Paint_DrawPoint(10, 70, EPD_7IN3E_GREEN, DOT_PIXEL_3X3, DOT_STYLE_DFT);
+    Paint_DrawLine(20, 40, 70, 90, EPD_7IN3E_YELLOW, DOT_PIXEL_1X1, LINE_STYLE_SOLID);
+    Paint_DrawLine(70, 40, 20, 90, EPD_7IN3E_YELLOW, DOT_PIXEL_1X1, LINE_STYLE_SOLID);
+    Paint_DrawRectangle(20, 40, 70, 90, EPD_7IN3E_BLACK, DOT_PIXEL_1X1, DRAW_FILL_EMPTY);
+    Paint_DrawRectangle(80, 40, 130, 90, EPD_7IN3E_BLACK, DOT_PIXEL_1X1, DRAW_FILL_FULL);
+    Paint_DrawCircle(45, 65, 20, EPD_7IN3E_BLACK, DOT_PIXEL_1X1, DRAW_FILL_EMPTY);
+    Paint_DrawCircle(105, 65, 20, EPD_7IN3E_WHITE, DOT_PIXEL_1X1, DRAW_FILL_FULL);
+    Paint_DrawLine(85, 65, 125, 65, EPD_7IN3E_YELLOW, DOT_PIXEL_1X1, LINE_STYLE_DOTTED);
+    Paint_DrawLine(105, 45, 105, 85, EPD_7IN3E_YELLOW, DOT_PIXEL_1X1, LINE_STYLE_DOTTED);
+    Paint_DrawString_CN(10, 100, "你好abc", &Font12CN, EPD_7IN3E_BLACK, EPD_7IN3E_WHITE);
+    Paint_DrawString_CN(10, 120, "微雪电子", &Font24CN, EPD_7IN3E_YELLOW, EPD_7IN3E_BLACK);
+    Paint_DrawNum(10, 0, 123456789, &Font12, EPD_7IN3E_BLACK, EPD_7IN3E_WHITE);
+    Paint_DrawNum(10, 17, 987654321, &Font16, EPD_7IN3E_WHITE, EPD_7IN3E_BLACK);
 	Paint_DrawString_EN(145, 0, "Waveshare", &Font16, EPD_7IN3E_BLACK, EPD_7IN3E_WHITE);
 	Paint_DrawString_EN(145, 35, "Waveshare", &Font16, EPD_7IN3E_GREEN, EPD_7IN3E_WHITE);
 	Paint_DrawString_EN(145, 70, "Waveshare", &Font16, EPD_7IN3E_BLUE, EPD_7IN3E_WHITE);
 	Paint_DrawString_EN(145, 105, "Waveshare", &Font16, EPD_7IN3E_RED, EPD_7IN3E_WHITE);
-	Paint_DrawString_EN(145, 140, "Waveshare", &Font16, EPD_7IN3E_YELLOW, EPD_7IN3E_WHITE);
+	// Paint_DrawString_EN(145, 140, "Waveshare", &Font16, EPD_7IN3E_YELLOW, EPD_7IN3E_WHITE);
 	// Paint_DrawString_EN(145, 175, "Waveshare", &Font16, EPD_7IN3E_ORANGE, EPD_7IN3E_WHITE);
 
     Debug("EPD_Display\r\n");
-    EPD_7IN3E_DisplayPart(BlackImage, 300, 120, 200, 240);
+    EPD_7IN3E_DisplayPart(BlackImage, 300, 120, 200, 160);
     DEV_Delay_ms(3000);
 #endif
 
