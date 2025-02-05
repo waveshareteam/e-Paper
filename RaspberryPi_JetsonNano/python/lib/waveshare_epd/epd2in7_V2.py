@@ -202,7 +202,11 @@ class EPD:
         self.ReadBusy()
         return 0
 
+    '''Deprecated. Use init_4Gray() instead'''
     def Init_4Gray(self):
+        return self.init_4Gray()
+
+    def init_4Gray(self):
         if (epdconfig.module_init() != 0):
             return -1
         self.reset()

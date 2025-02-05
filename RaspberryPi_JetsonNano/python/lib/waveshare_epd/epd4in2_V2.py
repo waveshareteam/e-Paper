@@ -264,9 +264,11 @@ class EPD:
         self.send_command(0x2c)
         self.send_data(self.LUT_ALL[232])
 
-    
-
+    '''Deprecated. Use init_4Gray() instead'''
     def Init_4Gray(self):
+        return self.init_4Gray()
+
+    def init_4Gray(self):
         if epdconfig.module_init() != 0:
             return -1
         # EPD hardware init start
