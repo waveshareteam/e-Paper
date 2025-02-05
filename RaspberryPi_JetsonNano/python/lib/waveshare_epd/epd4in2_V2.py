@@ -264,8 +264,8 @@ class EPD:
         self.send_command(0x2c)
         self.send_data(self.LUT_ALL[232])
 
-    '''Deprecated. Use init_4Gray() instead'''
     def Init_4Gray(self):
+        logger.warning("The 'Init_4Gray' method is deprecated, use 'init_4Gray' instead")
         return self.init_4Gray()
 
     def init_4Gray(self):
