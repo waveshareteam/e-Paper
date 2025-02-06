@@ -30,6 +30,7 @@ import time
 import os
 import logging
 import sys
+import platform
 
 from ctypes import *
 import ctypes
@@ -53,18 +54,19 @@ find_dirs = [
 ]
 spi = None
 for find_dir in find_dirs:
-    val = int(os.popen('getconf LONG_BIT').read())
-    val_1 = os.popen("cat /proc/cpuinfo | grep 'Raspberry Pi 5'").read()
-    if val == 64:
-        if val_1 == "":
-            so_filename = os.path.join(find_dir, 'DEV_Config_64_b.so')
-        else:
+    arch = platform.architecture()[0]
+    with open("/proc/device-tree/model") as f:
+        model = f.read()
+    if arch == "64bit":
+        if "Raspberry Pi 5" in model:
             so_filename = os.path.join(find_dir, 'DEV_Config_64_w.so')
-    else:
-        if val_1 == "":
-            so_filename = os.path.join(find_dir, 'DEV_Config_32_b.so')
         else:
+            so_filename = os.path.join(find_dir, 'DEV_Config_64_b.so')
+    else:
+        if "Raspberry Pi 5" in model:
             so_filename = os.path.join(find_dir, 'DEV_Config_32_w.so')
+        else:
+            so_filename = os.path.join(find_dir, 'DEV_Config_32_b.so')
     if os.path.exists(so_filename):
         spi = CDLL(so_filename)
         break
