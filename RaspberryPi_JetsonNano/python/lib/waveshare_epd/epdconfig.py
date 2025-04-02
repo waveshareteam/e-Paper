@@ -32,11 +32,65 @@ import logging
 import sys
 import time
 import subprocess
+import spidev
 
 from ctypes import *
 
 logger = logging.getLogger(__name__)
 
+
+class KhadasVIM4:
+    RST_PIN  = 420
+    DC_PIN   = 491
+    CS_PIN   = 502
+    BUSY_PIN = 492
+    PWR_PIN  = 450
+
+    def __init__(self):
+        self.SPI = spidev.SpiDev()
+
+        self.gpio_init(self.RST_PIN)
+        self.gpio_init(self.DC_PIN)
+        self.gpio_init(self.CS_PIN)
+        self.gpio_init(self.BUSY_PIN)
+        self.gpio_init(self.PWR_PIN)
+
+    def gpio_init(self, pin):
+        if not os.path.exists(f"/sys/class/gpio/gpio{pin}"):
+            os.system(f"echo {pin} | sudo tee /sys/class/gpio/export")
+            time.sleep(0.1)
+
+        direction = "in" if pin == self.BUSY_PIN else "out"
+        os.system(f"echo {direction} | sudo tee /sys/class/gpio/gpio{pin}/direction")
+
+    def digital_write(self, pin, value):
+        with open(f"/sys/class/gpio/gpio{pin}/value", "w") as f:
+            f.write("1" if value else "0")
+
+    def digital_read(self, pin):
+        with open(f"/sys/class/gpio/gpio{pin}/value", "r") as f:
+            return int(f.read().strip())
+
+    def delay_ms(self, delaytime):
+        time.sleep(delaytime / 1000.0)
+
+    def spi_writebyte(self, data):
+        self.SPI.writebytes(data)
+
+    def spi_writebyte2(self, data):
+        self.SPI.writebytes2(data)
+
+    def module_init(self):
+        self.SPI.open(1, 0)
+        self.SPI.max_speed_hz = 4000000
+        self.SPI.mode = 0b00
+        return 0
+
+    def module_exit(self):
+        self.SPI.close()
+
+        for pin in [self.RST_PIN, self.DC_PIN, self.BUSY_PIN, self.PWR_PIN]:
+            os.system(f"echo {pin} | sudo tee /sys/class/gpio/unexport")
 
 class RaspberryPi:
     # Pin definition
@@ -313,6 +367,8 @@ if "Raspberry" in output:
     implementation = RaspberryPi()
 elif os.path.exists('/sys/bus/platform/drivers/gpio-x3'):
     implementation = SunriseX3()
+elif os.path.exists('/proc/device-tree/model') and "VIM4" in open('/proc/device-tree/model').read():
+    implementation = KhadasVIM4()
 else:
     implementation = JetsonNano()
 
