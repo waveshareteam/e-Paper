@@ -1,0 +1,9 @@
+numpy==1.26.4
+pillow==10.2.0
+gpiod==2.2.4
+gpiodevice==0.0.5
+gpiozero==2.0.1
+lgpio==0.2.2.0
+pigpio==1.78
+rpi-lgpio==0.6
+spidev==3.6
