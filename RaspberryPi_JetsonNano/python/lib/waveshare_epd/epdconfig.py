@@ -38,15 +38,14 @@ from ctypes import *
 
 logger = logging.getLogger(__name__)
 
-
-class KhadasVIM4:
-    RST_PIN  = 420
-    DC_PIN   = 491
-    CS_PIN   = 502
-    BUSY_PIN = 492
-    PWR_PIN  = 450
-
-    def __init__(self):
+class Khadas:
+    def __init__(self, rst, dc, cs, busy, pwr, spi_bus):
+        self.RST_PIN = rst
+        self.DC_PIN = dc
+        self.CS_PIN = cs
+        self.BUSY_PIN = busy
+        self.PWR_PIN = pwr
+        self.spi_bus = spi_bus
         self.SPI = spidev.SpiDev()
 
         self.gpio_init(self.RST_PIN)
@@ -81,16 +80,28 @@ class KhadasVIM4:
         self.SPI.writebytes2(data)
 
     def module_init(self):
-        self.SPI.open(1, 0)
+        if self.spi_bus == 2:
+            self.SPI.open(2, 1)
+        else:
+            self.SPI.open(1, 0)
         self.SPI.max_speed_hz = 4000000
         self.SPI.mode = 0b00
         return 0
 
     def module_exit(self):
         self.SPI.close()
-
         for pin in [self.RST_PIN, self.DC_PIN, self.BUSY_PIN, self.PWR_PIN]:
             os.system(f"echo {pin} | sudo tee /sys/class/gpio/unexport")
+
+
+class KhadasVIM4(Khadas):
+    def __init__(self):
+        super().__init__(rst=420, dc=491, cs=502, busy=492, pwr=450, spi_bus=1)
+
+
+class KhadasVIM3(Khadas):
+    def __init__(self):
+        super().__init__(rst=462, dc=461, cs=460, busy=464, pwr=496, spi_bus=2)
 
 class RaspberryPi:
     # Pin definition
@@ -354,6 +365,16 @@ class SunriseX3:
 
         self.GPIO.cleanup([self.RST_PIN, self.DC_PIN, self.CS_PIN, self.BUSY_PIN], self.PWR_PIN)
 
+def get_khadas_model():
+    model_path = "/proc/device-tree/model"
+    if os.path.exists(model_path):
+        with open(model_path, "r") as f:
+            model = f.read().strip()
+            if "VIM4" in model:
+                return KhadasVIM4()
+            elif "VIM3" in model:
+                return KhadasVIM3()
+    return None
 
 if sys.version_info[0] == 2:
     process = subprocess.Popen("cat /proc/cpuinfo | grep Raspberry", shell=True, stdout=subprocess.PIPE)
@@ -367,10 +388,12 @@ if "Raspberry" in output:
     implementation = RaspberryPi()
 elif os.path.exists('/sys/bus/platform/drivers/gpio-x3'):
     implementation = SunriseX3()
-elif os.path.exists('/proc/device-tree/model') and "VIM4" in open('/proc/device-tree/model').read():
-    implementation = KhadasVIM4()
 else:
-    implementation = JetsonNano()
+    khadas_board = get_khadas_model()
+    if khadas_board:
+        implementation = khadas_board
+    else:
+        implementation = JetsonNano()
 
 for func in [x for x in dir(implementation) if not x.startswith('_')]:
     setattr(sys.modules[__name__], func, getattr(implementation, func))
