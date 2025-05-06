@@ -238,20 +238,26 @@ void Epd::DisplayFrame(const unsigned char* frame_buffer) {
     WaitUntilIdle();
 }
 
-void Epd::Displaypart(const unsigned char* pbuffer, unsigned long xStart, unsigned long yStart,unsigned long Picture_Width,unsigned long Picture_Height) {
+void Epd::Displaypart(const unsigned char* pbuffer, unsigned long xStart, unsigned long yStart, unsigned long Picture_Width, unsigned long Picture_Height) {
     SendCommand(0x13);
-    // xStart = xStart/8;
-    // xStart = xStart*8;
+
+    // Ensure xStart is byte-aligned
+    unsigned long xStart_byte = xStart / 8;
+
+    // Iterate over the entire display area and see if the bytes fit within the starts and width/height bounds
     for (unsigned long j = 0; j < height; j++) {
-        for (unsigned long i = 0; i < width/8; i++) {
-            if( (j>=yStart) && (j<yStart+Picture_Height) && (i*8>=xStart) && (i*8<xStart+Picture_Width)){
-                SendData(~(pgm_read_byte(&(pbuffer[i-xStart/8 + (Picture_Width)/8*(j-yStart)]))) );
-                // SendData(0xff);
-            }else {
-                SendData(0x00);
+        for (unsigned long i = 0; i < width / 8; i++) {
+            // Check if the current byte is within the part to be displayed
+            if ((j >= yStart) && (j < yStart + Picture_Height) && (i >= xStart_byte) && (i < xStart_byte + Picture_Width / 8)) {
+                // Correctly calculate the buffer index
+                unsigned long buffer_index = (i - xStart_byte) + (Picture_Width / 8) * (j - yStart);
+                SendData(~(pgm_read_byte(&(pbuffer[buffer_index]))));
+            } else {
+                SendData(~0xFF); // ~ inverts the bytes
             }
         }
     }
+
     SendCommand(0x12);
     DelayMs(100);
     WaitUntilIdle();
