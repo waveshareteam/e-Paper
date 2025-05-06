@@ -73,10 +73,10 @@ class EPD:
         epdconfig.spi_writebyte([command])
         epdconfig.digital_write(self.cs_pin, 1)
 
-    def send_data(self, data):
+    def send_data(self, *data):
         epdconfig.digital_write(self.dc_pin, 1)
         epdconfig.digital_write(self.cs_pin, 0)
-        epdconfig.spi_writebyte([data])
+        epdconfig.spi_writebyte(data)
         epdconfig.digital_write(self.cs_pin, 1)
         
     # send a lot of data   
@@ -93,16 +93,18 @@ class EPD:
         logger.debug("e-Paper busy H release")
 
     def TurnOnDisplay(self):
-        self.send_command(0x04) # POWER_ON
+        self.send_command(0x17) # AUTO: AUTO SEQUENCE
+        self.send_data(0XA5)    # A5: PON->DRF->POF / A7: PON->DRF->POF->DSLP
         self.ReadBusyH()
 
-        self.send_command(0x12) # DISPLAY_REFRESH
-        self.send_data(0X00)
-        self.ReadBusyH()
+        #self.send_command(0x12) # DRF: DISPLAY_REFRESH
+        #self.send_data(0X00)
+        #self.ReadBusyH()
         
-        self.send_command(0x02) # POWER_OFF
-        self.send_data(0X00)
-        self.ReadBusyH()
+        #self.send_command(0x02) # POF: POWER_OFF
+        #self.send_data(0X00)
+        #self.ReadBusyH()
+
         
     def init(self):
         if (epdconfig.module_init() != 0):
@@ -113,67 +115,45 @@ class EPD:
         epdconfig.delay_ms(30)
 
         self.send_command(0xAA)   
-        self.send_data(0x49)
-        self.send_data(0x55)
-        self.send_data(0x20)
-        self.send_data(0x08)
-        self.send_data(0x09)
-        self.send_data(0x18)
+        self.send_data(0x49, 0x55, 0x20, 0x08, 0x09, 0x18)
 
-        self.send_command(0x01)
+        self.send_command(0x01) # PWR: POWER SETTING (REGISTER)
         self.send_data(0x3F)
 
-        self.send_command(0x00)  
-        self.send_data(0x5F)
-        self.send_data(0x69)
-
-        self.send_command(0x03)
-        self.send_data(0x00)
-        self.send_data(0x54)
-        self.send_data(0x00)
-        self.send_data(0x44) 
-
-        self.send_command(0x05)
-        self.send_data(0x40)
+        self.send_command(0x00) # PSR: PANEL SETTING (REGISTER)
         self.send_data(0x1F)
-        self.send_data(0x1F)
-        self.send_data(0x2C)
 
-        self.send_command(0x06)
-        self.send_data(0x6F)
-        self.send_data(0x1F)
-        self.send_data(0x17)
-        self.send_data(0x49)
+        self.send_command(0x03) # PFS: POWER OFF SEQUENCE SETTING
+        self.send_data(0x00, 0x54, 0x00, 0x44) 
+        
+        #self.send_command(0x05)
+        #self.send_data(0x40, 0x1F, 0x1F, 0x2C)
 
-        self.send_command(0x08)
-        self.send_data(0x6F)
-        self.send_data(0x1F)
-        self.send_data(0x1F)
-        self.send_data(0x22)
+        self.send_command(0x06) # BTST: BOOSTER SOFT START
+        self.send_data(0x10, 0x10, 0x10)
 
-        self.send_command(0x30)
-        self.send_data(0x03)
+        #self.send_command(0x08)
+        #self.send_data(0x6F, 0x1F, 0x1F, 0x22)
 
-        self.send_command(0x50)
+        self.send_command(0x30) # PLL: PLL CONTROL
+        self.send_data(0x07)    # 0x03 -> slow, 0x07 -> fast
+
+        self.send_command(0x50) # CDI: VCOM AND DATA INTERVAL SETTING
         self.send_data(0x3F)
 
-        self.send_command(0x60)
-        self.send_data(0x02)
-        self.send_data(0x00)
+        self.send_command(0x60) # TCON: TCON SETTING
+        self.send_data(0x02, 0x00)
 
-        self.send_command(0x61)
-        self.send_data(0x03)
-        self.send_data(0x20)
-        self.send_data(0x01) 
-        self.send_data(0xE0)
+        self.send_command(0x61)                # TRES: RESOLUTION SETTING
+        self.send_data(0x03, 0x20, 0x01, 0xE0) # [0x0320][0x01E0] -> displaysize
 
         self.send_command(0x84)
         self.send_data(0x01)
 
-        self.send_command(0xE3)
+        self.send_command(0xE3) # PWS: POWER SAVING
         self.send_data(0x2F)
 
-        self.send_command(0x04)
+        #self.send_command(0x04) # PON: POWER ON (really wanted here?)
         self.ReadBusyH()
         return 0
 
@@ -198,11 +178,7 @@ class EPD:
 
         # PIL does not support 4 bit color, so pack the 4 bits of color
         # into a single byte to transfer to the panel
-        buf = [0x00] * int(self.width * self.height / 2)
-        idx = 0
-        for i in range(0, len(buf_7color), 2):
-            buf[idx] = (buf_7color[i] << 4) + buf_7color[i+1]
-            idx += 1
+        buf = [(buf_7color[i] << 4) + buf_7color[i+1] for i in range(0, len(buf_7color), 2)]
             
         return buf
 
