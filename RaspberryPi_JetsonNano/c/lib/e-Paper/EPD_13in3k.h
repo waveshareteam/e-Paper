@@ -38,8 +38,14 @@
 #define EPD_13IN3K_HEIGHT      680
 
 void EPD_13IN3K_Init(void);
+void EPD_13IN3K_Init_Part(void);
+void EPD_13IN3K_Init_4GRAY(void);
 void EPD_13IN3K_Clear(void);
+void EPD_13IN3K_color_Base(UBYTE color);
 void EPD_13IN3K_Display(UBYTE *Image);
+void EPD_13IN3K_Display_Base(UBYTE *Image);
+void EPD_13IN3K_Display_Part(UBYTE *Image, UWORD x, UWORD y, UWORD w, UWORD l);
+void EPD_13IN3K_4GrayDisplay(UBYTE *Image);
 void EPD_13IN3K_Sleep(void);
 
 #endif

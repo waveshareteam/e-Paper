@@ -114,6 +114,12 @@ else ifeq ($(EPD), epd2in13d)
 else ifeq ($(EPD), epd2in13g)
 	OBJ_C_EPD = ${DIR_EPD}/EPD_2in13g.c
 	OBJ_C_Examples = ${DIR_Examples}/EPD_2in13g_test.c
+else ifeq ($(EPD), epd2in15b)
+	OBJ_C_EPD = ${DIR_EPD}/EPD_2in15b.c
+	OBJ_C_Examples = ${DIR_Examples}/EPD_2in15b_test.c
+else ifeq ($(EPD), epd2in15g)
+	OBJ_C_EPD = ${DIR_EPD}/EPD_2in15g.c
+	OBJ_C_Examples = ${DIR_Examples}/EPD_2in15g_test.c
 else ifeq ($(EPD), epd3in52)
 	OBJ_C_EPD = ${DIR_EPD}/EPD_3in52.c
 	OBJ_C_Examples = ${DIR_Examples}/EPD_3in52_test.c
@@ -135,6 +141,9 @@ else ifeq ($(EPD), epd4in2bc)
 else ifeq ($(EPD), epd4in2bV2)
 	OBJ_C_EPD = ${DIR_EPD}/EPD_4in2b_V2.c
 	OBJ_C_Examples = ${DIR_Examples}/EPD_4in2b_V2_test.c
+else ifeq ($(EPD), epd4in2bV2_old)
+	OBJ_C_EPD = ${DIR_EPD}/EPD_4in2b_V2_old.c
+	OBJ_C_Examples = ${DIR_Examples}/EPD_4in2b_V2_test_old.c
 else ifeq ($(EPD), epd4in26)
 	OBJ_C_EPD = ${DIR_EPD}/EPD_4in26.c
 	OBJ_C_Examples = ${DIR_Examples}/EPD_4in26_test.c
@@ -144,6 +153,15 @@ else ifeq ($(EPD), epd4in37b)
 else ifeq ($(EPD), epd5in65f)
 	OBJ_C_EPD = ${DIR_EPD}/EPD_5in65f.c
 	OBJ_C_Examples = ${DIR_Examples}/EPD_5in65f_test.c
+else ifeq ($(EPD), epd5in79)
+	OBJ_C_EPD = ${DIR_EPD}/EPD_5in79.c
+	OBJ_C_Examples = ${DIR_Examples}/EPD_5in79_test.c
+else ifeq ($(EPD), epd5in79b)
+	OBJ_C_EPD = ${DIR_EPD}/EPD_5in79b.c
+	OBJ_C_Examples = ${DIR_Examples}/EPD_5in79b_test.c
+else ifeq ($(EPD), epd5in79g)
+	OBJ_C_EPD = ${DIR_EPD}/EPD_5in79g.c
+	OBJ_C_Examples = ${DIR_Examples}/EPD_5in79g_test.c
 else ifeq ($(EPD), epd5in83)
 	OBJ_C_EPD = ${DIR_EPD}/EPD_5in83.c
 	OBJ_C_Examples = ${DIR_Examples}/EPD_5in83_test.c
@@ -159,6 +177,9 @@ else ifeq ($(EPD), epd5in83bV2)
 else ifeq ($(EPD), epd5in84)
 	OBJ_C_EPD = ${DIR_EPD}/EPD_5in84.c
 	OBJ_C_Examples = ${DIR_Examples}/EPD_5in84_test.c
+else ifeq ($(EPD), epd7in3e)
+	OBJ_C_EPD = ${DIR_EPD}/EPD_7in3e.c
+	OBJ_C_Examples = ${DIR_Examples}/EPD_7in3e_test.c
 else ifeq ($(EPD), epd7in3f)
 	OBJ_C_EPD = ${DIR_EPD}/EPD_7in3f.c
 	OBJ_C_Examples = ${DIR_Examples}/EPD_7in3f_test.c
@@ -177,6 +198,9 @@ else ifeq ($(EPD), epd7in5bc)
 else ifeq ($(EPD), epd7in5bV2)
 	OBJ_C_EPD = ${DIR_EPD}/EPD_7in5b_V2.c
 	OBJ_C_Examples = ${DIR_Examples}/EPD_7in5b_V2_test.c
+else ifeq ($(EPD), epd7in5bV2_old)
+	OBJ_C_EPD = ${DIR_EPD}/EPD_7in5b_V2_old.c
+	OBJ_C_Examples = ${DIR_Examples}/EPD_7in5b_V2_test_old.c
 else ifeq ($(EPD), epd7in5HD)
 	OBJ_C_EPD = ${DIR_EPD}/EPD_7in5_HD.c
 	OBJ_C_Examples = ${DIR_Examples}/EPD_7in5_HD_test.c
@@ -186,6 +210,9 @@ else ifeq ($(EPD), epd7in5bHD)
 else ifeq ($(EPD), epd10in2b)
 	OBJ_C_EPD = ${DIR_EPD}/EPD_10in2b.c
 	OBJ_C_Examples = ${DIR_Examples}/EPD_10in2b_test.c
+else ifeq ($(EPD), epd13in3b)
+	OBJ_C_EPD = ${DIR_EPD}/EPD_13in3b.c
+	OBJ_C_Examples = ${DIR_Examples}/EPD_13in3b_test.c
 else ifeq ($(EPD), epd13in3k)
 	OBJ_C_EPD = ${DIR_EPD}/EPD_13in3k.c
 	OBJ_C_Examples = ${DIR_Examples}/EPD_13in3k_test.c
@@ -213,7 +240,7 @@ ifeq ($(USELIB_RPI), USE_BCM2835_LIB)
 else ifeq ($(USELIB_RPI), USE_WIRINGPI_LIB)
 	LIB_RPI += -lwiringPi -lm 
 else ifeq ($(USELIB_RPI), USE_LGPIO_LIB)
-	LIB_RPI += -llgpio -lm 
+	LIB_RPI += -llgpio -lm
 else ifeq ($(USELIB_RPI), USE_DEV_LIB)
 	LIB_RPI += -lgpiod -lm 
 endif
@@ -261,9 +288,14 @@ ${DIR_BIN}/%.o:$(DIR_GUI)/%.c
 	$(CC) $(CFLAGS) -c	$< -o $@ -I $(DIR_Config) $(DEBUG)
 
 RPI_DEV:
+ifeq ($(USELIB_RPI), USE_DEV_LIB)
 	$(CC) $(CFLAGS) $(DEBUG_RPI) -c	 $(DIR_Config)/dev_hardware_SPI.c -o $(DIR_BIN)/dev_hardware_SPI.o $(LIB_RPI) $(DEBUG)
-	$(CC) $(CFLAGS) $(DEBUG_RPI) -c	 $(DIR_Config)/RPI_gpiod.c -o $(DIR_BIN)/RPI_gpiod.o $(LIB_RPI) $(DEBUG)
 	$(CC) $(CFLAGS) $(DEBUG_RPI) -c	 $(DIR_Config)/DEV_Config.c -o $(DIR_BIN)/DEV_Config.o $(LIB_RPI) $(DEBUG)
+	$(CC) $(CFLAGS) $(DEBUG_RPI) -c	 $(DIR_Config)/RPI_gpiod.c -o $(DIR_BIN)/RPI_gpiod.o $(LIB_RPI) $(DEBUG)
+else
+	$(CC) $(CFLAGS) $(DEBUG_RPI) -c	 $(DIR_Config)/dev_hardware_SPI.c -o $(DIR_BIN)/dev_hardware_SPI.o $(LIB_RPI) $(DEBUG)
+	$(CC) $(CFLAGS) $(DEBUG_RPI) -c	 $(DIR_Config)/DEV_Config.c -o $(DIR_BIN)/DEV_Config.o $(LIB_RPI) $(DEBUG)
+endif
 	
 JETSON_DEV:
 	$(CC) $(CFLAGS) $(DEBUG_JETSONI) -c	 $(DIR_Config)/sysfs_software_spi.c -o $(DIR_BIN)/sysfs_software_spi.o $(LIB_JETSONI) $(DEBUG)

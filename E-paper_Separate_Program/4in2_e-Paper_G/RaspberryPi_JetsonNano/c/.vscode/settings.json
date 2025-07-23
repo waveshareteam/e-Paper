@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "epd_4in2g.h": "c",
+        "imagedata.h": "c"
+    }
+}

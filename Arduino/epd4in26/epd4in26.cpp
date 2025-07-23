@@ -154,6 +154,8 @@ int Epd::Init_Fast(void) {
 }
 
 int Epd::Init_4GRAY(void) {
+    unsigned int count;
+
     if (IfInit() != 0) {
         return -1;
     }
@@ -191,7 +193,22 @@ int Epd::Init_4GRAY(void) {
 
 	ReadBusy();
 
-    SetLut();
+    
+    SendCommand(0x32); //vcom
+    for(count = 0; count < 105 ; count++) {
+        SendData(LUT_DATA_4Gray[count]);
+    }
+
+    SendCommand(0x03); //VGH      
+	SendData(LUT_DATA_4Gray[105]);
+
+	SendCommand(0x04); //      
+	SendData(LUT_DATA_4Gray[106]); //VSH1   
+	SendData(LUT_DATA_4Gray[107]); //VSH2   
+	SendData(LUT_DATA_4Gray[108]); //VSL   
+
+	SendCommand(0x2C);     //VCOM Voltage
+	SendData(LUT_DATA_4Gray[109]);    //0x1C
 
     return 0;
 }
@@ -409,10 +426,10 @@ void Epd::Display_Part(unsigned char *Image, unsigned long x, unsigned long y, u
  *          You can use EPD_Reset() to awaken
  */
 void Epd::Sleep(void) {
-    SendCommand(0X02);
+    SendCommand(0x10);
+    SendData(0x03);
+    DelayMs(100);
     ReadBusy();
-    SendCommand(0X07);
-    SendData(0xA5);
 }
 
 void Epd::Clear(void) {

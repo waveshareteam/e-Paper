@@ -1,11 +1,11 @@
 /*****************************************************************************
 * | File      	:   EPD_7in5b_V2_test.c
 * | Author      :   Waveshare team
-* | Function    :   5.83inch B&C e-paper test demo
+* | Function    :   7.5inch e-paper ï¼ˆBï¼‰ test demo
 * | Info        :
 *----------------
 * |	This version:   V1.0
-* | Date        :   2020-11-30
+* | Date        :   2024-08-07
 * | Info        :
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -29,7 +29,6 @@
 ******************************************************************************/
 #include "EPD_Test.h"
 #include "EPD_7in5b_V2.h"
-#include <time.h> 
 
 int EPD_7in5b_V2_test(void)
 {
@@ -40,12 +39,8 @@ int EPD_7in5b_V2_test(void)
 
     printf("e-Paper Init and Clear...\r\n");
     EPD_7IN5B_V2_Init();
-	
-	struct timespec start={0,0}, finish={0,0}; 
-    clock_gettime(CLOCK_REALTIME,&start);
     EPD_7IN5B_V2_Clear();
-    clock_gettime(CLOCK_REALTIME,&finish);
-    printf("%ld S\r\n",finish.tv_sec-start.tv_sec);
+
     DEV_Delay_ms(500);
 	
     //Create a new image cache named IMAGE_BW and fill it with white
@@ -69,7 +64,7 @@ int EPD_7in5b_V2_test(void)
     Paint_SelectImage(RYImage);
     Paint_Clear(WHITE);
 
-#if 1   // show bmp
+#if 0   // show bmp
     printf("show window BMP-----------------\r\n");
     Paint_SelectImage(BlackImage);
     GUI_ReadBmp("./pic/2in9.bmp", 50, 100);
@@ -90,6 +85,7 @@ int EPD_7in5b_V2_test(void)
     
 #if 1   // show image for array    
     printf("show image for array\r\n");
+    EPD_7IN5B_V2_Init_Fast();
     EPD_7IN5B_V2_Display(gImage_7in5_V2_b, gImage_7in5_V2_ry);
     DEV_Delay_ms(2000);
 #endif
@@ -97,6 +93,7 @@ int EPD_7in5b_V2_test(void)
 #if 1   // Drawing on the image
     /*Horizontal screen*/
     //1.Draw black image
+    EPD_7IN5B_V2_Init();
     Paint_SelectImage(BlackImage);
     Paint_Clear(WHITE);
     Paint_DrawPoint(10, 80, BLACK, DOT_PIXEL_1X1, DOT_STYLE_DFT);
@@ -108,7 +105,7 @@ int EPD_7in5b_V2_test(void)
     Paint_DrawRectangle(20, 70, 70, 120, BLACK, DOT_PIXEL_1X1, DRAW_FILL_EMPTY);
     Paint_DrawRectangle(80, 70, 130, 120, BLACK, DOT_PIXEL_1X1, DRAW_FILL_FULL);
     Paint_DrawString_EN(10, 0, "waveshare", &Font16, BLACK, WHITE);    
-    Paint_DrawString_CN(130, 20, "Î¢Ñ©µç×Ó", &Font24CN, WHITE, BLACK);
+    Paint_DrawString_CN(130, 20, "Î¢Ñ©ï¿½ï¿½ï¿½ï¿½", &Font24CN, WHITE, BLACK);
     Paint_DrawNum(10, 50, 987654321, &Font16, WHITE, BLACK);
     
     //2.Draw red image
@@ -118,7 +115,7 @@ int EPD_7in5b_V2_test(void)
     Paint_DrawCircle(210, 95, 20, BLACK, DOT_PIXEL_1X1, DRAW_FILL_FULL);
     Paint_DrawLine(85, 95, 125, 95, BLACK, DOT_PIXEL_1X1, LINE_STYLE_DOTTED);
     Paint_DrawLine(105, 75, 105, 115, BLACK, DOT_PIXEL_1X1, LINE_STYLE_DOTTED);  
-    Paint_DrawString_CN(130, 0,"ÄãºÃabc", &Font12CN, BLACK, WHITE);
+    Paint_DrawString_CN(130, 0,"ï¿½ï¿½ï¿½abc", &Font12CN, BLACK, WHITE);
     Paint_DrawString_EN(10, 20, "hello world", &Font12, WHITE, BLACK);
     Paint_DrawNum(10, 33, 123456789, &Font12, BLACK, WHITE);
     
@@ -127,7 +124,48 @@ int EPD_7in5b_V2_test(void)
     DEV_Delay_ms(2000);
 #endif
 
+#if 1   //Partial refresh, example shows time
+    EPD_7IN5B_V2_Init_Part();
+    EPD_7IN5B_V2_Display_Base_color(WHITE);
+	Paint_NewImage(BlackImage, Font20.Width * 7, Font20.Height, 0, WHITE);
+    Debug("Partial refresh\r\n");
+    Paint_SelectImage(BlackImage);
+    Paint_Clear(WHITE);
+	
+    PAINT_TIME sPaint_time;
+    sPaint_time.Hour = 12;
+    sPaint_time.Min = 34;
+    sPaint_time.Sec = 56;
+    UBYTE num = 10;
+    for (;;) {
+        sPaint_time.Sec = sPaint_time.Sec + 1;
+        if (sPaint_time.Sec == 60) {
+            sPaint_time.Min = sPaint_time.Min + 1;
+            sPaint_time.Sec = 0;
+            if (sPaint_time.Min == 60) {
+                sPaint_time.Hour =  sPaint_time.Hour + 1;
+                sPaint_time.Min = 0;
+                if (sPaint_time.Hour == 24) {
+                    sPaint_time.Hour = 0;
+                    sPaint_time.Min = 0;
+                    sPaint_time.Sec = 0;
+                }
+            }
+        }
+        Paint_ClearWindows(0, 0, Font20.Width * 7, Font20.Height, WHITE);
+        Paint_DrawTime(0, 0, &sPaint_time, &Font20, WHITE, BLACK);
+
+        num = num - 1;
+        if(num == 0) {
+            break;
+        }
+		EPD_7IN5B_V2_Display_Partial(BlackImage, 10, 130, 10 + Font20.Width * 7, 130 + Font20.Height);
+        DEV_Delay_ms(500);//Analog clock 1s
+    }
+#endif
+
     printf("Clear...\r\n");
+    EPD_7IN5B_V2_Init();
     EPD_7IN5B_V2_Clear();
 
     printf("Goto Sleep...\r\n");

@@ -1,0 +1,47 @@
+EPD model                   EPD define (EPD=)
+1.64inch e-Paper (G)        epd1in64g
+2.36inch e-Paper (G)        epd2in36g
+3inch e-Paper (G)           epd3in0g
+4.37inch e-Paper (G)        epd4in37g
+7.3inch e-Paper (G)         epd7in3g
+1.54inch e-Paper (V2)       epd1in54V2
+1.54inch e-Paper (B) (V2)   epd1in54bV2
+1.54inch e-Paper (C)        epd1in54c
+2.66inch e-Paper            epd2in66
+2.66inch e-Paper (B)        epd2in66b
+2.7inch e-Paper             epd2in7
+2.7inch e-Paper (V2)        epd2in7V2
+2.9inch e-Paper (V2)        epd2in9V2
+2.9inch e-Paper (B)/(C)     epd2in9bc
+2.9inch e-Paper (B) (V3)    epd2in9bV3
+2.9inch e-Paper (D)         epd2in9d
+2.13inch e-Paper (V2)       epd2in13V2
+2.13inch e-Paper (V3)       epd2in13V3
+2.13inch e-Paper (B)/(C)    epd2in13bc
+2.13inch e-Paper (B) (V3)   epd2in13bV3
+2.13inch e-Paper (B) (V4)   epd2in13bV4
+2.13inch e-Paper (D)        epd2in13d
+3.52inch e-Paper            epd3in52
+3.7inch e-Paper             epd3in7
+4.01inch e-Paper (F)        epd4in01f
+4.2inch e-Paper             epd4in2
+4.2inch e-Paper (V2         epd4in2V2
+4.2inch e-Paper (B)/(C)     epd4in2bc
+4.2inch e-Paper (B) (V2)    epd4in2bV2
+5.65inch e-Paper (F)        epd5in65f
+5.83inch e-Paper (V2)       epd5in83V2
+5.83inch e-Paper (B)/(C)    epd5in83bc
+5.83inch e-Paper (B) (V2)   epd5in83bV2
+7.5inch e-Paper (V2)        epd7in5V2
+7.5inch e-Paper (B)/(C)     epd7in5bc
+7.5inch e-Paper (B) (V2)    epd7in5bV2
+
+Add EPD define at compile time, for example:
+    # modle is 7.5inch e-Paper (B) (V2)
+    sudo make clean
+    sudo make EPD=epd7in5bV2
+
+编译的时候加上 EPD define，例如：
+    # 屏幕型号为 7.5inch e-Paper (B) (V2)
+    sudo make clean
+    sudo make EPD=epd7in5bV2

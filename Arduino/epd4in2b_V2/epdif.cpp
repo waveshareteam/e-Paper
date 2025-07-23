@@ -52,6 +52,75 @@ void EpdIf::SpiTransfer(unsigned char data) {
     digitalWrite(CS_PIN, HIGH);
 }
 
+void EpdIf::EPD_GPIO_Init()
+{
+    SPI.end(); 
+}
+
+void EpdIf::EPD_SPI_Init()
+{
+    SPI.begin();
+    SPI.beginTransaction(SPISettings(2000000, MSBFIRST, SPI_MODE0));
+}
+
+void EpdIf::EPD_Mode(int pin, char mode) {
+    if(mode == 0)
+        pinMode(pin, INPUT);
+    else
+        pinMode(pin, OUTPUT);
+}
+
+void EpdIf::EPD_SendData(unsigned char data) {
+    unsigned char i,j=data;
+	EPD_Mode(MOSI_PIN, 1);
+    EPD_Mode(SCLK_PIN, 1);
+	digitalWrite(CS_PIN, 0);
+	for(i = 0; i<8; i++)
+    {
+        digitalWrite(SCLK_PIN, 0);     
+        if (j & 0x80)
+        {
+            digitalWrite(MOSI_PIN, 1);
+        }
+        else
+        {
+            digitalWrite(MOSI_PIN, 0);
+        }
+        
+        digitalWrite(SCLK_PIN, 1);
+        j = j << 1;
+        // DelayMs(1);
+    }
+	digitalWrite(SCLK_PIN, 0);
+	digitalWrite(CS_PIN, 1);
+}
+
+unsigned char  EpdIf::EPD_ReadData()
+{
+    unsigned char i,j=0xff;
+    EPD_Mode(MOSI_PIN, 0);
+    EPD_Mode(SCLK_PIN, 1);
+    digitalWrite(CS_PIN, 0);
+    for(i = 0; i<8; i++)
+    {
+        digitalWrite(SCLK_PIN, 0);
+        j = j << 1;
+        if (DigitalRead(MOSI_PIN))
+        {
+                j = j | 0x01;
+        }
+        else
+        {
+                j= j & 0xfe;
+        }
+        digitalWrite(SCLK_PIN, 1);
+    }
+    digitalWrite(SCLK_PIN, 0);
+    digitalWrite(CS_PIN, 1);
+    return j;
+}
+
+
 int EpdIf::IfInit(void) {
     pinMode(CS_PIN, OUTPUT);
     pinMode(RST_PIN, OUTPUT);

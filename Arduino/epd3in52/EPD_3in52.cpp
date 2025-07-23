@@ -288,11 +288,11 @@ void Epd::ReadBusy(void) {
  */
 void Epd::Reset(void) {
     DigitalWrite(reset_pin, HIGH);
-    DelayMs(20);    
+    DelayMs(200);    
     DigitalWrite(reset_pin, LOW);                //module reset    
-    DelayMs(2);
+    DelayMs(1);
     DigitalWrite(reset_pin, HIGH);
-    DelayMs(20);    
+    DelayMs(200);    
 }
 
 void Epd::lut(void)

@@ -450,9 +450,8 @@ void EPD_4in26_4GrayDisplay(UBYTE *Image)
     UDOUBLE i,j,k;
     UBYTE temp1,temp2,temp3;
 
-    // old  data
     EPD_4in26_SendCommand(0x24);
-    for(i=0; i<24000; i++) {             //5808*4  46464
+    for(i=0; i<24000; i++) { 
         temp3=0;
         for(j=0; j<2; j++) {
             temp1 = Image[i*2+j];
@@ -493,7 +492,7 @@ void EPD_4in26_4GrayDisplay(UBYTE *Image)
      }
 
     EPD_4in26_SendCommand(0x26);   //write RAM for black(0)/white (1)
-    for(i=0; i<24000; i++) {             //5808*4  46464
+    for(i=0; i<24000; i++) { 
         temp3=0;
         for(j=0; j<2; j++) {
             temp1 = Image[i*2+j];
@@ -542,6 +541,6 @@ parameter:
 void EPD_4in26_Sleep(void)
 {
 	EPD_4in26_SendCommand(0x10); //enter deep sleep
-	EPD_4in26_SendData(0x01); 
+	EPD_4in26_SendData(0x03); 
 	DEV_Delay_ms(100);
 }

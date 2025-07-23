@@ -495,7 +495,7 @@ void Epd::Display_Partial_Not_refresh(unsigned char* Image, unsigned int  Xstart
 	// TurnOnDisplay_Partial();
 }
 
-void Epd::Set_4GrayDisplay(const char *Image, int x, int y, int w, int l)
+void Epd::Set_4GrayDisplay(const unsigned char *Image, int x, int y, int w, int l)
 {
     int i,j,k,m;
 	int z=0;

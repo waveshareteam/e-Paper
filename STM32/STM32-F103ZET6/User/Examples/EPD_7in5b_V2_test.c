@@ -44,10 +44,10 @@ int EPD_test(void)
     UBYTE *Image;
     UWORD Imagesize = ((EPD_7IN5B_V2_WIDTH % 8 == 0)? (EPD_7IN5B_V2_WIDTH / 8 ): (EPD_7IN5B_V2_WIDTH / 8 + 1)) * EPD_7IN5B_V2_HEIGHT;
     if((Image = (UBYTE *)malloc(Imagesize / 2)) == NULL) {
-        printf("Failed to apply for black memory...\r\n");
+        Debug("Failed to apply for black memory...\r\n");
         return -1;
     }
-    printf("NewImage:Image\r\n");
+    Debug("NewImage:Image\r\n");
     Paint_NewImage(Image, EPD_7IN5B_V2_WIDTH, EPD_7IN5B_V2_HEIGHT / 2, 0, WHITE);
     
     //Select Image
@@ -55,13 +55,9 @@ int EPD_test(void)
     Paint_Clear(WHITE);
 
 #if 1   // show image for array    
-    printf("show image for array\r\n");
-		//The entire image size is Imagesize 
-		//Since the memory problem is transmitted halfway, now the other half is transmitted, so the offset address is required.
-    EPD_7IN5B_V2_WritePicture(gImage_7in5_V2_b, 0);
-    EPD_7IN5B_V2_WritePicture(gImage_7in5_V2_b + Imagesize/2, 1);
-    EPD_7IN5B_V2_WritePicture(gImage_7in5_V2_ry, 2);
-    EPD_7IN5B_V2_WritePicture(gImage_7in5_V2_ry + Imagesize/2, 3);
+    Debug("show image for array\r\n");
+    EPD_7IN5B_V2_Init_Fast();
+	EPD_7IN5B_V2_Display(gImage_7in5_V2_b, gImage_7in5_V2_ry);
     DEV_Delay_ms(2000);
 #endif
 
@@ -100,7 +96,48 @@ int EPD_test(void)
     DEV_Delay_ms(2000);
 #endif
 
+#if 1   //Partial refresh, example shows time
+    EPD_7IN5B_V2_Init_Part();
+    EPD_7IN5B_V2_Display_Base_color(WHITE);
+	Paint_NewImage(Image, Font20.Width * 7, Font20.Height, 0, WHITE);
+    Debug("Partial refresh\r\n");
+    Paint_SelectImage(Image);
+    Paint_Clear(WHITE);
+	
+    PAINT_TIME sPaint_time;
+    sPaint_time.Hour = 12;
+    sPaint_time.Min = 34;
+    sPaint_time.Sec = 56;
+    UBYTE num = 10;
+    for (;;) {
+        sPaint_time.Sec = sPaint_time.Sec + 1;
+        if (sPaint_time.Sec == 60) {
+            sPaint_time.Min = sPaint_time.Min + 1;
+            sPaint_time.Sec = 0;
+            if (sPaint_time.Min == 60) {
+                sPaint_time.Hour =  sPaint_time.Hour + 1;
+                sPaint_time.Min = 0;
+                if (sPaint_time.Hour == 24) {
+                    sPaint_time.Hour = 0;
+                    sPaint_time.Min = 0;
+                    sPaint_time.Sec = 0;
+                }
+            }
+        }
+        Paint_ClearWindows(0, 0, Font20.Width * 7, Font20.Height, WHITE);
+        Paint_DrawTime(0, 0, &sPaint_time, &Font20, WHITE, BLACK);
+
+        num = num - 1;
+        if(num == 0) {
+            break;
+        }
+		EPD_7IN5B_V2_Display_Partial(Image, 10, 130, 10 + Font20.Width * 7, 130 + Font20.Height);
+        DEV_Delay_ms(500);//Analog clock 1s
+    }
+#endif
+
     printf("Clear...\r\n");
+    EPD_7IN5B_V2_Init();
     EPD_7IN5B_V2_Clear();
 
     printf("Goto Sleep...\r\n");

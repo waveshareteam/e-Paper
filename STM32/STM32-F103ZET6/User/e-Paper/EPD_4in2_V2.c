@@ -181,7 +181,7 @@ parameter:
 static void EPD_4IN2_V2_SetCursor(UWORD Xstart, UWORD Ystart)
 {
     EPD_4IN2_V2_SendCommand(0x4E); // SET_RAM_X_ADDRESS_COUNTER
-    EPD_4IN2_V2_SendData(Xstart & 0xFF);
+    EPD_4IN2_V2_SendData((Xstart>>3) & 0xFF);
 
     EPD_4IN2_V2_SendCommand(0x4F); // SET_RAM_Y_ADDRESS_COUNTER
     EPD_4IN2_V2_SendData(Ystart & 0xFF);
@@ -510,14 +510,27 @@ void EPD_4IN2_V2_Display_4Gray(UBYTE *Image)
 }
 
 // Send partial data for partial refresh
-void EPD_4IN2_V2_PartialDisplay(UBYTE *Image, UWORD x, UWORD y, UWORD w, UWORD l)
+void EPD_4IN2_V2_PartialDisplay(UBYTE *Image, UWORD Xstart, UWORD Ystart, UWORD Xend, UWORD Yend)
 {
-    UWORD Width, Height;
-    Width = (w % 8 == 0)? (w / 8 ): (w / 8 + 1);
-    Height = l;
+    if((Xstart % 8 + Xend % 8 == 8 && Xstart % 8 > Xend % 8) || Xstart % 8 + Xend % 8 == 0 || (Xend - Xstart)%8 == 0)
+    {
+        Xstart = Xstart / 8 ;
+        Xend = Xend / 8;
+    }
+    else
+    {
+        Xstart = Xstart / 8 ;
+        Xend = Xend % 8 == 0 ? Xend / 8 : Xend / 8 + 1;
+    }
+    
 
-	EPD_4IN2_V2_SendCommand(0x3C); //BorderWavefrom,
-	EPD_4IN2_V2_SendData(0x80);	
+    UWORD i, Width;
+	Width = Xend -  Xstart;
+	UWORD IMAGE_COUNTER = Width * (Yend-Ystart);
+
+	Xend -= 1;
+	Yend -= 1;	
+
 
 	EPD_4IN2_V2_SendCommand(0x21); 
 	EPD_4IN2_V2_SendData(0x00);
@@ -526,19 +539,35 @@ void EPD_4IN2_V2_PartialDisplay(UBYTE *Image, UWORD x, UWORD y, UWORD w, UWORD l
 	EPD_4IN2_V2_SendCommand(0x3C); 
 	EPD_4IN2_V2_SendData(0x80); 
 
-	EPD_4IN2_V2_SetWindows(x, y, x+w-1, y+l-1);
-	EPD_4IN2_V2_SetCursor(x, y);
+    EPD_4IN2_V2_SendCommand(0x11);	// data  entry  mode
+    EPD_4IN2_V2_SendData(0x03);		// X-mode  
+
+    EPD_4IN2_V2_SendCommand(0x44);       // set RAM x address start/end, in page 35
+    EPD_4IN2_V2_SendData(Xstart & 0xff);    // RAM x address start at 00h;
+    EPD_4IN2_V2_SendData(Xend & 0xff);    // RAM x address end at 0fh(15+1)*8->128 
+    EPD_4IN2_V2_SendCommand(0x45);       // set RAM y address start/end, in page 35
+    EPD_4IN2_V2_SendData(Ystart & 0xff);    // RAM y address start at 0127h;
+    EPD_4IN2_V2_SendData((Ystart>>8) & 0x01);    // RAM y address start at 0127h;
+    EPD_4IN2_V2_SendData(Yend & 0xff);    // RAM y address end at 00h;
+    EPD_4IN2_V2_SendData((Yend>>8) & 0x01); 
+
+    EPD_4IN2_V2_SendCommand(0x4E);   // set RAM x address count to 0;
+    EPD_4IN2_V2_SendData(Xstart & 0xff); 
+    EPD_4IN2_V2_SendCommand(0x4F);   // set RAM y address count to 0X127;    
+    EPD_4IN2_V2_SendData(Ystart & 0xff);
+    EPD_4IN2_V2_SendData((Ystart>>8) & 0x01);
+
+    EPD_4IN2_V2_ReadBusy();
+
+    
 	
     EPD_4IN2_V2_SendCommand(0x24);
-    for (UWORD j = 0; j < Height; j++) {
-        for (UWORD i = 0; i < Width; i++) {
-            EPD_4IN2_V2_SendData(Image[i + j * Width]);
-        }
+    for (UWORD j = 0; j < IMAGE_COUNTER; j++) {
+            EPD_4IN2_V2_SendData(Image[j]);
     }
 	
 	EPD_4IN2_V2_TurnOnDisplay_Partial();
 }
-
 /******************************************************************************
 function :	Enter sleep mode
 parameter:

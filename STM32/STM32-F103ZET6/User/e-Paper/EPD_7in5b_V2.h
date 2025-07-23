@@ -41,10 +41,14 @@
 #define EPD_7IN5B_V2_HEIGHT      480
 
 UBYTE EPD_7IN5B_V2_Init(void);
+UBYTE EPD_7IN5B_V2_Init_Fast(void);
+UBYTE EPD_7IN5B_V2_Init_Part(void);
 void EPD_7IN5B_V2_Clear(void);
 void EPD_7IN5B_V2_ClearRed(void);
 void EPD_7IN5B_V2_ClearBlack(void);
 void EPD_7IN5B_V2_Display(const UBYTE *blackimage, const UBYTE *ryimage);
 void EPD_7IN5B_V2_Sleep(void);
 void EPD_7IN5B_V2_WritePicture(const UBYTE *blackimage, UBYTE Block);
+void EPD_7IN5B_V2_Display_Base_color(UBYTE color);
+void EPD_7IN5B_V2_Display_Partial(const UBYTE *Image, UWORD Xstart, UWORD Ystart, UWORD Xend, UWORD Yend);
 #endif
