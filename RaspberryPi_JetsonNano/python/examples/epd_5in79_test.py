@@ -86,6 +86,7 @@ try:
     # # you will need to use these two functions for a refresh, or the local brush display will be problematic
     # Himage = Image.new('1', (epd.width, epd.height), 255)
     # draw = ImageDraw.Draw(Himage)
+    epd.init_Partial()
     num = 0
     while (True):
         draw.rectangle((10, 120, 130, 170), fill = 255)

@@ -518,6 +518,18 @@ class EPD:
         Width =int(self.width / 16)+1
         Width1 =int(self.width / 8)
         Height = self.height
+
+        self.send_command(0x22)
+        self.send_data(0xc0)
+        self.send_command(0x20)
+        self.ReadBusy()
+
+        self.send_command(0x11)
+        self.send_data(0x01)
+
+        self.send_command(0x91)
+        self.send_data(0x00)
+
         self.send_command(0x44)	 
         self.send_data(0x00)     						
         self.send_data(0x31) 
