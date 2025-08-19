@@ -89,27 +89,34 @@ static void EPD_4IN0E_ReadBusyH(void)
 function :  Turn On Display
 parameter:
 ******************************************************************************/
+#define AUTO_SEQUENCE 1
 static void EPD_4IN0E_TurnOnDisplay(void)
 {
-    
-    EPD_4IN0E_SendCommand(0x04); // POWER_ON
+#ifdef AUTO_SEQUENCE
+    EPD_4IN0E_SendCommand(0x17);  // AUTO: AUTO SEQUENCE
+    EPD_4IN0E_SendData(0xA5);     // A5: PON->DRF->POF / A7: PON->DRF->POF->DSLP
+#else
+    EPD_4IN0E_SendCommand(0x04);  // PON: POWER ON
     EPD_4IN0E_ReadBusyH();
     DEV_Delay_ms(200);
 
+#if 0
     //Second setting 
-    EPD_4IN0E_SendCommand(0x06);
+    EPD_4IN0E_SendCommand(0x06);  // BTST: BOOSTER SOFT START (why 2nd time?)
     EPD_4IN0E_SendData(0x6F);
     EPD_4IN0E_SendData(0x1F);
     EPD_4IN0E_SendData(0x17);
     EPD_4IN0E_SendData(0x27);
     DEV_Delay_ms(200);
+#endif
 
-    EPD_4IN0E_SendCommand(0x12); // DISPLAY_REFRESH
+    EPD_4IN0E_SendCommand(0x12);  // DRF: DISPLAY/DATA REFRESH
     EPD_4IN0E_SendData(0x00);
     EPD_4IN0E_ReadBusyH();
 
-    EPD_4IN0E_SendCommand(0x02); // POWER_OFF
+    EPD_4IN0E_SendCommand(0x02);  // POF: POWER OFF
     EPD_4IN0E_SendData(0X00);
+#endif
     EPD_4IN0E_ReadBusyH();
 }
 
@@ -131,32 +138,32 @@ void EPD_4IN0E_Init(void)
     EPD_4IN0E_SendData(0x09);
     EPD_4IN0E_SendData(0x18);
 
-    EPD_4IN0E_SendCommand(0x01);
+    EPD_4IN0E_SendCommand(0x01);  // PWR: POWER SETTING (REGISTER)
     EPD_4IN0E_SendData(0x3F);
 
-    EPD_4IN0E_SendCommand(0x00);
-    EPD_4IN0E_SendData(0x5F);
-    EPD_4IN0E_SendData(0x69);
+    EPD_4IN0E_SendCommand(0x00);  // PSR: PANEL SETTING (REGISTER)
+    EPD_4IN0E_SendData(0x1F);
 
-    EPD_4IN0E_SendCommand(0x05);
+#if 0
+    EPD_4IN0E_SendCommand(0x05);  // looks like BTST, but 0x05 would be PMES: POWER ON MEASURE CMD
     EPD_4IN0E_SendData(0x40);
     EPD_4IN0E_SendData(0x1F);
     EPD_4IN0E_SendData(0x1F);
     EPD_4IN0E_SendData(0x2C);
 
-    EPD_4IN0E_SendCommand(0x08);
+    EPD_4IN0E_SendCommand(0x08);  // looks like BTST, but there is no further BTST on 0x08?
     EPD_4IN0E_SendData(0x6F);
     EPD_4IN0E_SendData(0x1F);
     EPD_4IN0E_SendData(0x1F);
     EPD_4IN0E_SendData(0x22);
+#endif
 
-    EPD_4IN0E_SendCommand(0x06);
-    EPD_4IN0E_SendData(0x6F);
-    EPD_4IN0E_SendData(0x1F);
-    EPD_4IN0E_SendData(0x17);
-    EPD_4IN0E_SendData(0x17);
+    EPD_4IN0E_SendCommand(0x06);  // BTST: BOOSTER SOFT START
+    EPD_4IN0E_SendData(0x10);
+    EPD_4IN0E_SendData(0x10);
+    EPD_4IN0E_SendData(0x10);
 
-    EPD_4IN0E_SendCommand(0x03);
+    EPD_4IN0E_SendCommand(0x03);  // PFS: POWER OFF SEQUENCE SETTING
     EPD_4IN0E_SendData(0x00);
     EPD_4IN0E_SendData(0x54);
     EPD_4IN0E_SendData(0x00);
@@ -166,22 +173,22 @@ void EPD_4IN0E_Init(void)
     EPD_4IN0E_SendData(0x02);
     EPD_4IN0E_SendData(0x00);
 
-    EPD_4IN0E_SendCommand(0x30);
-    EPD_4IN0E_SendData(0x08);
+    EPD_4IN0E_SendCommand(0x30);  // PLL: PLL CONTROL
+    EPD_4IN0E_SendData(0x07);     // 0x00(slow) - 0x07(fast), >0x08(slow again)
 
-    EPD_4IN0E_SendCommand(0x50);
+    EPD_4IN0E_SendCommand(0x50);  // CDI: VCOM AND DATA INTERVAL SETTING
     EPD_4IN0E_SendData(0x3F);
 
-    EPD_4IN0E_SendCommand(0x61);
-    EPD_4IN0E_SendData(0x01);
+    EPD_4IN0E_SendCommand(0x61);  // TRES: RESOLUTION SETTING
+    EPD_4IN0E_SendData(0x01);     // [0x0190][0x0258] -> displaysize
     EPD_4IN0E_SendData(0x90);
     EPD_4IN0E_SendData(0x02); 
     EPD_4IN0E_SendData(0x58);
 
-    EPD_4IN0E_SendCommand(0xE3);
+    EPD_4IN0E_SendCommand(0xE3);  // PWS: POWER SAVING
     EPD_4IN0E_SendData(0x2F);
 
-    EPD_4IN0E_SendCommand(0x84);
+    EPD_4IN0E_SendCommand(0x84);  // could be T_VCDS?
     EPD_4IN0E_SendData(0x01);
     EPD_4IN0E_ReadBusyH();
 
