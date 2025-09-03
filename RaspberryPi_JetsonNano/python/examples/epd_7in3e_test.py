@@ -16,7 +16,7 @@ import traceback
 logging.basicConfig(level=logging.DEBUG)
 
 try:
-    logging.info("epd7in3f Demo")
+    logging.info("epd7in3e Demo")
 
     epd = epd7in3e.EPD()   
     logging.info("init and Clear")
