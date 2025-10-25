@@ -1,7 +1,7 @@
 /*****************************************************************************
 * | File      	:   EPD_7in5h.h
 * | Author      :   Waveshare team
-* | Function    :   7.5inch e-paper (G)
+* | Function    :   7.5inch e-paper (H)
 * | Info        :
 *----------------
 * |	This version:   V1.0
