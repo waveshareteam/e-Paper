@@ -13,23 +13,36 @@ The demo application shows:
 
 ## Building
 
-**Note:** Zephyr 4.x uses new board naming format.
+**Note:** This sample is inside the module directory. You must specify the module path when building.
 
-### For nRF52840-DK:
+### Method 1: Using Command Line (Recommended)
+
+Navigate to the sample directory, then specify the module path via CMake variable:
+
 ```bash
+cd zephyr-epaper-project/samples/epaper_demo
+
+# For nRF52840-DK
+west build -b nrf52840dk/nrf52840 -p -- -DZEPHYR_EXTRA_MODULES=../..
+
+# For nRF52832-DK
+west build -b nrf52dk/nrf52832 -p -- -DZEPHYR_EXTRA_MODULES=../..
+
+# For nRF54L15-DK
+west build -b nrf54l15dk/nrf54l15/cpuapp -p -- -DZEPHYR_EXTRA_MODULES=../..
+```
+
+### Method 2: Using Environment Variable
+
+```bash
+export ZEPHYR_EXTRA_MODULES=/path/to/zephyr-epaper-project
+cd zephyr-epaper-project/samples/epaper_demo
 west build -b nrf52840dk/nrf52840 -p
-west flash
 ```
 
-### For nRF52832-DK:
-```bash
-west build -b nrf52dk/nrf52832 -p
-west flash
-```
+### Flash the Application
 
-### For nRF54L15-DK:
 ```bash
-west build -b nrf54l15dk/nrf54l15/cpuapp -p
 west flash
 ```
 

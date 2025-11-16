@@ -38,21 +38,23 @@ cd zephyr-epaper-project/samples/epaper_demo
 
 ### 3. Build for Your Board
 
+**Important:** Since the sample is inside the module directory, you must specify the module path using `-DZEPHYR_EXTRA_MODULES=../..`
+
 #### For nRF52840-DK:
 ```bash
-west build -b nrf52840dk/nrf52840 -p
+west build -b nrf52840dk/nrf52840 -p -- -DZEPHYR_EXTRA_MODULES=../..
 west flash
 ```
 
 #### For nRF52832-DK:
 ```bash
-west build -b nrf52dk/nrf52832 -p
+west build -b nrf52dk/nrf52832 -p -- -DZEPHYR_EXTRA_MODULES=../..
 west flash
 ```
 
 #### For nRF54L15-DK:
 ```bash
-west build -b nrf54l15dk/nrf54l15/cpuapp -p
+west build -b nrf54l15dk/nrf54l15/cpuapp -p -- -DZEPHYR_EXTRA_MODULES=../..
 west flash
 ```
 
@@ -76,7 +78,7 @@ screen /dev/ttyACM0 115200
 Use `-p` or `--pristine` to ensure a clean build:
 
 ```bash
-west build -b nrf52840dk/nrf52840 -p
+west build -b nrf52840dk/nrf52840 -p -- -DZEPHYR_EXTRA_MODULES=../..
 ```
 
 ### Build Without LVGL
@@ -91,7 +93,7 @@ To build without LVGL support, modify `prj.conf`:
 Then rebuild:
 
 ```bash
-west build -b nrf52840dk/nrf52840 -p
+west build -b nrf52840dk/nrf52840 -p -- -DZEPHYR_EXTRA_MODULES=../..
 ```
 
 ### Custom Configuration
@@ -99,7 +101,7 @@ west build -b nrf52840dk/nrf52840 -p
 Create a custom `.conf` file and use:
 
 ```bash
-west build -b nrf52840dk/nrf52840 -p -- -DEXTRA_CONF_FILE=my_config.conf
+west build -b nrf52840dk/nrf52840 -p -- -DZEPHYR_EXTRA_MODULES=../.. -DEXTRA_CONF_FILE=my_config.conf
 ```
 
 ## Troubleshooting Build Issues

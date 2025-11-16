@@ -31,8 +31,14 @@ zephyr-epaper-project/
 
 ```bash
 cd zephyr-epaper-project/samples/epaper_demo
-west build -b nrf52840dk/nrf52840 -p
+
+# Build with module path specified
+west build -b nrf52840dk/nrf52840 -p -- -DZEPHYR_EXTRA_MODULES=../..
+
+# Flash to board
 west flash
 ```
+
+**Important:** When building samples inside the module, you must specify the module path via `-DZEPHYR_EXTRA_MODULES=../..`
 
 See BUILD_INSTRUCTIONS.md for detailed build information.
