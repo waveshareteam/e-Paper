@@ -6,6 +6,8 @@
  * Ported from Waveshare's original driver
  */
 
+#define DT_DRV_COMPAT waveshare_epd_2in9_v2
+
 #include <zephyr/kernel.h>
 #include <zephyr/device.h>
 #include <zephyr/drivers/spi.h>
