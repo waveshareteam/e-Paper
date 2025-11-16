@@ -17,8 +17,8 @@ This project provides a Zephyr OS driver for the Waveshare 2.9" e-Paper display 
 - WEACT Studio ESL 2.9" (compatible with Waveshare 2.9")
 
 ### Supported Development Boards
-- nRF52840-DK (Board ID: `nrf52840dk/nrf52840/cpuapp`)
-- nRF52832-DK (Board ID: `nrf52dk/nrf52832/xxaa`)
+- nRF52840-DK (Board ID: `nrf52840dk/nrf52840`)
+- nRF52832-DK (Board ID: `nrf52dk/nrf52832`)
 - nRF54L15-DK (Board ID: `nrf54l15dk/nrf54l15/cpuapp`)
 
 ### Hardware Connections
@@ -103,14 +103,14 @@ list(APPEND ZEPHYR_EXTRA_MODULES
 #### For nRF52840-DK:
 ```bash
 cd zephyr-epaper-project/samples/epaper_demo
-west build -b nrf52840dk/nrf52840/cpuapp -p
+west build -b nrf52840dk/nrf52840 -p
 west flash
 ```
 
 #### For nRF52832-DK:
 ```bash
 cd zephyr-epaper-project/samples/epaper_demo
-west build -b nrf52dk/nrf52832/xxaa -p
+west build -b nrf52dk/nrf52832 -p
 west flash
 ```
 

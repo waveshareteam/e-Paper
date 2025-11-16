@@ -8,8 +8,8 @@ Zephyr 4.x uses a new board naming format with slashes instead of underscores:
 
 | Old Format (Zephyr 3.x) | New Format (Zephyr 4.x) |
 |-------------------------|-------------------------|
-| nrf52840dk_nrf52840 | nrf52840dk/nrf52840/cpuapp |
-| nrf52dk_nrf52832 | nrf52dk/nrf52832/xxaa |
+| nrf52840dk_nrf52840 | nrf52840dk/nrf52840 |
+| nrf52dk_nrf52832 | nrf52dk/nrf52832 |
 | nrf54l15dk_nrf54l15_cpuapp | nrf54l15dk/nrf54l15/cpuapp |
 
 ## Step-by-Step Build Guide
@@ -40,13 +40,13 @@ cd zephyr-epaper-project/samples/epaper_demo
 
 #### For nRF52840-DK:
 ```bash
-west build -b nrf52840dk/nrf52840/cpuapp -p
+west build -b nrf52840dk/nrf52840 -p
 west flash
 ```
 
 #### For nRF52832-DK:
 ```bash
-west build -b nrf52dk/nrf52832/xxaa -p
+west build -b nrf52dk/nrf52832 -p
 west flash
 ```
 
@@ -259,10 +259,10 @@ If you encounter build issues:
 
 ```bash
 # nRF52840-DK
-west build -b nrf52840dk/nrf52840/cpuapp -p && west flash
+west build -b nrf52840dk/nrf52840 -p && west flash
 
 # nRF52832-DK
-west build -b nrf52dk/nrf52832/xxaa -p && west flash
+west build -b nrf52dk/nrf52832 -p && west flash
 
 # nRF54L15-DK
 west build -b nrf54l15dk/nrf54l15/cpuapp -p && west flash

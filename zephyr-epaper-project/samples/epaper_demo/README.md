@@ -17,13 +17,13 @@ The demo application shows:
 
 ### For nRF52840-DK:
 ```bash
-west build -b nrf52840dk/nrf52840/cpuapp -p
+west build -b nrf52840dk/nrf52840 -p
 west flash
 ```
 
 ### For nRF52832-DK:
 ```bash
-west build -b nrf52dk/nrf52832/xxaa -p
+west build -b nrf52dk/nrf52832 -p
 west flash
 ```
 

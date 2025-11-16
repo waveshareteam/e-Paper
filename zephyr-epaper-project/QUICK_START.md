@@ -88,14 +88,14 @@ cd ../../
 ### For nRF52840-DK:
 ```bash
 cd samples/epaper_demo
-west build -b nrf52840dk/nrf52840/cpuapp -p
+west build -b nrf52840dk/nrf52840 -p
 west flash
 ```
 
 ### For nRF52832-DK:
 ```bash
 cd samples/epaper_demo
-west build -b nrf52dk/nrf52832/xxaa -p
+west build -b nrf52dk/nrf52832 -p
 west flash
 ```
 

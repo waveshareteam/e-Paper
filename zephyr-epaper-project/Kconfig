@@ -48,4 +48,4 @@ endif # EPAPER_EPD_2IN9_V2
 endmenu
 
 # LVGL Configuration
-source "lib/lvgl/Kconfig"
+rsource "lib/lvgl/Kconfig"
