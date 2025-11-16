@@ -1,6 +1,7 @@
+name: epaper
 build:
   kconfig: Kconfig
+  cmake: zephyr
   settings:
     dts_root: .
     board_root: .
-  cmake: zephyr
