@@ -6,7 +6,8 @@
 if(CONFIG_EPAPER_EPD_2IN9_V2)
   zephyr_library()
   zephyr_library_sources(drivers/epaper/epd_2in9_v2.c)
-  zephyr_library_include_directories(include)
+  # Make include directory available globally
+  zephyr_include_directories(include)
 endif()
 
 # Add LVGL if configured
