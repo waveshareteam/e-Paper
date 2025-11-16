@@ -1,7 +1,11 @@
-# E-Paper Driver Module CMakeLists.txt
+# E-Paper Driver Module - Standalone Build File
 #
 # Copyright (c) 2025
 # SPDX-License-Identifier: Apache-2.0
+#
+# NOTE: When this module is included in a Zephyr application via ZEPHYR_EXTRA_MODULES,
+#       Zephyr uses zephyr/CMakeLists.txt instead of this file.
+#       This file is for potential standalone builds only.
 
 if(CONFIG_EPAPER_EPD_2IN9_V2)
   zephyr_library()
