@@ -1,0 +1,36 @@
+# Device tree binding for Waveshare EPD 2.9" V2 e-Paper Display
+#
+# Copyright (c) 2025
+# SPDX-License-Identifier: Apache-2.0
+
+description: Waveshare EPD 2.9 inch V2 e-Paper Display
+
+compatible: "waveshare,epd-2in9-v2"
+
+include: spi-device.yaml
+
+properties:
+  rst-gpios:
+    type: phandle-array
+    required: true
+    description: Reset GPIO pin
+
+  dc-gpios:
+    type: phandle-array
+    required: true
+    description: Data/Command selection GPIO pin
+
+  busy-gpios:
+    type: phandle-array
+    required: true
+    description: Busy status GPIO pin
+
+  width:
+    type: int
+    default: 128
+    description: Display width in pixels
+
+  height:
+    type: int
+    default: 296
+    description: Display height in pixels

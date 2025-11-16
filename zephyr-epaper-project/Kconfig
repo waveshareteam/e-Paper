@@ -1,0 +1,51 @@
+# E-Paper driver Kconfig
+#
+# Copyright (c) 2025
+# SPDX-License-Identifier: Apache-2.0
+
+menu "E-Paper Display Drivers"
+
+config EPAPER_EPD_2IN9_V2
+	bool "Waveshare EPD 2.9\" V2 e-Paper Display Driver"
+	depends on SPI
+	depends on GPIO
+	help
+	  Enable driver for Waveshare EPD 2.9" V2 e-Paper display.
+	  This display uses SPI interface and requires RST, DC, CS, and BUSY GPIO pins.
+
+if EPAPER_EPD_2IN9_V2
+
+config EPAPER_EPD_2IN9_V2_INIT_PRIORITY
+	int "E-Paper display initialization priority"
+	default 80
+	help
+	  Initialization priority for the e-Paper display driver.
+	  Must be greater than SPI and GPIO initialization priorities.
+
+config EPAPER_EPD_2IN9_V2_PARTIAL_UPDATE
+	bool "Enable partial update support"
+	default y
+	help
+	  Enable partial screen update functionality.
+	  This allows updating only a portion of the display.
+
+config EPAPER_EPD_2IN9_V2_FAST_MODE
+	bool "Enable fast refresh mode"
+	default y
+	help
+	  Enable fast refresh mode for quicker screen updates.
+	  This mode provides faster refresh at the cost of some quality.
+
+config EPAPER_EPD_2IN9_V2_GRAY4_MODE
+	bool "Enable 4-level grayscale mode"
+	default y
+	help
+	  Enable 4-level grayscale display mode.
+	  This allows displaying images with 4 gray levels instead of just black/white.
+
+endif # EPAPER_EPD_2IN9_V2
+
+endmenu
+
+# LVGL Configuration
+source "lib/lvgl/Kconfig"
