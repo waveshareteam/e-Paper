@@ -42,31 +42,4 @@ config LVGL_DISPLAY_BUFFER_SIZE
 	  Size of the LVGL display buffer in pixels.
 	  For 128x296 e-Paper: (128 * 296) / 8 = 4736 bytes
 
-config LVGL_BITS_PER_PIXEL
-	int "Bits per pixel"
-	default 1
-	help
-	  Number of bits per pixel. For monochrome e-Paper, use 1.
-
-config LVGL_USE_LOG
-	bool "Enable LVGL logging"
-	default y
-	help
-	  Enable LVGL logging functionality.
-
-config LVGL_LOG_LEVEL
-	int "LVGL log level"
-	default 3
-	depends on LVGL_USE_LOG
-	help
-	  Log level for LVGL:
-	  0 = Trace, 1 = Info, 2 = Warn, 3 = Error, 4 = User, 5 = None
-
-config LVGL_EPAPER_DRIVER
-	bool "Enable e-Paper display driver for LVGL"
-	default y
-	depends on EPAPER_EPD_2IN9_V2
-	help
-	  Enable the display driver that connects LVGL to the e-Paper display.
-
 endif # LVGL

@@ -83,24 +83,26 @@ cd ../../
 
 ## Step 4: Build and Flash
 
+**Important:** Zephyr 4.x uses new board naming with slashes.
+
 ### For nRF52840-DK:
 ```bash
 cd samples/epaper_demo
-west build -b nrf52840dk_nrf52840 -p
+west build -b nrf52840dk/nrf52840/cpuapp -p
 west flash
 ```
 
 ### For nRF52832-DK:
 ```bash
 cd samples/epaper_demo
-west build -b nrf52dk_nrf52832 -p
+west build -b nrf52dk/nrf52832/xxaa -p
 west flash
 ```
 
 ### For nRF54L15-DK:
 ```bash
 cd samples/epaper_demo
-west build -b nrf54l15dk_nrf54l15_cpuapp -p
+west build -b nrf54l15dk/nrf54l15/cpuapp -p
 west flash
 ```
 

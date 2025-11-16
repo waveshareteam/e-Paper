@@ -30,9 +30,7 @@ if(CONFIG_LVGL)
     message(WARNING "Run: git clone https://github.com/lvgl/lvgl.git ${LVGL_ROOT_DIR}")
   endif()
 
-  # Add e-Paper display driver for LVGL
-  if(CONFIG_LVGL_EPAPER_DRIVER)
-    zephyr_library_sources(lvgl_epaper_driver.c)
-  endif()
+  # Add e-Paper display driver for LVGL (always build when LVGL is enabled)
+  zephyr_library_sources(lvgl_epaper_driver.c)
 
 endif()
