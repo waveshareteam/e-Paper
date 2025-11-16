@@ -46,6 +46,3 @@ config EPAPER_EPD_2IN9_V2_GRAY4_MODE
 endif # EPAPER_EPD_2IN9_V2
 
 endmenu
-
-# LVGL Configuration
-rsource "lib/lvgl/Kconfig"

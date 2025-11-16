@@ -12,8 +12,10 @@ if(CONFIG_EPAPER_EPD_2IN9_V2)
   zephyr_include_directories(${CMAKE_CURRENT_LIST_DIR}/../include)
 endif()
 
-# Add LVGL if configured
-# Use add_subdirectory with explicit binary dir to avoid conflicts
-if(CONFIG_LVGL AND EXISTS ${CMAKE_CURRENT_LIST_DIR}/../lib/lvgl/CMakeLists.txt)
-  add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/../lib/lvgl ${CMAKE_BINARY_DIR}/epaper_module_lvgl)
+# LVGL Integration
+# Add LVGL e-Paper driver if both are enabled
+if(CONFIG_EPAPER_EPD_2IN9_V2 AND CONFIG_LVGL)
+  if(EXISTS ${CMAKE_CURRENT_LIST_DIR}/../lib/lvgl/lvgl_epaper_driver.c)
+    zephyr_library_sources(${CMAKE_CURRENT_LIST_DIR}/../lib/lvgl/lvgl_epaper_driver.c)
+  endif()
 endif()
