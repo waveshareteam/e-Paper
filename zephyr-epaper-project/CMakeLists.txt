@@ -10,6 +10,7 @@ if(CONFIG_EPAPER_EPD_2IN9_V2)
 endif()
 
 # Add LVGL if configured
-if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/lib/lvgl/CMakeLists.txt)
-  add_subdirectory(lib/lvgl)
+# Use add_subdirectory with explicit binary dir to avoid conflicts
+if(CONFIG_LVGL AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/lib/lvgl/CMakeLists.txt)
+  add_subdirectory(lib/lvgl ${CMAKE_BINARY_DIR}/epaper_module_lvgl)
 endif()
