@@ -1,0 +1,53 @@
+/*
+ * Device tree overlay for Waveshare EPD 2.9" V2 on nRF54L15-DK
+ *
+ * SPI Pin Configuration:
+ * - MOSI: P1.11 (Arduino D11)
+ * - MISO: P1.12 (Arduino D12) - not used by e-Paper
+ * - SCK:  P1.13 (Arduino D13)
+ * - CS:   P1.10 (Arduino D10)
+ *
+ * Control Pins:
+ * - RST:  P1.09 (Arduino D9)
+ * - DC:   P1.08 (Arduino D8)
+ * - BUSY: P1.07 (Arduino D7)
+ */
+
+&pinctrl {
+	spi22_default: spi22_default {
+		group1 {
+			psels = <NRF_PSEL(SPIM_SCK, 1, 13)>,
+				<NRF_PSEL(SPIM_MOSI, 1, 11)>,
+				<NRF_PSEL(SPIM_MISO, 1, 12)>;
+		};
+	};
+
+	spi22_sleep: spi22_sleep {
+		group1 {
+			psels = <NRF_PSEL(SPIM_SCK, 1, 13)>,
+				<NRF_PSEL(SPIM_MOSI, 1, 11)>,
+				<NRF_PSEL(SPIM_MISO, 1, 12)>;
+			low-power-enable;
+		};
+	};
+};
+
+&spi22 {
+	compatible = "nordic,nrf-spim";
+	status = "okay";
+	pinctrl-0 = <&spi22_default>;
+	pinctrl-1 = <&spi22_sleep>;
+	pinctrl-names = "default", "sleep";
+	cs-gpios = <&gpio1 10 GPIO_ACTIVE_LOW>;
+
+	epd_2in9_v2: epd@0 {
+		compatible = "waveshare,epd-2in9-v2";
+		reg = <0>;
+		spi-max-frequency = <4000000>;  /* 4 MHz */
+		rst-gpios = <&gpio1 9 GPIO_ACTIVE_LOW>;
+		dc-gpios = <&gpio1 8 GPIO_ACTIVE_HIGH>;
+		busy-gpios = <&gpio1 7 GPIO_ACTIVE_HIGH>;
+		width = <128>;
+		height = <296>;
+	};
+};
