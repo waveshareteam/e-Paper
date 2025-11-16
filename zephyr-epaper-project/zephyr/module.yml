@@ -3,4 +3,4 @@ build:
   settings:
     dts_root: .
     board_root: .
-  cmake: zephyr
+  cmake: CMakeLists.txt
