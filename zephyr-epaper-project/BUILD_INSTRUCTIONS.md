@@ -76,7 +76,7 @@ screen /dev/ttyACM0 115200
 Use `-p` or `--pristine` to ensure a clean build:
 
 ```bash
-west build -b nrf52840dk/nrf52840/cpuapp -p
+west build -b nrf52840dk/nrf52840 -p
 ```
 
 ### Build Without LVGL
@@ -91,7 +91,7 @@ To build without LVGL support, modify `prj.conf`:
 Then rebuild:
 
 ```bash
-west build -b nrf52840dk/nrf52840/cpuapp -p
+west build -b nrf52840dk/nrf52840 -p
 ```
 
 ### Custom Configuration
@@ -99,7 +99,7 @@ west build -b nrf52840dk/nrf52840/cpuapp -p
 Create a custom `.conf` file and use:
 
 ```bash
-west build -b nrf52840dk/nrf52840/cpuapp -p -- -DEXTRA_CONF_FILE=my_config.conf
+west build -b nrf52840dk/nrf52840 -p -- -DEXTRA_CONF_FILE=my_config.conf
 ```
 
 ## Troubleshooting Build Issues
@@ -112,7 +112,7 @@ west build -b nrf52840dk/nrf52840/cpuapp -p -- -DEXTRA_CONF_FILE=my_config.conf
 west build -b nrf52840dk_nrf52840
 
 # Correct (new format)
-west build -b nrf52840dk/nrf52840/cpuapp
+west build -b nrf52840dk/nrf52840
 ```
 
 ### Issue: "Kconfig warnings: undefined symbol LVGL_XXX"
