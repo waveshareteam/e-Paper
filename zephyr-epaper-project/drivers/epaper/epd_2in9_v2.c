@@ -185,16 +185,39 @@ static int epd_send_data_multi(const struct device *dev, const uint8_t *data, si
 	return spi_write_dt(&config->spi, &tx_bufs);
 }
 
-static void epd_wait_busy(const struct device *dev)
+static int epd_wait_busy(const struct device *dev)
 {
 	const struct epd_2in9_v2_config *config = dev->config;
+	int timeout_ms = 5000; /* 5 second timeout */
+	int elapsed = 0;
+	int busy_state;
 
-	LOG_DBG("Waiting for display...");
+	busy_state = gpio_pin_get_dt(&config->busy);
+	LOG_INF("BUSY pin initial state: %d", busy_state);
+
+	if (busy_state < 0) {
+		LOG_ERR("Failed to read BUSY pin: %d", busy_state);
+		return busy_state;
+	}
+
+	LOG_DBG("Waiting for display (timeout: %d ms)...", timeout_ms);
 	while (gpio_pin_get_dt(&config->busy) == 1) {
 		k_msleep(10);
+		elapsed += 10;
+
+		if (elapsed >= timeout_ms) {
+			LOG_ERR("Timeout waiting for BUSY pin (still high after %d ms)", timeout_ms);
+			LOG_ERR("Check BUSY pin connection to P1.8 (Arduino D7)");
+			return -ETIMEDOUT;
+		}
+
+		if (elapsed % 500 == 0) {
+			LOG_INF("Still waiting... (%d ms elapsed)", elapsed);
+		}
 	}
 	k_msleep(50);
-	LOG_DBG("Display ready");
+	LOG_INF("Display ready (waited %d ms)", elapsed);
+	return 0;
 }
 
 static int epd_load_lut(const struct device *dev, const uint8_t *lut)
@@ -215,7 +238,10 @@ static int epd_load_lut(const struct device *dev, const uint8_t *lut)
 		}
 	}
 
-	epd_wait_busy(dev);
+	ret = epd_wait_busy(dev);
+	if (ret < 0) {
+		return ret;
+	}
 
 	/* Set additional LUT parameters */
 	epd_send_command(dev, 0x3f);
@@ -261,19 +287,29 @@ static void epd_set_cursor(const struct device *dev, uint16_t x, uint16_t y)
 
 static int epd_turn_on_display(const struct device *dev)
 {
+	int ret;
+
 	epd_send_command(dev, 0x22);  /* Display Update Control */
 	epd_send_data(dev, 0xC7);
 	epd_send_command(dev, 0x20);  /* Activate Display Update Sequence */
-	epd_wait_busy(dev);
+	ret = epd_wait_busy(dev);
+	if (ret < 0) {
+		return ret;
+	}
 	return 0;
 }
 
 static int epd_turn_on_display_partial(const struct device *dev)
 {
+	int ret;
+
 	epd_send_command(dev, 0x22);  /* Display Update Control */
 	epd_send_data(dev, 0x0F);
 	epd_send_command(dev, 0x20);  /* Activate Display Update Sequence */
-	epd_wait_busy(dev);
+	ret = epd_wait_busy(dev);
+	if (ret < 0) {
+		return ret;
+	}
 	return 0;
 }
 
@@ -290,11 +326,19 @@ int epd_2in9_v2_init(const struct device *dev, enum epd_refresh_mode mode)
 	epd_reset(dev);
 	k_msleep(100);
 
-	epd_wait_busy(dev);
+	ret = epd_wait_busy(dev);
+	if (ret < 0) {
+		LOG_ERR("Failed waiting for display after reset: %d", ret);
+		return ret;
+	}
 
 	/* Software reset */
 	epd_send_command(dev, 0x12);
-	epd_wait_busy(dev);
+	ret = epd_wait_busy(dev);
+	if (ret < 0) {
+		LOG_ERR("Failed waiting for display after software reset: %d", ret);
+		return ret;
+	}
 
 	/* Driver output control */
 	epd_send_command(dev, 0x01);
@@ -330,7 +374,11 @@ int epd_2in9_v2_init(const struct device *dev, enum epd_refresh_mode mode)
 
 	/* Set cursor */
 	epd_set_cursor(dev, 0, 0);
-	epd_wait_busy(dev);
+	ret = epd_wait_busy(dev);
+	if (ret < 0) {
+		LOG_ERR("Failed waiting for display after cursor set: %d", ret);
+		return ret;
+	}
 
 	/* Load appropriate LUT */
 	switch (mode) {
@@ -404,6 +452,7 @@ int epd_2in9_v2_display_partial(const struct device *dev, const uint8_t *image)
 {
 	const struct epd_2in9_v2_config *config = dev->config;
 	uint16_t buffer_size = (config->width * config->height) / 8;
+	int ret;
 
 	if (image == NULL) {
 		return -EINVAL;
@@ -430,7 +479,11 @@ int epd_2in9_v2_display_partial(const struct device *dev, const uint8_t *image)
 	epd_send_command(dev, 0x22);
 	epd_send_data(dev, 0xC0);
 	epd_send_command(dev, 0x20);
-	epd_wait_busy(dev);
+	ret = epd_wait_busy(dev);
+	if (ret < 0) {
+		LOG_ERR("Failed waiting for display in partial update: %d", ret);
+		return ret;
+	}
 
 	epd_set_window(dev, 0, 0, config->width - 1, config->height - 1);
 	epd_set_cursor(dev, 0, 0);
