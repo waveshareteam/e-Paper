@@ -307,10 +307,14 @@ class EPD:
         if (blackimage != None):
             for j in range(Height):
                 for i in range(Width):
-                    blackimage[i + j * Width] = ~blackimage[i + j * Width]
+                    blackimage[i + j * Width] = blackimage[i + j * Width] & ryimage[i + j * Width]
+            self.send_command(0x24)
+            self.send_data2(blackimage)
             self.send_command(0x26)
             self.send_data2(blackimage)
         else:
+            self.send_command(0x24)
+            self.send_data2(blackimage)
             self.send_command(0x26)
             self.send_data2(blackimage)   
         

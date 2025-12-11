@@ -50,3 +50,4 @@
 2024-07-11: Add routines for new program 7.3inch e-paper (E)
 2024-07-11: Add routines for the Aruduino R4 motherboard
 2024-08-08: Added 2.15B and 2.15G programs; Update 7.5B and 4.2B programs
+2025-12-05: Update the programs for 2.9-inch e-Paper (B) V4 and 5.83-inch e-Paper V2.

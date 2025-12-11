@@ -294,7 +294,7 @@ void DEV_GPIO_Init(void)
     EPD_PWR_PIN     = GPIO18;
 	EPD_BUSY_PIN    = GPIO24;
     EPD_MOSI_PIN    = SPI0_MOSI;
-	EPD_SCLK_PIN    = SPI0_SCLK;
+	EPD_SCLK_PIN    = SPI0_SCK;
 #endif
 
     DEV_GPIO_Mode(EPD_BUSY_PIN, 0);

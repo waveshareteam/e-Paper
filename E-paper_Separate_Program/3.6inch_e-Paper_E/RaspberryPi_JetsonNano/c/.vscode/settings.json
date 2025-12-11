@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "epd_test.h": "c",
+        "imagedata.h": "c",
+        "dev_config.h": "c"
+    }
+}

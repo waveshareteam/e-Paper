@@ -378,6 +378,7 @@ void EPD_2IN9B_V4_Display_Fast(const UBYTE *blackimage, const UBYTE *ryimage)
 void EPD_2IN9B_V4_Display_Base(const UBYTE *blackimage, const UBYTE *ryimage)
 {
     UWORD Width, Height;
+    UBYTE a;
     Width = (EPD_2IN9B_V4_WIDTH % 8 == 0)? (EPD_2IN9B_V4_WIDTH / 8 ): (EPD_2IN9B_V4_WIDTH / 8 + 1);
     Height = EPD_2IN9B_V4_HEIGHT;
 
@@ -397,10 +398,19 @@ void EPD_2IN9B_V4_Display_Base(const UBYTE *blackimage, const UBYTE *ryimage)
 
     EPD_2IN9B_V4_TurnOnDisplay_Base();
 
+    EPD_2IN9B_V4_SendCommand(0x24);
+    for (UWORD j = 0; j < Height; j++){
+        for (UWORD i = 0; i < Width; i++){
+            a = blackimage[i + j * Width]&ryimage[i + j * Width];
+            EPD_2IN9B_V4_SendData(a);
+        }
+    }
+
     EPD_2IN9B_V4_SendCommand(0x26);
     for (UWORD j = 0; j < Height; j++) {
         for (UWORD i = 0; i < Width; i++) {
-            EPD_2IN9B_V4_SendData(blackimage[i + j * Width]);
+            a = blackimage[i + j * Width]&ryimage[i + j * Width];
+            EPD_2IN9B_V4_SendData(a);
         }
     }
 }

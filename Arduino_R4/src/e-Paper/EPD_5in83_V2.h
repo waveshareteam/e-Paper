@@ -4,8 +4,8 @@
 * | Function    :   5.83inch e-paper V2
 * | Info        :
 *----------------
-* |	This version:   V1.0
-* | Date        :   2020-12-09
+* |	This version:   V1.1
+* | Date        :   2025-12-03
 * | Info        :
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -38,9 +38,15 @@
 #define EPD_5in83_V2_HEIGHT      480
 
 void EPD_5in83_V2_Init(void);
+void EPD_5in83_V2_Init_Fast(void);
+void EPD_5in83_V2_Init_Part(void);
+void EPD_5in83_V2_Init_4GRAY(void);
 void EPD_5in83_V2_Clear(void);
 void EPD_5in83_V2_Display(const UBYTE *Image);
-void EPD_5in83_V2_SendHalfHalfScreen(const UBYTE *Image);
+void EPD_5in83_V2_Display_Base_fImage(const UBYTE *Image);
+void EPD_5in83_V2_Display_Partial(const UBYTE *Image, UWORD Xstart, UWORD Ystart, UWORD Xend, UWORD Yend);
+void EPD_5in83_V2_Display_4Gray(const UBYTE *Image);
+void EPD_5in83_V2_4GrayDisplay_fImage(const UBYTE *Image);
 void EPD_5in83_V2_Sleep(void);
 
 #endif
