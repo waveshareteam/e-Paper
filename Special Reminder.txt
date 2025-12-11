@@ -1,3 +1,7 @@
 The Arduino program in this package only supports the Arduino series development boards, not the ESP32, ESP8266 and other development boards that use the Arduino IDE for development.
 ESP32 development board use: https://www.waveshare.com/wiki/E-Paper_ESP32_Driver_Board
 ESP8266 development board use: https://www.waveshare.com/wiki/E-Paper_ESP8266_Driver_Board
+
+The program in the Arduino_R4 folder in this program package is written based on the Arduino UNO R4 Minima development board and supports the Arduino UNO R4 WiFi development board. Does not support ESP32, ESP8266, Arduino UNO R3 and other development boards; To use the Arduino UNO R3 development board use the program in the Arduino folder
+
+Please note that the program in the Arduino folder will stop updating. If you need to use the Arduino UNO R3 to drive the latest screen, please transplant it by yourself. We recommend the development board of Arduino UNO R4 series to develop the ink screen

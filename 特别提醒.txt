@@ -1,3 +1,7 @@
 本程序包中的 Arduino 程序，仅支持 Arduino 系列的开发板，不支持 ESP32、ESP8266 等使用 Arduino IDE 进行开发的其他开发板
 ESP32开发板使用 ：https://www.waveshare.net/wiki/E-Paper_ESP32_Driver_Board
 ESP8266开发板使用 ：https://www.waveshare.net/wiki/E-Paper_ESP8266_Driver_Board
+
+本程序包中的 Arduino_R4 文件夹中的程序基于Arduino UNO R4 Minima开发板进行编写，支持 Arduino UNO R4 WiFi 开发板；不支持ESP32、ESP8266、Arduino UNO R3等开发板；如需使用 Arduino UNO R3 开发板请使用 Arduino 文件夹中的程序
+
+请注意，Arduino 文件夹中的程序将停止更新，如果您有需要使用 Arduino UNO R3 驱动最新的屏幕请您自行移植；我们推荐使用 Arduino UNO R4 系列的开发板对墨水屏进行开发

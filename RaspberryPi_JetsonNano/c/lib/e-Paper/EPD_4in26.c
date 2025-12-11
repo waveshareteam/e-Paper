@@ -536,6 +536,6 @@ parameter:
 void EPD_4in26_Sleep(void)
 {
 	EPD_4in26_SendCommand(0x10); //enter deep sleep
-	EPD_4in26_SendData(0x01); 
+	EPD_4in26_SendData(0x03); 
 	DEV_Delay_ms(100);
 }

@@ -1,11 +1,11 @@
 /*****************************************************************************
-* | File      	:	EPD_7in5.h
+* | File      	:	EPD_7in5_B.h
 * | Author      :   Waveshare team
 * | Function    :   Electronic paper driver
 * | Info        :
 *----------------
 * |	This version:   V2.0
-* | Date        :   2018-11-09
+* | Date        :   2024-08-07
 * | Info        :   
 * 1.Remove:ImageBuff[EPD_HEIGHT * EPD_WIDTH / 8]
 * 2.Change:EPD_Display(UBYTE *Image)
@@ -41,10 +41,14 @@
 #define EPD_7IN5B_V2_HEIGHT      480
 
 UBYTE EPD_7IN5B_V2_Init(void);
+UBYTE EPD_7IN5B_V2_Init_Fast(void);
+UBYTE EPD_7IN5B_V2_Init_Part(void);
 void EPD_7IN5B_V2_Clear(void);
 void EPD_7IN5B_V2_ClearRed(void);
 void EPD_7IN5B_V2_ClearBlack(void);
 void EPD_7IN5B_V2_Display(const UBYTE *blackimage, const UBYTE *ryimage);
+void EPD_7IN5B_V2_Display_Fast(const UBYTE *blackimage);
+void EPD_7IN5B_V2_Display_Base_color(UBYTE color);
+void EPD_7IN5B_V2_Display_Partial(const UBYTE *Image, UWORD Xstart, UWORD Ystart, UWORD Xend, UWORD Yend);
 void EPD_7IN5B_V2_Sleep(void);
-
 #endif

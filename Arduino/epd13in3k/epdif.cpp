@@ -62,7 +62,7 @@ int EpdIf::IfInit(void) {
     DigitalWrite(PWR_PIN, 1);
 
     SPI.begin();
-    SPI.beginTransaction(SPISettings(7000000, MSBFIRST, SPI_MODE0));
+    SPI.beginTransaction(SPISettings(4000000, MSBFIRST, SPI_MODE0));
     return 0;
 }
 

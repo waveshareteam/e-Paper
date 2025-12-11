@@ -31,6 +31,7 @@ Epd::~Epd() {
 };
 
 Epd::Epd() {
+    flag=0;
     reset_pin = RST_PIN;
     dc_pin = DC_PIN;
     cs_pin = CS_PIN;
@@ -39,7 +40,58 @@ Epd::Epd() {
     height = EPD_HEIGHT;
 };
 
+int Epd::Init_old(void) {
+    Reset();
+    SendCommand(0x04);
+    ReadBusy();
+	
+    SendCommand(0x00);
+    SendData(0x0F);     // LUT from OTP
+	
+    // /* EPD hardware init end */
+    return 0;
+}
+
+int Epd::Init_new(void) {
+
+    Reset();
+
+    ReadBusy();
+    SendCommand(0x12);
+    ReadBusy();
+
+    SendCommand(0x3C); //BorderWavefrom
+    SendData(0x05);	
+
+    SendCommand(0x18); //Read built-in temperature sensor
+    SendData(0x80);	
+
+    SendCommand(0x11); //data entry mode       
+    SendData(0x03);
+
+    SendCommand(0x44); //set Ram-X address start/end position   
+    SendData(0x00);
+    SendData(width/8-1);
+
+    SendCommand(0x45); //set Ram-Y address start/end position          
+    SendData(0x00);
+    SendData(0x00); 
+    SendData((height-1)%256);    
+    SendData((height-1)/256);
+
+    SendCommand(0x4E);   // set RAM x address count to 0;
+    SendData(0x00);
+    SendCommand(0x4F);   // set RAM y address count to 0X199;    
+    SendData(0x00);    
+    SendData(0x00);
+    ReadBusy();
+
+    return 0;
+}
+
 int Epd::Init(void) {
+    unsigned char i=0;
+
     /* this calls the peripheral hardware interface, see epdif */
     if (IfInit() != 0) {
         return -1;
@@ -47,13 +99,28 @@ int Epd::Init(void) {
     /* EPD hardware init start */
     Reset();
 
-    SendCommand(POWER_ON);
-    WaitUntilIdle();
+    EPD_GPIO_Init();
+    digitalWrite(dc_pin, 0);
+    EPD_SendData(0x2F);
+    DelayMs(50);
+    
+    digitalWrite(dc_pin, 1);
+    i = EPD_ReadData();
+    printf("%02x\n",i);
+    
+    EPD_SPI_Init();
+    if(i == 0x01)
+    {
+        flag = 0;
+        Init_new();
+    }
+    else
+    {
+        flag = 1;
+        Init_old();
+    }
 	
-    SendCommand(PANEL_SETTING);
-    SendData(0x0F);     // LUT from OTP
-	
-    /* EPD hardware init end */
+    // /* EPD hardware init end */
     return 0;
 }
 
@@ -76,10 +143,19 @@ void Epd::SendData(unsigned char data) {
 /**
  *  @brief: Wait until the busy_pin goes HIGH
  */
-void Epd::WaitUntilIdle(void) {
-    while(DigitalRead(busy_pin) == 0) {      //0: busy, 1: idle
-        DelayMs(100);
-    }      
+void Epd::ReadBusy(void) {
+    if(flag == 0)
+    {
+        while(DigitalRead(busy_pin) == 1) {
+            DelayMs(100);
+        } 
+    }
+    else
+    {
+        while(DigitalRead(busy_pin) == 0) {
+            DelayMs(100);
+        } 
+    }     
 }
 
 /**
@@ -97,139 +173,192 @@ void Epd::Reset(void) {
 }
 
 /**
- *  @brief: transmit partial data to the SRAM
- */
-void Epd::SetPartialWindow(const unsigned char* buffer_black, const unsigned char* buffer_red, int x, int y, int w, int l) {
-    SendCommand(PARTIAL_IN);
-    SendCommand(PARTIAL_WINDOW);
-    SendData(x >> 8);
-    SendData(x & 0xf8);     // x should be the multiple of 8, the last 3 bit will always be ignored
-    SendData(((x & 0xf8) + w  - 1) >> 8);
-    SendData(((x & 0xf8) + w  - 1) | 0x07);
-    SendData(y >> 8);        
-    SendData(y & 0xff);
-    SendData((y + l - 1) >> 8);        
-    SendData((y + l - 1) & 0xff);
-    SendData(0x01);         // Gates scan both inside and outside of the partial window. (default) 
-    DelayMs(2);
-    SendCommand(DATA_START_TRANSMISSION_1);
-    if (buffer_black != NULL) {
-        for(int i = 0; i < w  / 8 * l; i++) {
-            SendData(buffer_black[i]);  
-        }  
-    }
-    DelayMs(2);
-    SendCommand(DATA_START_TRANSMISSION_2);
-    if (buffer_red != NULL) {
-        for(int i = 0; i < w  / 8 * l; i++) {
-            SendData(buffer_red[i]);  
-        }  
-    }
-    DelayMs(2);
-    SendCommand(PARTIAL_OUT);  
-}
-
-/**
  *  @brief: transmit partial data to the black part of SRAM
  */
-void Epd::SetPartialWindowBlack(const unsigned char* buffer_black, int x, int y, int w, int l) {
-    SendCommand(PARTIAL_IN);
-    SendCommand(PARTIAL_WINDOW);
-    SendData(x >> 8);
-    SendData(x & 0xf8);     // x should be the multiple of 8, the last 3 bit will always be ignored
-    SendData(((x & 0xf8) + w  - 1) >> 8);
-    SendData(((x & 0xf8) + w  - 1) | 0x07);
-    SendData(y >> 8);        
-    SendData(y & 0xff);
-    SendData((y + l - 1) >> 8);        
-    SendData((y + l - 1) & 0xff);
-    SendData(0x01);         // Gates scan both inside and outside of the partial window. (default) 
-    DelayMs(2);
-    SendCommand(DATA_START_TRANSMISSION_1);
-    if (buffer_black != NULL) {
-        for(int i = 0; i < w  / 8 * l; i++) {
-            SendData(buffer_black[i]);  
-        }  
+void Epd::Display_Window_Black(const UBYTE *image, UBYTE count) {
+    UBYTE k;
+    if(count == 0 && flag == 0)
+        SendCommand(0x24);
+    else if(count == 0)
+        SendCommand(0x10);
+    
+    for (UWORD j = 0; j < 100; j++) {
+        for (UWORD i = 0; i < 50; i++) {
+            if(i<16)
+            {
+                SendData(image[i + (j*16)]);
+            }
+            else
+            {
+                SendData(0xFF);
+            } 
+        }
     }
-    DelayMs(2);
-    SendCommand(PARTIAL_OUT);  
 }
 
 /**
  *  @brief: transmit partial data to the red part of SRAM
  */
-void Epd::SetPartialWindowRed(const unsigned char* buffer_red, int x, int y, int w, int l) {
-    SendCommand(PARTIAL_IN);
-    SendCommand(PARTIAL_WINDOW);
-    SendData(x >> 8);
-    SendData(x & 0xf8);     // x should be the multiple of 8, the last 3 bit will always be ignored
-    SendData(((x & 0xf8) + w  - 1) >> 8);
-    SendData(((x & 0xf8) + w  - 1) | 0x07);
-    SendData(y >> 8);        
-    SendData(y & 0xff);
-    SendData((y + l - 1) >> 8);        
-    SendData((y + l - 1) & 0xff);
-    SendData(0x01);         // Gates scan both inside and outside of the partial window. (default) 
-    DelayMs(2);
-    SendCommand(DATA_START_TRANSMISSION_2);
-    if (buffer_red != NULL) {
-        for(int i = 0; i < w  / 8 * l; i++) {
-            SendData(buffer_red[i]);  
-        }  
+void Epd::Display_Window_Red_new(const UBYTE *image, UBYTE count) {
+    UBYTE k;
+    if(count == 0)
+        SendCommand(0x26);
+    
+    for (UWORD j = 0; j < 100; j++) {
+        for (UWORD i = 0; i < 50; i++) {
+            if(i<16)
+            {
+                SendData(~image[i + (j*16)]);
+            }
+            else
+            {
+                SendData(0x00);
+            } 
+        }
     }
-    DelayMs(2);
-    SendCommand(PARTIAL_OUT);  
+}
+void Epd::Display_Window_Red_old(const UBYTE *image, UBYTE count) {
+    UBYTE k;
+    if(count == 0)
+        SendCommand(0x13);
+    
+    for (UWORD j = 0; j < 100; j++) {
+        for (UWORD i = 0; i < 50; i++) {
+            if(i<16)
+            {
+                SendData(image[i + (j*16)]);
+            }
+            else
+            {
+                SendData(0xFF);
+            } 
+        }
+    }
+}
+void Epd::Display_Window_Red(const UBYTE *image, UBYTE count) {
+    if(flag == 0)
+        Display_Window_Red_new(image, count);
+    else
+        Display_Window_Red_old(image, count);
+}
+
+void Epd::DisplayFrame(void) {
+    if(flag == 0)
+    {
+        SendCommand(0x22);
+        SendData(0xF7);
+        SendCommand(0x20);
+        ReadBusy();
+    }
+    else
+    {
+        SendCommand(0x12);
+        DelayMs(100);
+        ReadBusy();
+    }
 }
 
 /**
  * @brief: refresh and displays the frame
  */
-void Epd::DisplayFrame(const unsigned char* frame_black, const unsigned char* frame_red) {
-    if (frame_black != NULL) {
-        SendCommand(DATA_START_TRANSMISSION_1);
-        DelayMs(2);
-        for (int i = 0; i < this->width / 8 * this->height; i++) {
-            SendData(pgm_read_byte(&frame_black[i]));
+void Epd::Display_old(const UBYTE *blackimage, const UBYTE *ryimage) {
+    UBYTE k;
+    SendCommand(0x10);
+    for (UWORD j = 0; j < height; j++) {
+        for (UWORD i = 0; i < width/8; i++) {
+          SendData(pgm_read_byte(&blackimage[i + (j*width/8)]));
         }
-        DelayMs(2);
     }
-    if (frame_red != NULL) {
-        SendCommand(DATA_START_TRANSMISSION_2);
-        DelayMs(2);
-        for (int i = 0; i < this->width / 8 * this->height; i++) {
-            SendData(pgm_read_byte(&frame_red[i]));
+    
+    SendCommand(0x13);
+    for (UWORD j = 0; j < height; j++) {
+        for (UWORD i = 0; i < width/8; i++) {
+          SendData(pgm_read_byte(&ryimage[i + (j*width/8)]));
         }
-        DelayMs(2);
     }
-    SendCommand(DISPLAY_REFRESH);
-    WaitUntilIdle();
+    SendCommand(0x12);
+    DelayMs(100);
+    ReadBusy();
+}
+
+void Epd::Display_new(const UBYTE *blackimage, const UBYTE *ryimage) {
+    UBYTE k;
+    SendCommand(0x24);
+    for (UWORD j = 0; j < height; j++) {
+        for (UWORD i = 0; i < width/8; i++) {
+          SendData(pgm_read_byte(&blackimage[i + (j*width/8)]));
+        }
+    }
+    
+    SendCommand(0x26);
+    for (UWORD j = 0; j < height; j++) {
+        for (UWORD i = 0; i < width/8; i++) {
+          k = pgm_read_byte(&ryimage[i + (j*width/8)]);
+          SendData(~k);
+        }
+    }
+    SendCommand(0x22);
+    SendData(0xF7);
+    SendCommand(0x20);
+    ReadBusy();
+}
+
+void Epd::Display(const UBYTE *blackimage, const UBYTE *ryimage) {
+    if(flag == 0)
+        Display_new(blackimage, ryimage);
+    else
+        Display_old(blackimage, ryimage);
 }
 
 /**
  * @brief: clear the frame data from the SRAM, this won't refresh the display
  */
-void Epd::ClearFrame(void) {
-    SendCommand(DATA_START_TRANSMISSION_1);           
-    DelayMs(2);
-    for(int i = 0; i < width / 8 * height; i++) {
-        SendData(0xFF);  
-    }  
-    DelayMs(2);
-    SendCommand(DATA_START_TRANSMISSION_2);           
-    DelayMs(2);
-    for(int i = 0; i < width / 8 * height; i++) {
-        SendData(0xFF);  
-    }  
-    DelayMs(2);
+void Epd::Clear_new() {
+    //send black data
+    SendCommand(0x24);
+    for (UWORD j = 0; j < height; j++) {
+        for (UWORD i = 0; i < width/8; i++) {
+            SendData(0xff);
+        }
+    }
+    //send red data
+    SendCommand(0x26);
+    for (UWORD j = 0; j < height; j++) {
+        for (UWORD i = 0; i < width/8; i++) {
+            SendData(0x00);
+        }
+    }
+    SendCommand(0x22);
+    SendData(0xF7);
+    SendCommand(0x20);
+    ReadBusy();
 }
 
-/**
- * @brief: This displays the frame data from SRAM
- */
-void Epd::DisplayFrame(void) {
-    SendCommand(DISPLAY_REFRESH); 
+void Epd::Clear_old() {
+    //send black data
+    SendCommand(0x10);
+    for (UWORD j = 0; j < height; j++) {
+        for (UWORD i = 0; i < width/8; i++) {
+            SendData(0xff);
+        }
+    }
+    //send red data
+    SendCommand(0x13);
+    for (UWORD j = 0; j < height; j++) {
+        for (UWORD i = 0; i < width/8; i++) {
+            SendData(0xff);
+        }
+    }
+    SendCommand(0x12);
     DelayMs(100);
-    WaitUntilIdle();
+    ReadBusy();
+}
+
+void Epd::Clear() {
+    if(flag == 0)
+        Clear_new();
+    else
+        Clear_old();
 }
 
 /**
@@ -238,13 +367,25 @@ void Epd::DisplayFrame(void) {
  *         check code, the command would be executed if check code = 0xA5. 
  *         You can use Epd::Reset() to awaken and use Epd::Init() to initialize.
  */
-void Epd::Sleep() {
-    SendCommand(VCOM_AND_DATA_INTERVAL_SETTING);
-    SendData(0xF7);     // border floating
-    SendCommand(POWER_OFF);
-    WaitUntilIdle();
-    SendCommand(DEEP_SLEEP);
-    SendData(0xA5);     // check code
+void Epd::Sleep_new(void) {
+    SendCommand(0x10);
+    SendData(0x01);
+}
+
+void Epd::Sleep_old() {
+   SendCommand(0X50);  	
+   SendData(0xf7);
+   SendCommand(0x02); 
+   ReadBusy();
+   SendCommand(0x07);  
+   SendData(0XA5);
+}
+
+void Epd::Sleep(void) {
+    if(flag == 0)
+        Sleep_new();
+    else
+        Sleep_old();
 }
 
 
