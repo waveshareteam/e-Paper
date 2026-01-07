@@ -198,9 +198,10 @@ class EPD:
         return 0
 
     def getbuffer(self, image):
-        # Create a pallette with the 7 colors supported by the panel
+        # Create a palette with the 6 colors supported by the E6/Spectra 6 panel
+        # Black, White, Yellow, Red, Blue, Green (NO orange - hardware doesn't support it)
         pal_image = Image.new("P", (1,1))
-        pal_image.putpalette( (0,0,0,  255,255,255,  0,255,0,   0,0,255,  255,0,0,  255,255,0, 255,128,0) + (0,0,0)*249)
+        pal_image.putpalette( (0,0,0,  255,255,255,  255,255,0,  255,0,0,  0,0,255,  0,255,0) + (0,0,0)*250)
 
         # Check if we need to rotate the image
         imwidth, imheight = image.size
@@ -211,16 +212,16 @@ class EPD:
         else:
             logger.warning("Invalid image dimensions: %d x %d, expected %d x %d" % (imwidth, imheight, self.width, self.height))
 
-        # Convert the soruce image to the 7 colors, dithering if needed
-        image_7color = image_temp.convert("RGB").quantize(palette=pal_image)
-        buf_7color = bytearray(image_7color.tobytes('raw'))
+        # Convert the source image to the 6 colors, dithering if needed
+        image_6color = image_temp.convert("RGB").quantize(palette=pal_image)
+        buf_6color = bytearray(image_6color.tobytes('raw'))
 
         # PIL does not support 4 bit color, so pack the 4 bits of color
         # into a single byte to transfer to the panel
         buf = [0x00] * int(self.width * self.height / 2)
         idx = 0
-        for i in range(0, len(buf_7color), 2):
-            buf[idx] = (buf_7color[i] << 4) + buf_7color[i+1]
+        for i in range(0, len(buf_6color), 2):
+            buf[idx] = (buf_6color[i] << 4) + buf_6color[i+1]
             idx += 1
             
         return buf
@@ -244,4 +245,3 @@ class EPD:
         epdconfig.delay_ms(2000)
         epdconfig.module_exit()
 ### END OF FILE ###
-
