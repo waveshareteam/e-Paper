@@ -24,34 +24,56 @@ make -j4 EPD=epd5in65f
 
 ## 3. Persistent NixOS system config (SPI + non-root access)
 
-Add the following to `/etc/nixos/configuration.nix`.
+`boot.loader.raspberryPi` was removed from nixpkgs and no longer works.
+Use `raspberry-pi-nix` for modern Raspberry Pi boot/device-tree configuration.
+
+### Option A: Use the dedicated image repo (recommended)
+
+Use `https://github.com/anicolao/nix-epaper`, which already includes:
+- SPI firmware configuration
+- `spidev` kernel module
+- `spi`/`gpio` groups and udev rules
+
+### Option B: Add equivalent settings to your own system flake
+
+In your system `flake.nix`:
 
 ```nix
 {
-  # Ensure groups exist for device permissions.
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    raspberry-pi-nix = {
+      url = "github:nix-community/raspberry-pi-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+}
+```
+
+In your NixOS configuration module:
+
+```nix
+{
+  imports = [ raspberry-pi-nix.nixosModules.raspberry-pi ];
+
+  # Pi 4; use "bcm2712" for Pi 5.
+  raspberry-pi-nix.board = "bcm2711";
+
+  # Enable SPI in generated config.txt.
+  hardware.raspberry-pi.config.all.base-dt-params.spi = {
+    enable = true;
+    value = "on";
+  };
+
+  # Ensure userspace SPI char device and permissions.
+  boot.kernelModules = [ "spidev" ];
   users.groups.spi = {};
   users.groups.gpio = {};
-
-  # Add your user to the groups.
   users.users.anicolao.extraGroups = [ "spi" "gpio" ];
-
-  # Device permissions for non-root SPI/GPIO access.
   services.udev.extraRules = ''
     KERNEL=="spidev*", GROUP="spi", MODE="0660"
     KERNEL=="gpiochip*", GROUP="gpio", MODE="0660"
   '';
-
-  # Load spidev module.
-  boot.kernelModules = [ "spidev" ];
-
-  # Raspberry Pi firmware/device-tree SPI enablement.
-  boot.loader.raspberryPi = {
-    enable = true;
-    version = 4; # adjust for your board generation
-    firmwareConfig = ''
-      dtparam=spi=on
-    '';
-  };
 }
 ```
 
