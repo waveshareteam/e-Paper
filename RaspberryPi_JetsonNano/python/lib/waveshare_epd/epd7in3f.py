@@ -56,15 +56,15 @@ class EPD:
         self.RED    = 0x0000ff   #   0100
         self.YELLOW = 0x00ffff   #   0101
         self.ORANGE = 0x0080ff   #   0110
-        
+
     # Hardware reset
     def reset(self):
         epdconfig.digital_write(self.reset_pin, 1)
-        epdconfig.delay_ms(20) 
+        epdconfig.delay_ms(20)
         epdconfig.digital_write(self.reset_pin, 0)         # module reset
         epdconfig.delay_ms(2)
         epdconfig.digital_write(self.reset_pin, 1)
-        epdconfig.delay_ms(20)   
+        epdconfig.delay_ms(20)
 
     def send_command(self, command):
         epdconfig.digital_write(self.dc_pin, 0)
@@ -77,14 +77,14 @@ class EPD:
         epdconfig.digital_write(self.cs_pin, 0)
         epdconfig.spi_writebyte([data])
         epdconfig.digital_write(self.cs_pin, 1)
-        
-    # send a lot of data   
+
+    # send a lot of data
     def send_data2(self, data):
         epdconfig.digital_write(self.dc_pin, 1)
         epdconfig.digital_write(self.cs_pin, 0)
         epdconfig.spi_writebyte2(data)
         epdconfig.digital_write(self.cs_pin, 1)
-        
+
     def ReadBusyH(self):
         logger.debug("e-Paper busy H")
         while(epdconfig.digital_read(self.busy_pin) == 0):      # 0: busy, 1: idle
@@ -98,11 +98,11 @@ class EPD:
         self.send_command(0x12) # DISPLAY_REFRESH
         self.send_data(0X00)
         self.ReadBusyH()
-        
+
         self.send_command(0x02) # POWER_OFF
         self.send_data(0X00)
         self.ReadBusyH()
-        
+
     def init(self):
         if (epdconfig.module_init() != 0):
             return -1
@@ -165,7 +165,7 @@ class EPD:
         self.send_command(0x41)     # TSE
         self.send_data(0x00)
 
-        self.send_command(0x50)
+        self.send_command(0x50)    # Border Waveform Control
         self.send_data(0x3F)
 
         self.send_command(0x60)
@@ -222,7 +222,7 @@ class EPD:
         for i in range(0, len(buf_7color), 2):
             buf[idx] = (buf_7color[i] << 4) + buf_7color[i+1]
             idx += 1
-            
+
         return buf
 
     def display(self, image):
@@ -244,4 +244,3 @@ class EPD:
         epdconfig.delay_ms(2000)
         epdconfig.module_exit()
 ### END OF FILE ###
-
