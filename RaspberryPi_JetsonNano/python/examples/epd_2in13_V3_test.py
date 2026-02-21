@@ -70,6 +70,9 @@ try:
     epd.displayPartBaseImage(epd.getbuffer(time_image))
     num = 0
     while (True):
+        current_time = time.time()
+        time.sleep(int(current_time) + 1 - current_time)
+        
         time_draw.rectangle((120, 80, 220, 105), fill = 255)
         time_draw.text((120, 80), time.strftime('%H:%M:%S'), font = font24, fill = 0)
         epd.displayPartial(epd.getbuffer(time_image))
