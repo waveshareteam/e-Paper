@@ -1,7 +1,7 @@
 /*****************************************************************************
 * | File        :   EPD_7in3e.c
 * | Author      :   Waveshare team
-* | Function    :   7.3inch e-Paper (F) Driver
+* | Function    :   7.3inch e-Paper (E) Driver
 * | Info        :
 *----------------
 * | This version:   V1.0
