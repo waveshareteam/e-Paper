@@ -46,7 +46,7 @@ public:
     void SendData(unsigned char data);
     void Sleep(void);
     void Clear(void);
-    void Epd::Displaypart(const unsigned char* pbuffer, unsigned long Start_X, unsigned long Start_Y,unsigned long END_X,unsigned long END_Y);
+    void Displaypart(const unsigned char* pbuffer, unsigned long Start_X, unsigned long Start_Y,unsigned long END_X,unsigned long END_Y);
  
 private:
     unsigned int reset_pin;
