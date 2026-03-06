@@ -45,6 +45,7 @@ class EPD:
         self.cs_pin = epdconfig.CS_PIN
         self.width = EPD_WIDTH
         self.height = EPD_HEIGHT
+        self._prev_buffer: bytearray | list | None = None  # Reference buffer for differential partial refresh
         
     '''
     function :Hardware reset
@@ -267,8 +268,11 @@ class EPD:
     '''
     def display(self, image):
         self.send_command(0x24)
-        self.send_data2(image)  
+        self.send_data2(image)
+        self.send_command(0x26)
+        self.send_data2(image)
         self.TurnOnDisplay()
+        self._prev_buffer = image  # Keep buffer in sync
     
     '''
     function : Sends the image buffer in RAM to e-Paper and fast displays
@@ -277,8 +281,11 @@ class EPD:
     '''
     def display_fast(self, image):
         self.send_command(0x24)
-        self.send_data2(image) 
+        self.send_data2(image)
+        self.send_command(0x26)
+        self.send_data2(image)
         self.TurnOnDisplay_Fast()
+        self._prev_buffer = image  # Keep buffer in sync
     '''
     function : Sends the image buffer in RAM to e-Paper and partial refresh
     parameter:
@@ -303,9 +310,15 @@ class EPD:
         self.SetWindow(0, 0, self.width - 1, self.height - 1)
         self.SetCursor(0, 0)
         
-        self.send_command(0x24) # WRITE_RAM
-        self.send_data2(image)  
+        self.send_command(0x26) # Write previous image to RAM for differential refresh
+        prev = self._prev_buffer if self._prev_buffer is not None else image
+        self.send_data2(prev)
+
+        self.send_command(0x24) # Write new image to RAM
+        self.send_data2(image)
+
         self.TurnOnDisplayPart()
+        self._prev_buffer = image  # Save for next partial refresh
 
     '''
     function : Refresh a base image
@@ -319,6 +332,7 @@ class EPD:
         self.send_command(0x26)
         self.send_data2(image)  
         self.TurnOnDisplay()
+        self._prev_buffer = image  # Keep buffer in sync
     
     '''
     function : Clear screen
@@ -334,6 +348,7 @@ class EPD:
         self.send_command(0x24)
         self.send_data2([color] * int(self.height * linewidth))  
         self.TurnOnDisplay()
+        self._prev_buffer = [color] * int(self.height * linewidth)  # Keep buffer in sync
 
     '''
     function : Enter sleep mode
