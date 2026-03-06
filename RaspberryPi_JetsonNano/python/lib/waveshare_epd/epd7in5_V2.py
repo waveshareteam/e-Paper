@@ -446,4 +446,11 @@ class EPD:
         
         epdconfig.delay_ms(2000)
         epdconfig.module_exit()
+    def getbuffer_region(self, image):
+        # Accept any size image, convert to 1-bit, and invert bits for e-paper
+        img = image.convert('1')
+        buf = bytearray(img.tobytes('raw'))
+        for i in range(len(buf)):
+            buf[i] ^= 0xFF
+        return buf
 ### END OF FILE ###
