@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "dev_config.h": "c",
+        "epd_test.h": "c",
+        "gui_bmpfile.h": "c"
+    }
+}
