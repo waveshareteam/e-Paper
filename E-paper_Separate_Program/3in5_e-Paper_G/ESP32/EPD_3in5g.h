@@ -1,0 +1,33 @@
+/*****************************************************************************
+* | File      	:   EPD_3in5g.h
+* | Author      :   Waveshare team
+* | Function    :   3inch5 e-paper (G)
+* | Info        :
+*----------------
+* |	This version:   V1.0
+* | Date        :   2024-08-07
+* | Info        :
+* -----------------------------------------------------------------------------
+******************************************************************************/
+#ifndef __EPD_3IN5G_H_
+#define __EPD_3IN5G_H_
+
+#include "DEV_Config.h"
+
+// Display resolution
+#define EPD_3IN5G_WIDTH       184
+#define EPD_3IN5G_HEIGHT      384
+
+// Color
+#define  EPD_3IN5G_BLACK   0x0
+#define  EPD_3IN5G_WHITE   0x1
+#define  EPD_3IN5G_YELLOW  0x2
+#define  EPD_3IN5G_RED     0x3
+
+void EPD_3IN5G_Init(void);
+void EPD_3IN5G_Init_Fast(void);
+void EPD_3IN5G_Clear(UBYTE color);
+void EPD_3IN5G_Display(const UBYTE *Image);
+void EPD_3IN5G_Sleep(void);
+
+#endif
