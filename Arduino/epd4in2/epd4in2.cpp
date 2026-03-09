@@ -179,7 +179,7 @@ void Epd::SetPartialWindow(const unsigned char* buffer_black, int x, int y, int 
     SendCommand(PARTIAL_WINDOW);
     SendData(x >> 8);
     SendData(x & 0xf8);     // x should be the multiple of 8, the last 3 bit will always be ignored
-    SendData(((x & 0xf8) + w  - 1) >> 8);
+    SendData(((x & 0xfff8) + w  - 1) >> 8);
     SendData(((x & 0xf8) + w  - 1) | 0x07);
     SendData(y >> 8);        
     SendData(y & 0xff);
