@@ -31,8 +31,8 @@ import logging
 from . import epdconfig
 
 # Display resolution
-EPD_WIDTH       = 280
-EPD_HEIGHT      = 480
+EPD_WIDTH       = 480
+EPD_HEIGHT      = 280
 
 GRAY1  = 0xff #white
 GRAY2  = 0xC0 #Close to white
