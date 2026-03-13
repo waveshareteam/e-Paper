@@ -70,7 +70,10 @@ const UBYTE PWS_V[1] = {
 const UBYTE AN_TM_V[9] = {
 	0xC0, 0x1C, 0x1C, 0xCC, 0xCC, 0xCC, 0x15, 0x15, 0x55
 };
-
+const uint8_t AUTO_V[2][1] = {
+  { 0xA5 }, // performs PON -> DRF -> POF
+  { 0xA7 }  // performs PON -> DRF -> POF -> DSLP
+};
 
 const UBYTE AGID_V[1] = {
 	0x10
@@ -170,8 +173,14 @@ static void EPD_13IN3E_ReadBusyH(void)
 function :  Turn On Display
 parameter:
 ******************************************************************************/
+#define AUTO_SEQUENCE 1
 static void EPD_13IN3E_TurnOnDisplay(void)
 {
+#ifdef AUTO_SEQUENCE
+    EPD_13IN3E_CS_ALL(0);
+    EPD_13IN3E_SPI_Sand(AUTO, AUTO_V[0], sizeof(AUTO_V[0]));
+    EPD_13IN3E_CS_ALL(1);
+#else
     printf("Write PON \r\n");
     EPD_13IN3E_CS_ALL(0);
     EPD_13IN3E_SendCommand(0x04); // POWER_ON
@@ -189,6 +198,7 @@ static void EPD_13IN3E_TurnOnDisplay(void)
     EPD_13IN3E_CS_ALL(0);
     EPD_13IN3E_SPI_Sand(POF, POF_V, sizeof(POF_V));
     EPD_13IN3E_CS_ALL(1);
+#endif
     // EPD_13IN3E_ReadBusyH();
     printf("Display Done!! \r\n");
 }

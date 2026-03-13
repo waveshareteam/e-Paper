@@ -88,25 +88,32 @@ static void EPD_7IN3E_ReadBusyH(void)
 function :  Turn On Display
 parameter:
 ******************************************************************************/
+#define AUTO_SEQUENCE 1
 static void EPD_7IN3E_TurnOnDisplay(void)
 {
-    
-    EPD_7IN3E_SendCommand(0x04); // POWER_ON
+#ifdef AUTO_SEQUENCE
+    EPD_7IN3E_SendCommand(0x17);  // AUTO: AUTO SEQUENCE
+    EPD_7IN3E_SendData(0xA5);     // A5: PON->DRF->POF / A7: PON->DRF->POF->DSLP
+#else
+    EPD_7IN3E_SendCommand(0x04);  // PON: POWER ON
     EPD_7IN3E_ReadBusyH();
 
+#if 0
     //Second setting 
-    EPD_7IN3E_SendCommand(0x06);
+    EPD_7IN3E_SendCommand(0x06);  // BTST: BOOSTER SOFT START (why 2nd time?)
     EPD_7IN3E_SendData(0x6F);
     EPD_7IN3E_SendData(0x1F);
     EPD_7IN3E_SendData(0x17);
     EPD_7IN3E_SendData(0x49);
+#endif
 
-    EPD_7IN3E_SendCommand(0x12); // DISPLAY_REFRESH
+    EPD_7IN3E_SendCommand(0x12);  // DRF: DISPLAY/DATA REFRESH
     EPD_7IN3E_SendData(0x00);
     EPD_7IN3E_ReadBusyH();
     
-    EPD_7IN3E_SendCommand(0x02); // POWER_OFF
+    EPD_7IN3E_SendCommand(0x02);  // POF: POWER OFF
     EPD_7IN3E_SendData(0X00);
+#endif
     EPD_7IN3E_ReadBusyH();
 }
 
@@ -128,60 +135,62 @@ void EPD_7IN3E_Init(void)
     EPD_7IN3E_SendData(0x09);
     EPD_7IN3E_SendData(0x18);
 
-    EPD_7IN3E_SendCommand(0x01);//
+    EPD_7IN3E_SendCommand(0x01);  // PWR: POWER SETTING (REGISTER)
     EPD_7IN3E_SendData(0x3F);
 
-    EPD_7IN3E_SendCommand(0x00);  
-    EPD_7IN3E_SendData(0x5F);
-    EPD_7IN3E_SendData(0x69);
+    EPD_7IN3E_SendCommand(0x00);  // PSR: PANEL SETTING (REGISTER)
+    EPD_7IN3E_SendData(0x1F);
 
-    EPD_7IN3E_SendCommand(0x03);
+    EPD_7IN3E_SendCommand(0x03);  // PFS: POWER OFF SEQUENCE SETTING
     EPD_7IN3E_SendData(0x00);
     EPD_7IN3E_SendData(0x54);
     EPD_7IN3E_SendData(0x00);
     EPD_7IN3E_SendData(0x44); 
 
-    EPD_7IN3E_SendCommand(0x05);
+#if 0
+    EPD_7IN3E_SendCommand(0x05);  // looks like BTST, but 0x05 would be PMES: POWER ON MEASURE CMD
     EPD_7IN3E_SendData(0x40);
     EPD_7IN3E_SendData(0x1F);
     EPD_7IN3E_SendData(0x1F);
     EPD_7IN3E_SendData(0x2C);
+#endif
 
-    EPD_7IN3E_SendCommand(0x06);
-    EPD_7IN3E_SendData(0x6F);
-    EPD_7IN3E_SendData(0x1F);
-    EPD_7IN3E_SendData(0x17);
-    EPD_7IN3E_SendData(0x49);
+    EPD_7IN3E_SendCommand(0x06);  // BTST: BOOSTER SOFT START
+    EPD_7IN3E_SendData(0x10);
+    EPD_7IN3E_SendData(0x10);
+    EPD_7IN3E_SendData(0x10);
 
-    EPD_7IN3E_SendCommand(0x08);
+#if 0
+    EPD_7IN3E_SendCommand(0x08);  // looks like BTST, but there is no further BTST on 0x08?
     EPD_7IN3E_SendData(0x6F);
     EPD_7IN3E_SendData(0x1F);
     EPD_7IN3E_SendData(0x1F);
     EPD_7IN3E_SendData(0x22);
+#endif
 
-    EPD_7IN3E_SendCommand(0x30);
-    EPD_7IN3E_SendData(0x03);
+    EPD_7IN3E_SendCommand(0x30);  // PLL: PLL CONTROL
+    EPD_7IN3E_SendData(0x07);     // 0x03 -> slow, 0x07 -> fast
     
-    EPD_7IN3E_SendCommand(0x50);
+    EPD_7IN3E_SendCommand(0x50);  // CDI: VCOM AND DATA INTERVAL SETTING
     EPD_7IN3E_SendData(0x3F);
 
-    EPD_7IN3E_SendCommand(0x60);
+    EPD_7IN3E_SendCommand(0x60);  // TCON: TCON SETTING
     EPD_7IN3E_SendData(0x02);
     EPD_7IN3E_SendData(0x00);
 
-    EPD_7IN3E_SendCommand(0x61);
-    EPD_7IN3E_SendData(0x03);
+    EPD_7IN3E_SendCommand(0x61);  // TRES: RESOLUTION SETTING
+    EPD_7IN3E_SendData(0x03);     // [0x0320][0x01E0] -> displaysize
     EPD_7IN3E_SendData(0x20);
     EPD_7IN3E_SendData(0x01); 
     EPD_7IN3E_SendData(0xE0);
 
-    EPD_7IN3E_SendCommand(0x84);
+    EPD_7IN3E_SendCommand(0x84);  // could be T_VCDS?
     EPD_7IN3E_SendData(0x01);
 
-    EPD_7IN3E_SendCommand(0xE3);
+    EPD_7IN3E_SendCommand(0xE3);  // PWS: POWER SAVING
     EPD_7IN3E_SendData(0x2F);
 
-    EPD_7IN3E_SendCommand(0x04);     //PWR on  
+//    EPD_7IN3E_SendCommand(0x04);  // PON: POWER ON (really wanted here?)
     EPD_7IN3E_ReadBusyH();          //waiting for the electronic paper IC to release the idle signal
 
 }
