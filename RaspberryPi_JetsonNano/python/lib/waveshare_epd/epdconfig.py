@@ -31,7 +31,6 @@ import os
 import logging
 import sys
 import time
-import subprocess
 
 from ctypes import *
 
@@ -301,15 +300,7 @@ class SunriseX3:
         self.GPIO.cleanup([self.RST_PIN, self.DC_PIN, self.CS_PIN, self.BUSY_PIN], self.PWR_PIN)
 
 
-if sys.version_info[0] == 2:
-    process = subprocess.Popen("cat /proc/cpuinfo | grep Raspberry", shell=True, stdout=subprocess.PIPE)
-else:
-    process = subprocess.Popen("cat /proc/cpuinfo | grep Raspberry", shell=True, stdout=subprocess.PIPE, text=True)
-output, _ = process.communicate()
-if sys.version_info[0] == 2:
-    output = output.decode(sys.stdout.encoding)
-
-if "Raspberry" in output:
+if os.path.exists('/sys/bus/platform/drivers/gpiomem-bcm2835') or os.path.exists('/sys/bus/platform/drivers/rpi-gpiomem'):
     implementation = RaspberryPi()
 elif os.path.exists('/sys/bus/platform/drivers/gpio-x3'):
     implementation = SunriseX3()
