@@ -1,0 +1,26 @@
+# Rust build artifacts
+/target/
+
+# Cargo lock is useful for binaries, keep it
+# But ignore debug artifacts
+*.pdb
+
+# Editor/IDE
+.vscode/*
+!.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*~
+
+# Library data (populated externally)
+/library_data/
+
+# Testing and analysis
+/test_reports/
+__pycache__/
+
+# OS files
+Thumbs.db
+.DS_Store
+*.uf2
