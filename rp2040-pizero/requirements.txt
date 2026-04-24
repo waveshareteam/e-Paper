@@ -1,2 +1,4 @@
 pyserial==3.5
-requests
+Pillow
+numpy
+opencv-python

@@ -13,9 +13,6 @@
 *.swo
 *~
 
-# Library data (populated externally)
-/library_data/
-
 # Testing and analysis
 /test_reports/
 __pycache__/

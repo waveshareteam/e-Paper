@@ -1,13 +1,11 @@
 #![no_std]
 #![no_main]
 
-use core::fmt::Write;
 use embassy_executor::Spawner;
 use embassy_futures::select::select4;
 use embassy_rp::gpio::{Input, Level, Output, Pull};
 use embassy_rp::spi::{Config as SpiConfig, Spi};
 use embassy_time::{Duration, Instant, Timer};
-use heapless::String;
 use panic_reset as _;
 use defmt_rtt as _;
 
@@ -31,35 +29,17 @@ bind_interrupts!(struct Irqs {
 });
 
 const FLASH_SIZE: usize = 16 * 1024 * 1024;
-const PERSIST_OFFSET: u32 = 1024 * 1024; // 1MB mark (Safe-Zone for 2MB+ chips)
+const PERSIST_OFFSET: u32 = 1024 * 1024; 
 
 // --- Input Tuning ---
 const TICK_MS: u64 = 50;
-const BTN_TICK_LONG_PRESS: u16 = 20; // Ticks for returning to main menu
+const BTN_TICK_LONG_PRESS: u16 = 20; 
 
 const IDLE_TIMEOUT_TICKS: u32 = (5 * 60 * 1000) / TICK_MS as u32; // 5 minutes
 
-const KNOWN_SETS: &[&str] = &[
-    "Apothecary Potions",
-    "Infusions of Feathers",
-    "Master Medicinal",
-    "Tonics of the Deep Forest",
-];
-
 defmt::timestamp!("{=u64:us}", Instant::now().as_micros());
 
-/// Simple helper to check if a set is "Known" (featured)
-fn is_set_known(name: &str) -> bool {
-    for &k in KNOWN_SETS {
-        if k == name {
-            return true;
-        }
-    }
-    false
-}
-
 /// Pick a random refresh limit between 15 and 20 (inclusive)
-/// using the low bits of the hardware timer as entropy.
 fn pick_refresh_limit() -> u16 {
     let ticks = Instant::now().as_ticks();
     15 + (ticks % 6) as u16 // 15..=20
@@ -69,7 +49,6 @@ fn pick_refresh_limit() -> u16 {
 async fn main(_spawner: Spawner) {
     let p = embassy_rp::init(Default::default());
 
-    // 1. Initial 200ms Delay for power & hardware stabilization
     Timer::after(Duration::from_millis(200)).await;
 
     // --- E-Paper ---
@@ -83,7 +62,7 @@ async fn main(_spawner: Spawner) {
     let mut epd = SSD1680::new(spi1, epd_cs, epd_dc, epd_rst, epd_busy);
     let mut ui = Ui::new();
 
-    // --- Persistence (Gallery Index) - BLOCKING MODE ---
+    // --- Persistence (Gallery Index) ---
     let mut flash = Flash::<_, Blocking, FLASH_SIZE>::new_blocking(p.FLASH);
     let mut index_buf = [0u8; 4];
     flash
@@ -92,38 +71,17 @@ async fn main(_spawner: Spawner) {
     
     let mut current_idx = u32::from_le_bytes(index_buf) as usize;
 
-    // Safety check for first boot or corruption
     if current_idx >= assets::COVER_COUNT {
         current_idx = 0;
     }
 
-    // --- DIRECT INDEX UPDATE ---
+    // Increment index on boot to cycle covers
+    #[allow(clippy::modulo_one)]
     let next_idx = ((current_idx + 1) % assets::COVER_COUNT) as u32;
-    let needs_write = true; // In this specific "vibe" logic, we always increment on boot.
-    
-    if needs_write {
-        // Only erase and write if we actually have a new value or need to fix corruption
-        flash
-            .blocking_erase(PERSIST_OFFSET, PERSIST_OFFSET + 4096)
-            .expect("Flash erase failed");
+    flash.blocking_erase(PERSIST_OFFSET, PERSIST_OFFSET + 4096).ok();
+    flash.blocking_write(PERSIST_OFFSET, &next_idx.to_le_bytes()).ok();
 
-        // Wait for flash controller to stabilize
-        Timer::after(Duration::from_millis(10)).await;
-
-        flash
-            .blocking_write(PERSIST_OFFSET, &next_idx.to_le_bytes())
-            .expect("Flash write failed");
-
-        let mut v_buf = [0u8; 4];
-        flash
-            .blocking_read(PERSIST_OFFSET, &mut v_buf)
-            .expect("Final verify read failed");
-        if v_buf != next_idx.to_le_bytes() {
-            defmt::error!("Flash sync failed! Expected {:?}, got {:?}", next_idx.to_le_bytes(), v_buf);
-        }
-    }
-
-    // Now proceed to the slow display process
+    // Initial Display
     epd.init_4grey().await.ok();
     let (b1, b0) = assets::COVERS[current_idx];
     epd.display_4grey(b1, b0).await.ok();
@@ -138,28 +96,11 @@ async fn main(_spawner: Spawner) {
     let mut state = AppState::CoverImage;
     let mut category_idx: usize = 0;
     let mut item_idx: usize = 0;
-    let mut needs_refresh = false; // Initial refresh done at startup
+    let mut needs_refresh = false; 
     let mut total_pages: usize = 0;
     let mut partial_count: u16 = 0;
     let mut partial_limit: u16 = pick_refresh_limit();
     let mut idle_ticks: u32 = 0;
-
-    // Sorting: Known first
-    let mut display_to_real_cat = [0usize; 32];
-    let mut known_count = 0;
-    for (i, cat) in DATA.iter().enumerate().take(32) {
-        if is_set_known(cat.name) {
-            display_to_real_cat[known_count] = i;
-            known_count += 1;
-        }
-    }
-    let mut total_count = known_count;
-    for (i, cat) in DATA.iter().enumerate().take(32) {
-        if !is_set_known(cat.name) {
-            display_to_real_cat[total_count] = i;
-            total_count += 1;
-        }
-    }
 
     let mut up = BtnState::new();
     let mut down = BtnState::new();
@@ -167,7 +108,7 @@ async fn main(_spawner: Spawner) {
     let mut back = BtnState::new();
 
     loop {
-        if total_count == 0 {
+        if DATA.is_empty() {
             Timer::after(Duration::from_millis(500)).await;
             continue;
         }
@@ -176,80 +117,39 @@ async fn main(_spawner: Spawner) {
             match state {
                 AppState::SelectingCategory => {
                     let mut items = [""; 32];
-                    let mut names: [String<32>; 32] = Default::default();
-                    for i in 0..total_count {
-                        let real_idx = display_to_real_cat[i];
-                        let name = DATA[real_idx].name;
-                        if i < known_count {
-                            let _ = write!(names[i], "[K] {}", name);
-                        } else {
-                            let _ = write!(names[i], "{}", name);
-                        }
+                    for (i, cat) in DATA.iter().enumerate().take(32) {
+                        items[i] = cat.name;
                     }
-                    for i in 0..total_count {
-                        items[i] = names[i].as_str();
-                    }
-                    ui.render_menu("Potion Library", &items[..total_count], category_idx);
+                    ui.render_menu("Documentation", &items[..DATA.len()], category_idx);
                 }
                 AppState::SelectingItem => {
-                    let real_cat_idx = display_to_real_cat[category_idx];
                     let mut items = [""; 32];
-                    items[0] = "#About this Set";
-                    for (i, p) in DATA[real_cat_idx].items.iter().enumerate().take(31) {
+                    items[0] = "#Description";
+                    for (i, p) in DATA[category_idx].items.iter().enumerate().take(31) {
                         items[i + 1] = p.name;
                     }
                     ui.render_menu(
-                        DATA[real_cat_idx].name,
-                        &items[..DATA[real_cat_idx].items.len() + 1],
+                        DATA[category_idx].name,
+                        &items[..DATA[category_idx].items.len() + 1],
                         item_idx,
                     );
                 }
                 AppState::ViewingCategoryDescription { page } => {
-                    let real_cat_idx = display_to_real_cat[category_idx];
-                    let cat = &DATA[real_cat_idx];
+                    let cat = &DATA[category_idx];
                     total_pages = ui.render_paged_text(cat.name, &[], cat.description, page);
                 }
                 AppState::ViewingItem { page } => {
-                    let real_cat_idx = display_to_real_cat[category_idx];
-                    let set_name = DATA[real_cat_idx].name;
-                    let item = &DATA[real_cat_idx].items[item_idx - 1];
-                    let known = is_set_known(set_name);
-
-                    let (top_details, body_with_effects) = if known {
-                        // Known set: Show everything
-                        let top = if item.details.len() >= 2 {
-                            &item.details[..2]
-                        } else {
-                            item.details
-                        };
-
-                        let mut body: String<4096> = String::new();
-                        let _ = write!(body, "#Info\n{}", item.body);
-
-                        // Show all effects starting from index 2 (RP, Mechanical, etc)
-                        for i in 2..item.details.len() {
-                            let effects = &item.details[i];
-                            let _ = write!(body, "\n~\n#{}:\n{}", effects.label, effects.value);
-                        }
-                        (top, body)
-                    } else {
-                        // Unknown set: Hide mechanics (Ingredients, Effects)
-                        let mut body: String<4096> = String::new();
-                        let _ = write!(body, "#Info\n{}", item.body);
-                        (Default::default(), body)
-                    };
-
+                    let item = &DATA[category_idx].items[item_idx - 1];
                     total_pages = ui.render_paged_text(
                         item.name,
-                        top_details,
-                        body_with_effects.as_str(),
+                        item.details,
+                        item.body,
                         page,
                     );
                 }
-                AppState::CoverImage => {
-                    // No dynamic UI to render, static image handles it in the EPD layer
-                }
+                AppState::CoverImage => {}
             }
+
             if state == AppState::CoverImage {
                 if epd.init_4grey().await.is_ok() {
                     let (b1, b0) = assets::COVERS[current_idx];
@@ -260,7 +160,7 @@ async fn main(_spawner: Spawner) {
                     if epd.display_base(&ui.buffer.buffer).await.is_ok() {
                         partial_count = 0;
                         partial_limit = pick_refresh_limit();
-                        epd.init_turbo().await.ok(); // Prepared for subsequent partial updates
+                        epd.init_turbo().await.ok();
                     }
                 } else {
                     if epd.display_turbo(&ui.buffer.buffer).await.is_ok() {
@@ -278,39 +178,27 @@ async fn main(_spawner: Spawner) {
             !btn_back_pin.is_high(),
         ];
         let mut btns = [&mut up, &mut down, &mut sel, &mut back];
-
         let mut events: heapless::Vec<UiEvent, 4> = heapless::Vec::new();
 
         for (i, b) in btns.iter_mut().enumerate() {
             if phys[i] {
                 b.press_duration += 1;
-                
-                // --- LONG PRESS TRIGGERS (Immediate upon threshold) ---
-                // Button 4 (Top Right / Up) -> Escape to Cover
                 if i == 0 && b.press_duration == BTN_TICK_LONG_PRESS && !b.handled {
                     let _ = events.push(UiEvent::LongBack); 
                     b.handled = true;
                 }
-                
-                // Key1 (Bottom Right / Back) -> Force Refresh
                 if i == 3 && b.press_duration == BTN_TICK_LONG_PRESS && !b.handled {
                     let _ = events.push(UiEvent::ForceRefresh);
                     b.handled = true;
                 }
-
-                // Note: No immediate or repeat actions here to prevent interference with long press
             } else {
-                // --- RELEASE ACTIONS (Short Press Only) ---
-                if !b.handled && b.press_duration > 0 {
-                    // Only trigger if pressed for less than long press threshold
-                    if b.press_duration < BTN_TICK_LONG_PRESS {
-                        match i {
-                            0 => { let _ = events.push(UiEvent::Up); }
-                            1 => { let _ = events.push(UiEvent::Down); }
-                            2 => { let _ = events.push(UiEvent::Select); }
-                            3 => { let _ = events.push(UiEvent::Back); }
-                            _ => {}
-                        }
+                if !b.handled && b.press_duration > 0 && b.press_duration < BTN_TICK_LONG_PRESS {
+                    match i {
+                        0 => { let _ = events.push(UiEvent::Up); }
+                        1 => { let _ = events.push(UiEvent::Down); }
+                        2 => { let _ = events.push(UiEvent::Select); }
+                        3 => { let _ = events.push(UiEvent::Back); }
+                        _ => {}
                     }
                 }
                 b.press_duration = 0;
@@ -319,37 +207,38 @@ async fn main(_spawner: Spawner) {
         }
 
         for event in events {
-            let real_cat_idx = display_to_real_cat[category_idx];
             let items_len = if state == AppState::SelectingItem {
-                DATA[real_cat_idx].items.len() + 1
+                DATA[category_idx].items.len() + 1
             } else {
                 0
             };
 
-            // Custom logic for returning to cover (cycling)
+            // Custom logic for cycling covers from the main menu
             if state == AppState::SelectingCategory && event == UiEvent::Back && category_idx == 0 {
-                current_idx = (current_idx + 1) % assets::COVER_COUNT;
-                let save_idx = ((current_idx + 1) % assets::COVER_COUNT) as u32;
-                flash.blocking_erase(PERSIST_OFFSET, PERSIST_OFFSET + 4096).ok();
-                flash.blocking_write(PERSIST_OFFSET, &save_idx.to_le_bytes()).ok();
+                #[allow(clippy::modulo_one)]
+                {
+                    current_idx = (current_idx + 1) % assets::COVER_COUNT;
+                    let save_idx = ((current_idx + 1) % assets::COVER_COUNT) as u32;
+                    flash.blocking_erase(PERSIST_OFFSET, PERSIST_OFFSET + 4096).ok();
+                    flash.blocking_write(PERSIST_OFFSET, &save_idx.to_le_bytes()).ok();
+                }
                 state = AppState::CoverImage;
                 needs_refresh = true;
                 continue;
             }
 
-            if let Some(new_state) = state.next_state(event, &mut category_idx, &mut item_idx, total_count, items_len, total_pages) {
+            if let Some(new_state) = state.next_state(event, &mut category_idx, &mut item_idx, DATA.len(), items_len, total_pages) {
                 if event == UiEvent::ForceRefresh {
                     partial_count = partial_limit;
-                    epd.init().await.ok(); // Explicit re-init for full refresh
+                    epd.init().await.ok(); 
                 }
                 if state == AppState::CoverImage && new_state != AppState::CoverImage {
                     epd.init().await.ok();
-                    partial_count = partial_limit; // Force full refresh
+                    partial_count = partial_limit; 
                 }
                 state = new_state;
                 needs_refresh = true;
             } else {
-                // If next_state returned None but we have an event, it might have modified category_idx/item_idx
                 needs_refresh = true;
             }
         }
