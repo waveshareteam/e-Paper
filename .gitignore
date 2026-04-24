@@ -1,0 +1,29 @@
+# Rust
+target/
+**/*.rs.bk
+*.pdb
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Python (used in some scripts)
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+ENV/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Project specific
+/rp2040-pizero/library_data/
+/rp2040-pizero/test_reports/
+*.uf2

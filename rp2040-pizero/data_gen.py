@@ -1,201 +1,197 @@
 import os
-import re
-import requests
+import sys
 import json
+from PIL import Image, ImageOps, ImageFilter
+import numpy as np
+import cv2
 
-# This script generates src/data.rs from a folder hierarchy.
-# Folder structure:
-# data/
-#   CategoryName/
-#     Description.md
-#     ItemName/
-#       Details.txt (optional, format: Label: Value)
-#       Body.md
-
+# --- CONFIGURATION ---
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(_SCRIPT_DIR, "library_data")
-OUT_FILE = os.path.join(_SCRIPT_DIR, "src", "data.rs")
+GALLERY_DIR = os.path.join(_SCRIPT_DIR, "gallery")
+DATA_RS = os.path.join(_SCRIPT_DIR, "src", "data.rs")
+ASSETS_RS = os.path.join(_SCRIPT_DIR, "src", "assets.rs")
 
-# --- API Integration ---
-API_BASES = [
-    "https://empire.145multimedia.co.uk",
-    "http://localhost:8081",
-    "http://localhost:8080",
-]
+HARDWARE_MAP = {
+    0:   (1, 1), # Black
+    85:  (0, 1), # Dark Gray
+    170: (1, 0), # Light Gray
+    255: (0, 0)  # White
+}
 
-CACHE_FILE = os.path.join(DATA_DIR, ".price_cache.json")
+def get_closest_level(pixel):
+    if pixel < 42:    return 0
+    if pixel < 128:   return 85
+    if pixel < 212:   return 170
+    return 255
 
-# Definitive list of sets known to the player (only these get prices/details)
-KNOWN_SET_NAMES = [
-    "Apothecary Potions",
-    "Infusions of Feathers",
-    "Master Medicinal",
-    "Tonics of the Deep Forest",
-]
+def escape_rust(s):
+    return s.replace('\\', '\\\\').replace('"', '\\"').replace('\n', '\\n')
 
-POIOTN_PRICES = {} # Name -> Price String
-
-def fetch_json(endpoint):
-    for base in API_BASES:
-        url = f"{base}{endpoint}"
-        try:
-            # print(f"Trying {url}...")
-            r = requests.get(url, timeout=5)
-            r.raise_for_status()
-            return r.json()
-        except Exception:
-            continue
-    return None
-
-print("Fetching potion set IDs (with failover)...")
-sets_data = fetch_json("/api/potionsets/lookup")
-
-if sets_data:
-    print("Found sets data from API")
-    all_sets = sets_data.get("sets", [])
-    target_ids = [str(s["Id"]) for s in all_sets if s["Name"] in KNOWN_SET_NAMES]
+# --- IMAGE PROCESSING (from convert_4gray.py) ---
+def process_one_image(img_path):
+    print(f"  Processing image: {os.path.basename(img_path)}...")
+    gamma = 1.3
     
-    if target_ids:
-        print(f"Fetching prices for sets: {', '.join(target_ids)}...")
-        price_data = fetch_json(f"/api/potions/prices/generate?set_ids={','.join(target_ids)}")
+    with Image.open(img_path) as img:
+        if img.mode == 'RGBA':
+            background = Image.new("RGB", img.size, (255, 255, 255))
+            background.paste(img, mask=img.split()[3])
+            img = background.convert('L')
+        else:
+            img = img.convert('L')
+        # Scale to fit within 256x168 while preserving aspect ratio
+        img.thumbnail((256, 168), Image.Resampling.LANCZOS)
         
-        if price_data:
-            prices = price_data.get("prices", [])
-            for p in prices:
-                POIOTN_PRICES[p["PotionName"]] = f"{p['SellPrice']}R"
-            
-            # Save to cache
-            try:
-                with open(CACHE_FILE, "w") as f:
-                    json.dump(POIOTN_PRICES, f)
-                print(f"Cached {len(POIOTN_PRICES)} prices to {CACHE_FILE}")
-            except Exception as e:
-                print(f"Warning: Could not save cache: {e}")
+        # Center on a 264x176 white background
+        img_boxed = Image.new('L', (264, 176), 255)
+        offset = ((264 - img.width) // 2, (176 - img.height) // 2)
+        img_boxed.paste(img, offset)
+        img = img_boxed
+        
+        img_np = np.array(img)
+        img_np = (np.power(img_np / 255.0, 1.0 / gamma) * 255.0).astype(np.uint8)
+        clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+        img_np = clahe.apply(img_np)
+        
+        img = Image.fromarray(img_np)
+        img = ImageOps.autocontrast(img, cutoff=0.3)
+        img = img.filter(ImageFilter.UnsharpMask(radius=1.5, percent=180, threshold=2))
+        img = img.rotate(-90, expand=True) # 176x264 Physical
+        
+        width, height = img.size
+        pixels = np.pad(np.array(img, dtype=float), 2, mode='constant', constant_values=255)
+        
+        for y in range(2, height + 2):
+            for x in range(2, width + 2):
+                old_p = pixels[y, x]
+                new_p = get_closest_level(old_p)
+                pixels[y, x] = new_p
+                err = (old_p - new_p) / 8.0
+                pixels[y,   x+1] += err
+                pixels[y,   x+2] += err
+                pixels[y+1, x-1] += err
+                pixels[y+1, x]   += err
+                pixels[y+1, x+1] += err
+                pixels[y+2, x]   += err
 
-if not POIOTN_PRICES:
-    # Try loading from cache
-    if os.path.exists(CACHE_FILE):
-        try:
-            with open(CACHE_FILE, "r") as f:
-                POIOTN_PRICES = json.load(f)
-            print(f"Loaded {len(POIOTN_PRICES)} prices from local cache.")
-        except Exception as e:
-            print(f"Warning: Could not load cache: {e}")
-    else:
-        print("Warning: No prices fetched and no cache found.")
+        pixels = np.clip(pixels[2:height+2, 2:width+2], 0, 255).astype(np.uint8)
+        b1 = bytearray([0] * 5808)
+        b0 = bytearray([0] * 5808)
+        
+        for y in range(height):
+            for x in range(width):
+                val = pixels[y, x]
+                level = get_closest_level(val)
+                ram1, ram2 = HARDWARE_MAP[level]
+                byte_idx = (y * width + x) // 8
+                bit_idx = 7 - (x % 8)
+                if ram1: b1[byte_idx] |= (1 << bit_idx)
+                if ram2: b0[byte_idx] |= (1 << bit_idx)
+    return b1, b0
 
-print(f"Final price count: {len(POIOTN_PRICES)}")
+def format_hex(data):
+    lines = []
+    for i in range(0, len(data), 12):
+        chunk = data[i:i+12]
+        lines.append("        " + ",".join([f"0x{b:02X}" for b in chunk]) + ",")
+    return "\n".join(lines)
 
+# --- TEXT PROCESSING ---
 def read_file(path, escape=True):
-    if not os.path.exists(path):
-        return ""
+    if not os.path.exists(path): return ""
     with open(path, "r", encoding="utf-8", errors="replace") as f:
-        content = f.read()
-        if escape:
-            return content.replace('\\', '\\\\').replace('"', '\\"').replace('\n', '\\n')
-        return content
+        content = f.read().strip()
+        return escape_rust(content) if escape else content
 
 def parse_details(path):
+    if not os.path.exists(path): return []
     content = read_file(path, escape=False)
     details = []
     current_label = None
     current_value = []
-    
     for line in content.split('\n'):
         if ':' in line:
-            if current_label:
-                details.append((current_label, '\n'.join(current_value).strip()))
+            if current_label: details.append((current_label, '\n'.join(current_value).strip()))
             label, value = line.split(':', 1)
             current_label = label.strip()
             current_value = [value.strip()]
-        else:
-            if current_label and line.strip():
-                current_value.append(line.strip())
-                
-    if current_label:
-        details.append((current_label, '\n'.join(current_value).strip()))
-        
+        elif current_label and line.strip():
+            current_value.append(line.strip())
+    if current_label: details.append((current_label, '\n'.join(current_value).strip()))
     return details
 
-if not os.path.exists(DATA_DIR):
-    os.makedirs(DATA_DIR)
-    print(f"Created {DATA_DIR}. Please add categories and items.")
-
-print(f"Generating {OUT_FILE} from {DATA_DIR}...")
-
-categories = []
-for cat_name in sorted(os.listdir(DATA_DIR)):
-    cat_path = os.path.join(DATA_DIR, cat_name)
-    if not os.path.isdir(cat_path) or cat_name.startswith("."):
-        continue
+def main():
+    print("--- E-Paper Offline Data Generator ---")
     
-    cat_data = {
-        "name": cat_name,
-        "description": read_file(os.path.join(cat_path, "Description.md")),
-        "items": []
-    }
-    
-    for item_name in sorted(os.listdir(cat_path)):
-        item_path = os.path.join(cat_path, item_name)
-        if not os.path.isdir(item_path):
-            continue
-            
-        item_data = {
-            "name": item_name,
-            "details": parse_details(os.path.join(item_path, "Details.txt")),
-            "body": read_file(os.path.join(item_path, "Body.md")),
-        }
-        cat_data["items"].append(item_data)
+    # 1. Process Gallery Images -> src/assets.rs
+    valid_exts = (".png", ".jpg", ".jpeg", ".bmp", ".webp")
+    if os.path.exists(GALLERY_DIR):
+        images = sorted([f for f in os.listdir(GALLERY_DIR) if f.lower().endswith(valid_exts)])
+    else:
+        images = []
         
-    categories.append(cat_data)
+    print(f"Found {len(images)} images in gallery.")
+    all_image_data = []
+    for img_name in images:
+        b1, b0 = process_one_image(os.path.join(GALLERY_DIR, img_name))
+        all_image_data.append((img_name, b1, b0))
 
-with open(OUT_FILE, "w", encoding="utf-8") as f:
-    f.write("// Generated by data_gen.py. DO NOT EDIT.\n\n")
-    f.write("pub struct Detail {\n")
-    f.write("    pub label: &'static str,\n")
-    f.write("    pub value: &'static str,\n")
-    f.write("}\n\n")
-    
-    f.write("pub struct Item {\n")
-    f.write("    pub name: &'static str,\n")
-    f.write("    pub details: &'static [Detail],\n")
-    f.write("    pub body: &'static str,\n")
-    f.write("}\n\n")
-    
-    f.write("pub struct Category {\n")
-    f.write("    pub name: &'static str,\n")
-    f.write("    pub description: &'static str,\n")
-    f.write("    pub items: &'static [Item],\n")
-    f.write("}\n\n")
-    
-    for i, cat in enumerate(categories):
-        for j, item in enumerate(cat["items"]):
-            f.write(f"const DETAILS_{i}_{j}: &[Detail] = &[\n")
-            for label, value in item["details"]:
-                f.write(f'    Detail {{ label: "{label}", value: "{value}" }},\n')
+    with open(ASSETS_RS, "w", encoding="utf-8") as f:
+        f.write("// AUTO-GENERATED GALLERY ASSETS. DO NOT EDIT.\n\n")
+        for i, (name, b1, b0) in enumerate(all_image_data):
+            f.write(f"static G{i}_B1: [u8; 5808] = [\n{format_hex(b1)}\n];\n\n")
+            f.write(f"static G{i}_B0: [u8; 5808] = [\n{format_hex(b0)}\n];\n\n")
+        f.write(f"pub const COVER_COUNT: usize = {len(all_image_data)};\n\n")
+        f.write("pub static COVERS: &[(&[u8; 5808], &[u8; 5808])] = &[\n")
+        for i in range(len(all_image_data)):
+            f.write(f"    (&G{i}_B1, &G{i}_B0),\n")
+        f.write("];\n")
+
+    # 2. Process Documentation -> src/data.rs
+    categories = []
+    if os.path.exists(DATA_DIR):
+        for cat_name in sorted(os.listdir(DATA_DIR)):
+            cat_path = os.path.join(DATA_DIR, cat_name)
+            if not os.path.isdir(cat_path) or cat_name.startswith("."): continue
+            cat_data = {
+                "name": cat_name,
+                "description": read_file(os.path.join(cat_path, "Description.md")),
+                "items": []
+            }
+            for item_name in sorted(os.listdir(cat_path)):
+                item_path = os.path.join(cat_path, item_name)
+                if not os.path.isdir(item_path): continue
+                cat_data["items"].append({
+                    "name": item_name,
+                    "details": parse_details(os.path.join(item_path, "Details.txt")),
+                    "body": read_file(os.path.join(item_path, "Body.md")),
+                })
+            categories.append(cat_data)
+
+    with open(DATA_RS, "w", encoding="utf-8") as f:
+        f.write("// Generated by data_gen.py. DO NOT EDIT.\n\n")
+        f.write("pub struct Detail {\n    pub label: &'static str,\n    pub value: &'static str,\n}\n\n")
+        f.write("pub struct Item {\n    pub name: &'static str,\n    pub details: &'static [Detail],\n    pub body: &'static str,\n}\n\n")
+        f.write("pub struct Category {\n    pub name: &'static str,\n    pub description: &'static str,\n    pub items: &'static [Item],\n}\n\n")
+        
+        for i, cat in enumerate(categories):
+            for j, item in enumerate(cat["items"]):
+                f.write(f"const DETAILS_{i}_{j}: &[Detail] = &[\n")
+                for label, value in item["details"]:
+                    f.write(f'    Detail {{ label: "{escape_rust(label)}", value: "{escape_rust(value)}" }},\n')
+                f.write("];\n\n")
+            f.write(f"const ITEMS_{i}: &[Item] = &[\n")
+            for j, item in enumerate(cat["items"]):
+                f.write(f'    Item {{\n        name: "{escape_rust(item["name"])}",\n        details: DETAILS_{i}_{j},\n        body: "{item["body"]}",\n    }},\n')
             f.write("];\n\n")
-            
-        f.write(f"const ITEMS_{i}: &[Item] = &[\n")
-        for j, item in enumerate(cat["items"]):
-            f.write("    Item {\n")
-            
-            display_name = item["name"]
-            if display_name in POIOTN_PRICES:
-                display_name = f"{display_name} ({POIOTN_PRICES[display_name]})"
-                
-            f.write(f'        name: "{display_name}",\n')
-            f.write(f'        details: DETAILS_{i}_{j},\n')
-            f.write(f'        body: "{item["body"]}",\n')
-            f.write("    },\n")
-        f.write("];\n\n")
         
-    f.write("pub static DATA: &[Category] = &[\n")
-    for i, cat in enumerate(categories):
-        f.write("    Category {\n")
-        f.write(f'        name: "{cat["name"]}",\n')
-        f.write(f'        description: "{cat["description"]}",\n')
-        f.write(f'        items: ITEMS_{i},\n')
-        f.write("    },\n")
-    f.write("];\n")
+        f.write("pub static DATA: &[Category] = &[\n")
+        for i, cat in enumerate(categories):
+            f.write(f'    Category {{\n        name: "{escape_rust(cat["name"])}",\n        description: "{cat["description"]}",\n        items: ITEMS_{i},\n    }},\n')
+        f.write("];\n")
 
-print("Done.")
+    print(f"Done! Generated {ASSETS_RS} and {DATA_RS}.")
+
+if __name__ == "__main__":
+    main()
