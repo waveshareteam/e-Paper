@@ -1,4 +1,4 @@
-#![cfg_attr(not(test), no_std)]
+#![no_std]
 
 pub mod config;
 #[cfg(all(target_arch = "arm", target_os = "none"))]

@@ -2,6 +2,9 @@ use embedded_graphics::{
     pixelcolor::BinaryColor,
     prelude::*,
 };
+use core::default::Default;
+use core::iter::IntoIterator;
+use core::result::Result::{self, Ok};
 use crate::epd::{EPD_WIDTH, EPD_HEIGHT};
 
 pub struct DisplayBuffer {

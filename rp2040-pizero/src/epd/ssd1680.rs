@@ -2,6 +2,11 @@ use embassy_rp::gpio::{Output, Input};
 use embassy_rp::spi::{Spi, Instance, Blocking};
 use embassy_time::{Timer, Duration};
 use embedded_hal::spi::SpiBus;
+use core::result::Result::{self, Ok, Err};
+use core::fmt::Debug;
+use core::cmp::{PartialEq, Eq};
+use core::clone::Clone;
+use core::marker::Copy;
 
 pub const EPD_WIDTH: u32 = 176;
 pub const EPD_HEIGHT: u32 = 264;

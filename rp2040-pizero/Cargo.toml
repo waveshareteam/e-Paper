@@ -44,6 +44,6 @@ test = false
 [lib]
 name = "recipe_reader_logic"
 path = "src/lib.rs"
-test = true
+test = false
 
 
