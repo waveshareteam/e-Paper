@@ -123,7 +123,7 @@ class EPD:
         self.send_command(0x61)	
         self.send_data(self.width//256)	
         self.send_data(self.width%256)	
-        self.send_data(self.height_init/256)	
+        self.send_data(self.height_init//256)	
         self.send_data(self.height_init%256)	
 
         self.send_command(0x62)
@@ -182,7 +182,7 @@ class EPD:
         self.send_command(0x61)	
         self.send_data(self.width//256)	
         self.send_data(self.width%256)	
-        self.send_data(self.height_init/256)	
+        self.send_data(self.height_init//256)	
         self.send_data(self.height_init%256)	
 
         self.send_command(0x62)
