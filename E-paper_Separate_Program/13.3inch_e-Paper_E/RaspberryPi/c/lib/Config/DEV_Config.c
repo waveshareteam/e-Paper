@@ -184,23 +184,25 @@ Info:
 ******************************************************************************/
 static void DEV_GPIOConfig(void)
 {
-	DEV_GPIO_Mode(EPD_SCK_PIN, 1);
+    DEV_GPIO_Mode(EPD_PWR_PIN, 1);      // handle PWR pin first
+    DEV_Digital_Write(EPD_PWR_PIN, 0);  // power off HAT+ before resetting values
+
+    DEV_GPIO_Mode(EPD_SCK_PIN, 1);
     DEV_GPIO_Mode(EPD_SI0_PIN, 1);
     DEV_GPIO_Mode(EPD_CS_M_PIN, 1);
     DEV_GPIO_Mode(EPD_CS_S_PIN, 1);
     DEV_GPIO_Mode(EPD_DC_PIN, 1);
     DEV_GPIO_Mode(EPD_RST_PIN, 1);
     DEV_GPIO_Mode(EPD_BUSY_PIN, 0);
-    DEV_GPIO_Mode(EPD_PWR_PIN, 1);
 
     DEV_Digital_Write(EPD_SCK_PIN, 0);
     DEV_Digital_Write(EPD_SI0_PIN, 0);
-    DEV_Digital_Write(EPD_CS_M_PIN, 0);
-    DEV_Digital_Write(EPD_CS_S_PIN, 0);
+    DEV_Digital_Write(EPD_CS_M_PIN, 1); // CS is low active, thus high
+    DEV_Digital_Write(EPD_CS_S_PIN, 1); // same applies
     DEV_Digital_Write(EPD_DC_PIN, 0);
     DEV_Digital_Write(EPD_RST_PIN, 0);
     // DEV_Digital_Write(EPD_BUSY_PIN, 0);
-    DEV_Digital_Write(EPD_PWR_PIN, 1);	
+    DEV_Digital_Write(EPD_PWR_PIN, 1);  // turn power on
 }
 
 /******************************************************************************
