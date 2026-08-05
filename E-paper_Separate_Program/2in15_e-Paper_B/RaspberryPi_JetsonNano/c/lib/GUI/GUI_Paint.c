@@ -188,7 +188,7 @@ parameter:
 ******************************************************************************/
 void Paint_SetPixel(UWORD Xpoint, UWORD Ypoint, UWORD Color)
 {
-    if(Xpoint > Paint.Width || Ypoint > Paint.Height){
+    if(Xpoint >= Paint.Width || Ypoint >= Paint.Height){
         Debug("Exceeding display boundaries\r\n");
         return;
     }      
@@ -231,7 +231,7 @@ void Paint_SetPixel(UWORD Xpoint, UWORD Ypoint, UWORD Color)
         return;
     }
 
-    if(X > Paint.WidthMemory || Y > Paint.HeightMemory){
+    if(X >= Paint.WidthMemory || Y >= Paint.HeightMemory){
         Debug("Exceeding display boundaries\r\n");
         return;
     }
