@@ -1,0 +1,6 @@
+*.pyc
+*.log
+settings.json
+E-paper_Separate_Program/4in2_e-Paper_G/RaspberryPi_JetsonNano/python/lib/waveshare_epd/__init__.pyc
+E-paper_Separate_Program/4in2_e-Paper_G/RaspberryPi_JetsonNano/python/lib/waveshare_epd/epd4in2g.pyc
+E-paper_Separate_Program/4in2_e-Paper_G/RaspberryPi_JetsonNano/python/lib/waveshare_epd/epdconfig.pyc
