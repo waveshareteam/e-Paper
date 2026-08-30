@@ -47,7 +47,6 @@ void EPD_7IN5B_V2_Clear(void);
 void EPD_7IN5B_V2_ClearRed(void);
 void EPD_7IN5B_V2_ClearBlack(void);
 void EPD_7IN5B_V2_Display(const UBYTE *blackimage, const UBYTE *ryimage);
-void EPD_7IN5B_V2_Display_Fast(const UBYTE *blackimage);
 void EPD_7IN5B_V2_Display_Base_color(UBYTE color);
 void EPD_7IN5B_V2_Display_Partial(const UBYTE *Image, UWORD Xstart, UWORD Ystart, UWORD Xend, UWORD Yend);
 void EPD_7IN5B_V2_Sleep(void);
