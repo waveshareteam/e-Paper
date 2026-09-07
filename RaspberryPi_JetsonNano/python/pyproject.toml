@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "waveshare-epd"
+description = "Waveshare e-Paper Display"
+authors = [
+    { name = "Waveshare" }
+]
+dependencies = ["Pillow"]
+
+[tool.setuptools]
+package-dir = {"" = "lib"}
+
+[tool.setuptools.packages.find]
+where = ["lib"]
+
+[tool.setuptools.dynamic]
+dependencies = {file = "dynamic_dependencies.py"}
