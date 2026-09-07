@@ -63,11 +63,30 @@ function :  send data
 parameter:
     Data : Write data
 ******************************************************************************/
-static void EPD_4IN0E_SendData(UBYTE Data)
+static void EPD_4IN0E_SendDataBurst(UBYTE *Data, unsigned Datac)
 {
     DEV_Digital_Write(EPD_DC_PIN, 1);
     DEV_Digital_Write(EPD_CS_PIN, 0);
-    DEV_SPI_WriteByte(Data);
+    unsigned i;
+    for(i=0;i<Datac;++i) {
+        DEV_SPI_WriteByte(Data[i]);
+    }
+    DEV_Digital_Write(EPD_CS_PIN, 1);
+}
+
+static void EPD_4IN0E_SendData(UBYTE Data)
+{
+    EPD_4IN0E_SendDataBurst(&Data, 1);
+}
+
+static void EPD_4IN0E_SendDataDuplicates(UBYTE Data, unsigned datac)
+{
+    DEV_Digital_Write(EPD_DC_PIN, 1);
+    DEV_Digital_Write(EPD_CS_PIN, 0);
+    unsigned i;
+    for(i=0;i<datac;++i) {
+        DEV_SPI_WriteByte(Data);
+    }
     DEV_Digital_Write(EPD_CS_PIN, 1);
 }
 
@@ -91,7 +110,6 @@ parameter:
 ******************************************************************************/
 static void EPD_4IN0E_TurnOnDisplay(void)
 {
-    
     EPD_4IN0E_SendCommand(0x04); // POWER_ON
     EPD_4IN0E_ReadBusyH();
     DEV_Delay_ms(200);
@@ -198,11 +216,7 @@ void EPD_4IN0E_Clear(UBYTE color)
     Height = EPD_4IN0E_HEIGHT;
 
     EPD_4IN0E_SendCommand(0x10);
-    for (UWORD j = 0; j < Height; j++) {
-        for (UWORD i = 0; i < Width; i++) {
-            EPD_4IN0E_SendData((color<<4)|color);
-        }
-    }
+    EPD_4IN0E_SendDataDuplicates((color<<4)|color, Width*Height);
 
     EPD_4IN0E_TurnOnDisplay();
 }
@@ -213,15 +227,13 @@ parameter:
 ******************************************************************************/
 void EPD_4IN0E_Show7Block(void)
 {
-    unsigned long j, k;
+    unsigned long k;
     unsigned char const Color_seven[6] = 
     {EPD_4IN0E_BLACK, EPD_4IN0E_YELLOW, EPD_4IN0E_RED, EPD_4IN0E_BLUE, EPD_4IN0E_GREEN, EPD_4IN0E_WHITE};
 
     EPD_4IN0E_SendCommand(0x10);
     for(k = 0 ; k < 6; k ++) {
-        for(j = 0 ; j < 20000; j ++) {
-            EPD_4IN0E_SendData((Color_seven[k]<<4) |Color_seven[k]);
-        }
+        EPD_4IN0E_SendDataDuplicates((Color_seven[k]<<4) |Color_seven[k], 20000);
     }
     EPD_4IN0E_TurnOnDisplay();
 }
@@ -233,28 +245,19 @@ void EPD_4IN0E_Show(void)
     {EPD_4IN0E_BLACK, EPD_4IN0E_YELLOW, EPD_4IN0E_RED, EPD_4IN0E_BLUE, EPD_4IN0E_GREEN, EPD_4IN0E_WHITE};
 
     UWORD Width, Height;
-    Width = (EPD_4IN0E_WIDTH % 2 == 0)? (EPD_4IN0E_WIDTH / 2 ): (EPD_4IN0E_WIDTH / 2 + 1);
+    Width = (EPD_4IN0E_WIDTH % 2 == 0)? (EPD_4IN0E_WIDTH / 2): (EPD_4IN0E_WIDTH / 2 + 1);
     Height = EPD_4IN0E_HEIGHT;
     k = 0;
     o = 0;
 
     EPD_4IN0E_SendCommand(0x10);
     for (UWORD j = 0; j < Height; j++) {
-        if((j > 10) && (j<50))
-        for (UWORD i = 0; i < Width; i++) {
-                EPD_4IN0E_SendData((Color_seven[0]<<4) |Color_seven[0]);
-            }
-        else if(o < Height/2)
-        for (UWORD i = 0; i < Width; i++) {
-                EPD_4IN0E_SendData((Color_seven[0]<<4) |Color_seven[0]);
-            }
-        
+        if(((j > 10) && (j<50))
+           || o < Height/2)
+            EPD_4IN0E_SendDataDuplicates((Color_seven[0]<<4) |Color_seven[0], Width);
         else
         {
-            for (UWORD i = 0; i < Width; i++) {
-                EPD_4IN0E_SendData((Color_seven[k]<<4) |Color_seven[k]);
-                
-            }
+            EPD_4IN0E_SendDataDuplicates((Color_seven[k]<<4) |Color_seven[k], Width);
             k++ ;
             if(k >= 6)
                 k = 0;
@@ -274,15 +277,12 @@ parameter:
 void EPD_4IN0E_Display(UBYTE *Image)
 {
     UWORD Width, Height;
-    Width = (EPD_4IN0E_WIDTH % 2 == 0)? (EPD_4IN0E_WIDTH / 2 ): (EPD_4IN0E_WIDTH / 2 + 1);
+    Width = (EPD_4IN0E_WIDTH % 2 == 0)? (EPD_4IN0E_WIDTH / 2): (EPD_4IN0E_WIDTH / 2 + 1);
     Height = EPD_4IN0E_HEIGHT;
 
     EPD_4IN0E_SendCommand(0x10);
-    for (UWORD j = 0; j < Height; j++) {
-        for (UWORD i = 0; i < Width; i++) {
-            EPD_4IN0E_SendData(Image[i + j * Width]);
-        }
-    }
+    EPD_4IN0E_SendDataBurst(Image, Width * Height);
+
     EPD_4IN0E_TurnOnDisplay();
 }
 
