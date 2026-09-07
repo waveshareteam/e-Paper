@@ -1,0 +1,164 @@
+#######################################
+# Display for Waveshare Eink Modules
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+AmebaEink	KEYWORD1
+EpdIf2in9	KEYWORD1
+EpdIf2in9b	KEYWORD1
+EpdIf2in9V2	KEYWORD1
+EpdIf4in2	KEYWORD1
+EpdIf4in2	KEYWORD1
+Paint	KEYWORD1
+QRCode	KEYWORD1
+
+#######################################
+# epdif_2in9.h Methods (KEYWORD2) & Constants (LITERAL1)
+#######################################
+EPD_SetFrameMemory_Partial	KEYWORD2
+EPD_SetFrameMemory	KEYWORD2
+EPD_SetFrameMemory_Base	KEYWORD2
+EPD_DisplayFrame	KEYWORD2
+EPD_DisplayFrame_Partial	KEYWORD2
+EPD_ClearScreen_White	KEYWORD2
+EPD_ClearScreen_Black	KEYWORD2
+EPD_Busy	KEYWORD2
+EPD_Sleep	KEYWORD2
+EPD_Reset	KEYWORD2
+
+driver_delay_us	KEYWORD2
+driver_delay_xms	KEYWORD2
+DELAY_S	KEYWORD2
+SpiDelay	KEYWORD2
+SpiTransfer	KEYWORD2
+SendData	KEYWORD2
+SendCommand	KEYWORD2
+EPD_Init	KEYWORD2
+EPD_InitText	KEYWORD2
+EPD_Part_Init	KEYWORD2
+SetLUT	KEYWORD2
+
+#######################################
+# epdif_2in9_v2.h Methods (KEYWORD2) & Constants (LITERAL1)
+#######################################
+IfInit	KEYWORD2
+DigitalWrite	KEYWORD2
+DigitalRead	KEYWORD2
+DelayMs	KEYWORD2
+SpiTransfer	KEYWORD2
+Init	KEYWORD2
+Epdif_Init	KEYWORD2
+SendData	KEYWORD2
+SendCommand	KEYWORD2
+WaitUntilIdle	KEYWORD2
+Reset	KEYWORD2
+SetFrameMemory	KEYWORD2
+SetFrameMemory_Partial	KEYWORD2
+SetFrameMemory_Base	KEYWORD2
+DisplayFrame	KEYWORD2
+DisplayFrame_Partial	KEYWORD2
+Sleep	KEYWORD2
+
+SetLut	KEYWORD2
+SetLut_by_host	KEYWORD2
+SetMemoryArea	KEYWORD2
+SetMemoryPointer	KEYWORD2
+
+#######################################
+# epdif_2in9b.h Methods (KEYWORD2) & Constants (LITERAL1)
+#######################################
+IfInit	KEYWORD2
+DigitalWrite	KEYWORD2
+DigitalRead	KEYWORD2
+DelayMs	KEYWORD2
+SpiTransfer	KEYWORD2
+Init	KEYWORD2
+SendData	KEYWORD2
+SendCommand	KEYWORD2
+WaitUntilIdle	KEYWORD2
+Reset	KEYWORD2
+SetPartialWindow	KEYWORD2
+SetPartialWindowBlack	KEYWORD2
+SetPartialWindowRed	KEYWORD2
+DisplayFrame	KEYWORD2
+ClearFrame	KEYWORD2
+Sleep	KEYWORD2
+
+#######################################
+# epdif_4in2.h Methods (KEYWORD2) & Constants (LITERAL1)
+#######################################
+IfInit	KEYWORD2
+DigitalWrite	KEYWORD2
+DigitalRead	KEYWORD2
+DelayMs	KEYWORD2
+SpiTransfer	KEYWORD2
+Init	KEYWORD2
+Init_4Gray	KEYWORD2
+SendData	KEYWORD2
+SendCommand	KEYWORD2
+SetFrame_Partial	KEYWORD2
+Set_4GrayDisplay	KEYWORD2
+SetLut	KEYWORD2
+set4Gray_lut	KEYWORD2
+DisplayFrame	KEYWORD2
+ClearFrame	KEYWORD2
+Sleep	KEYWORD2
+
+#######################################
+# epdif_7in5.h Methods (KEYWORD2) & Constants (LITERAL1)
+#######################################
+IfInit	KEYWORD2
+DigitalWrite	KEYWORD2
+DigitalRead	KEYWORD2
+DelayMs	KEYWORD2
+SpiTransfer	KEYWORD2
+Init	KEYWORD2
+WaitUntilIdle	KEYWORD2
+Reset	KEYWORD2
+SetLut	KEYWORD2
+DisplayFrame	KEYWORD2
+SendCommand	KEYWORD2
+SendData	KEYWORD2
+Sleep	KEYWORD2
+Clear	KEYWORD2
+
+SetLut_by_host	KEYWORD2
+
+#######################################
+# epdpaint.h Methods (KEYWORD2) & Constants (LITERAL1)
+#######################################
+Clear	KEYWORD2
+GetWidth	KEYWORD2
+SetWidth	KEYWORD2
+GetHeight	KEYWORD2
+SetHeight	KEYWORD2
+GetRotate	KEYWORD2
+SetRotate	KEYWORD2
+GetImage	KEYWORD2
+DrawAbsolutePixel	KEYWORD2
+DrawPixel	KEYWORD2
+DrawLine	KEYWORD2
+DrawCharAt	KEYWORD2
+DrawStringAt	KEYWORD2
+DrawHorizontalLine	KEYWORD2 
+DrawVerticalLine	KEYWORD2
+DrawRectangle	KEYWORD2
+DrawFilledRectangle	KEYWORD2
+DrawCircle	KEYWORD2
+DrawFilledCircle	KEYWORD2
+LongTextWrap	KEYWORD2
+
+#######################################
+# qrcode.h Methods (KEYWORD2) & Constants (LITERAL1)
+#######################################
+qrcode_getBufferSize	KEYWORD2
+qrcode_initText	KEYWORD2
+qrcode_initBytes	KEYWORD2
+qrcode_getModule	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
