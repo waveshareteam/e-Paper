@@ -68,6 +68,9 @@ try:
     time_draw = ImageDraw.Draw(time_image)
     num = 0
     while (True):
+        current_time = time.time()
+        time.sleep(int(current_time) + 1 - current_time)
+        
         time_draw.rectangle((10, 10, 120, 50), fill = 255)
         time_draw.text((10, 10), time.strftime('%H:%M:%S'), font = font, fill = 0)
         newimage = time_image.crop([10, 10, 120, 50])
