@@ -96,7 +96,7 @@ try:
 
     '''4Gray display'''
     logging.info("4Gray display--------------------------------")
-    epd.Init_4Gray()
+    epd.init_4Gray()
     
     Limage = Image.new('L', (epd.height, epd.width), 0)  # 255: clear the frame
     draw = ImageDraw.Draw(Limage)
