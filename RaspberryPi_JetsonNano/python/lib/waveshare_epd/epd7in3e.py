@@ -1,5 +1,5 @@
 # *****************************************************************************
-# * | File        :	  epd7in3f.py
+# * | File        :	  epd7in3e.py
 # * | Author      :   Waveshare team
 # * | Function    :   Electronic paper driver
 # * | Info        :
