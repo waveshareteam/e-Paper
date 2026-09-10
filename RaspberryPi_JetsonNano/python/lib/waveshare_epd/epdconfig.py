@@ -47,6 +47,7 @@ class RaspberryPi:
     PWR_PIN  = 18
     MOSI_PIN = 10
     SCLK_PIN = 11
+    Flag     = 0
 
     def __init__(self):
         import spidev
@@ -139,15 +140,18 @@ class RaspberryPi:
             self.DEV_SPI.DEV_Module_Init()
 
         else:
-            # SPI device, bus = 0, device = 0
-            self.SPI.open(0, 0)
-            self.SPI.max_speed_hz = 4000000
-            self.SPI.mode = 0b00
+            if self.Flag == 0:
+                self.Flag = 1
+                # SPI device, bus = 0, device = 0
+                self.SPI.open(0, 0)
+                self.SPI.max_speed_hz = 4000000
+                self.SPI.mode = 0b00
         return 0
 
     def module_exit(self, cleanup=False):
         logger.debug("spi end")
         self.SPI.close()
+        self.Flag = 0
 
         self.GPIO_RST_PIN.off()
         self.GPIO_DC_PIN.off()
