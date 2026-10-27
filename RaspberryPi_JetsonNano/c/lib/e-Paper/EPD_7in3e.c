@@ -72,16 +72,16 @@ static void EPD_7IN3E_SendData(UBYTE Data)
 }
 
 /******************************************************************************
-function :  Wait until the busy_pin goes LOW
+function :  Wait for the BUSY pin to be released.
 parameter:
 ******************************************************************************/
 static void EPD_7IN3E_ReadBusyH(void)
 {
-    Debug("e-Paper busy H\r\n");
+    Debug("e-Paper busy\r\n");
     while(!DEV_Digital_Read(EPD_BUSY_PIN)) {      //LOW: busy, HIGH: idle
         DEV_Delay_ms(1);
     }
-    Debug("e-Paper busy H release\r\n");
+    Debug("e-Paper busy release\r\n");
 }
 
 /******************************************************************************

@@ -87,10 +87,10 @@ class EPD:
         epdconfig.digital_write(self.cs_pin, 1)
         
     def ReadBusyH(self):
-        logger.debug("e-Paper busy H")
+        logger.debug("e-Paper busy")
         while(epdconfig.digital_read(self.busy_pin) == 0):      # 0: busy, 1: idle
             epdconfig.delay_ms(5)
-        logger.debug("e-Paper busy H release")
+        logger.debug("e-Paper busy release")
 
     def TurnOnDisplay(self):
         self.send_command(0x04) # POWER_ON
